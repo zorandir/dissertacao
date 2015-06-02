@@ -1,0 +1,219 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                                                                 %
+%   Modelo de apresentação para o Curso de Pós-Graduação em Engenharia Elétrica   %
+%   da Universidade Presbiteriana Mackenzie.                                      %
+%                                                                                 %
+%   Este Modelo foi adaptado para a disciplina de Metodologia do Trabalho         %
+%   Cientifico do Programa de Pós-Graduação em Engenharia Elétrica.               %
+%                                                                                 %
+%   As alterações de estilo se encontram no arquivo mackenzie.sty, e estão        %
+%   comentadas conforme a alteração.                                              %
+%                                                                                 %
+%   Caso você necessite alterar os padrões de estilo, deixe comentado suas        %
+%   alterações e compartilhe o arquivo para que outros possam se beneficiar das   %
+%   melhorias assim como eu e você, não esqueça de incluir seu nome e data da     %
+%   modificação.                                                                  %
+%                                                                                 %
+%   Dúvidas quanto a utilização ou modificação podem ser direcionadas a:          %
+%   Pedro H. Matheus <phmatheus@ig.com.br>                                        %
+%                                                                                 %
+% ----------------------------------------------------------------------          %
+% Referencial:                                                                    %
+%                                                                                 %
+%   Tema adaptado por Pedro Henrique Matheus da Costa Ferreira do original        %
+%   disponibilizado pelo Dr. Chris Bourke do departamento de Ciência da           %
+%   Computação e Engenharia da Universidade de Nebraska - Lincoln.                %
+%                                                                                 %
+%   O tema original pode ser obtido em: http://cse.unl.edu/~cbourke               %
+%                                                                                 %
+%   Deixo aqui meus agradecimentos ao Dr. Bourke por compartilhar e permitir a    %
+%   a utilização e modificação do tema por terceiros.                             %
+%   Pedro H. Matheus 20 de março de 2013                                          %
+%                                                                                 %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass{beamer}
+% pacote utilizado para permitir acentuação diretamente do texto.
+\usepackage[utf8]{inputenc}
+\usepackage[brazil]{babel}
+% pacote para permitir a utilização de imagens nos slides.
+\usepackage{graphicx}
+% pacote para permitir a utilização de hiperlinks no texto.
+\usepackage{hyperref}
+% pacote com conjunto de fontes extra para matemática
+\usepackage{amsfonts}
+\usepackage{amssymb}
+% pacote para criação de macros no LaTeX
+\usepackage{xparse}
+% pacote que permite unir duas ou mais linhas em uma tabela
+\usepackage{multirow}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                                               %
+% Comando para criar caixas de texto.                           %
+% Forma de utilização:                                          %
+%                                                               %
+%  \newtheorem{nome_da_caixa}[theorem]{titulo_da_caixa}         %
+%                                                               %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newtheorem{definicao}[theorem]{Definição}
+
+\usetheme[hideothersubsections]{Mackenzie}
+
+\title{UPM - Modelo Beamer de apresentação para \LaTeX\ }
+\author{Pedro H. Matheus} %
+\institute{Universidade Presbiteriana Mackenzie\\
+Programa de Pós-Graduação em Engenharia Elétrica}
+\date{Março 2013}
+
+\begin{document}
+
+\begin{frame}
+        \titlepage
+        \begin{center}
+    \href{mailto:phmatheus@ig.com.br}{\color{blue}{\texttt{phmatheus@ig.com.br}}}
+
+        \end{center}
+\end{frame}
+
+\section{Introdução}
+
+\begin{frame}
+    \frametitle{Introdução}
+    \framesubtitle{}
+
+    \texttt{Beamer} é uma classe de documentos do \LaTeX\ que gera apresentações para serem utilizadas com um projetor ou serem impressas em transparências.
+    
+    Criar uma apresentação utilizando a classe \texttt{Beamer} se parece muito com a criar um documento em \LaTeX\, existem as seções, as subseções e as páginas (slides) são chamados de frames.
+    
+    Você pode utilizar todo seu conhecimento de \LaTeX\ para criar apresentações utilizando o \texttt{Beamer}, sem a necessidade de reaprender a utilizar uma nova ferramenta.
+    
+    Caso você não conheça o \LaTeX\ é uma ótima oportunidade para conhece-lo. \cite{Tantau2013}
+\end{frame}
+
+\section{Tema do Mackenzie}
+
+\begin{frame}
+    \frametitle{Tema do Mackenzie}
+    \framesubtitle{}
+    Este tema foi desenvolvido tendo como base o tema da Universidade de Nebraska--Lincoln (UNL)\cite{Bourke2013}, que foi baseado no
+    tema padrão chamado PaloAlto da classe \texttt{Beamer}
+
+    Na versão da UNL foram acrescentados as seguintes características:
+    \begin{itemize}
+      \item A utilização das cores scarlet e creme.
+      \item Melhorado o espaçamento.
+      \item O modo matemático preserva as fontes serif do \LaTeX's.
+      \item Adiciona automaticamente o logotipo da UNL.
+      \item Sombras 
+      \item Estilos de sombras projetadas nas barras superiores e laterais.
+    \end{itemize}
+
+\end{frame}
+\begin{frame}
+    \frametitle{Tema do Mackenzie}
+    \framesubtitle{}
+    No tema criado para o Mackenzie foram efetuadas as seguintes modificações:
+    \begin{itemize}
+      \item Alterado o padrão de cores Scarlet para o tom de vermelho do Mackenzie.
+      \item Alterado o padrão de cores Creme para um tom mais claro melhorando o contraste com o vermelho.
+      \item Adicionado um novo padrão de cor para as caixas de texto.
+      \item Adiciona automaticamente o logotipo do Mackenzie.
+    \end{itemize}
+
+\end{frame}
+    
+\begin{frame}  %---------------------------------------------------------------
+    \frametitle{Outras Características do Beamer}
+    \framesubtitle{}
+
+    As caixas de texto do Beamer por padrão já são arredondadas e tem uma sombra abaixo delas.  Todas as caixas de texto(definition, theorem, etc) Tiveram seu padrão de cores alterados para o novo estilo de cores do Mackenzie.
+    
+
+    \begin{block} {Exemplo de Caixa de Texto}
+        Este exemplo cria uma caixa de texto no slide.\\
+        Caixas de texto podem ser utilizadas para destacar uma parte do texto.
+    \end{block}
+
+\end{frame}
+
+\section{Utilização do Tema}
+
+\begin{frame}[fragile]
+    \frametitle{Como posso utilizar o tema do Mackenzie?}
+    \framesubtitle{Como passar opções para o tema?}
+
+   Para utilizar o tema do Mackenzie insira a seguinte linha após a declaração de classe do seu documento:
+
+    \begin{verbatim}\usetheme{Mackenzie}\end{verbatim}
+
+    Para passar parâmetros para o tema, insira:
+
+    \verb"\usetheme[left,hideothersubsections,width=2.5cm]{Mackenzie}"
+
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Como posso utilizar o tema do Mackenzie?}
+    \framesubtitle{Como passar opções para o tema?}
+
+    Existem vários parâmetros que podem ser passados ao tema:
+    \begin{itemize}
+      \item \texttt{hideothersubsections} -- Este parâmetro esconde as \emph{subseções} que não pertencem a seção atual da barra lateral.
+      \item \texttt{hideallsubsections} -- Este parâmetro oculta \emph{todas} as subseções da barra lateral.
+      \item \texttt{width} -- Define a largura da barra lateral, o padrão é:
+      	    \verb"2.5\baselineskip"
+      \item \texttt{height} -- Define a altura da barra superior, o padrão é:
+      	    \verb"2.5\baselineskip"
+      \item \texttt{left} -- Define que a barra lateral fique a esquerda (padrão).
+      \item \texttt{right} -- Define que a barra lateral fique a direita.
+    \end{itemize}
+
+\end{frame}
+
+
+\section{Referências}
+\setbeamerfont{ref}{size=\Tiny}
+\setbeamerfont{normal}{size=\large}
+\begin{frame}
+\usebeamerfont{ref}
+    \frametitle{Referências}
+        \begin{thebibliography}{9}
+            \setbeamertemplate{bibliography item}[online]
+            \bibitem[Tantau et al., 2013]{Tantau2013}
+                Till Tantau and Joseph Wright and Vedran Miletic.
+                \newblock {\em The Beamer Class - User Guide for version 3.26.}
+                \newblock \href{http://bitbucket.org/rivanvx/beamer}{\color{blue} http://bitbucket.org/rivanvx/beamer}, Jan. 2013.
+            \bibitem[Bourke C., 2013]{Bourke2013}
+                Chris Bourke.
+                \newblock {\em UNL Beamer Theme.}
+                \newblock \href{http://cse.unl.edu/~cbourke}{\color{blue} http://cse.unl.edu/~cbourke}, Jan. 2013.
+        \end{thebibliography}
+        \usebeamerfont{normal}
+        Exemplos de utilização de referências:
+        \usebeamerfont{ref}
+        \begin{thebibliography}{9}
+            \setbeamertemplate{bibliography item}[default] % Default or Article are the same
+            \bibitem[Dijkstra, 1982]{Dijkstra1982}
+                E.~Dijkstra.
+                \newblock Smoothsort, an alternative for sorting in situ.
+                \newblock {\em Science of Computer Programming}, 1(3):223--233, 1982.
+            \setbeamertemplate{bibliography item}[book]
+            \bibitem[Dijkstra, 1982]{Dijkstra1982}
+                E.~Dijkstra.
+                \newblock Smoothsort, an alternative for sorting in situ.
+                \newblock {\em Science of Computer Programming}, 1(3):223--233, 1982.
+            \setbeamertemplate{bibliography item}[triangle]
+            \bibitem[Dijkstra, 1982]{Dijkstra1982}
+                E.~Dijkstra.
+                \newblock Smoothsort, an alternative for sorting in situ.
+                \newblock {\em Science of Computer Programming}, 1(3):223--233, 1982.
+            \setbeamertemplate{bibliography item}[text]
+            \bibitem[Dijkstra, 1982]{Dijkstra1982}
+                E.~Dijkstra.
+                \newblock Smoothsort, an alternative for sorting in situ.
+                \newblock {\em Science of Computer Programming}, 1(3):223--233, 1982.
+        \end{thebibliography}
+\end{frame}
+\end{document}

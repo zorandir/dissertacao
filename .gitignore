@@ -1,0 +1,13 @@
+*.aux
+*.bbl
+*.blg
+*.dvi
+*.log
+*.out
+*.toc
+*.gz
+*.sublime-project
+*.sublime-workspace
+*.fdb_latexmk
+*.docx
+*.rtf

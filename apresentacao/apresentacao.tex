@@ -1,0 +1,238 @@
+% Apresentações em widescreen. Outros valores possíveis: 1610, 149, 54, 43 e 32.
+% Por padrão, as apresentações são no formato 4:3 (sem o aspectratio).
+\documentclass[aspectratio=43]{beamer}	 	
+
+\usetheme[hideallsubsections,width=3.1cm]{Mackenzie}
+\usecolortheme{default}
+\usefonttheme[onlymath]{serif}			% para fontes matemáticas
+% Enconte mais temas e cores em http://www.hartwork.org/beamer-theme-matrix/ 
+% Veja também http://deic.uab.es/~iblanes/beamer_gallery/index.html
+
+% ---
+% PACOTES
+% ---
+\usepackage[alf]{abntex2cite}		% Citações padrão ABNT
+\usepackage[brazil]{babel}		% Idioma do documento
+\usepackage{color}			% Controle das cores
+\usepackage[T1]{fontenc}		% Selecao de codigos de fonte.
+\usepackage{graphicx} \graphicspath{ {../img/} } % Inclusão de gráficos
+\usepackage[utf8]{inputenc}		% Codificacao do documento (conversão automática dos acentos)
+\usepackage{txfonts}			% Fontes virtuais
+\usepackage{subcaption}
+
+% ---
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                                               %
+% Comando para criar caixas de texto.                           %
+% Forma de utilização:                                          %
+%                                                               %
+%  \newtheorem{nome_da_caixa}[theorem]{titulo_da_caixa}         %
+%                                                               %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newtheorem{definicao}[theorem]{Definição}
+
+\usetheme{Mackenzie}
+
+\title{Complementando o estudo de \textit{templates} em autômatos celulares}
+\author{Zorandir Soares Jr.\\
+zorandir@gmail.com
+} 
+\institute{Universidade Presbiteriana Mackenzie\\
+Programa de Pós-Graduação em Engenharia Elétrica\\ \\
+}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}
+	\frametitle{Complementando o estudo de \textit{templates} em autômatos celulares}
+    \titlepage
+\end{frame}
+ 
+ \section{Introdução}
+ \begin{frame}
+     \frametitle{Introdução}
+     \framesubtitle{Autômatos Celulares}
+
+     Autômatos Celulares (ACs) são idealizações matemáticas simples dos sistemas naturais. Eles consistem em um reticulado de campos discretos idênticos, onde cada campo pode assumir um conjunto finitos de, geralmente, valores inteiros. Os valores dos campos evoluem em tempo discreto de acordo com regras determinísticas que especificam o valor de cada campo de acordo com os campos das vizinhanças \cite{wolfram1994cellular}.
+ \end{frame}
+
+\section{Tamanho das famílias dos autômatos celulares}
+\begin{frame}
+\frametitle{Tamanho das famílias dos autômatos celulares}
+\framesubtitle{Autômatos celulares binários}
+
+ \begin{equation}
+k^{k^{2r+1}}
+\label{eq:tamFamilia}
+\end{equation}
+
+Para $k=2$ e $r=1$:
+\begin{equation}
+2^{2^{3}} = 2^{8} = 256
+\end{equation}
+
+Para $k=2$ e $r=2$:
+\begin{equation}
+2^{2^{5}} = 2^{32} \approx 4.29\times 10^9
+\end{equation}
+
+Para $k=2$ e $r=3$:
+\begin{equation}
+2^{2^{7}} = 2^{128} \approx 3.40\times 10^{38}
+\end{equation}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Tamanho das famílias dos autômatos celulares}
+\framesubtitle{Autômatos celulares não binários}
+
+Para $k=3$ e $r=1$:
+\begin{equation}
+3^{3^{3}} = 3^{27} \approx 7.625597484987\times 10^{12}
+\end{equation}
+
+Para $k=4$ e $r=1$:
+\begin{equation}
+4^{4^{3}} = 4^{64} \approx 3.40\times 10^{38}
+\end{equation}
+
+Para $k=5$ e $r=1$:
+\begin{equation}
+5^{5^{3}} = 5^{125} \approx 2.35\times 10^{87}
+\end{equation}
+
+\end{frame}
+
+ \section{Propriedades Estáticas}
+ \begin{frame}
+     \frametitle{Propriedades Estáticas}
+     \begin{itemize}
+           \item Confinamento
+           \item Conservabilidade de estados
+           \item Conservabilidade de paridade
+     \end{itemize}
+ \end{frame}
+
+ % \begin{frame}
+ %     \frametitle{Representação de famílias}
+ %     \framesubtitle{Grafos de Gruijin}
+ % \end{frame}
+
+%\begin{frame}
+%	\frametitle{Representação de famílias}
+%	\framesubtitle{Templates}
+% \end{frame}
+
+\section{Templates}
+\begin{frame}
+	\frametitle{Templates}
+	\framesubtitle{Introdução}
+	
+	\textit{Templates} de autômatos celulares são uma generalização de tabelas de transições que faz com que um templates seja capaz de representar famílias de autômatos celulares de forma simples e elegante. Os templates foram apresentados por \citeonline{deOliveira2014} e implementada como um algoritmo na linguagem do software Wolfram Mathematica.
+
+ \end{frame}
+
+\begin{frame}
+	\frametitle{Templates}
+	\framesubtitle{Expansão}
+
+	Expansão é o processo o processo no qual se obtêm todas as tabelas de transição $R_k$ associadas a um template $T$.
+	A operação de expansão foi implementada por \cite{daCosta2014} e foi descrita em maior detalhes por ele da seguinte maneira:
+
+	\begin{equation}
+	E(T)=R_k
+	\end{equation}
+
+ \end{frame}
+
+\begin{frame}
+	\frametitle{Templates}
+	\framesubtitle{Intersecção}
+
+	Intersecção é o processo no qual se obtêm um template que represente o conjunto $R_k$ após se receber dois templates definidos para o mesmo espaço. A operação de intersecção também foi implementada por \cite{daCosta2014} e foi descrita em maior detalhes da seguinte maneira:
+
+	\begin{equation}
+	I(T_1,T_2)=T_3 \Leftrightarrow E(T_3) = E(T_1) \cap E(T_2)
+	\end{equation}
+
+ \end{frame}
+
+\begin{frame}
+	\frametitle{Templates}
+	\framesubtitle{Complemento}
+
+	Complemento é o processo no qual se obtêm um conjunto de templates que represente todas as regras que não pertençam ao template original. A operação pode ser melhor visualizada abaixo:
+
+	\begin{equation}
+	C(T_1)=T_1^c \Leftrightarrow T_1^c = U \setminus T_1
+	\end{equation}
+ \end{frame}
+
+\section{Aplicação}
+\begin{frame}
+    \frametitle{Aplicação}
+    \framesubtitle{Problema de Paridade}
+   
+    O \textit{Problema de Paridade}. Neste problema a configuração inicial (entrada) deve ser classificada em uma entre duas classe, de acordo com a quantidade par de 1s ou não (a saída é, portanto, a paridade da entrada - par ou ímpar) \cite{Sipper1998}.
+\end{frame}
+
+\begin{frame}
+    \frametitle{Aplicação}
+    \framesubtitle{Problema de Paridade}
+
+        \begin{figure}
+        \centering
+        \setcounter{subfigure}{0}
+        \begin{subfigure}{0.20\textwidth}
+            \includegraphics[width=\linewidth]{regra-1-par}
+            % \caption{Par}\label{fig:parity-rule_a}
+        \end{subfigure}
+        ~
+        \setcounter{subfigure}{0}
+        \begin{subfigure}{0.20\textwidth}
+            \includegraphics[width=\linewidth]{regra-1-impar.png}
+            % \caption{Ímpar}\label{fig:parity-rule_b}
+        \end{subfigure}
+
+        % Você pode adicionar mais subfigures aqui!
+        \label{fig:parity-rule}
+        \caption{Exemplo de regra de paridade. A imagem a esquerda contém em sua entrada um número par de 1s. A da direita contém um número ímpar.}
+        % \caption{Regra acima é 297492748577089511288345839143552794896 para raio 3}
+    \end{figure}
+\end{frame}
+
+% \section{Trabalhos Relacionados}
+% \begin{frame}[fragile]
+%     \frametitle{Trabalhos Relacionados}
+%     % \framesubtitle{Como passar opções para o tema?}
+%     \begin{itemize}
+%           \item \citeonline{Sipper1998} provou a impossibilidade de resolução do PP em AC Elementares.
+%           \item \citeonline{Lee2001} mostraram que a utilização de mais de uma regra soluciona o PP.
+%           \item \citeonline{Betel2013} provaram a impossibilidade de ACs de raio 2 solucionarem o PP, a existência de solução para raio 4 e evidências empíricas da não existência de solução do PP para raio 3.
+%     \end{itemize}
+% \end{frame}
+
+ \section{Referências}
+ \setbeamerfont{ref}{size=\Tiny}
+ \setbeamerfont{normal}{size=\large}
+ \begin{frame}[allowframebreaks]
+     \frametitle{Referências}
+     \bibliography{bibliografia}
+ \end{frame}
+
+ \section{}
+ \begin{frame}[t]\frametitle{Dúvidas}
+     \center
+     {\fontsize{250}{300}\selectfont {?}}
+ \end{frame}
+
+\begin{frame}[t]\frametitle{Obrigado}
+    \center
+    {\fontsize{50}{300}\selectfont {Obrigado}}
+    
+    % Zorandir Soares Jr.\\
+    % 71412840@mackenzista.com.br, zorandir@gmail.com
+\end{frame}
+\end{document}

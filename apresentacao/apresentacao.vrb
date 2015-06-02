@@ -1,0 +1,296 @@
+\frametitle{Trabalhos Relacionados}
+     % \framesubtitle{Como passar opções para o tema?}
+     \begin{itemize}
+           \item \citeonline{Sipper1998} provou a impossibilidade de resolução do PP em AC Elementares.
+           \item \citeonline{Lee2001} mostraram que a utilização de mais de uma regra soluciona o PP.
+           \item \citeonline{Betel2013} provaram a impossibilidade de ACs de raio 2 solucionarem o PP, a existência de solução para raio 4 e evidências empíricas da não existência de solução do PP para raio 3.
+     \end{itemize}
+ \end{frame}
+
+
+% \begin{frame}
+%     \frametitle{Introdução}
+%     \framesubtitle{Autômatos Celulares}
+
+%     \begin{figure}
+%       \centering
+%       \includegraphics[width=0.5\textwidth]{wolfram-notation.pdf}
+%       \caption{Notação de Wolfram para os autômatos celulares elementares.}
+% %    \captionfont{Fonte: elaborado pelos autores.}
+%       \label{fig:wolfram-notation}
+%     \end{figure}
+% \end{frame}
+
+% \begin{frame}
+%     \frametitle{Introdução}
+%     \framesubtitle{Autômatos Celulares}
+
+%     \begin{figure}
+%       \centering
+%       \includegraphics[width=0.5\textwidth]{ace-regra-30-conf.png}
+%     \end{figure}
+%     \vskip-1cm
+%     \begin{figure}
+%       \centering
+%       \includegraphics[width=0.5\textwidth]{ace-regra-30.png}
+%       \caption{Regra 30 dos Autômatos Celulares Elementares.}
+%    % \captionfont{Fonte: elaborado pelos autores.}
+%       \label{fig:wolfram-notation}
+%     \end{figure}
+% \end{frame}
+
+% \begin{frame}
+%     \frametitle{Introdução}
+%     \framesubtitle{Autômatos Celulares}
+
+%     \begin{figure}
+%       \centering
+%       \includegraphics[width=0.5\textwidth]{ace-regra-90-conf.png}
+%     \end{figure}
+%     \vskip-1cm
+%     \begin{figure}
+%       \centering
+%       \includegraphics[width=0.5\textwidth]{ace-regra-90.png}
+%       \caption{Regra 90 dos Autômatos Celulares Elementares.}
+%    % \captionfont{Fonte: elaborado pelos autores.}
+%       \label{fig:wolfram-notation}
+%     \end{figure}
+% \end{frame}
+
+% \begin{frame}
+%     \frametitle{Introdução}
+%     \framesubtitle{Problema de Paridade}
+
+%     O \textit{Problema de Paridade} (PP). Neste problema a configuração inicial (entrada) deve ser classificada em uma entre duas classe, de acordo com a quantidade par de 1s ou não (a saída é, portanto, a paridade da entrada - par ou ímpar) \cite{Sipper1998}.
+% \end{frame}
+
+% \begin{frame}
+%     \frametitle{Introdução}
+%     \framesubtitle{Problema de Paridade}
+
+%         \begin{figure}
+%         \centering
+%         \setcounter{subfigure}{0}
+%         \begin{subfigure}{0.20\textwidth}
+%             \includegraphics[width=\linewidth]{regra-1-par}
+%             % \caption{Par}\label{fig:parity-rule_a}
+%         \end{subfigure}
+%         ~
+%         \setcounter{subfigure}{0}
+%         \begin{subfigure}{0.20\textwidth}
+%             \includegraphics[width=\linewidth]{regra-1-impar.png}
+%             % \caption{Ímpar}\label{fig:parity-rule_b}
+%         \end{subfigure}
+
+%         % Você pode adicionar mais subfigures aqui!
+%         \label{fig:parity-rule}
+%         \caption{Exemplo de regra de paridade. A imagem a esquerda contém em sua entrada um número par de 1s. A da direita contém um número ímpar.}
+%         % \caption{Regra acima é  297492748577089511288345839143552794896 para raio 3}
+%     \end{figure}
+% \end{frame}
+
+% \begin{frame}
+%     \frametitle{Introdução}
+%     \framesubtitle{Problema de Paridade}
+
+%     \begin{figure}
+%       \centering
+%       \includegraphics[width=0.44\textwidth]{regras.pdf}
+%       \caption{Regras inicialmente consideradas por \citeonline{Betel2013} com a possibilidade de serem perfeitas para o PP em raio 3}
+%    % \captionfont{Fonte: elaborado pelos autores.}
+%       \label{fig:wolfram-notation}
+%     \end{figure}
+% \end{frame}
+
+% \begin{frame}
+%     \frametitle{Introdução}
+%     \framesubtitle{Problema de Paridade}
+
+%     \begin{table}
+%     \centering
+%     \small
+%     \caption{Regras com a possibilidade de serem perfeitas para o PP em raio 3 de acordo com \citeonline{Betel2013} }
+%     {
+%         \vspace{0}
+%         \scalebox{0.7}{
+%         \tabcolsep=0.11cm
+%         \begin{tabular}{ll}
+%         \hline
+%         \textbf{Índice} & \textbf{Número da regra} \\
+%         \hline
+%         2   & 297492748577089511288345839143552794896 \\
+%         3   & 297494046666159425466677605435168768272 \\
+%         4   & 297473276211074685927935207853055525136 \\
+%         41  & 297494047933810020972540523993508070160 \\
+%         81  & 327614459766465259907200645449039558212 \\
+%         82  & 327614459768941139985789420397481506372 \\
+%         83  & 327281179214333935737401133562859173444 \\
+%         84  & 327281098082234148161930000576236303940 \\
+%         85  & 327614459768974989908738616614073480772 \\
+%         86  & 327281179214367785660350329779451147844 \\
+%         87  & 327614378639317232488943091156319548996 \\
+%         88  & 327281098084710028240554804321697216068 \\
+%         89  & 327281098082272833788157673107875509828 \\
+%         90  & 327614378636880038036581988739516806724 \\
+%         91  & 327281179211853219955497871094541268548 \\
+%         92  & 327614459766460424203922186726182565444 \\
+%         93  & 327614378639355918115170763687958754884 \\
+%         94  & 327281098084748713866782476853336421956 \\
+%         95  & 327614459768936304282510961674624513604 \\
+%         96  & 327281179214329100034122674840002180676 \\
+%         \hline
+%         \end{tabular}
+%     }}
+%     \label{tab:regrasIniciais}
+%     \end{table}
+% \end{frame}
+
+
+% \section{Objetivo e Hipótese}
+
+% \begin{frame}
+%     \frametitle{Objetivo e Hipótese}
+%     \framesubtitle{}
+%     \begin{description}
+%       \item[Hipótese] As 20 regras restantes, de raio 3, candidatas a resolver o PP para tamanhos primos de reticulado também são imperfeitas, ou seja, não resolvem o PP para toda e qualquer configuração inicial.
+%       \item[Objetivo]
+%       \begin{itemize}
+%           \item Estudar o PP para reticulados unidimensionais de dois estados e de raio 3 com base nos estudos de \citeonline{Betel2013} e
+%           \item Encontrar, através da análise de padrões cíclicos, as configurações iniciais que provem que as 20 regras restantes de raio 3 candidatas a resolver o PP para tamanhos primos de reticulado são imperfeitas, ou seja, confirmar a hipótese.
+%       \end{itemize}
+
+
+%     % \begin{block} {Exemplo de Caixa de Texto}
+%     %     Este exemplo cria uma caixa de texto no slide.\\
+%     %     Caixas de texto podem ser utilizadas para destacar uma parte do texto.
+%     % \end{block}
+
+%     \end{description}
+% \end{frame}
+
+% \section{Trabalhos Relacionados}
+% \begin{frame}[fragile]
+%     \frametitle{Trabalhos Relacionados}
+%     % \framesubtitle{Como passar opções para o tema?}
+%     \begin{itemize}
+%           \item \citeonline{Sipper1998} provou a impossibilidade de resolução do PP em AC Elementares.
+%           \item \citeonline{Lee2001} mostraram que a utilização de mais de uma regra soluciona o PP.
+%           \item \citeonline{Betel2013} provaram a impossibilidade de ACs de raio 2 solucionarem o PP, a existência de solução para raio 4 e evidências empíricas da não existência de solução do PP para raio 3.
+%     \end{itemize}
+% \end{frame}
+
+% \section{Metodologia}
+% \begin{frame}[fragile]
+%     \frametitle{Metodologia}
+%     \begin{itemize}
+%         \item Será utilizado uma heurística não probabilística com a análise de configurações iniciais e regimes cíclicos que previamente levaram à falha no problema de paridade.
+%         \item Essa mesma heurística foi utilizada \citeonline{Betel2013} para se chegar as 20 regras estudadas.
+%     \end{itemize}
+
+% \end{frame}
+
+% \begin{frame}[fragile]
+%     \frametitle{Metodologia}
+
+%         Em \cite{Betel2013} essa heurística foi utilizada da seguinte forma: inicialmente foi encontrado uma CI de tamanho 83 que eliminava 55 das 99 regras. Depois, com base em dois padrões cíclicos nomeados pelos autores de ``the big dog'' e ``the small dog'' foi construído um CIs de tamanho 83 que fez com que 4 regras fossem descartadas.
+%     \begin{figure}
+%         \centering
+%         \setcounter{subfigure}{0}
+%         \begin{subfigure}{0.20\textwidth}
+%             \includegraphics[width=\linewidth]{ciclo1-a.png}
+%             % \caption{Par}\label{fig:parity-rule_a}
+%         \end{subfigure}
+%         ~
+%         \setcounter{subfigure}{0}
+%         \begin{subfigure}{0.20\textwidth}
+%             \includegraphics[width=\linewidth]{ciclo1-b.png}
+%             % \caption{Ímpar}\label{fig:parity-rule_b}
+%         \end{subfigure}
+
+%         % Você pode adicionar mais subfigures aqui!
+%         \label{fig:parity-rule}
+%         \caption{Padrões cíclicos ``the big dog'' e ``the small dog'' de periodicidade 50 e 25 respectivamente.}
+%         % \caption{Regra acima é  297492748577089511288345839143552794896 para raio 3}
+%     \end{figure}
+
+% \end{frame}
+
+% \begin{frame}[fragile]
+% \frametitle{Metodologia}
+%     Posteriormente, foi construído CIs de tamanho 83 com base em outros dois padrões cíclicos encontrados também em CIs de tamanho 25. Essa nova configuração encontrada descartou mais 16 regras.
+
+%     \begin{figure}
+%         \centering
+%         \setcounter{subfigure}{0}
+%         \begin{subfigure}{0.20\textwidth}
+%             \includegraphics[width=\linewidth]{ciclo2-a.png}
+%             % \caption{Par}\label{fig:parity-rule_a}
+%         \end{subfigure}
+%         ~
+%         \setcounter{subfigure}{0}
+%         \begin{subfigure}{0.20\textwidth}
+%             \includegraphics[width=\linewidth]{ciclo2-b.png}
+%             % \caption{Ímpar}\label{fig:parity-rule_b}
+%         \end{subfigure}
+
+%         % Você pode adicionar mais subfigures aqui!
+%         \label{fig:parity-rule}
+%         \caption{Padrões cíclicos da segunda etapa de periodicidade 50 e 25 respectivamente.}
+%         % \caption{Regra acima é  297492748577089511288345839143552794896 para raio 3}
+%     \end{figure}
+% \end{frame}
+
+% \begin{frame}[fragile]
+% \frametitle{Metodologia}
+%     Por fim, a análise de mais dois padrões cíclicos, que como os anteriores apareceram no reticulado de tamanho 25, foi construído uma CIs de tamanho 157 que descartou 4 regras, restando assim apenas as 20 regras que faltam descartar.
+
+%     % \begin{figure}
+%     %     \centering
+%     %     \setcounter{subfigure}{0}
+%     %     \begin{subfigure}{0.20\textwidth}
+%     %         \includegraphics[width=\linewidth]{ciclo3-a.png}
+%     %         % \caption{Par}\label{fig:parity-rule_a}
+%     %     \end{subfigure}
+%     %     ~
+%     %     \setcounter{subfigure}{0}
+%     %     \begin{subfigure}{0.20\textwidth}
+%     %         \includegraphics[width=\linewidth]{ciclo3-b.png}
+%     %         % \caption{Ímpar}\label{fig:parity-rule_b}
+%     %     \end{subfigure}
+
+%     %     % Você pode adicionar mais subfigures aqui!
+%     %     \label{fig:parity-rule}
+%     %     \caption{Padrões cíclicos ``the pair of brollies'' e ``the downward strip'' de periodicidade 225 e 5 respectivamente.}
+%     %     % \caption{Regra acima é  297492748577089511288345839143552794896 para raio 3}
+%     % \end{figure}
+% \end{frame}
+
+% \section{Resultados esperados}
+% \begin{frame}[t]\frametitle{Resultados esperados}
+%     \begin{itemize}
+%           \item Espera-se que através dessa heurística se consiga descartar o máximo possível de regras que hoje são consideradas como candidatas a resolver o problema de paridade. De preferência eliminando todas.
+%           \item Esse estudo também procura ajudar no entendimento de forma mais ampla e abstrata do PP para ACs de qualquer raio ou dimensão.
+%           \item Por fim, espera-se contribuir para o entendimento e externalização da heurística utilizada, que hoje pode ser caracterizada como um conhecimento tácito.
+%     \end{itemize}
+% \end{frame}
+
+% \section{Referências}
+% \setbeamerfont{ref}{size=\Tiny}
+% \setbeamerfont{normal}{size=\large}
+% \begin{frame}
+%     \frametitle{Referências}
+%     \bibliography{biblproj}
+% \end{frame}
+
+% \section{}
+% \begin{frame}[t]\frametitle{Dúvidas}
+%     \center
+%     {\fontsize{250}{300}\selectfont {?}}
+% \end{frame}
+
+\begin{frame}[t]\frametitle{Obrigado}
+    \center
+    {\fontsize{50}{300}\selectfont {Obrigado}}
+
+    % Zorandir Soares Jr.\\
+    % 71412840@mackenzista.com.br, zorandir@gmail.com
