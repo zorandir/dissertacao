@@ -12,3 +12,6 @@
 *.docx
 *.rtf
 *.synctex.gz
+*.synctex.gz(buzy)
+*.lof
+*.lot
