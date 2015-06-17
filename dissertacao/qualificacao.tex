@@ -31,10 +31,10 @@
 \textbf{\large Zorandir Soares Junior}\\
 \vskip 4.0cm
 \setlength{\baselineskip}{1.5\baselineskip}
-\textbf{\large Aperfeiçoando A Representação De Autômatos Celulares Através De \textit{Templates}}\\
+\textbf{\large Aperfeiçoando a Representação de Autômatos Celulares Através de \textit{Templates}}\\
 \vskip 3.5cm
 \end{center}
-\vskip 6.3cm
+\vskip 7.3cm
 \textbf{\normalsize Orientador: Prof. Dr. Pedro Paulo Balbi de Oliveira }\\
 \vskip 1.0cm
 \begin{center}
@@ -54,7 +54,7 @@ São Paulo\\
 \textbf{\large Zorandir Soares Junior}\\
 \vskip 4.0cm
 \setlength{\baselineskip}{1.5\baselineskip}
-\textbf{\large Aperfeiçoando A Representação De Autômatos Celulares Através De \textit{Templates}}\\
+\textbf{\large Aperfeiçoando a Representação de Autômatos Celulares Através de \textit{Templates}}\\
 \vskip 3.5cm
 \end{center}
 \hfill{\vbox{\hsize=8.5cm\noindent\strut
@@ -72,6 +72,7 @@ Elétrica.\break}\\
 São Paulo\\
 \the\year\\
 \end{center}
+\newpage
 
 % FICHA CATALOGRAFICA
 %\newpage
@@ -107,7 +108,7 @@ São Paulo\\
 \textbf{RESUMO}
 \end{center}
 %\renewcommand{\baselinestretch}{0.6666666}
-Templates são representação formais para conjuntos de autômatos celulares (ACs) feitas por meio da generalização das tabelas de transição clássicas. Já existem algoritmos que geram templates para propriedades estáticas e algoritmos que realizam operações como intersecção entre templates e expansão de template. Neste projeto é introduzido a operação de complemento de templates, assim como explicado o funcionamento do algoritmo dessa operação implementada na biblioteca \textit{CATemplates}. Também são apresentados exemplos das possibilidades de uso do templates no problema de paridade, com o apoio das operações de complemento e das operações geradoras de templates de ACs conservativos de paridade e ACs conservativos de estado.
+Templates são representações formais para conjuntos de autômatos celulares (ACs) feitas por meio da generalização das tabelas de transição clássicas. Já existem algoritmos que geram templates para propriedades estáticas e algoritmos que realizam operações como intersecção entre templates e expansão de template. Este projeto de pesquisa introduz a operação de complemento de templates e o funcionamento do algoritmo dessa operação implementada na biblioteca \textit{CATemplates}. Também são apresentados exemplos das possibilidades de uso do templates no problema de paridade, com o apoio das operações de complemento e das operações geradoras de templates de ACs conservativos de paridade e ACs conservativos de estado.
 \\[0.5cm]
 \begin{flushleft}
 {\bf Palavras-chave:} {\it Autômatos celulares, templates, conservabilidade, problema de paridade.}
@@ -158,26 +159,28 @@ Templates are formal representation for cellular automaton sets (CAs) made throu
 \renewcommand{\baselinestretch}{1.4} 
 \normalsize
 \section{INTRODUÇÃO}\label{sec:introducao}
-Autômatos Celulares (ACs) são sistemas dinâmicos discretos em tempo e espaço cuja dinâmica tem sido extensivamente estudada e aplicada em diversas áreas. ACs tem a capacidade de através de regras de comportamentos locais simples, gerar comportamentos globais complexos. De acordo com \citeonline{wolfram1994cellular}, ACs podem também ser considerados uma idealização discreta de equações parciais diferenciais, muitas vezes utilizadas para descrever sistemas naturais.
+Autômatos Celulares (ACs) são sistemas dinâmicos discretos em tempo e espaço cuja dinâmica tem sido extensivamente estudada e aplicada em diversas áreas. ACs tem a capacidade de, através de regras de comportamentos locais simples, gerar comportamentos globais complexos. De acordo com \citeonline{wolfram1994cellular}, ACs podem também ser considerados uma idealização discreta de equações parciais diferenciais, muitas vezes utilizadas para descrever sistemas naturais.
 
-Existem diversas famílias de autômatos celulares que podem ser estudadas. Devido ao rápido crescimento das famílias dos ACs conforme se mudam seu parâmetros de raio e estado, uma das famílias mais estudadas é a do espaço elementar, por possuir apenas 256 regras.
+%TODO: Todas ac podem ser estudados!!!
+Existem diversas famílias de autômatos celulares que podem ser estudadas. Devido ao rápido crescimento das famílias dos ACs, de acordo com a variação dos parâmetros de raio e estado, uma das famílias mais estudadas é a do espaço elementar por possuir apenas 256 regras.
 
-Há casos em que os estudos de ACs concentram-se em algum comportamento obtido através de restrições aplicadas às tabelas de transição. Os ACs confinados, criados por \citeonline{theyssier2004captive}, é um dos caso que se pode usar como exemplo. Esses comportamentos e propriedades obtidos através de restrições aplicadas à tabela de transição podem ser denominados como propriedade estática.
+Há casos em que os estudos de ACs concentram-se em algum comportamento obtido através de restrições aplicadas às tabelas de transição. Os ACs confinados, criados por \citeonline{theyssier2004captive}, são um dos casos que se pode usar como exemplo. Esses comportamentos e propriedades obtidos através de restrições aplicadas à tabela de transição podem ser denominados como propriedades estáticas.
 
+%TODO: Referencia propriedades estáticas
 Propriedades estáticas permitem prever determinados comportamentos de um AC sem consultar sua evolução espaço-temporal, ou seja, dispensando a simulação do sistema. Propriedades estáticas também podem ser descritas como indicadores de comportamento de uma determinada família de ACs. Um exemplo de propriedade estática, descrita posteriormente em mais detalhes, é a conservabilidade de paridade. A conservabilidade de paridade define um tipo de AC binário que mantêm o número de estados com valor $1$ sempre com a mesma paridade.
 
 %TODO: Verificar se uso referencia ao artigo do PP, ou à dissertação do Verardo
-Existem algumas formas de representar propriedades estáticas, e essa representação é crucial pois culmina na eliminação da necessidade de se buscar uma propriedade analisando todo o espaço de um AC. Em \citeonline{li1990structure} já foi introduzido variáveis na representação de conjuntos de tabelas de transição. Por meio de grafos de De Bruijn, Betel, De Oliveira e Flocchini (\citeyear{Betel2013}) representam um conjunto de ACs na busca pela solução do problema de paridade. Mais recentemente De Oliveira e Verardo (\citeyear{deOliveira2014}) estabeleceu uma representação formal para conjuntos de ACs, denominada \textit{Templates}, assim como esse estudo exemplificou o uso da biblioteca \textit{CATemplates} \cite{CATemplates} desenvolvida na linguagem do software \textit{Wolfram Mathematica} \cite{woframMathematica10}.
+Existem algumas formas de representar propriedades estáticas, e essa representação é crucial pois culmina na eliminação da necessidade de se buscar uma propriedade analisando todo o espaço de um AC. Em \citeonline{li1990structure} foram introduzidas variáveis na representação de conjuntos de tabelas de transição. Por meio de grafos de De Bruijn, os autores Betel, De Oliveira e Flocchini (\citeyear{Betel2013}) representam um conjunto de ACs na busca pela solução do problema de paridade. Mais recentemente De Oliveira e Verardo (\citeyear{deOliveira2014}) estabeleceram uma representação formal para conjuntos de ACs, denominada \textit{Templates}, bem como a exemplificação do uso da biblioteca \textit{CATemplates} \cite{CATemplates} desenvolvida na linguagem do software \textit{Wolfram Mathematica} \cite{woframMathematica10}.
 
 Templates tem a capacidade de representar conjuntos de ACs sem a necessidade de se operar uma busca em todo espaço original do AC. Essa capacidade dos templates é o principal motivador deste trabalho, visto que essa habilidade é muito importante para a resolução de diversos problemas que buscam por regras com algum comportamento específico.
 
 \subsection{Objetivos}
-Este estudo tem como objetivos principais desenvolver novos algoritmos geradores de templates baseado em propriedades estática, assim como apresentar o funcionamento da operação de complemento de templates. Ademais esse projeto propõem-se a apresentar exemplos da utilidade de templates em problemas típicos de autômatos celulares, como o problema de paridade e o problema de densidade.
+Este projeto de pesquisa tem como objetivo principal o desenvolvimento de novos algoritmos para geração de templates baseado em propriedades estáticas, bem como apresentar o funcionamento da operação de complemento de templates. Ademais esse projeto propõem-se a apresentar exemplos da utilidade de templates em problemas típicos de autômatos celulares, como o problema de paridade e o problema de densidade.
 
 Até o presente momento os seguintes itens já foram concluídos:
       \begin{itemize}
           \item Implementação da operação de complemento de templates em autômatos celulares binários.
-          \item Apresentação de um conjunto de processos que restringem do espaço de busca para a solução do problema de paridade, exemplificando a utilidade de templates em problemas típicos de autômatos celulares.
+          \item Apresentação de um conjunto de processos que restringem o espaço de busca para a solução do problema de paridade, exemplificando a utilidade de templates em problemas típicos de autômatos celulares.
       \end{itemize}
 
 \subsection{Organização do Documento}
@@ -193,13 +196,13 @@ Este documento está organizado da seguinte forma: na Seção \ref{sec:acs} são
 \section{AUTÔMATOS CELULARES}\label{sec:acs}
 Autômatos celulares são idealizações matemáticas simples dos sistemas naturais. Eles consistem em um reticulado de campos discretos usualmente idênticos, onde cada campo pode assumir um conjunto finitos de, geralmente, valores inteiros. Os valores dos campos evoluem em tempo discreto de acordo com regras determinísticas que especificam o valor de cada campo de acordo com os campos das vizinhanças \cite{wolfram1994cellular}.
 
-Uma definição parecida é dada por \citeonline{weisstein2015}, para quem um AC é um conjunto de células ``coloridas'', em um reticulado com forma previamente especificada que evolui ao longo de uma série de passos de tempo discretos, de acordo com um conjunto de regras baseadas nos estados de células vizinhas. As regras são aplicadas de forma iterativa para o número de passos de tempo desejado.
+Uma definição parecida é dada por \citeonline{weisstein2015}, que define um AC como um conjunto de células ``coloridas'' em um reticulado com forma previamente especificada que evolui ao longo de uma série de passos de tempo discreto, de acordo com um conjunto de regras baseadas nos estados de células vizinhas. As regras são aplicadas de forma iterativa para o número de passos de tempo desejado.
 
-Os autômatos celulares são compostos por células distribuídas em um reticulado, e essas células mudam de estado ao longo de passos de tempo e de acordo com regras locais. O conjunto de células em determinado passo de tempo é denominado configuração ou estado global, e são as configurações que descrevem a evolução espaço temporal de um AC. 
+Os autômatos celulares são compostos por células distribuídas em um reticulado. Essas células mudam de estado ao longo de passos de tempo e de acordo com regras locais. O conjunto de células em determinado passo de tempo é denominado configuração ou estado global e são as configurações que descrevem a evolução espaço temporal de um AC. 
 
-Autômatos celulares podem operar com reticulados em qualquer número de dimensões. Os primeiros ACs, criados por \citeonline{neumann1966theory} para serem usados como um modelo formal de auto reprodução de sistemas biológicos, eram bidimensionais. Outro conhecido AC bidimensional é o ``Jogo da Vida'' (ou ``Game of Life'') que fez sua primeira aparição em uma coluna de jogos matemáticos \cite{GardnerM1970}. Entre os AC unidimensionais, os mais conhecidos são os do espaço elementares, que foram sistematicamente estudados em \citeonline{wolfram1983statistical}.
+Autômatos celulares podem operar com reticulados em qualquer número de dimensões. Os primeiros ACs eram bidimensionais e foram criados por \citeonline{neumann1966theory} para serem usados como um modelo formal de auto reprodução de sistemas biológicos. Outro conhecido AC bidimensional é o ``Jogo da Vida'' (ou ``Game of Life''), esse AC, criado por John Conway, fez sua primeira aparição em uma coluna de jogos matemáticos \cite{GardnerM1970}. Entre os AC unidimensionais, os mais conhecidos são os do espaço elementar, que foram sistematicamente estudados por \citeonline{wolfram1983statistical}.
 
-Independente da dimensionalidade do reticulado, é necessário definir como o AC se comportará nas bordas do reticulado. Um tratamento típico, é aplicar condição de contorno periódica nas extremidades do reticulado. Ou seja, tratar reticulados unidimensionais como um anel, e bidimensionais como toro. Esses tratamentos podem ser visualizados na Figura \ref{fig:anel} e na Figura \ref{fig:toro}, respectivamente.  
+Independente da dimensionalidade do reticulado, é necessário definir como o AC se comportará nas bordas. Um tratamento típico é a aplicação da condição de contorno periódica nas extremidades. Ou seja, tratar reticulados unidimensionais como um anel, e bidimensionais como toro (ou toroide). Esses tratamentos podem ser visualizados na Figura \ref{fig:anel} e na Figura \ref{fig:toro}, respectivamente.  
 	\begin{figure}[h!]
 	  \centering
 	  \includegraphics[width=.3\textwidth]{fig_circularList.pdf}
@@ -218,8 +221,8 @@ Independente da dimensionalidade do reticulado, é necessário definir como o AC
 %Estados; regras locais; e raio
 As células de um autômato celular podem apresentar $k$ estados. O valor desses estados é representado ou por cores ou por valores inteiros no intervalo $[0, k-1]$. O estado de uma célula pode ser modificado pelas funções locais, que são o conjunto de regras que determinam o novo valor de uma célula baseado em seu estado atual e nos estados das células adjacentes. Para que as funções locais atualizem os valores de uma célula, é necessário que um raio $r$ seja definido. Esse raio $r$ representa o número de células adjacentes que serão analisadas em cada direção pelas funções locais.
 
-%vizinhanças
-Além do raio, é preciso determinar o formato de vizinhança que serão utilizados nos parâmetros da função local. Duas vizinhanças bem comuns em ACs bidimensionais, são as vizinhanças de von Neumann e Moore. Na Figura \ref{fig:vVonNeumann} e na Figura \ref{fig:vMoore} são apresentadas as vizinhanças de von Neumann e Moore, respectivamente, para raios de 1 a 4. No caso dos ACs unidimensionais, as vizinhanças são definidas apenas pelo raio $r$, e ele descreve quantas células a esquerda e direita da célula atual serão consideras pela função local.
+%vizinhanças %TODO Referências de vizinhança de von Neumann e vizinhança de Moore 
+Além do raio, é preciso determinar o formato de vizinhança que será utilizada nos parâmetros da função local. Duas vizinhanças bem comuns em ACs bidimensionais são as vizinhanças de von Neumann \cite{weisstein2015b} e Moore \cite{weisstein2015c}. Na Figura \ref{fig:vVonNeumann} e na Figura \ref{fig:vMoore} são apresentadas as vizinhanças de von Neumann e Moore, respectivamente, para raios de 0 a 3. No caso dos ACs unidimensionais, as vizinhanças são definidas apenas pelo raio $r$ e ele descreve quantas células a esquerda e direita da célula atual serão consideras pela função local.
 
 	\begin{figure}[h!]
 	  \centering
@@ -236,9 +239,9 @@ Além do raio, é preciso determinar o formato de vizinhança que serão utiliza
 	\end{figure}
 
 %Famílias de autômatos Celulares; e Autômatos Celulares Elementares.
-Definindo qual será o raio, o número de estados, o tipo de vizinhança e a dimensionalidade das configurações, é definido uma família de autômatos celulares. Autômatos celulares unidimensionais, de raio $r=1$ e dois estados, ou seja $k=2$, são conhecidos como a família dos autômatos celulares elementares.
+Uma família de autômatos celulares é definida pelo raio, número de estados, tipo de vizinhança e a dimensionalidade das configurações. Autômatos celulares unidimensionais de raio $r=1$ e $k=2$ são conhecidos como a família dos autômatos celulares elementares.
 
-Todo AC é regido por um conjunto de regras locais que determinam como ficarão as configurações no próximo passo de tempo de acordo com as configurações de vizinhança recebidas. Existem diversas maneiras de representar essas regras locais, a mais comum são as tabelas de transições. Tabela de transição é uma $n-$upla em que os elementos são todos os possíveis estados de vizinhanças de uma célula acrescentados de um estado que representa a transição que ocorrerá. A Equação \ref{eq:nupla} representa a $n$-upla da regra 30.
+Todo AC é regido por um conjunto de regras locais que determinam como ficarão as configurações no próximo passo de tempo de acordo com as configurações de vizinhança recebidas. Existem diversas maneiras de representar essas regras locais, a mais comum são as tabelas de transições. A tabela de transição é uma $n-$upla em que os elementos são todos os possíveis estados de vizinhanças de uma célula acrescentados de um estado que representa a transição que ocorrerá. A Equação \ref{eq:nupla} representa a $n$-upla da regra 30.
 \begin{equation}
 \begin{split}
 (((1,1,1),0),((1,1,0),0),((1,0,1),0),((1,0,0),1),\\
@@ -247,7 +250,8 @@ Todo AC é regido por um conjunto de regras locais que determinam como ficarão 
 \end{split}
 \end{equation}
 
-Uma outra forma de representar uma tabela de transições é a forma icônica. Na forma icônica os bits $1$ são representados por ícones na cor preta, e os bits $0$ por ícones na cor branca. Cada uma das transições de estados é representada por um conjunto de ícones representando a vizinhança na parte de cima, e um ícone representando o estado resultante após a transição abaixo. A Figura \ref{fig:repIconicaR30} mostra a representação icônica da regra 30.
+%TODO tabela de transições no plural? no singular? enfim...
+Uma outra forma de representar uma tabela de transições é a forma icônica. Na forma icônica o bit $1$ é representado por um ícone na cor preta, e o bit $0$ por um ícone na cor branca. Cada uma das transições de estados é representada por um conjunto de ícones que representa a vizinhança na parte superior, e um ícone para representar o estado resultante após a transição na parte inferior. A Figura \ref{fig:repIconicaR30} mostra a representação icônica da regra 30.
 
 	\begin{figure}[h!]
 	  \centering
@@ -256,7 +260,7 @@ Uma outra forma de representar uma tabela de transições é a forma icônica. N
 	  \label{fig:repIconicaR30}
 	\end{figure}
 
-Além dessas formas de representação, ainda existe a forma $k$-aria, em que sabendo-se o valor atribuído para $k$ e $r$, elimina-se a a representação das vizinhanças e deixa-se apenas as representações resultantes. Na Equação \ref{eq:karia} é possível ver a representação $k$-aria da regra 30. O número da regra é obtido ao se converter a representação $k$-aria para decimal. Esse número é um identificador único em família de autômatos celulares, ou seja, sempre representa apenas uma tabela de transições de estado.
+Além dessas formas de representação, ainda existe a forma $k$-aria em que, sabendo-se o valor atribuído para $k$ e $r$, elimina-se a representação das vizinhanças e deixa-se apenas as representações resultantes. Na Equação \ref{eq:karia} é possível ver a representação $k$-aria da regra 30. O número da regra é obtido ao se converter a representação $k$-aria para decimal. Esse número é um identificador único em família de autômatos celulares, ou seja, sempre representa apenas uma tabela de transições de estado.
 \begin{equation}
 (0,0,0,1,1,1,1,0)
 \label{eq:karia}
@@ -269,17 +273,14 @@ k^{k^{2r+1}}
 \end{equation}
 
 %TODO: rever esse paragrafo que está confuso.
-No espaço elementar há $2^{2^{3}} = 256$ regras, aumentando apenas para 2 o valor do raio $r$, obtemos uma família de $2^{2^{5}} = 4.294.967.296$ regras. Caso se aumente o número de estados para 3, obtém-se um espaço de ACs com $3^{3^{3}} = 7.625.597.484.987$ regras. Logo, é fácil perceber como qualquer modificação nas variáveis $k$ e $r$ geram famílias com número de regras muito grande. Famílias de ACs representam um desafio grande na hora de encontrar ACs com propriedades específicas, já que procurar regras através de força bruta em um espaço muito grande se torna uma tarefa extremamente improdutiva.
+No espaço elementar há $2^{2^{3}} = 256$ regras. Aumentando o raio $r=2$, obtemos uma família de $2^{2^{5}} = 4.294.967.296$ regras. Para $k=3$ e $r=1$, obtém-se um espaço de ACs com $3^{3^{3}} = 7.625.597.484.987$ regras. Logo, é fácil perceber que qualquer modificação nas variáveis $k$ e $r$ geram famílias com número de regras muito grande. Famílias de ACs representam um desafio grande na hora de encontrar ACs com propriedades específicas, já que procurar regras através de força bruta em um espaço muito grande se torna uma tarefa extremamente improdutiva.
 
-Para contornar esse problema, é muito comum utilizar algumas propriedades estáticas para restringir as regras do espaço em que se fará as buscas pelo regra com o comportamento desejado. Alguns exemplos de propriedades estáticas que podem auxiliar nesse ``filtro'' são o confinamento, conservabilidade de estados e conservabilidade de paridade. Todas as propriedades estáticas citadas anteriormente são detalhadas na Seção \ref{sec:propriedadesEstaticas}.
+Para contornar esse problema, é comum utilizar algumas propriedades estáticas para restringir as regras do espaço no qual serão feitas as buscas. Alguns exemplos de propriedades estáticas que podem auxiliar nesse ``filtro'' são o confinamento, conservabilidade de estados e conservabilidade de paridade. Todas as propriedades estáticas citadas anteriormente são detalhadas na Seção \ref{sec:propriedadesEstaticas}.
 
-O problema da paridade é um dos problemas que envolvem fazer a ligação entre comportamento local e comportamento global. Nesse projeto, considerando que um AC binário, unidimensional e com condição de contorno periódica, se uma configuração inicial contiver um número ímpar de estados com valor 1, o AC deve convergir para que todas as células estejam preenchidas com 1. Caso contrário, ele deve convergir para todos os estados com o valor 0. Por conta da própria definição do problema, fica simples perceber que essa condições não podem ser satisfeitas em uma grelha de tamanho par, afinal uma configuração de com todos os estados apresentando o mesmo valor não poderia ser um estado quiescente. Devido essa questão, pode-se dizer que as regras que solucionam o problema de paridade em ACs são \textit{perfeitas} se eles resolverem o problema de paridade em qualquer configuração inicial arbitrária para ACs de tamanho ímpar. 
+%TODO
+O problema da paridade é um dos problemas que envolvem fazer a ligação entre comportamento local e comportamento global. Para o problema de paridade, nesse projeto, considera-se um AC binário, unidimensional e com condição de contorno periódica. Se uma configuração inicial contiver um número ímpar de estados com valor 1, o AC deve convergir para que todas as células estejam preenchidas com 1, caso contrário, ele deve convergir para todos os estados com o valor 0. Por conta da própria definição do problema, fica simples perceber que essa condições não podem ser satisfeitas em uma grelha de tamanho par, afinal uma configuração com todos os estados apresentando o mesmo valor não poderia ser um estado quiescente. Devido essa questão, pode-se dizer que as regras que solucionam o problema de paridade em ACs são \textit{perfeitas} se eles resolverem o problema de paridade em qualquer configuração inicial arbitrária para ACs de tamanho ímpar \cite{Betel2013}. Ainda em relação ao problema de paridade, Betel, De Oliveira e Flocchini (\citeyear{Betel2013}) descrevem duas propriedades básicas: se $f$ é a regra local que resolve o problema de paridade, então $f(0, \dots, 0) = 0$ e $f(1, \dots, 1) = 1$. A segunda propriedade define que para uma regra preservar a configuração de paridade ela deve apresentar número par de transições ativas. Em outras palavras, toda aplicação da regra deve levar a uma nova configuração com a mesma paridade.
 
-Ainda em relação ao problema de paridade, Betel, De Oliveira e Flocchini (\citeyear{Betel2013}) descrevem 2 propriedades básicas: se $f$ é a regra local que resolve o problema de paridade, então $f(0, \dots, 0) = 0$ e $f(1, \dots, 1) = 1$. A segunda propriedade define que para uma regra preservar a configuração de paridade, Betel, De Oliveira e Flocchini (\citeyear{Betel2013}) número par de transições ativas. Em outras palavras, toda aplicação da regra deve levar a uma nova configuração com a mesma paridade.
-
-Procurar uma regra que resolva o problema de paridade em autômatos celulares unidimensionais de raio 3, por exemplo, através de buscas por força bruta acarretaria em testar mais de 340 undecilhões de regras. Uma maneira de facilitar essa busca seria restringir as regras através de Betel, De Oliveira e Flocchini (\citeyear{Betel2013}) estados, mas é necessário uma forma de representar essas propriedades e até mesmo aplicar operações como intersecção e complemento entre elas.
-
-Nesse ponto que os \textit{templates} apresentam-se de uma forma interessantes e útil para representar conjuntos de regras com determinada propriedade. Templates de ACs são uma generalizações das tabelas de transições que permitem representar espaços inteiros de ACs \cite{Verardo2014}.
+Procurar uma regra que resolva o problema de paridade em autômatos celulares unidimensionais de raio 3, por exemplo, por meio de buscas por força bruta acarretaria em testar mais de 340 undecilhões de regras. Uma maneira de facilitar essa busca é restringir as regras através propriedades estáticas, mas é necessário uma forma de representar essas propriedades e até mesmo aplicar operações como intersecção e complemento entre elas. Nesse ponto que os \textit{templates} apresentam-se de uma forma interessante e útil para representar conjuntos de regras com determinada propriedade. Templates de ACs são uma generalizações das tabelas de transições que permitem representar espaços inteiros de ACs \cite{Verardo2014}.
 
 
 
@@ -292,7 +293,7 @@ Nesse ponto que os \textit{templates} apresentam-se de uma forma interessantes e
 \textit{Templates} de autômatos celulares são uma generalização de tabelas de transições que faz com que um templates seja capaz de representar famílias de autômatos celulares. Os templates foram criados por De Oliveira e Verardo (\citeyear{deOliveira2014}) e implementada como um algoritmo na linguagem do software \textit{Wolfram Mathematica} \cite{woframMathematica10}, atualmente disponíveis na biblioteca \textit{open source CATemplates} \cite{CATemplates} no GitHub.
 
 %TODO: verificar a frase e cada item $i$ representa uma função $g_i(x_0,x_1,\dots,x_{k^{2r+1}-1})$
-Formalmente, um \textit{template} é uma $n$-upla formada por $k^{2r+1}$ itens, e cada item $i$ representa uma função $g_i(x_0,x_1,\dots,x_{k^{2r+1}-1})$. As variáveis $x_i$ podem assumir qualquer estado entre 0 e $k-1$, logo no caso binário $x_i$ pode assumir os valores 0 e 1. É possível limitar os valores possíveis de $x_i$ através da notação $x_i \in C$, onde $C$ é um conjunto representando os possíveis valores de $x_i$. Entretanto vale frisar que no caso binário não tem lógica implementar uma notação como $x_i \in {1}$ ou $x_i \in {0}$ pois os templates também aceitam constante, sendo essas notações equivalente à apenas as constante $1$ e $0$ respectivamente.
+Formalmente, um \textit{template} é uma $n$-upla formada por $k^{2r+1}$ itens, e cada item $i$ representa uma função $g_i(x_0,x_1,\dots,x_{k^{2r+1}-1})$. As variáveis $x_i$ podem assumir qualquer estado entre 0 e $k-1$, logo no caso binário $x_i$ pode assumir os valores 0 e 1. É possível limitar os valores possíveis de $x_i$ através da notação $x_i \in C$, onde $C$ é um conjunto representando os possíveis valores de $x_i$. Entretanto vale frisar que no caso binário não tem lógica implementar uma notação como $x_i \in {1}$ ou $x_i \in {0}$ pois os templates também aceitam constante, sendo essas notações equivalente à apenas as constante $1$ e $0$, respectivamente.
 
 Exemplificando, dado um template $T_1 = (1,1,1,1,1-x_1,x_2,x_1,0)$, ele representará todas as regras que tenham em sua primeira posição (sempre da direita pra esquerda) o estado 0, nas posições 5, 6, 7 e 8 o estado 1, nas posições 2 e 3 qualquer estado no intervalo $[0,k-1]$ e na posição 4 o estado complementar ao valor de $x_1$. Perceba que o tamanho da $n$-tupla é determinado pela função $k^{2r+1}$, logo no template $T_1$ os únicos valores inteiros possíveis para $k$ e $r$ são 2 e 1 respectivamente. Portanto $T_1$ representará um subespaço dos ACs elementares.
 
@@ -304,7 +305,7 @@ Cada template tem um número de substituições máximo igual a $k^m$, sendo o $
 \label{eq:templateConstante}
 \end{equation}
 
-Já a $8$-uplas representada pela Equação \ref{eq:templateBase} representa um template base que está associado a todas as 256 regras do espaço elementar, já que para $m = 8$ temos $2^m = 256 $.
+Já a $8$-uplas, apresentada na Equação \ref{eq:templateBase}, representa um template base que está associado a todas as 256 regras do espaço elementar já que, para $m = 8$, temos $2^m = 256 $.
 \begin{equation}
 (x_7,x_6,x_5,x_4,x_3,x_2,x_1,x_0)
 \label{eq:templateBase}
@@ -317,9 +318,10 @@ Já a $8$-uplas representada pela Equação \ref{eq:templateBase} representa um 
 
 A representação de famílias de autômatos celulares através de templates, possibilita a utilização de templates para problemas já bem conhecidos da área de ACs. Um exemplo de problema que pode se beneficiar dos templates é o problema da paridade.
 
+%TODO Tirar repetição
 O problema da paridade refere-se à capacidade de um AC binário, unidimensional, com condição de contorno periódica, apresentar uma evolução temporal da seguinte forma: se uma configuração inicial contiver um número ímpar de células com o valor 1, o AC deve convergir para que todas as células estejam no estado 1; caso contrário, ele deve convergir para todas as células no estado 0. Pode-se dizer que as regras que solucionam o problema de paridade em ACs são \textit{perfeitas} se elas resolverem o problema em qualquer configuração inicial arbitrária, em reticulados de tamanho ímpar. 
 
-A Figura \ref{fig:parity-rule} ilustra o desenvolvimento espaço temporal de uma regra que usualmente resolve o problema de paridade. Nessa imagem o desenvolvimento temporal à esquerda contém em sua configuração inicial um número par de estados igual a 1, já na evolução temporal ilustrada à direita há um número ímpar de estados igual a 1.
+A Figura \ref{fig:parity-rule} ilustra o desenvolvimento espaço temporal de uma regra que usualmente resolve o problema de paridade. Nessa imagem o desenvolvimento temporal à esquerda contém, em sua configuração inicial, um número par de estados igual a 1, já na evolução temporal ilustrada à direita há um número ímpar de estados igual a 1.
 % A Figura \ref{fig:paritySample} ilustra uma regra que soluciona o PP.
 \begin{figure}[h!]
 	\center
@@ -338,12 +340,12 @@ A Figura \ref{fig:parity-rule} ilustra o desenvolvimento espaço temporal de uma
 %     \label{fig:parity-rule}
 % \end{figure}
 
+%TODO "que é que a"
+O estudo do problema de paridade é interessante pois ajuda a compreender um problema ainda sem solução em ACs, que é, que a despeito da habilidade de realizar computações, pouco se sabe sobre como se deve projetar transições de estado locais que levem a um comportamento global pré determinado. Entretanto, entender o impacto das interações locais nas soluções globais influi em diversos sistemas de computação emergente. Entender a influência que o tamanho da vizinhança dos autômatos celulares apresenta na computabilidade pode apresentar consequências úteis para o projeto de ACs e para a compreensão de sistemas emergentes complexos em geral.
 
-O estudo do problema de paridade é interessante pois ajuda a compreender outro problemas ainda sem solução em ACs, que é que a despeito da habilidade de realizar computações, pouco se sabe sobre como se deve projetar transições de estado locais que levem a um comportamento global pré determinado. Entretanto, entender o impacto das interações locais nas soluções globais influi em diversos sistemas de computação emergente. Entender a influência que o tamanho da vizinhança dos autômatos celulares apresenta na computabilidade pode apresentar consequências úteis para o projeto de ACs e para a compreensão de sistemas emergentes complexos em geral.
+Estudos feitos sobre o problema de paridade já levaram ao conhecimento de que o problema não tem solução perfeita para ACs elementares e de raio 2, todavia já foi descoberta uma regra perfeita que soluciona o problema de paridade para raio 4. Em relação aos ACs de raio 3, ainda não foi encontrada solução perfeita e há evidências empíricas desfavoráveis a uma solução para esse raio \cite{Betel2013}.
 
-Estudos feitos sobre o problema de paridade já levaram ao conhecimento de que o problema não tem solução perfeitas para ACs elementares e de raio 2, todavia já foi descoberta uma regra perfeita que soluciona o problema de paridade para raio 4. Em relação aos ACs de raio 3, ainda não foi encontradas solução perfeita e há evidências empíricas desfavoráveis a uma solução para esse raio \cite{Betel2013}.
-
-Esse estudos de Betel, De Oliveira e Flocchini (\citeyear{Betel2013}), buscando definir se o problema de paridade em ACs de raio 2 apresenta alguma soluções perfeita, encontraram de forma analítica como as transações de estado de supostas regras que resolvessem o problema de paridade deveriam ser. Com isso, utilizando grafos de \textit{De Bruijn} foram definidas quais variáveis deveriam ser estáticas, quais deveriam ser livres e quais deveriam apresentar interdependência. Com essa definições foram definidas duas famílias de ACs. Os grafos ilustrados na Figura \ref{fig:grafosDeBruijn} e na Figura \ref{fig:grafosDeBruijn2} são os grafos desenvolvidos por Betel, De Oliveira e Flocchini (\citeyear{Betel2013}).
+Betel, De Oliveira e Flocchini (\citeyear{Betel2013}), buscando definir se o problema de paridade em ACs de raio 2 apresenta alguma solução perfeita, encontraram de forma analítica como as transações de estado de supostas regras que resolvessem o problema de paridade deveriam ser. Com isso, utilizando grafos de \textit{De Bruijn} foram definidas quais variáveis deveriam ser estáticas, quais deveriam ser livres e quais deveriam apresentar interdependência. Com essa definições foram definidas duas famílias de ACs. Os grafos ilustrados na Figura \ref{fig:grafosDeBruijn} e na Figura \ref{fig:grafosDeBruijn2} são os grafos desenvolvidos por Betel, De Oliveira e Flocchini (\citeyear{Betel2013}).
 
 \begin{figure}[h!]
   \centering
@@ -353,7 +355,7 @@ Esse estudos de Betel, De Oliveira e Flocchini (\citeyear{Betel2013}), buscando 
     \label{fig:grafosDeBruijn}
 \end{figure}
 
-Ambos os grafos apresentam as variáveis livres $a, b, c, d \text{ e } x$ e uma interdependência, em que uma transição de estado deve ter o valor oposto à variável $x$. A única diferença entre os dois grafos são nas váriaveis estáticas.
+Ambos os grafos apresentam as variáveis livres $a, b, c, d \text{ e } x$ e uma interdependência, em que uma transição de estado deve ter o valor oposto à variável $x$. A única diferença entre os dois grafos são nas variáveis estáticas.
 
 \begin{figure}[h!]
   \centering
@@ -363,7 +365,8 @@ Ambos os grafos apresentam as variáveis livres $a, b, c, d \text{ e } x$ e uma 
     \label{fig:grafosDeBruijn2}
 \end{figure}
 
-Ao utilizar os grafos de \textit{De Bruijn} fixando algumas transições de estado, a família de ACs em que se procurava as regras que solucionavam o problema de paridade, antes composta por $2^{32}$ regras, foi restringida para apenas 64 regras, que puderam ser estudadas em mais detalhes até que se falhassem. Entretanto, conforme mostrado em \cite{Verardo2014}, a representação desse espaço de 64 regras poderiam ser perfeitamente representados através de \textit{templates}. O template \ref{eq:templateParidade1} representa o mesmo espaço que a Figura \ref{fig:grafosDeBruijn}, já o template \ref{eq:templateParidade2} é equivale a Figura \ref{fig:grafosDeBruijn2}.
+%TODO deixar mais claro.
+Ao utilizar os grafos de \textit{De Bruijn}, fixando algumas transições de estado, a família de ACs em que se procurava as regras que solucionavam o problema de paridade, antes composta por $2^{32}$ regras, foi restringida para apenas 64 regras, que puderam ser estudadas em mais detalhes até que falhassem. Entretanto, conforme mostrado em \cite{Verardo2014}, a representação desse espaço de 64 regras poderiam ser perfeitamente representados através de \textit{templates}. O template \ref{eq:templateParidade1} representa o mesmo espaço que a Figura \ref{fig:grafosDeBruijn}, já o template \ref{eq:templateParidade2} é equivalente a Figura \ref{fig:grafosDeBruijn2}.
 
 \begin{equation}
 \left(0,1,1,1,1,x_{26},0,1,1,1,1-x_{10},x_{20,}0,0,1,0,1,0,1,0,x_{11},x_{10},0,0,1,0,x_5,0,1,0,0,1\right)
@@ -379,7 +382,7 @@ Ao utilizar os grafos de \textit{De Bruijn} fixando algumas transições de esta
 \newpage\newpage
 \subsection{Expansão De Templates}
 	Expansão é o processo no qual se obtêm todas as tabelas de transição $R_k$ associadas a um template $T$.
-	A operação de expansão foi apresentada por \cite{Verardo2014} e foi descrita em maior detalhes da seguinte maneira:
+	A operação de expansão foi apresentada por \citeonline{Verardo2014} e foi descrita em mais detalhes da seguinte maneira:
 
 	\begin{equation}
 	E(T)=R_k
@@ -455,7 +458,7 @@ Ao utilizar os grafos de \textit{De Bruijn} fixando algumas transições de esta
 
 \newpage\newpage
 \subsection{Intersecção De Templates}%TODO: Verificar essa frase que está meio confusa.
-	Intersecção é o processo no qual se obtêm um template que represente o conjunto $R_k$ de todas as regras pertencentes aos dois templates definidos para o mesmo espaço recebidos como parâmetro. A operação de intersecção foi descrita por \citeonline{Verardo2014} e mostrada em maiores detalhes da seguinte maneira:
+	Intersecção é o processo no qual se obtêm um template que represente o conjunto $R_k$ de todas as regras pertencentes aos dois templates definidos para o mesmo espaço recebidos como parâmetro. A operação de intersecção foi descrita por \citeonline{Verardo2014} e mostrada em mais detalhes da seguinte maneira:
 
 	\begin{equation}
 	I(T_1,T_2)=T_3 \Leftrightarrow E(T_3) = E(T_1) \cap E(T_2)
@@ -480,7 +483,7 @@ Ao utilizar os grafos de \textit{De Bruijn} fixando algumas transições de esta
 	\label{eq:interseccao}
 	\end{equation}
 
-	Esse sistema de equações é passado então como argumento para a função Solve, que por sua vez retorna um conjunto solução $S$, que nesse exemplo é $S = \{x_0 = 2, x_3 = 1, x_4 = 0, x_5 = 1 - x_4, x_6 = 0\}$. O cojunto $S$ é aplicado como um conjunto de substituições sobre os dois templates recebidos como parâmetro, que em caso de templates sem restrição de variáveis sempre retorna o mesmo template. Neste exemplo, após aplicada as substituições do conjunto de soluções $S$ obtêm-se como resultado o templates $T_3 = (x_7, 1, 1, 0, 1, x_2, 2, 2)$.
+	Esse sistema de equações é passado então como argumento para a função Solve, que por sua vez retorna um conjunto solução $S$, que nesse exemplo é $S = \{x_0 = 2, x_3 = 1, x_4 = 0, x_5 = 1 - x_4, x_6 = 0\}$. O cojunto $S$ é aplicado como um conjunto de substituições sobre os dois templates recebidos como parâmetro, que em caso de templates sem restrição de variáveis sempre retorna o mesmo template. Neste exemplo, após aplicada as substituições do conjunto de soluções $S$, obtêm-se como resultado o template $T_3 = (x_7, 1, 1, 0, 1, x_2, 2, 2)$.
 
 	A segunda etapa do algoritmo apenas é aplicada para templates com alguma restrição de variável. Essa etapa consiste em extrair as expressões que estabelecem as restrições, e através delas obter um segundo sistema de equações. A solução desse sistema ou pode ser vazia, expressando assim que os templates não tem intersecção, ou pode indicar os valores que as variáveis com restrição podem assumir.
 
@@ -503,9 +506,9 @@ Ao utilizar os grafos de \textit{De Bruijn} fixando algumas transições de esta
 	\label{eq:templateIntescecao}
 	\end{equation}
 
-	Vale frisar que o template $T_{r2}$ também poderia ser representado substituindo a variável $x_2$ e seu conjunto de restrição $\{1\}$ apenas pelo valor constante $1$, como mostrado a seguir: $T_{r2} = (x_7 \in \{0,1\}, 1, x_5, 0, x_3, 1, 2, 2)$. Esse tipo de mudança é sempre preferível pois variáveis a mais acarretam em mais processamento.
+	Vale frisar que o template $T_{r2}$ também poderia ser representado substituindo a variável $x_2$ e seu conjunto de restrição $\{1\}$ apenas pelo valor constante $1$, como mostrado a seguir: $T_{r2} = (x_7 \in \{0,1\}, 1, x_5, 0, x_3, 1, 2, 2)$. Esse tipo de mudança é sempre preterido pois variáveis a mais acarretam em mais processamento.
 
-	No caso de binário, ou seja $k = 2$, a notação de restrição nunca se faz necessária visto que ou a restrição terá apenas um valor factível, sendo preferível que essa variável e sua restrição sejam substituídas por valor constante, ou a variável poderá assumir qualquer estado, sendo assim por definição uma variável livre.
+	No caso binário, ou seja $k = 2$, a notação de restrição nunca é necessária visto que ou a restrição terá apenas um valor factível, sendo preferível que essa variável e sua restrição sejam substituídas por um valor constante, ou a variável poderá assumir qualquer estado sendo assim, por definição, uma variável livre.
 
 
 
@@ -516,7 +519,7 @@ Ao utilizar os grafos de \textit{De Bruijn} fixando algumas transições de esta
 
 	Em ACs, propriedades estáticas são propriedades computadas com base nas tabelas de transição. Essas propriedade permitem prever determinados comportamentos de um ACs sem consultar sua evolução espaço temporal. 
 
-	Esta seção descreverá algumas propriedades estáticas, assim como o funcionamento dos algoritmos geradores de templates que as representam. Todos algortimos explicados aqui estão implementados na biblioteca \textit{CATemplates} \cite{CATemplates}.
+	Esta seção descreverá algumas propriedades estáticas, assim como o funcionamento dos algoritmos geradores de templates que as representam. Todos algoritmos explicados aqui estão implementados na biblioteca \textit{CATemplates} \cite{CATemplates}.
 
 	\subsection{Conservabilidade De Estados E Conservabilidade De Paridade}
 	Conservabilidade de estados é uma propriedade estática que determina que a soma dos estados de um determinado autômato celular não devem se alterar durante a evolução espaço temporal, independente da configuração inicial passada.
@@ -604,7 +607,7 @@ Ao utilizar os grafos de \textit{De Bruijn} fixando algumas transições de esta
 	\label{eq:conservativeTemplate}
 	\end{equation}
 
-	O processo de gerar regras conservativas de paridade é bem parecido, porém as condições de \citeonline{boccara2002} são ligeiramente modificadas em relação a Equação \ref{eq:conservativeCA}, de forma que cada uma das funções locais deve respeitar agora as condições da Equação \ref{eq:parityConservativeCA}.
+	O processo de gerar regras conservativas de paridade é bem parecido, porém as condições de \cite{boccara2002} são ligeiramente modificadas em relação a Equação \ref{eq:conservativeCA}, de forma que cada uma das funções locais deve respeitar agora as condições da Equação \ref{eq:parityConservativeCA}.
 
 	\begin{equation}
 	\begin{split}
@@ -664,7 +667,7 @@ Ao utilizar os grafos de \textit{De Bruijn} fixando algumas transições de esta
 
 \section{RESULTADOS PARCIAIS}\label{sec:aplicacao}
 
-	O presente estudo já apresenta resultados interessantes, tais como a desenvolvimento da operação de complemento, assim como a demosntração de um série de passos que, utilizando a operação de complemento, consegue restringir o espaço busca de ACs de raio 3 que tem a possibilidade de solucionar o problema de paridade.
+	O presente estudo já apresenta resultados interessantes, tais como a desenvolvimento da operação de complemento, assim como a demonstração de um série de passos que, utilizando a operação de complemento, consegue restringir o espaço busca de ACs de raio 3 que tem a possibilidade de solucionar o problema de paridade.
 
 	A operação de complemento é responsável por obter um conjunto de templates que represente todas as regras que não pertençam a um template passado como argumento. Está operação pode ser melhor visualizada abaixo:
 	\begin{equation}
