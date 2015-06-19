@@ -123,7 +123,7 @@ Templates são representações formais para conjuntos de autômatos celulares (
 \textbf{ABSTRACT}
 \end{center}
 %\renewcommand{\baselinestretch}{0.6666666}
-Templates are formal representation for cellular automaton sets (CAs) made through the generalization of the classical transition tables. Already there are algorithms that generate templates for static properties and algorithms that perform operations such as intersection between templates and template expansion. In this project it is introduced the templates complement operating, and explained the functioning of the algorithm of this operation implemented in the \textit{CATemplates} package. Also show examples of possibilities of using templates in the parity problem, with the support of complement operations and generating operations of CAs conservative parity and ACs state conservative.
+Templates are formal representation for cellular automaton sets (CAs) made through the generalization of the classical transitions table. Already there are algorithms that generate templates for static properties and algorithms that perform operations such as intersection between templates and template expansion. In this research project it is introduced the templates complement operating and explained the functioning of the algorithm of this operation implemented in the \textit{CATemplates} package. Also show examples of possibilities of using templates in the parity problem, with the support of complement operations and generating operations of CAs conservative parity and ACs state conservative.
 \\[0.5cm]
 \begin{flushleft}
 {\bf Keywords:} {\it Cellular automaton, templates, conservation, parity problem.}
@@ -182,7 +182,7 @@ Até o presente momento os seguintes itens já foram concluídos:
       \end{itemize}
 
 \subsection{Organização do Documento}
-Este documento está organizado da seguinte forma: na Seção \ref{sec:acs} são detalhados os ACs, assim como alguma de suas propriedades. A Seção \ref{sec:templates} apresenta em mais detalhes o funcionamento dos templates, assim como descreve o funcionamentos de duas de suas principais operações. A Seção \ref{sec:propriedadesEstaticas} apresenta algumas propriedade estáticas e explica o funcionamento de suas respectivas operações de geração de template. A Seção \ref{sec:aplicacao} apresenta alguns exemplos de aplicações para os templates, focado principalmente no problema de paridade. Por fim, a Seção \ref{sec:conclusao} apresenta as considerações finais do presente trabalho.
+Este documento está organizado da seguinte forma: na Seção \ref{sec:acs} são detalhados os ACs, assim como alguma de suas propriedades. A Seção \ref{sec:templates} apresenta em mais detalhes o funcionamento dos templates, assim como descreve o funcionamentos de duas de suas principais operações. A Seção \ref{sec:propriedadesEstaticas} apresenta algumas propriedade estáticas e explica o funcionamento de suas respectivas operações de geração de template. A Seção \ref{sec:aplicacao} apresenta os resultados parciais desse projeto de pesquisa. Por fim, a Seção \ref{sec:conclusao} apresenta as considerações finais do presente trabalho.
 
 
 
@@ -345,11 +345,11 @@ Ambos os grafos apresentam as variáveis livres $a, b, c, d \text{ e } x$ e uma 
 
 Ao utilizar os grafos de \textit{De Bruijn} fixando algumas transições de estado a família de ACs em que se procurava as regras que solucionavam o problema de paridade foi restringida para apenas 64 regras. Ao se restrigir o espaço de busca, antes composto por $2^{32}$ regras, as regras puderam ser estudadas em mais detalhes até que falhassem. Entretanto, conforme mostrado em \cite{Verardo2014}, a representação desse espaço de 64 regras pode ser equivalentemente representado por meio de \textit{templates}. O template \ref{eq:templateParidade1} representa o mesmo espaço que a Figura \ref{fig:grafosDeBruijn}, já o template \ref{eq:templateParidade2} é equivalente a Figura \ref{fig:grafosDeBruijn2}.
 \begin{equation}
-\left(0,1,1,1,1,x_{26},0,1,1,1,1-x_{10},x_{20,}0,0,1,0,1,0,1,0,x_{11},x_{10},0,0,1,0,x_5,0,1,0,0,1\right)
+\left(0,1,1,1,1,x_{26},0,1,1,1,1-x_{10},x_{20},0,0,1,0,1,0,1,0,x_{11},x_{10},0,0,1,0,x_5,0,1,0,0,1\right)
 \label{eq:templateParidade1}
 \end{equation}
 \begin{equation}
-\left(0,1,1,0,1,x_{26},1,0,1,1,1-x_{10},x_{20,}0,1,1,0,1,0,1,1,x_{11},x_{10},0,0,1,0,x_5,0,0,0,0,1\right)
+\left(0,1,1,0,1,x_{26},1,0,1,1,1-x_{10},x_{20},0,1,1,0,1,0,1,1,x_{11},x_{10},0,0,1,0,x_5,0,0,0,0,1\right)
 \label{eq:templateParidade2}
 \end{equation}
 
@@ -700,7 +700,7 @@ Ao utilizar os grafos de \textit{De Bruijn} fixando algumas transições de esta
 	\label{eq:logicalComplement2}
 	\end{equation}
 
-	Após a efetuado esses passos, a combinação lógica de equações resultante é passada como argumento para a função Solve que retorna o conjunto solução $S$. Nesse exemplo $S = \{\{x4 \to x_1\},\{x0\to 1\}\}$. Perceba que $S$ apresenta mais de um conjunto de substituições, por consequência  ambos devem ser utilizados para realizar as substituições no template base. Essas substituições faz com que se obtenha o conjunto de templates $\{(x_7,x_6,x_5,x_1,x_3,x_2,x_1,x0),(x_7,x_6,x_5,x4,x_3,x_2,x_1,1)\}$. A união desses dois templates representa todas as regras não representadas pelo template $T_1$.
+	Após a efetuado esses passos, a combinação lógica de equações resultante é passada como argumento para a função Solve que retorna o conjunto solução $S$. Nesse exemplo $S = \{\{x_4 \to x_1\},\{x_0\to 1\}\}$. Perceba que $S$ apresenta mais de um conjunto de substituições, por consequência  ambos devem ser utilizados para realizar as substituições no template base. Essas substituições faz com que se obtenha o conjunto de templates $\{(x_7,x_6,x_5,x_1,x_3,x_2,x_1,x_0),(x_7,x_6,x_5,x_4,x_3,x_2,x_1,1)\}$. A união desses dois templates representa todas as regras não representadas pelo template $T_1$.
 
 	%TODO: verificar essa confusão!!
 	No exemplo dado com o template $T_1$ apenas as etapas da operação de complemento descritas anteriormente são necessárias, mas nem sempre é assim. 
@@ -759,7 +759,7 @@ Como possíveis trabalhos futuros, pretende-se generalizar a operação de compl
 
 \section{PLANO DE TRABALHO}
 
-Este projeto está organizado em 7 fases, em um período de dois anos, conforme descrito na tabela \ref{cronograma}:
+Este projeto está organizado em sete fases, em um período de dois anos, conforme descrito na tabela \ref{cronograma}:
 
   \begin{itemize}
       \item Fase 0: participação nas disciplinas necessárias ao cumprimento dos créditos para a obtenção do título de mestre;
