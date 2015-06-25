@@ -130,7 +130,7 @@ Existem algumas formas de representar propriedades estáticas, e essa representa
 Templates tem a capacidade de representar conjuntos de ACs sem a necessidade de se operar uma busca em todo espaço original do AC. Essa capacidade dos templates é o principal motivador deste trabalho, visto que essa habilidade é muito importante para a resolução de diversos problemas que buscam por regras com algum comportamento específico.
 
 \subsection{Objetivos}
-Este projeto de pesquisa tem como objetivo principal o desenvolvimento de novos algoritmos para geração de templates baseado em propriedades estáticas, bem como apresentar o funcionamento da operação de complemento de templates. Ademais esse projeto propõem-se a apresentar exemplos da utilidade de templates em problemas típicos de autômatos celulares, como o problema de paridade e o problema de densidade.
+Este projeto de pesquisa tem como objetivo principal o desenvolvimento de novos algoritmos para geração de templates baseado em propriedades estáticas, bem como apresentar o funcionamento da operação de complemento de templates. Ademais esse projeto propõe-se a apresentar exemplos da utilidade de templates em problemas típicos de autômatos celulares, como o problema de paridade e o problema de densidade.
 
 Até o presente momento os seguintes itens já foram concluídos:
       \begin{itemize}
@@ -230,7 +230,7 @@ No espaço elementar há $2^{2^{3}} = 256$ regras. Aumentando o raio $r=2$, obte
 
 Para contornar esse problema, é comum utilizar algumas propriedades estáticas para restringir as regras do espaço no qual serão feitas as buscas. Alguns exemplos de propriedades estáticas que podem auxiliar nesse ``filtro'' são o confinamento, conservabilidade de estados e conservabilidade de paridade. Todas as propriedades estáticas citadas anteriormente são detalhadas na Seção \ref{sec:propriedadesEstaticas}.
 
-O problema da paridade é um dos problemas que envolvem fazer a ligação entre comportamento local e comportamento global de um autômato celular. Para o problema de paridade, nesse projeto, considera-se um AC binário, unidimensional e com condição de contorno periódica. Se uma configuração inicial contiver um número ímpar de estados com valor 1, o AC deve convergir para que todas as células estejam preenchidas com 1, caso contrário, ele deve convergir para todos os estados com o valor 0. Por conta da própria definição do problema, fica simples perceber que essa condições não podem ser satisfeitas em uma grelha de tamanho par, afinal uma configuração com todos os estados apresentando o mesmo valor não poderia ser um estado quiescente. Devido essa questão, pode-se dizer que as regras que solucionam o problema de paridade em ACs são \textit{perfeitas} se eles resolverem o problema de paridade em qualquer configuração inicial arbitrária para ACs de tamanho ímpar \cite{Betel2013}. Ainda em relação ao problema de paridade, Betel, De Oliveira e Flocchini (\citeyear{Betel2013}) descrevem duas propriedades básicas: se $f$ é a regra local que resolve o problema de paridade, então $f(0, \dots, 0) = 0$ e $f(1, \dots, 1) = 1$. A segunda propriedade define que para uma regra preservar a configuração de paridade ela deve apresentar número par de transições ativas. Em outras palavras, toda aplicação da regra deve levar a uma nova configuração com a mesma paridade.
+O problema da paridade é um dos problemas que envolvem fazer a ligação entre comportamento local e comportamento global de um autômato celular. Para o problema de paridade, nesse projeto, considera-se um AC binário, unidimensional e com condição de contorno periódica. Se uma configuração inicial contiver um número ímpar de estados com valor 1, o AC deve convergir para que todas as células estejam preenchidas com 1, caso contrário, ele deve convergir para todos os estados com o valor 0. Por conta da própria definição do problema, fica simples perceber que essas condições não podem ser satisfeitas em uma grelha de tamanho par, afinal uma configuração com todos os estados apresentando o mesmo valor não poderia ser um estado quiescente. Devido essa questão, pode-se dizer que as regras que solucionam o problema de paridade em ACs são \textit{perfeitas} se eles resolverem o problema de paridade em qualquer configuração inicial arbitrária para ACs de tamanho ímpar \cite{Betel2013}. Ainda em relação ao problema de paridade, Betel, De Oliveira e Flocchini (\citeyear{Betel2013}) descrevem duas propriedades básicas: se $f$ é a regra local que resolve o problema de paridade, então $f(0, \dots, 0) = 0$ e $f(1, \dots, 1) = 1$. A segunda propriedade define que para uma regra preservar a configuração de paridade ela deve apresentar número par de transições ativas. Em outras palavras, toda aplicação da regra deve levar a uma nova configuração com a mesma paridade.
 
 Procurar uma regra que resolva o problema de paridade em autômatos celulares unidimensionais de raio 3, por exemplo, por meio de buscas por força bruta acarretaria em testar mais de 340 undecilhões de regras. Uma maneira de facilitar essa busca é restringir as regras através propriedades estáticas, mas é necessário uma forma de representar essas propriedades e até mesmo aplicar operações como intersecção e complemento entre elas. Nesse ponto que os \textit{templates} apresentam-se de uma forma interessante e útil para representar conjuntos de regras com determinada propriedade. Templates de ACs são uma generalizações das tabelas de transições que permitem representar espaços inteiros de ACs \cite{Verardo2014}.
 
@@ -277,11 +277,11 @@ A Figura \ref{fig:parity-rule} ilustra o desenvolvimento espaço temporal de uma
 	\label{fig:parity-rule}
 \end{figure}
 
-O estudo do problema de paridade é interessante pois ajuda a compreender um problema ainda sem solução em ACs, que é, que a despeito da habilidade de realizar computações, pouco se sabe sobre como se deve projetar transições de estado locais que levem a um comportamento global pré determinado. Entretanto, entender o impacto das interações locais nas soluções globais influi em diversos sistemas de computação emergente. Entender a influência que o tamanho da vizinhança dos autômatos celulares apresenta na computabilidade pode apresentar consequências úteis para o projeto de ACs e para a compreensão de sistemas emergentes complexos em geral.
+O estudo do problema de paridade é interessante pois ajuda a compreender um problema ainda sem solução em ACs, que é, que a despeito da habilidade de realizar computações, pouco se sabe sobre como se deve projetar transições de estado locais que levem a um comportamento global pré-determinado. Entretanto, entender o impacto das interações locais nas soluções globais influi em diversos sistemas de computação emergente. Entender a influência que o tamanho da vizinhança dos autômatos celulares apresenta na computabilidade pode apresentar consequências úteis para o projeto de ACs e para a compreensão de sistemas emergentes complexos em geral.
 
 Estudos feitos sobre o problema de paridade já levaram ao conhecimento de que o problema não tem solução perfeita para ACs elementares e de raio 2, todavia já foi descoberta uma regra perfeita que soluciona o problema de paridade para raio 4. Em relação aos ACs de raio 3, ainda não foi encontrada solução perfeita e há evidências empíricas desfavoráveis a uma solução para esse raio \cite{Betel2013}.
 
-Betel, De Oliveira e Flocchini (\citeyear{Betel2013}), buscando definir se o problema de paridade em ACs de raio 2 apresenta alguma solução perfeita, encontraram de forma analítica como as transações de estado de supostas regras que resolvessem o problema de paridade deveriam ser. Com isso, utilizando grafos de \textit{De Bruijn} foram definidas quais variáveis deveriam ser estáticas, quais deveriam ser livres e quais deveriam apresentar interdependência. Com essa definições foram definidas duas famílias de ACs. Os grafos ilustrados na Figura \ref{fig:grafosDeBruijn} e na Figura \ref{fig:grafosDeBruijn2} são os grafos desenvolvidos por Betel, De Oliveira e Flocchini (\citeyear{Betel2013}).
+Betel, De Oliveira e Flocchini (\citeyear{Betel2013}), buscando definir se o problema de paridade em ACs de raio 2 apresenta alguma solução perfeita, encontraram de forma analítica como as transações de estado de supostas regras que resolvessem o problema de paridade deveriam ser. Com isso, utilizando grafos de \textit{De Bruijn} foram definidas quais variáveis deveriam ser estáticas, quais deveriam ser livres e quais deveriam apresentar interdependência. Com essas definições foram definidas duas famílias de ACs. Os grafos ilustrados na Figura \ref{fig:grafosDeBruijn} e na Figura \ref{fig:grafosDeBruijn2} são os grafos desenvolvidos por Betel, De Oliveira e Flocchini (\citeyear{Betel2013}).
 
 \begin{figure}[h!]
   \centering
@@ -290,7 +290,7 @@ Betel, De Oliveira e Flocchini (\citeyear{Betel2013}), buscando definir se o pro
     \label{fig:grafosDeBruijn}
 \end{figure}
 
-Ambos os grafos apresentam as variáveis livres $a, b, c, d \text{ e } x$ e uma interdependência, em que uma transição de estado deve ter o valor oposto à variável $x$. A única diferença entre os dois grafos são nas variáveis estáticas.
+Ambos os grafos apresentam as variáveis livres $a, b, c, d \text{ e } x$ e uma interdependência, em que uma transição de estado deve ter o valor oposto à variável $x$. A única diferença entre os dois grafos está nas variáveis estáticas.
 
 \begin{figure}[h!]
   \centering
@@ -299,7 +299,7 @@ Ambos os grafos apresentam as variáveis livres $a, b, c, d \text{ e } x$ e uma 
     \label{fig:grafosDeBruijn2}
 \end{figure}
 
-Ao utilizar os grafos de \textit{De Bruijn} fixando algumas transições de estado a família de ACs em que se procurava as regras que solucionavam o problema de paridade foi restringida para apenas 64 regras. Ao se restrigir o espaço de busca, antes composto por $2^{32}$ regras, as regras puderam ser estudadas em mais detalhes até que falhassem. Entretanto, conforme mostrado em \cite{Verardo2014}, a representação desse espaço de 64 regras pode ser equivalentemente representado por meio de \textit{templates}. O template \ref{eq:templateParidade1} representa o mesmo espaço que a Figura \ref{fig:grafosDeBruijn}, já o template \ref{eq:templateParidade2} é equivalente a Figura \ref{fig:grafosDeBruijn2}.
+Ao utilizar os grafos de \textit{De Bruijn} fixando algumas transições de estado a família de ACs em que se procurava as regras que solucionavam o problema de paridade foi restringida para apenas 64 regras. Ao se restringir o espaço de busca, antes composto por $2^{32}$ regras, as regras puderam ser estudadas em mais detalhes até que falhassem. Entretanto, conforme mostrado em \cite{Verardo2014}, a representação desse espaço de 64 regras pode ser equivalentemente representado por meio de \textit{templates}. O template \ref{eq:templateParidade1} representa o mesmo espaço que a Figura \ref{fig:grafosDeBruijn}, já o template \ref{eq:templateParidade2} é equivalente a Figura \ref{fig:grafosDeBruijn2}.
 \begin{equation}
 \left(0,1,1,1,1,x_{26},0,1,1,1,1-x_{10},x_{20},0,0,1,0,1,0,1,0,x_{11},x_{10},0,0,1,0,x_5,0,1,0,0,1\right)
 \label{eq:templateParidade1}
@@ -389,7 +389,7 @@ Ao utilizar os grafos de \textit{De Bruijn} fixando algumas transições de esta
 
 \newpage\newpage
 \subsection{Intersecção de Templates}
-	Intersecção é o processo no qual se obtêm um template que represente o conjunto $R_k$. O conjunto $R_k$ representa todas as regras pertencentes aos dois templates recebidos como parâmetro. É necessário que os dois templates recebidos como parâmetro pertencam ao mesmo espaço. A operação de intersecção foi descrita por \citeonline{Verardo2014} e mostrada em mais detalhes da seguinte maneira:
+	Intersecção é o processo no qual se obtêm um template que represente o conjunto $R_k$. O conjunto $R_k$ representa todas as regras pertencentes aos dois templates recebidos como parâmetro. É necessário que os dois templates recebidos como parâmetro pertençam ao mesmo espaço. A operação de intersecção foi descrita por \citeonline{Verardo2014} e mostrada em mais detalhes da seguinte maneira:
 
 	\begin{equation}
 	I(T_1,T_2)=T_3 \Leftrightarrow E(T_3) = E(T_1) \cap E(T_2)
@@ -413,7 +413,7 @@ Ao utilizar os grafos de \textit{De Bruijn} fixando algumas transições de esta
 	\label{eq:interseccao}
 	\end{equation}
 
-	Esse sistema de equações é passado então como argumento para a função Solve, que por sua vez retorna um conjunto solução $S$, que nesse exemplo é $S = \{x_0 = 2, x_3 = 1, x_4 = 0, x_5 = 1 - x_4, x_6 = 0\}$. O cojunto $S$ é aplicado como um conjunto de substituições sobre os dois templates recebidos como parâmetro, que em caso de templates sem restrição de variáveis sempre retorna o mesmo template. Neste exemplo, após aplicada as substituições do conjunto de soluções $S$, obtêm-se como resultado o template $T_3 = (x_7, 1, 1, 0, 1, x_2, 2, 2)$.
+	Esse sistema de equações é passado então como argumento para a função Solve, que por sua vez retorna um conjunto solução $S$, que nesse exemplo é $S = \{x_0 = 2, x_3 = 1, x_4 = 0, x_5 = 1 - x_4, x_6 = 0\}$. O conjunto $S$ é aplicado como um conjunto de substituições sobre os dois templates recebidos como parâmetro, que em caso de templates sem restrição de variáveis sempre retorna o mesmo template. Neste exemplo, após aplicada as substituições do conjunto de soluções $S$, obtêm-se como resultado o template $T_3 = (x_7, 1, 1, 0, 1, x_2, 2, 2)$.
 
 	A segunda etapa do algoritmo apenas é aplicada para templates com alguma restrição de variável. Essa etapa consiste em extrair as expressões que estabelecem as restrições, e através delas obter um segundo sistema de equações. A solução desse sistema ou pode ser vazia, expressando assim que os templates não tem intersecção, ou pode indicar os valores que as variáveis com restrição podem assumir.
 
@@ -447,7 +447,7 @@ Ao utilizar os grafos de \textit{De Bruijn} fixando algumas transições de esta
 \section[REPRESENTAÇÃO DE PROPRIEDADES ESTÁTICAS POR MEIO DE TEMPLATES]{REPRESENTAÇÃO DE PROPRIEDADES \\ ESTÁTICAS POR MEIO DE TEMPLATES}
 \label{sec:propriedadesEstaticas}
 
-	Em ACs, propriedades estáticas são propriedades computadas com base nas tabelas de transição. Essas propriedade permitem prever determinados comportamentos de um ACs sem consultar sua evolução espaço temporal. 
+	Em ACs, propriedades estáticas são propriedades computadas com base nas tabelas de transição. Essas propriedades permitem prever determinados comportamentos de um ACs sem consultar sua evolução espaço temporal. 
 
 	Esta seção descreverá algumas propriedades estáticas e os algoritmos geradores de templates que as representam. Todos algoritmos explicados estão implementados na biblioteca \textit{CATemplates} \cite{CATemplates}.
 
@@ -555,7 +555,7 @@ Ao utilizar os grafos de \textit{De Bruijn} fixando algumas transições de esta
 
 
 	\subsection{Confinamento}
-	Os autômatos celulares confinados, ou \textit{captive} em Inglês, são uma classe de AC que se baseiam em uma caracterização de sua funções locais que não adotem estados definidos em qualquer estrutura externa à vizinhança \cite{theyssier2004captive}. 
+	Os autômatos celulares confinados, ou \textit{captive} em Inglês, são uma classe de AC que se baseiam em uma caracterização de suas funções locais que não adotem estados definidos em qualquer estrutura externa à vizinhança \cite{theyssier2004captive}. 
 
 	\citeonline{theyssier2004captive} formalmente define que dado a função local $f$ de um AC para a vizinhança $(\alpha_0, \dots, \alpha_{2r})$, sendo o $r$ o raio, um AC é considerado confinado se respeitar a condição descrita na Equação \ref{eq:captiveAC}.
 
@@ -564,7 +564,7 @@ Ao utilizar os grafos de \textit{De Bruijn} fixando algumas transições de esta
 	\label{eq:captiveAC}
 	\end{equation}
 
-	Essa propriedade pode ser facilmente representada através de templates. Para isto, basta restringir as variáveis a um conjunto de valores presentes na vizinhança correspondente. A biblioteca \textit{open source CATemplates} já apresenta um algoritmo que gera as regras confinadas. Esse algoritmo recebe como parâmetro os argumentos $k$ e $r$. Após isso, gera as vizinhanças do espaço e verifica em cada uma das vizinhanças os estados que elas tem. Caso a vizinhança tenha todos os estados do intervalo $[0, k-1]$ essa posição terá uma variável livre no template. Caso a vizinhança tenha apenas um estado a posição correspondente no template assume um valor fixo. Por fim, caso a vizinhança apresente mais de um estado, mas não todos, a posição correspondente do template apresentará uma variável restritas mediante expressões $x_i \in C$.
+	Essa propriedade pode ser facilmente representada através de templates. Para isto, basta restringir as variáveis a um conjunto de valores presentes na vizinhança correspondente. A biblioteca \textit{open source CATemplates} já apresenta um algoritmo que gera as regras confinadas. Esse algoritmo recebe como parâmetro os argumentos $k$ e $r$. Após isso, gera as vizinhanças do espaço e verifica em cada uma das vizinhanças os estados que elas têm. Caso a vizinhança tenha todos os estados do intervalo $[0, k-1]$ essa posição terá uma variável livre no template. Caso a vizinhança tenha apenas um estado a posição correspondente no template assume um valor fixo. Por fim, caso a vizinhança apresente mais de um estado, mas não todos, a posição correspondente do template apresentará uma variável restritas mediante expressões $x_i \in C$.
 
 	É trivial perceber que qualquer AC binário que tenha as funções locais $f((0_0, 0_1,\dots, 0_{2r})) = 0$ e $f((1_0, 1_,1\dots, 1_{2r})) = 1$ é caracterizado como um AC confinado. A Equação \ref{eq:captiveTemplateACE} representa o template de todas as regras confinadas do espaço elementar e as equações \ref{eq:captiveTemplateR05} representam a família de $k=2$ e $r=0,5$.
 	\begin{equation}
@@ -597,7 +597,7 @@ Ao utilizar os grafos de \textit{De Bruijn} fixando algumas transições de esta
 
 \section{RESULTADOS PARCIAIS}\label{sec:aplicacao}
 
-	O presente projeto de pesquisa já apresenta resultados como resultado o desenvolvimento da operação de complemento para templates com $k=2$, bem como a demonstração de um série de passos que, utilizando a operação de complemento, conseguem restringir o espaço busca de ACs de raio 3 que tem a possibilidade de solucionar o problema de paridade.
+	O presente projeto de pesquisa já apresenta resultados como resultado o desenvolvimento da operação de complemento para templates com $k=2$, bem como a demonstração de uma série de passos que, utilizando a operação de complemento, conseguem restringir o espaço busca de ACs de raio 3 que tem a possibilidade de solucionar o problema de paridade.
 
 	A operação de complemento é responsável por obter um conjunto de templates que represente todas as regras não representadas por um template passado como argumento. Está operação pode ser melhor visualizada abaixo:
 	\begin{equation}
@@ -613,7 +613,7 @@ Ao utilizar os grafos de \textit{De Bruijn} fixando algumas transições de esta
 	  \label{fig:complement}
 	\end{figure}
 
-	O processo que o algoritmo usa para encontrar o conjunto complementar de um template é efetuado através de uma sequência de etapas. A primeira etapa consiste em igualar o template recebido com o template base do mesmo espaço, obtendo assim uma combinações lógicas de equações. Então o algoritmo remove as equações tautológicas e aplica uma operação de negação nas equações, no caso binario a operação de negação consiste apenas em efetuar as permutações $\rho = (0 \rightarrow 1, 1 \rightarrow 0)$ ao resultado final das equações. Neste momento o algoritmo troca o operador lógico $\wedge$ por $\vee$ e por fim esse sistema é então passado como argumento para a função Solve. O resultado da função Solve é um conjuntos com diversos conjuntos de substituições que são aplicados ao template base. Para melhor visualizar essas etapas, considere o template $T_1 = (x_7, x_6, x_5, 1 - x_1, x_3, x_2, x_1, 0)$ de $k=2$ e $r=1$. Esse template será igualado com o template base gerando o sistema de equações \ref{eq:complement}, representado abaixo:
+	O processo que o algoritmo usa para encontrar o conjunto complementar de um template é efetuado através de uma sequência de etapas. A primeira etapa consiste em igualar o template recebido com o template base do mesmo espaço, obtendo assim combinações lógicas de equações. Então o algoritmo remove as equações tautológicas e aplica uma operação de negação nas equações, no caso binário a operação de negação consiste apenas em efetuar as permutações $\rho = (0 \rightarrow 1, 1 \rightarrow 0)$ ao resultado final das equações. Neste momento o algoritmo troca o operador lógico $\wedge$ por $\vee$ e por fim esse sistema é então passado como argumento para a função Solve. O resultado da função Solve é um conjuntos com diversos conjuntos de substituições que são aplicados ao template base. Para melhor visualizar essas etapas, considere o template $T_1 = (x_7, x_6, x_5, 1 - x_1, x_3, x_2, x_1, 0)$ de $k=2$ e $r=1$. Esse template será igualado com o template base gerando o sistema de equações \ref{eq:complement}, representado abaixo:
 	\begin{equation}
 	\left\{\begin{matrix}
 	x_7 & = & x_7	\\ 
@@ -656,7 +656,7 @@ Ao utilizar os grafos de \textit{De Bruijn} fixando algumas transições de esta
 	\label{eq:logicalComplement2}
 	\end{equation}
 
-	Após a efetuado esses passos, a combinação lógica de equações resultante é passada como argumento para a função Solve que retorna o conjunto solução $S$. Nesse exemplo $S = \{\{x_4 \to x_1\},\{x_0\to 1\}\}$. Perceba que $S$ apresenta mais de um conjunto de substituições, por consequência  ambos devem ser utilizados para realizar as substituições no template base. Essas substituições faz com que se obtenha o conjunto de templates $\{(x_7,x_6,x_5,x_1,x_3,x_2,x_1,x_0),(x_7,x_6,x_5,x_4,x_3,x_2,x_1,1)\}$. A união desses dois templates representa todas as regras não representadas pelo template $T_1$.
+	Após a efetuado esses passos, a combinação lógica de equações resultante é passada como argumento para a função Solve que retorna o conjunto solução $S$. Nesse exemplo $S = \{\{x_4 \to x_1\},\{x_0\to 1\}\}$. Perceba que $S$ apresenta mais de um conjunto de substituições, por consequência ambos devem ser utilizados para realizar as substituições no template base. Essas substituições faz com que se obtenha o conjunto de templates $\{(x_7,x_6,x_5,x_1,x_3,x_2,x_1,x_0),(x_7,x_6,x_5,x_4,x_3,x_2,x_1,1)\}$. A união desses dois templates representa todas as regras não representadas pelo template $T_1$.
 
 	No exemplo dado com o template $T_1$ apenas as etapas da operação de complemento descritas anteriormente são necessárias, mas nem sempre é assim. 
 	A operação de complemento precisa também verificar se o template possui combinações de substituições que o levem a gerar regras inválidas. 
@@ -680,13 +680,13 @@ Ao utilizar os grafos de \textit{De Bruijn} fixando algumas transições de esta
 	Ainda não se sabe se existem regras de raio 3 que solucionem o problema de paridade. 
 	Mas os templates podem ser uma forma interessante de restringir o conjunto de regras na busca dessa solução.
 
-	As regras dos ACs que solucionam o problema de paridade tem algumas propriedades estáticas que podem ser trivialmente percebidas. 
-	Um AC que resolva o problema de paridade sempre será contido, tendo em vista no problema de paridade as vizinhanças homogêneas não devem levar à transições de estado ativas, e está é a única restrição de variável dos templates contidos para AC binários. 
-	Vale frisar que o espaço das regras contidas de raio 3 ainda é um espaço muito grande, entretanto essa não é a única propriedade estática que um AC que resolva o problema de paridade contêm. 
+	As regras dos ACs que solucionam o problema de paridade têm algumas propriedades estáticas que podem ser trivialmente percebidas. 
+	Um AC que resolva o problema de paridade sempre será contido, tendo em vista no problema de paridade as vizinhanças homogêneas não devem levar a transições de estado ativas, e está é a única restrição de variável dos templates contidos para AC binários. 
+	Vale frisar que o espaço das regras contidas de raio 3 ainda é um espaço muito grande, entretanto essa não é a única propriedade estática que um AC que resolva o problema de paridade contém. 
 	Para que um AC resolva problema de paridade também é necessário que ele não seja conservativo, visto que se a soma dos estados do AC não mudar, ele nunca convergirá como propõem o problema. 
 	Por fim, espera-se que um AC que resolva o problema de paridade seja conservativo de paridade.
 
-	Dado a possibilidade de se obter os templates para todas essa propriedades, é também possível utilizar as operações de complemento e intersecção para restringir o espaço de busca para a solução desse problema.
+	Dado a possibilidade de se obter os templates para todas essas propriedades, é também possível utilizar as operações de complemento e intersecção para restringir o espaço de busca para a solução desse problema.
 	Para efetuar esta restrição, basta efetuar a intersecção do templates de confinamento com o template de conservabilidade de paridade, visto que ambas as propriedades são consideradas interessante. 
 	Posteriormente, deve-se efetuar a operação de complemento do template das regras conservativas de estado, visto que essas regras não podem resolver o problema de paridade. 
 	E por fim, efetuar intersecção do template obtido pela primeira intersecção com cada um dos templates obtidos pela operação de complemento.
@@ -700,17 +700,17 @@ Ao utilizar os grafos de \textit{De Bruijn} fixando algumas transições de esta
 \section{CONSIDERAÇÕES FINAIS}\label{sec:conclusao}
 No presente trabalho é descrito os templates de autômatos celulares, proposta introduzida por De Oliveira e Verardo (\citeyear{deOliveira2014}), que por meio de uma generalização de tabelas de transição $k$-árias pode representar conjuntos de ACs.
 
-O conceito de templates é importante devido sua capacidade de representar conjuntos de ACs com determinadas propriedades dinâmicas. Essa capacidade faz com que não seja necessário buscar por todo um espaço de ACs, o que devido ao rápido crescimento das famílias dos ACs conforme se mudam seu parâmetros, impossibilitaria a busca através de força bruta.
+O conceito de templates é importante devido sua capacidade de representar conjuntos de ACs com determinadas propriedades dinâmicas. Essa capacidade faz com que não seja necessário buscar por todo um espaço de ACs, o que devido ao rápido crescimento das famílias dos ACs conforme se mudam seus parâmetros, impossibilitaria a busca através de força bruta.
 
 Por conta dessa capacidade de representação de ACs com determinada propriedades, foi exposto neste projeto algumas propriedades estáticas e os algoritmos geradores dos templates que as representam. Esses algoritmos já estavam implementados na biblioteca \textit{open source} \textit{CATemplates} \cite{CATemplates}. Além disso foi explicada as operações de expansão e intersecção do \textit{CATemplates}. Essas operações, desenvolvidas por \citeonline{Verardo2014}, foram mostradas novamente aqui para que fosse possível explicitar sua relevância para a solução de problemas típicos de ACs, como o problema de paridade.
 
 Também foi introduzido nesse trabalho a operação de complemento de templates. Essa operação permite que dado um templates, se encontre um conjunto de templates que represente todas as regras que não pertençam ao template passado como argumento. Vale frisar que essa operação atualmente só aceita templates binários. A operação de complemento, já disponível na biblioteca \textit{CATemplates}, é mais um exemplo de operação que pode ser utilizada para restringir o conjunto de regras a serem avaliadas na busca pela solução do problema de paridade, por exemplo.
 
-Para que fosse possível a implementação da operação de complemento, foi introduzido neste projeto de pesquisa a operação que, dado um template, gera \textit{templates de exceção}. \textit{Templates de exceção} são gerados a partir de templates bases substituindo-se algumas variáveis pelas substituições que geram regras inválidas no template original. Os algoritmo que geram templates de exceção são essenciais para a operação de complemento.
+Para que fosse possível a implementação da operação de complemento, foi introduzido neste projeto de pesquisa a operação que, dado um template, gera \textit{templates de exceção}. \textit{Templates de exceção} são gerados a partir de templates bases substituindo-se algumas variáveis pelas substituições que geram regras inválidas no template original. O algoritmo que geram templates de exceção são essenciais para a operação de complemento.
 
 Também foi exposto nesse trabalho um conjunto de processos utilizando templates que podem auxiliar na restrição do espaço de busca para a solução do problema de paridade.
 
-Como possíveis trabalhos futuros, pretende-se generalizar a operação de complemento para qualquer valor de $k$, bem como pretende-se implementar novos algoritmos geradores de templates que represente outras propriedades estáticas. Ademais, também busca-se a implementação de novas operações de templates baseadas na operações de conjuntos, como a operação de união.
+Como possíveis trabalhos futuros, pretende-se generalizar a operação de complemento para qualquer valor de $k$, bem como pretende-se implementar novos algoritmos geradores de templates que represente outras propriedades estáticas. Ademais, também se busca a implementação de novas operações de templates baseadas nas operações de conjuntos, como a operação de união.
 
 \section{PLANO DE TRABALHO}
 
