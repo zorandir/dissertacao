@@ -74,31 +74,6 @@ São Paulo\\
 \end{center}
 \newpage
 
-% FICHA CATALOGRAFICA
-%\newpage
-%\begin{figure*}[!b]
-%\includegraphics[height=4.2in,width=6.4in]{ficha.pdf}
-%\end{figure*}
-
-% % AGRADECIMENTOS
-% \newpage
-% %\newpage~\newpage
-% \thispagestyle{plain}
-% \pagenumbering{roman}
-% \begin{center}
-% \large  
-% \textbf{AGRADECIMENTOS}
-% \end{center}
-% \renewcommand{\baselinestretch}{0.22}
-% \hspace*{\parindent} Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vel pulvinar sem. Nunc auctor feugiat erat, non sodales mauris tempus ac. Phasellus eleifend dignissim magna, in pulvinar neque pharetra bibendum. Sed consequat, nibh vel accumsan blandit, magna libero viverra risus, id sollicitudin massa lacus nec diam. Sed sit amet ultrices lectus, at posuere nunc. Proin at fringilla nunc. Curabitur venenatis arcu sit amet sollicitudin dapibus. Phasellus blandit luctus rutrum. Pellentesque condimentum molestie sodales. Aenean faucibus diam tellus, nec interdum erat imperdiet vitae. Sed tortor mauris, lacinia quis luctus nec, aliquam et enim. Duis porta blandit libero sed hendrerit. Integer faucibus diam sed elit cursus egestas. Vivamus dictum leo ac ipsum consectetur posuere. Phasellus posuere efficitur hendrerit.
-
-% Curabitur nec justo turpis. Fusce volutpat nisi maximus, tincidunt dui eu, rutrum urna. Nam vitae tincidunt elit. In ullamcorper nunc ex. Sed at venenatis augue, eget rutrum diam. Nunc sed erat a ligula consectetur lobortis. Nullam venenatis ac felis at aliquam. Sed non lobortis est. Nam sagittis arcu lectus, ac dapibus erat finibus sed. Donec hendrerit magna sit amet dictum faucibus. Suspendisse ac lectus feugiat, vestibulum tellus at, cursus justo. Aenean non accumsan dui, a cursus lectus.
-
-% Vestibulum porttitor sit amet orci eu viverra. Nunc congue arcu sem, ut viverra nisl imperdiet et. Proin ullamcorper aliquet mollis. Aliquam rutrum ex sit amet metus lobortis semper. In mi risus, ullamcorper non sapien vel, accumsan vestibulum neque. Nulla tempus mi odio, tempus varius odio laoreet et. Nam nec libero sed nisi gravida sagittis. Vivamus quis dolor mattis ante maximus aliquet at a massa. Curabitur ac purus molestie, lobortis purus id, dictum risus. Suspendisse potenti.
-
-% Morbi leo orci, molestie et leo et, venenatis pretium urna. Vestibulum vestibulum orci lacus. Nunc varius odio id turpis suscipit rhoncus. Phasellus condimentum tortor libero. Duis elit nisi, dapibus vel justo vitae, luctus dignissim turpis. Pellentesque scelerisque, urna id dapibus ullamcorper, magna ante tempor sem, quis tincidunt libero lorem vel sapien. Nullam in lacus tortor. Donec tempor rutrum ipsum, in maximus augue pellentesque ut. Morbi id libero nisl. Vivamus sit amet aliquam risus. Mauris ut scelerisque felis. Duis ac nunc pharetra, sodales arcu at, luctus ligula. Duis pretium eros id varius tempus. In fermentum diam in ligula iaculis, et rhoncus justo lobortis.
-% \\[0.5cm]
-
 % RESUMO
 \newpage
 \thispagestyle{plain}
@@ -133,24 +108,6 @@ Templates are formal representation for cellular automaton sets (CAs) made throu
 \newpage
 \thispagestyle{empty}
 \tableofcontents
-
-% % LISTA DE FIGURAS
-% \newpage
-% %\pagestyle{plain}
-% %\pagenumbering{arabic}
-% \pagestyle{empty}
-% \renewcommand{\baselinestretch}{1.5} 
-% \normalsize
-% \listoffigures
-
-% % LISTA DE TABELAS
-% \newpage
-% %\pagestyle{plain}
-% %\pagenumbering{arabic}
-% \pagestyle{empty}
-% \renewcommand{\baselinestretch}{1.5} 
-% \normalsize
-% \listoftables
 
 % DESENVOLVIMENTO
 \newpage
@@ -272,7 +229,6 @@ k^{k^{2r+1}}
 No espaço elementar há $2^{2^{3}} = 256$ regras. Aumentando o raio $r=2$, obtemos uma família de $2^{2^{5}} = 4.294.967.296$ regras. Para $k=3$ e $r=1$, obtém-se um espaço de ACs com $3^{3^{3}} = 7.625.597.484.987$ regras. Logo, é fácil perceber que qualquer modificação nas variáveis $k$ e $r$ geram famílias com número de regras muito grande. Famílias grandes de ACs representam um desafio na hora de encontrar ACs com propriedades específicas, já que procurar regras através de força bruta em um espaço muito grande se torna uma tarefa extremamente improdutiva.
 
 Para contornar esse problema, é comum utilizar algumas propriedades estáticas para restringir as regras do espaço no qual serão feitas as buscas. Alguns exemplos de propriedades estáticas que podem auxiliar nesse ``filtro'' são o confinamento, conservabilidade de estados e conservabilidade de paridade. Todas as propriedades estáticas citadas anteriormente são detalhadas na Seção \ref{sec:propriedadesEstaticas}.
-
 
 O problema da paridade é um dos problemas que envolvem fazer a ligação entre comportamento local e comportamento global de um autômato celular. Para o problema de paridade, nesse projeto, considera-se um AC binário, unidimensional e com condição de contorno periódica. Se uma configuração inicial contiver um número ímpar de estados com valor 1, o AC deve convergir para que todas as células estejam preenchidas com 1, caso contrário, ele deve convergir para todos os estados com o valor 0. Por conta da própria definição do problema, fica simples perceber que essa condições não podem ser satisfeitas em uma grelha de tamanho par, afinal uma configuração com todos os estados apresentando o mesmo valor não poderia ser um estado quiescente. Devido essa questão, pode-se dizer que as regras que solucionam o problema de paridade em ACs são \textit{perfeitas} se eles resolverem o problema de paridade em qualquer configuração inicial arbitrária para ACs de tamanho ímpar \cite{Betel2013}. Ainda em relação ao problema de paridade, Betel, De Oliveira e Flocchini (\citeyear{Betel2013}) descrevem duas propriedades básicas: se $f$ é a regra local que resolve o problema de paridade, então $f(0, \dots, 0) = 0$ e $f(1, \dots, 1) = 1$. A segunda propriedade define que para uma regra preservar a configuração de paridade ela deve apresentar número par de transições ativas. Em outras palavras, toda aplicação da regra deve levar a uma nova configuração com a mesma paridade.
 
@@ -702,7 +658,6 @@ Ao utilizar os grafos de \textit{De Bruijn} fixando algumas transições de esta
 
 	Após a efetuado esses passos, a combinação lógica de equações resultante é passada como argumento para a função Solve que retorna o conjunto solução $S$. Nesse exemplo $S = \{\{x_4 \to x_1\},\{x_0\to 1\}\}$. Perceba que $S$ apresenta mais de um conjunto de substituições, por consequência  ambos devem ser utilizados para realizar as substituições no template base. Essas substituições faz com que se obtenha o conjunto de templates $\{(x_7,x_6,x_5,x_1,x_3,x_2,x_1,x_0),(x_7,x_6,x_5,x_4,x_3,x_2,x_1,1)\}$. A união desses dois templates representa todas as regras não representadas pelo template $T_1$.
 
-	%TODO: verificar essa confusão!!
 	No exemplo dado com o template $T_1$ apenas as etapas da operação de complemento descritas anteriormente são necessárias, mas nem sempre é assim. 
 	A operação de complemento precisa também verificar se o template possui combinações de substituições que o levem a gerar regras inválidas. 
 	Caso exista, gera-se os \textit{templates de exceção} do template passado como argumento e adiciona-o ao conjunto de templates complementares, sendo que \textit{templates de exceção} são os templates apresentam um conjunto de substituições que levem o template original a apresentar substituições fora do intervalo inteiro $[0, k-1]$.
@@ -775,7 +730,7 @@ Este projeto está organizado em sete fases, em um período de dois anos, confor
 \centering
 \caption{Cronograma de desenvolvimento do projeto}
 \label{cronograma}
-\resizebox{\textwidth}{!}{%
+\resizebox{\textwidth}{!}{
 	\vspace{0cm}
 	\begin{tabular}{|l|c|c|c|c|c|c|c|c|}
 	\hline	
@@ -793,35 +748,10 @@ Este projeto está organizado em sete fases, em um período de dois anos, confor
 }
 \end{table}
 
-% \begin{table}[h!]
-% \centering
-% \caption{Cronograma de desenvolvimento do projeto}
-% \label{cronograma}
-% \resizebox{\textwidth}{!}{%
-% 	\vspace{0cm}
-% 	\begin{tabular}{|l|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
-% 	\hline	
-% 	\multicolumn{1}{|c|}{} 			& \multicolumn{1}{c|}{2014} & \multicolumn{12}{c|}{2015} & \multicolumn{1}{c|}{2016} 										\\ \hline
-% 	\textbf{Atividades} 			& Dez	& Jan 	& Fev 	& Mar	& Abr 	& Mai 	& Jun 	& Jul 	& Ago 	& Set 	& Out 	& Nov 	& Dez	& Jan	\\ \hline
-% 	Pesquisa bibliográfica 			&  •	&  		&  		&  		&  		&  		&  		&  		&  		&  		&  		&  		&  		&  		\\ \hline
-% 	Revisão de literatura 			&  •	& • 	&  		&  		&  		&  		&  		&  		&  		&  		&  		&  		&  		&  		\\ \hline
-% 	Coleta e seleção de dados 		&   	& 	 	& •		&  		&  		&  		&  		&  		&  		&  		&  		&  		&  		&  		\\ \hline
-% 	Análise de dados 				&   	& 	 	& •		& •		& •		&  		&  		&  		&  		&  		&  		&  		&  		&  		\\ \hline
-% 	Programação e testes			&   	& 	 	& 		& •		& •		& •		&  		&  		&  		&  		&  		&  		&  		&  		\\ \hline
-% 	Primeira entrega 				&   	& 		&  		&  		&  		& •		& •		&  		&  		&  		&  		&  		&  		&  		\\ \hline
-% 	Revisão e correção 				&   	& 		&  		&  		&  		&  		& •		& •		& •		&  		&  		&  		&  		&  		\\ \hline
-% 	Submissão de artigos			&   	& 	 	& 		&  		& 		& 		&  		& •		&  		& •		&  		&  		&  		&  		\\ \hline
-% 	Apresentação da qualificação	&   	& 		&  		&  		&  		&  		&  		&  		& •		& 		&  		& 		& 		& 		\\ \hline
-% 	Ajustes e melhorias 			&   	& 		&  		&  		&  		&  		&  		&  		&  		& •		& •		& •		& •		& 		\\ \hline
-% 	Apresentação do trabalho final	&   	& 		&  		&  		&  		&  		&  		&  		&  		&  		&  		& 		& 		& •		\\ \hline
-% 	\hline
-% 	\end{tabular}
-% }
-% \end{table}
 
- \def\refname{REFERÊNCIAS BIBLIOGRÁFICAS}
- \bibliography{bibliografia}
- \addcontentsline{toc}{section}{REFERÊNCIAS BIBLIOGRÁFICAS} 
- \bibliographystyle{abnt-alf}
+\def\refname{REFERÊNCIAS BIBLIOGRÁFICAS}
+\bibliography{bibliografia}
+\addcontentsline{toc}{section}{REFERÊNCIAS BIBLIOGRÁFICAS} 
+\bibliographystyle{abnt-alf}
 
 \end{document}
