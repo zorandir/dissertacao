@@ -150,10 +150,25 @@ x_8 \in \{0,2\}, x_7, x_6 \in \{0,2\}, x_5, x_4 \in \{0,1\}, x_3 \in \{0,1\}, x_
 \subsection{Totalidade e Semi-totalidade}
 Os ACs totalísticos são autômatos celulares cujo valor de uma célula depende apenas da soma dos valores dos seus vizinhos no passo de tempo anterior \cite{wolfram1983statistical}.
 
-A Figura \ref{fig:totalistcRule} ilustra o a tabela de transição do AC totálistico 777 com $k = 3$ e $r = 1$. 
+De forma análoga é possivel dizer que as transições dependem da médias das células que compõem  a vizinhança ao invés da soma. A Figura \ref{fig:totalistcRule} ilustra o a tabela de transição do AC totálistico 777 com $k = 3$ e $r = 1$. 
 	\begin{figure}[h!]
 	  \centering
-	  \includegraphics[width=1\textwidth]{image3004.png}
-	  \caption{Condição de contorno periódica em um reticulado unidimensional formando um anel.}
+	  \includegraphics[width=1\textwidth]{fig_totalistcRule777.pdf}
+	  \caption{Tabela de transição do AC totálistico 777. As transições dependem da média dos estados das células da vizinhança. Cada média possível é representada por tons de cinza entre o branco (estado 0) e o preto (estado 2).}
 	  \label{fig:totalistcRule}
 	\end{figure}
+
+Já os ACs semi-totalísticos (\textit{outer-totalistic CA}) são generalizações de ACs totalísticos \cite{weisstein2015outerTotalistic}. Um AC pode ser considerado semi-totalístico caso suas transições sejam definidas pela soma (ou média) das células da vizinhança entretanto sem levar em consideração a célula central.
+
+%talvez trocar citação de Gardner.
+O Jogo da Vida \cite{GardnerM1970} é o exemplo mais conhecido de autômatos celulares semi-totalisticos, além de apresentar propriedades bem interessantes, como a computabilidade universal.
+
+Os ACs semi-totalísticos podem ser interpredos como ACs clássicos que apresentam a propriedade de \textit{semi-totalidade}. A propriedade de semi-totalidade determina que as as trasições que apresentem a mesma soma dos estados vizinhos externos e que tenham a mesma célula central devem apresentar o mesmo resultado. Da mesma forma os AC totalísticos também tem sua propriedade correspondente nos ACs clássicos: a \textit{totalidade}. A totalídade determina que todas as trasições que apresente a mesmo soma dos estados das vizinhanças devem levar a um mesmo resultado.
+
+A partir das definições de como devem ser as transições de estados dos ACs totalísticos e dos ACs semi-totalísticos foi possível representa-los através de templates. A biblioteca \textit{CATemplates} já apresenta os algoritmos que as geram essa propriedades e seu funcionamento é bem simples. 
+
+O algoritmo que gera regras totalísticas recebe como argumento os valores de $r$ e $k$, definindo assim uma família de ACs. Em seguida enumera as vizinhanças do espaço e calcula a soma dos estados de cada uma delas. O resultados da soma é o que define quais transições devem ser iguais para que o template represente apenas regras totalísticas.
+
+Para determinar qual será a váriavel associada, dada uma vizinhança qualquer, o agoritmo verifica se a vizinhança foi a única até então que obteve um determinado valor de soma. Em caso positivo o algoritmo criará e associará uma variável $x_i$ para esta transição, sendo $i$ o valor decimal da vizinhança. Caso contrário, a transição será associada uma váriavel $x_i$ em que $i$ é o valor decimal da primeira e menor vizinhança encontrada com o mesmo valor de soma das vizinhanças.
+
+ 
