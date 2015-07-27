@@ -65,7 +65,7 @@ Após a efetuado esses passos, a combinação lógica de equações resultante �
 
 No exemplo dado com o template $T_1$ apenas as etapas da operação de complemento descritas anteriormente são necessárias, mas nem sempre é assim. 
 A operação de complemento precisa também verificar se o template possui combinações de substituições que o levem a gerar regras inválidas. 
-Caso exista, gera-se os \textit{templates de exceção} do template passado como argumento e adiciona-o ao conjunto de templates complementares, sendo que \textit{templates de exceção} são os templates apresentam um conjunto de substituições que levem o template original a apresentar substituições fora do intervalo inteiro $[0, k-1]$.
+Caso exista, gera-se os \textit{templates de exceção} do template passado como argumento e o adiciona ao conjunto de templates complementares, sendo que \textit{templates de exceção} são os templates apresentam um conjunto de substituições que levem o template original a apresentar substituições fora do intervalo inteiro $[0, k-1]$.
 
 Exemplificando, considere o template $T_2 = (x_7, x_6, x_5, 1 - x_1 - x_2, x_3, x_2, x_1, 0)$ para $k=2$.
 A primeira etapa da operação de complemento ocorre normalmente e encontra os templates complementares $\{(x_7, x_6, x_5, x_4, x_3, x_2, x_1, 1),(x_7, x_6, x_5, x_1 + x_2, x_3, x_2, x_1, x_0)\}$.

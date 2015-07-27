@@ -87,7 +87,7 @@ Para exemplificar o funcionamento do algoritmo, considere um espaço com $k=2$ e
 \label{eq:conservativeLinearSystem3}
 \end{equation}
 
-Por fim o algoritmo utiliza a função Solve do \textit{Wofram Mathematica} para simplificar o sistema e utiliza o conjunto solução retornado pela função Solve como regras de substituições. Essas regras de substituições são aplicadas no template base, gerando assim o template das regras conservativas. O template gerado pode ser observado na Equação \ref{eq:conservativeTemplate}, e sua expansão gera as cinco regras conservativas do espaço elementar, após eliminadas as regras inválidas.
+Por fim o algoritmo utiliza a função Solve do \textit{Wolfram Mathematica} para simplificar o sistema e utiliza o conjunto solução retornado pela função Solve como regras de substituições. Essas regras de substituições são aplicadas no template base, gerando assim o template das regras conservativas. O template gerado pode ser observado na Equação \ref{eq:conservativeTemplate}, e sua expansão gera as cinco regras conservativas do espaço elementar, após eliminadas as regras inválidas.
 
 \begin{equation}
 (1,x_2-x_3+1,1-x_2,-x_1-x_2+1,x_3,x_2,x_1,0)
@@ -144,31 +144,227 @@ x_8 \in \{0,2\}, x_7, x_6 \in \{0,2\}, x_5, x_4 \in \{0,1\}, x_3 \in \{0,1\}, x_
 \end{equation}
 
 \subsection{Simetria Interna}
+Para entender a propriedade de simetria interna faz-se necessário compreender o funcionamento das transformações de regras e classes de equivalência dinâmica. As explicações a seguir são válidas para regras binárias pois o algoritmo hoje implementado no CATemplates é para regras binárias, apesar de ser possível sua generalização para $k$ estados.
 
-\subsection{Invariância a Troca de Cor}
+Dado uma tabela de transições de um AC, existem três transformações que podem ser empregadas e que resultam em ACs com comportamentos dinâmicos equivalentes: \textit{reflexão}, \textit{conjugação} e \textit{composição}. A reflexão é a transformação obtida ao refletir os bits das vizinhanças da tabela. A conjugação é obtida ao inverter todos os estados das células da tabela de transições. Já a composição é a transformação obtida ao se efetuar a reflexão e a conjugação, independente da ordem.
+
+Essas transformações podem ser aplicadas tanto a vizinhança, como também podem ser aplicadas a toda a tabela de transições. Para aplicar uma transformação a toda uma tabela, basta aplicá-la a cada uma das vizinhanças da tabela. Uma tabela, transição ou vizinhança é chamada de invariante a uma transformação caso essa transformação, quando aplicada a ela, não promova nenhum efeito. Um exemplo de vizinhança invariante por reflexão é a vizinhança $(1,0,1)$. A vizinhança $(1,0,1)$ após aplicada a transformação por reflexão, continua sendo a mesma vizinhança.
+
+Para exemplificar essas transformações e as equivalências dinâmicas considere a tabela de transição da regra 60, ilustrada pela Figura \ref{fig:table60}. Ao se aplicar a transformação por reflexão na regra 60 obtemos a regra 102 do espaço elementar, ilustrada pela Figura \ref{fig:table102}.
+
+	\begin{figure}[h!]
+	  \centering
+	  \includegraphics[width=.7\textwidth]{fig_ruleIcon60.png}
+	  \caption{Tabela de transições da regra 60 do espaço elementar.}
+	  \label{fig:table60}
+	\end{figure}
+
+	\begin{figure}[h!]
+	  \centering
+	  \includegraphics[width=.7\textwidth]{fig_ruleIcon102.png}
+	  \caption{Tabela de transições da regra 102 do espaço elementar, obtida através da transformação de reflexão aplicada na tabela de transições da regra 60.}
+	  \label{fig:table102}
+	\end{figure}
+
+Ao se aplicar a transformação por conjugação na regra 60 obtemos a regra 195 do espaço elementar, conforme ilustrado na Figura \ref{fig:table195}. E por fim, ao se aplicar a transformação por composição de reflexão e conjugação na regra 60 obtemos a regra 153 do espaço elementar, conforme ilustrado na Figura \ref{fig:table153}.
+
+	\begin{figure}[h!]
+	  \centering
+	  \includegraphics[width=.7\textwidth]{fig_ruleIcon195.png}
+	  \caption{Tabela de transições da regra 195 do espaço elementar, obtida através da transformação de conjugação aplicada na tabela de transições da regra 60.}
+	  \label{fig:table195}
+	\end{figure}
+
+	\begin{figure}[h!]
+	  \centering
+	  \includegraphics[width=.7\textwidth]{fig_ruleIcon153.png}
+	  \caption{Tabela de transições da regra 153 do espaço elementar, obtida através da transformação de composição aplicada na tabela de transições da regra 60.}
+	  \label{fig:table153}
+	\end{figure}
+
+Tanto a regra 60, como as regras 102, 153 e 195 pertencem a mesma classe de equivalência dinâmica. Uma forma interessante de entender o porquê é analisando a evolução espaço-temporal dessas regras, ilustrada pela Figura \ref{fig:dynamicEquivalecy}.
+
+	\begin{figure}[h!]
+	  \centering
+	  \def\svgscale{0.63}
+	  \import{../img/}{fig_ruleEquivalence60.pdf_tex}
+	  \caption{Evolução espaço-temporal das regras pertencente à mesma classe dinâmica da regra 60.}
+	  \label{fig:dynamicEquivalecy}
+	\end{figure}
+
+Tendo em vista as tabelas de transições obtidas por meio das transformações, é possível saber o quão simétrica é uma regra, ou em outras palavras, qual a simetria interna de uma regra em relação a uma determinada transformação. A simetria interna pode ser representada pelo número de vizinhanças que permanecem iguais após aplicada uma determinada transformação. Exemplificando, a regra 60 dos ACs elementares tem um valor de simetria interna por reflexão igual a 4, pois compartilha as transições de estado $((1,1,1),0)$, $((1,0,1),1)$, $((0,1,0),1)$ e $ ((0,0,0),0)$ com a regra resultante de sua transformação por reflexão, a regra 102. Vale notar que as vizinhanças compartilhadas são todas as vizinhanças invariantes do espaço elementar, logo pode-se dizer que a regra 60 tem a menor simetria interna possível para o espaço elementar.
+
+Um resultado bem diferente pode ser visto ao se repetir esse mesmo processo para a regra 204, que tem o valor 8 de simetria interna para transformação por reflexão. Esse valor é máximo possível para o espaço elementar e evidencia que ao se aplicar a transformação por reflexão na regra 204 será obtida a mesma regra como resultado. Uma regra contiver máxima simetria para uma transformação é uma regra invariante.
+
+Vale frisar que apenas transformações por reflexão apresentam vizinhanças invariantes. No caso das reflexões por conjugação e por composição isso não ocorre.
+
+Já há implementado no CATemplates um algoritmo gerador de templates que representam regras do espaço binário com um determinado valor de simetria para uma transformação.
+
+O algoritmo recebe como parâmetro um raio $r$, definindo assim a família de ACs que será representada, o valor de simetria interna desejado, e uma das transformações de simetria.
+
+Para melhor representar o funcionamento do algoritmo, considere que foi passado como parâmetro um raio $r = 1$, a transformação de reflexão e a simetria interna desejada igual a 8. O primeiro passo do algoritmo será gerar todas as vizinhanças do espaço, que no nosso exemplo pode ser representado pela conjunto descrito pela Equação \ref{eq:neighborSetACE}
+\begin{equation}
+\{(1,1,1),(1,1,0),
+(1,0,1),(1,0,0),
+(0,1,1),(0,1,0),
+(0,0,1),(0,0,0)\}
+\label{eq:neighborSetACE}
+\end{equation}
+
+Após isso, a transformação escolhida, no caso reflexão, é aplicada a cada uma das vizinhanças, gerando assim o conjunto representado pela Equação \ref{eq:neighborSetTransformadoACE}.  
+\begin{equation}
+\begin{split}
+\{
+((1,1,1),(1,1,1)),
+((1,1,0),(0,1,1)),
+((1,0,1),(1,0,1)),
+((1,0,0),(0,0,1)),\\
+((0,1,1),(1,1,0)),
+((0,1,0),(0,1,0)),
+((0,0,1),(1,0,0)),
+((0,0,0),(0,0,0))\}
+\label{eq:neighborSetTransformadoACE}
+\end{split}
+\end{equation}
+
+Então, dos pares de vizinhanças encontrados, salva-se em uma variável o número de vizinhanças invariantes à transformação escolhida e remove-se os pares de vizinhanças idênticos. Após essa operação o conjunto resultante estará de acordo com a Equação \ref{eq:neighborSetTransformadoInACE}.
+\begin{equation}
+\{(((1,1,0),(0,1,1)),
+((1,0,0),(0,0,1)),
+((0,1,1),(1,1,0)),
+((0,0,1),(1,0,0))\}
+\label{eq:neighborSetTransformadoInACE}
+\end{equation}
+
+Nesse momento, caso o valor de simetria interna passado como parâmetro seja menor que as vizinhanças invariantes, o algoritmo retorna como resultado um conjunto vazio, tendo em vista que o valor mínimo de simetria interna é igual ao total de vizinhanças invariantes. Caso contrário o algoritmo agora removerá todas as repetições de pares de vizinhanças, considerando que pares de vizinhanças em ordem diferentes repetições. A Equação \ref{eq:internalSimetryP4} representa como ficara o conjunto após as remoções.
+\begin{equation}
+\{(((1,1,0),(0,1,1)), ((1,0,0),(0,0,1))\}
+\label{eq:internalSimetryP4}
+\end{equation}
+
+Cada vizinhança é então substituída pela variável de template correspondente a sua posição, gerando assim um conjunto que representa as equivalências entre variáveis de um template. Esse conjunto de equivalências podem ser melhor visualizados pela Equação \ref{eq:internalSimetryP5} e pelo sistema de equação equivalente representado pela Equação \ref{eq:internalSimetryP6}.
+\begin{equation}
+\{(x_6,x_3), (x_4,x_1)\}
+\label{eq:internalSimetryP5}
+\end{equation}
+
+\begin{equation}
+\left\{\begin{matrix}
+x_4 & = & x_1\\ 
+x_6 & = & x_3
+\end{matrix}\right.
+\label{eq:internalSimetryP6}
+\end{equation}
+
+Entretanto, apesar de igualar todas o sistema de equações ser útil para encontrar a máxima simetria interna de uma determinada transformação, para outros valores de simetria entre o mínimo e o máximo, é necessário que o sistema de equações apresentem algumas inequações, como pode ser visualizado nas Equações \ref{eq:internalSimetryP7} e \ref{eq:internalSimetryP8}.
+\begin{equation}
+\left\{\begin{matrix}
+x_4 & \neq & x_1\\ 
+x_6 & = & x_3
+\end{matrix}\right.
+\label{eq:internalSimetryP7}
+\end{equation}
+
+\begin{equation}
+\left\{\begin{matrix}
+x_4 & = & x_1\\ 
+x_6 & \neq & x_3
+\end{matrix}\right.
+\label{eq:internalSimetryP8}
+\end{equation}
+
+A relação de desigualdade é representada nos templates por meio de uma função que sempre dê um resultado diferente. No caso binário essa função é $1 - x_i$. Logo os sistemas representados pelas Equações \ref{eq:internalSimetryP7} e \ref{eq:internalSimetryP8} são respectivamente equivalentes as Equações \ref{eq:internalSimetryP9} e \ref{eq:internalSimetryP10}
+\begin{equation}
+\left\{\begin{matrix}
+x_4 & = & 1 - x_1\\ 
+x_6 & = & x_3
+\end{matrix}\right.
+\label{eq:internalSimetryP9}
+\end{equation}
+
+\begin{equation}
+\left\{\begin{matrix}
+x_4 & = & x_1\\ 
+x_6 & = 1 - & x_3
+\end{matrix}\right.
+\label{eq:internalSimetryP10}
+\end{equation}
+
+Para montar essas equivalências, o algoritmo particiona o conjunto de equivalência em $(s-v)/2$ partes, sendo que $s$ é o número de simetria interna passado como argumento e $v$ é o número de vizinhanças invariantes à transformação determinada. Após o particionamento, o algoritmo une as partições com os complementos do conjunto, adicionando assim as desigualdades nos pares do complemento. Para os exemplos dados, o conjunto resultante é representado pela Equação \ref{eq:internalSimetryP11}.
+\begin{equation}
+C_{reflex6}=\{((x_4,x_1),(x_6,1-x_3)),((x_4,1-x_1),(x_6,x_3))\}
+\label{eq:internalSimetryP11}
+\end{equation}
+
+O conjunto $C_{reflex6}$ representa as equivalências entre variáveis, que quando aplicadas ao template base, originam os templates que representam as regras com simetria interna 6. Ao realizar essas substituições obtemos o conjunto de templates representado pela Equação \ref{eq:internalSimetryP12}.
+
+\begin{equation}
+\{(x_7,1-x_3,x_5,x_1,x_3,x_2,x_1,x_0),(x_7,x_3,x_5,1-x_1,x_3,x_2,x_1,x_0)\}
+\label{eq:internalSimetryP12}
+\end{equation}
+Esse conjunto de templates representam todas as regras com valor de simetria por reflexão igual a 6 do espaço elementar.
+
+Esse algoritmo teve sua primeira implementação apresentada por De Oliveira e Verardo (\citeyear{deOliveira2014}; \citeyear{deOliveira2014b}). Posteriormente uma nova versão foi apresentada em \cite{Verardo2014}.
 
 \subsection{Totalidade e Semi-totalidade}
 Os ACs totalísticos são autômatos celulares cujo valor de uma célula depende apenas da soma dos valores dos seus vizinhos no passo de tempo anterior \cite{wolfram1983statistical}.
 
-De forma análoga é possivel dizer que as transições dependem da médias das células que compõem  a vizinhança ao invés da soma. A Figura \ref{fig:totalistcRule} ilustra o a tabela de transição do AC totálistico 777 com $k = 3$ e $r = 1$. 
+De forma análoga é possível dizer que as transições dependem da média das células que compõem  a vizinhança ao invés da soma. A Figura \ref{fig:totalistcRule} ilustra a tabela de transição do AC totalístico 777 com $k = 3$ e $r = 1$. 
+
 	\begin{figure}[h!]
 	  \centering
 	  \includegraphics[width=1\textwidth]{fig_totalistcRule777.pdf}
-	  \caption{Tabela de transição do AC totálistico 777. As transições dependem da média dos estados das células da vizinhança. Cada média possível é representada por tons de cinza entre o branco (estado 0) e o preto (estado 2).}
+	  \caption{Tabela de transição do AC totalístico 777. As transições dependem da média dos estados das células da vizinhança. Cada média possível é representada por tons de cinza entre o branco (estado 0) e o preto (estado 2).}
 	  \label{fig:totalistcRule}
 	\end{figure}
 
-Já os ACs semi-totalísticos (\textit{outer-totalistic CA}) são generalizações de ACs totalísticos \cite{weisstein2015outerTotalistic}. Um AC pode ser considerado semi-totalístico caso suas transições sejam definidas pela soma (ou média) das células da vizinhança entretanto sem levar em consideração a célula central.
+Já os ACs semi-totalísticos (\textit{outer-totalistic CA}) são generalizações de ACs totalísticos \cite{weisstein2015outerTotalistic}. Um AC pode ser considerado semi-totalístico caso suas transições sejam definidas pela soma (ou média) das células da vizinhança sem levar em consideração a célula central.
 
 %talvez trocar citação de Gardner.
-O Jogo da Vida \cite{GardnerM1970} é o exemplo mais conhecido de autômatos celulares semi-totalisticos, além de apresentar propriedades bem interessantes, como a computabilidade universal.
+O Jogo da Vida \cite{GardnerM1970} é o exemplo mais conhecido de autômatos celulares semi-totalísticos, tendo em vista que as células centrais no Jogo da Vida são definidas em termos de ``viva'' (estado 1) ou ``morta'' (estado 0).
 
-Os ACs semi-totalísticos podem ser interpredos como ACs clássicos que apresentam a propriedade de \textit{semi-totalidade}. A propriedade de semi-totalidade determina que as as trasições que apresentem a mesma soma dos estados vizinhos externos e que tenham a mesma célula central devem apresentar o mesmo resultado. Da mesma forma os AC totalísticos também tem sua propriedade correspondente nos ACs clássicos: a \textit{totalidade}. A totalídade determina que todas as trasições que apresente a mesmo soma dos estados das vizinhanças devem levar a um mesmo resultado.
+Os ACs semi-totalísticos podem ser interpretados como ACs clássicos que apresentam a propriedade de \textit{semi-totalidade}. A propriedade de semi-totalidade determina que as transições que apresentem a mesma soma dos estados vizinhos externos e que tenham a mesma célula central devem apresentar o mesmo resultado. Da mesma forma os ACs totalísticos também tem sua propriedade correspondente nos ACs clássicos: a \textit{totalidade}. A totalidade determina que todas as transições que apresentem a mesma soma dos estados das vizinhanças devem levar a um mesmo resultado.
 
-A partir das definições de como devem ser as transições de estados dos ACs totalísticos e dos ACs semi-totalísticos foi possível representa-los através de templates. A biblioteca \textit{CATemplates} já apresenta os algoritmos que as geram essa propriedades e seu funcionamento é bem simples. 
+A partir das definições de como devem ser as transições de estados dos ACs totalísticos e dos ACs semi-totalísticos foi possível representá-los por meio de templates. A biblioteca \textit{CATemplates} já apresenta os algoritmos que geram essas propriedades e seu funcionamento é bem simples. 
 
-O algoritmo que gera regras totalísticas recebe como argumento os valores de $r$ e $k$, definindo assim uma família de ACs. Em seguida enumera as vizinhanças do espaço e calcula a soma dos estados de cada uma delas. O resultados da soma é o que define quais transições devem ser iguais para que o template represente apenas regras totalísticas.
+O algoritmo que gera regras totalísticas recebe como argumento os valores de $r$ e $k$, definindo assim uma família de ACs. Em seguida enumera as vizinhanças do espaço e calcula a soma dos estados de cada uma delas. O resultado da soma é o que define quais transições devem ser iguais para que o template represente apenas regras totalísticas.
 
-Para determinar qual será a váriavel associada, dada uma vizinhança qualquer, o agoritmo verifica se a vizinhança foi a única até então que obteve um determinado valor de soma. Em caso positivo o algoritmo criará e associará uma variável $x_i$ para esta transição, sendo $i$ o valor decimal da vizinhança. Caso contrário, a transição será associada uma váriavel $x_i$ em que $i$ é o valor decimal da primeira e menor vizinhança encontrada com o mesmo valor de soma das vizinhanças.
+Para determinar qual será a variável associada, dada uma vizinhança qualquer, o algoritmo verifica se a vizinhança foi a única até então que obteve um determinado valor de soma. Em caso positivo o algoritmo criará e associará uma variável $x_i$ para esta transição, sendo $i$ o valor decimal da vizinhança. Caso contrário, a transição será associada uma variável $x_i$ em que $i$ é o valor decimal da primeira e menor vizinhança encontrada com o mesmo valor de soma das vizinhanças.
 
- 
+A Equação \ref{eq:templateTotalisticECA} representa o template para o espaço elementar gerado pelo processo descrito acima. Esse template, quando expandido, gera $k^m = 2^4 = 16$ regras.
+\begin{equation}
+\begin{split}
+(x_7,x_3,x_3,x_1,x_3,x_1,x_1,x_0)
+\label{eq:templateTotalisticECA}
+\end{split}
+\end{equation}
+
+Já para a família de ACs de $k=3$ e $r=1$, o algoritmo gera o template demonstrado pela Equação \ref{eq:templateTotalistic31}, sendo que esse template representa as $k^m = 3^7 = 2.187$ regras totalísticas do espaço.
+\begin{equation}
+\begin{split}
+(x_{26},x_{17},x_8,x_{17},x_8,x_5,x_8,x_5,x_2,x_{17},x_8,x_5,x_8,\\
+x_5,x_2,x_5,x_2,x_1,x_8,x_5,x_2,x_5,x_2,x_1,x_2,x_1,x_0)
+\label{eq:templateTotalistic31}
+\end{split}
+\end{equation}
+
+Para as regras semi-totalísticas, o algoritmo segue o mesmo processo básico, porém com uma pequena modificação: as vizinhanças são somadas, mas a célula central é desconsiderada na soma e posteriormente concatenada ao final do resultado. Neste processo as vizinhanças que contenham o mesmo estado na célula central e a mesma soma de valores dos estados das células externas, como por exemplo $(2,1,0)$ e $(1,1,1)$, geram a mesma cadeias de caracteres ao final. A partir desse ponto o algoritmo segue a mesmo processo aplicado as regras totalísticas: para determinar qual será a variável associada a uma vizinhança o algoritmo verifica se a vizinhança foi a única até então que obteve um determinado valor. Em caso positivo o algoritmo criará e associará uma variável $x_i$ para esta transição, sendo $i$ o valor decimal da vizinhança. Caso contrário, a transição será associada uma variável $x_i$ em que $i$ é o valor decimal da primeira e menor vizinhança encontrada com o mesmo valor de soma das vizinhanças.
+
+Aplicando esse algoritmo gerador de templates de regras semi-totalísticas como os argumentos $k=2$ e $r=1$ é obtido o template representado pela Equação \ref{eq:templateSemiTotalisticECA}.
+\begin{equation}
+\begin{split}
+(x_7,x_3,x_5,x_1,x_3,x_2,x_1,x_0)
+\label{eq:templateSemiTotalisticECA}
+\end{split}
+\end{equation}
+
+O template representado pela Equação \ref{eq:templateSemiTotalisticECA} quando expandido gera as $k^m = 2^6 = 64$ regras semi-totalísticas do espaço elementar.
+
+Para a família de ACs com $k=3$ e $r=1$, o algoritmo gera o template representado pela Equação \ref{eq:templateSemiTotalistic31}, que quando expandida gera as $k^m = 3^{15} = 14.348.907$ regras semi-totalísticas do espaço.
+\begin{equation}
+\begin{split}
+(x_{26},x_{17},x_8,x_{23},x_{14},x_5,x_{20},x_{11},x_2,x_{17},x_8,x_7,x_{14},\\
+x_5,x_4,x_{11},x_2,x_1,x_8,x_7,x_6,x_5,x_4,x_3,x_2,x_1,x_0)
+\label{eq:templateSemiTotalistic31}
+\end{split}
+\end{equation}
