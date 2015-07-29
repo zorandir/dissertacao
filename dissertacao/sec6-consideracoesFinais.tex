@@ -2,11 +2,11 @@
 \section{CONSIDERAÇÕES FINAIS}
 \label{sec:consideracoesFinais}
 
-No presente trabalho é descrito os templates de autômatos celulares, proposta introduzida por De Oliveira e Verardo (\citeyear{deOliveira2014}), que por meio de uma generalização de tabelas de transição $k$-árias pode representar conjuntos de ACs.
+No presente trabalho são descritos os templates de autômatos celulares, proposta introduzida por De Oliveira e Verardo (\citeyear{deOliveira2014}), que por meio de uma generalização de tabelas de transição $k$-árias pode representar conjuntos de ACs.
 
 O conceito de templates é importante devido sua capacidade de representar conjuntos de ACs com determinadas propriedades dinâmicas. Essa capacidade faz com que não seja necessário buscar por todo um espaço de ACs, o que devido ao rápido crescimento das famílias dos ACs conforme se mudam seus parâmetros, impossibilitaria a busca através de força bruta.
 
-Por conta dessa capacidade de representação de ACs com determinada propriedades, foi exposto neste projeto algumas propriedades estáticas e os algoritmos geradores dos templates que as representam. Esses algoritmos já estavam implementados na biblioteca \textit{open source} \textit{CATemplates} \cite{CATemplates}. Além disso foi explicada as operações de expansão e intersecção do \textit{CATemplates}. Essas operações, desenvolvidas por \citeonline{Verardo2014}, foram mostradas novamente aqui para que fosse possível explicitar sua relevância para a solução de problemas típicos de ACs, como o problema de paridade.
+Por conta dessa capacidade de representação de ACs com determinadas propriedades, foi exposto neste projeto algumas propriedades estáticas e os algoritmos geradores dos templates que as representam. Esses algoritmos já estavam implementados na biblioteca \textit{open source} \textit{CATemplates} \cite{CATemplates}. Além disso foram explicadas as operações de expansão e intersecção do \textit{CATemplates}. Essas operações, desenvolvidas por \citeonline{Verardo2014}, foram mostradas novamente aqui para que fosse possível explicitar sua relevância para a solução de problemas típicos de ACs, como o problema de paridade.
 
 Também foi introduzido nesse trabalho a operação de complemento de templates. Essa operação permite que dado um templates, se encontre um conjunto de templates que represente todas as regras que não pertençam ao template passado como argumento. Vale frisar que essa operação atualmente só aceita templates binários. A operação de complemento, já disponível na biblioteca \textit{CATemplates}, é mais um exemplo de operação que pode ser utilizada para restringir o conjunto de regras a serem avaliadas na busca pela solução do problema de paridade, por exemplo.
 
@@ -14,4 +14,4 @@ Para que fosse possível a implementação da operação de complemento, foi int
 
 Também foi exposto nesse trabalho um conjunto de processos utilizando templates que podem auxiliar na restrição do espaço de busca para a solução do problema de paridade.
 
-Como possíveis trabalhos futuros, pretende-se generalizar a operação de complemento para qualquer valor de $k$, bem como pretende-se implementar novos algoritmos geradores de templates que represente outras propriedades estáticas. Ademais, também se busca a implementação de novas operações de templates baseadas nas operações de conjuntos, como a operação de união.
+Como possíveis trabalhos futuros, pretende-se generalizar a operação de complemento para qualquer valor de $k$, bem como se pretende implementar novos algoritmos geradores de templates que represente outras propriedades estáticas. Ademais, também se busca a implementação de novas operações de templates baseadas nas operações de conjuntos, como a operação de união.
