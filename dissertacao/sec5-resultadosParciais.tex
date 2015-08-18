@@ -18,7 +18,7 @@ A Figura \ref{fig:complement} ilustra essa operação que consiste em passar um 
   \label{fig:complement}
 \end{figure}
 
-O processo que o algoritmo usa para encontrar o conjunto complementar de um template é efetuado através de uma sequência de etapas. A primeira etapa consiste em igualar o template recebido com o template base do mesmo espaço, obtendo assim combinações lógicas de equações. Então o algoritmo remove as equações tautológicas e aplica uma operação de negação nas equações, no caso binário a operação de negação consiste apenas em efetuar as permutações $\rho = (0 \rightarrow 1, 1 \rightarrow 0)$ ao resultado final das equações. Neste momento o algoritmo troca o operador lógico $\wedge$ por $\vee$ e por fim esse sistema é então passado como argumento para a função Solve. O resultado da função Solve é um conjuntos com diversos conjuntos de substituições que são aplicados ao template base. Para melhor visualizar essas etapas, considere o template $T_1 = (x_7, x_6, x_5, 1 - x_1, x_3, x_2, x_1, 0)$ de $k=2$ e $r=1$. Esse template será igualado com o template base gerando o sistema de equações \ref{eq:complement}, representado abaixo:
+O processo que o algoritmo usa para encontrar o conjunto complementar de um template é efetuado através de uma sequência de etapas. A primeira etapa consiste em igualar o template recebido com o template base do mesmo espaço, obtendo assim combinações lógicas de equações. Então o algoritmo remove as equações tautológicas e aplica uma operação de negação nas equações, no caso binário a operação de negação consiste apenas em efetuar as permutações $\rho = (0 \rightarrow 1, 1 \rightarrow 0)$ ao resultado final das equações. Neste momento o algoritmo troca o operador lógico $\wedge$ por $\vee$ e por fim esse sistema é então passado como argumento para a função Solve. O resultado da função Solve é um conjuntos com diversos conjuntos de substituições que são aplicados ao template base. Para melhor visualizar essas etapas, considere o template $T_1 = (x_7, x_6, x_5, 1 - x_1, x_3, x_2, x_1, 0)$ de $k=2$ e $r=1$. Esse template será igualado com o template base gerando um sistema de equações representado pela Eq. \eqref{eq:complement}.
 \begin{equation}
 \left\{\begin{matrix}
 x_7 & = & x_7	\\ 
@@ -33,7 +33,7 @@ x_0 & = & 0
 \label{eq:complement}
 \end{equation}
 
-Esse sistema deve ser representado através de combinações lógicas de equações. A Equação \ref{eq:logicalComplement} é equivalente a Equação \ref{eq:complement} e também pode ser resolvido pela função Solve do \textit{Wolfram Language}.
+Esse sistema deve ser representado através de combinações lógicas de equações. A Eq. \eqref{eq:logicalComplement} é equivalente a Eq. \eqref{eq:complement} e também pode ser resolvido pela função Solve do \textit{Wolfram Language}.
 \begin{equation}
 \begin{split}
 x_7 = x_7	\wedge  
@@ -48,13 +48,13 @@ x_0 = 0
 \label{eq:logicalComplement}
 \end{equation}
 
-Antes de passar a Equação \ref{eq:logicalComplement} para a função Solve, o algoritmo elimina todas as equações tautológicas e troca todo operadores lógico $\wedge$ por $\vee$. Ao se executar essas etapas na Equação \ref{eq:logicalComplement}, obtêm-se a Equação \ref{eq:logicalComplement1} ilustrada abaixo:
+Antes de passar a Eq. \eqref{eq:logicalComplement} para a função Solve, o algoritmo elimina todas as equações tautológicas e troca todo operadores lógico $\wedge$ por $\vee$. Ao se executar essas etapas na Eq. \eqref{eq:logicalComplement}, obtêm-se a Eq. \eqref{eq:logicalComplement1} ilustrada abaixo:
 \begin{equation}
 x_4 = 1 - x_1 \vee x_0 = 0
 \label{eq:logicalComplement1}
 \end{equation}
 
-Por fim é aplicado a operação de negação nas equações. No caso binário basta efetuar a permutação $\rho $, que também pode ser feita por meio da função $f(x) = 1 - (x)$. A Equação \ref{eq:logicalComplement2} representa a combinação lógica de equações resultante dessas operações.
+Por fim é aplicado a operação de negação nas equações. No caso binário basta efetuar a permutação $\rho $, que também pode ser feita por meio da função $f(x) = 1 - (x)$. A Eq. \eqref{eq:logicalComplement2} representa a combinação lógica de equações resultante dessas operações.
 \begin{equation}
 x_4 = 1 - (1 - x_1) \vee  
 x_0 = 1 - 0
@@ -96,7 +96,7 @@ Para efetuar esta restrição, basta efetuar a intersecção do templates de con
 Posteriormente, deve-se efetuar a operação de complemento do template das regras conservativas de estado, visto que essas regras não podem resolver o problema de paridade. 
 E por fim, efetuar intersecção do template obtido pela primeira intersecção com cada um dos templates obtidos pela operação de complemento.
 
-Formalmente essas operações de conjuntos entre os templates pode ser representado através da Equação \ref{eq:operationsTemplateParidade}, sendo que $T_{confinado}$ representa o templates das regras confinadas, $T_{conservaparidade}$ representa o templates das regras que conservam a paridade e $\bar{T}_{conservaestados}$ representa o conjunto de templates complementares ao templates das regras conservativas. O resultado dessa operação é $T_{paridade}$, esse resultado representa um conjunto de templates que restringem um pouco mais as regras com possibilidades de solucionar o problema de paridade.
+Formalmente essas operações de conjuntos entre os templates pode ser representado através da Eq. \eqref{eq:operationsTemplateParidade}, sendo que $T_{confinado}$ representa o templates das regras confinadas, $T_{conservaparidade}$ representa o templates das regras que conservam a paridade e $\bar{T}_{conservaestados}$ representa o conjunto de templates complementares ao templates das regras conservativas. O resultado dessa operação é $T_{paridade}$, esse resultado representa um conjunto de templates que restringem um pouco mais as regras com possibilidades de solucionar o problema de paridade.
 \begin{equation}
 T_{paridade} = (T_{conservaparidade} \cap T_{confinado}) \cap \bar{T}_{conservaestados}
 \label{eq:operationsTemplateParidade}

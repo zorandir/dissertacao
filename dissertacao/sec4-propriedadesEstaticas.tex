@@ -2,14 +2,14 @@
 \section[REPRESENTAÇÃO DE PROPRIEDADES ESTÁTICAS POR MEIO DE TEMPLATES]{REPRESENTAÇÃO DE PROPRIEDADES \\ ESTÁTICAS POR MEIO DE TEMPLATES}
 \label{sec:propriedadesEstaticas}
 
-Em ACs, propriedades estáticas são propriedades computadas com base nas tabelas de transição. Essas propriedades permitem prever determinados comportamentos de um ACs sem consultar sua evolução espaço temporal. 
+Em ACs, propriedades estáticas são propriedades computadas com base nas tabelas de transição. Essas propriedades permitem prever determinados comportamentos de um ACs sem consultar sua evolução espaço-temporal. 
 
 Esta seção descreverá algumas propriedades estáticas e os algoritmos geradores de templates que as representam. Todos algoritmos explicados estão implementados na biblioteca \textit{CATemplates} \cite{CATemplates}.
 
 \subsection{Conservabilidade de Estados e Conservabilidade de Paridade}
-Conservabilidade de estados é uma propriedade estática que determina que a soma dos estados de um determinado autômato celular não deve se alterar durante a evolução espaço temporal, independente da configuração inicial passada.
+Conservabilidade de estados é uma propriedade estática que determina que a soma dos estados de um determinado autômato celular não deve se alterar durante a evolução espaço-temporal, independente da configuração inicial passada.
 
-De acordo com Boccara e Fukś (\citeyear{boccara2002}), um AC é conservativo quando cada uma de suas regras locais $f$ de vizinhança $(\alpha_0,\alpha_1, \dots, \alpha_{n-1})$ respeita as condições descritas na Equação \ref{eq:conservativeCA}.
+De acordo com Boccara e Fukś (\citeyear{boccara2002}), um AC é conservativo quando cada uma de suas regras locais $f$ de vizinhança $(\alpha_0,\alpha_1, \dots, \alpha_{n-1})$ respeita as condições descritas na Eq. \eqref{eq:conservativeCA}.
 
 \begin{equation}
 \begin{split}
@@ -18,7 +18,7 @@ f(\alpha_0,\alpha_1, \dots,\alpha_{n-1}) = \alpha_0 + (\sum_{i=0}^{n-2}f(0_0,0_1
 \end{split}
 \end{equation}
 
-Para exemplificar, considere a regra 204 do espaço elementar. Por meio da condição mostrada na Equação \ref{eq:conservativeCA}, será provado que essa regra é conservativa, já que satisfaz a condição. A Equação \ref{eq:ruleTable204} representa a tabela de transições da regra 204.
+Para exemplificar, considere a regra 204 do espaço elementar. Por meio da condição mostrada na Eq. \eqref{eq:conservativeCA}, será provado que essa regra é conservativa, já que satisfaz a condição. A Eq. \eqref{eq:ruleTable204} representa a tabela de transições da regra 204.
 
 \begin{equation}
 \begin{split}
@@ -27,7 +27,7 @@ Para exemplificar, considere a regra 204 do espaço elementar. Por meio da condi
 \end{split}
 \end{equation}
 
-Como demonstra \citeonline{Verardo2014}, a aplicação das condições da Equação \ref{eq:conservativeCA} nas tabelas de transições de ACs do espaço elementar, sempre resultará no sistema descrito pela Equação \ref{eq:conservativeLinearSystem}.
+Como demonstra \citeonline{Verardo2014}, a aplicação das condições da Eq. \eqref{eq:conservativeCA} nas tabelas de transições de ACs do espaço elementar, sempre resultará no sistema descrito pela Eq. \eqref{eq:conservativeLinearSystem}.
 
 \begin{equation}
 \left\{\begin{matrix}
@@ -43,7 +43,7 @@ Como demonstra \citeonline{Verardo2014}, a aplicação das condições da Equaç
 \label{eq:conservativeLinearSystem}
 \end{equation}
 
-A Equação \ref{eq:conservativeLinearSystem} simplificada é representada pela Equação \ref{eq:conservativeLinearSystem2}.
+A Eq. \eqref{eq:conservativeLinearSystem} simplificada é representada pela Eq. \eqref{eq:conservativeLinearSystem2}.
 
 \begin{equation}
 \left\{\begin{matrix}
@@ -59,7 +59,7 @@ A Equação \ref{eq:conservativeLinearSystem} simplificada é representada pela 
 \label{eq:conservativeLinearSystem2}
 \end{equation}
 
-Excluindo-se as condições tautológicas do sistema e atribuindo os valores das funções locais $f$ conforme a tabela de transições da regra 204, é obtido o sistema descrito pela Equação \ref{eq:conservativeAC204}. Esse sistema, ao não apresentar condições contraditórias ou falsas, prova que a regra 204 é conservativa.
+Excluindo-se as condições tautológicas do sistema e atribuindo os valores das funções locais $f$ conforme a tabela de transições da regra 204, é obtido o sistema descrito pela Eq. \eqref{eq:conservativeAC204}. Esse sistema, ao não apresentar condições contraditórias ou falsas, prova que a regra 204 é conservativa.
 
 \begin{equation}
 \left\{\begin{matrix}
@@ -74,7 +74,7 @@ Excluindo-se as condições tautológicas do sistema e atribuindo os valores das
 
 O algoritmo que gera templates que representam regras conservativas, criado por De Oliveira e Verardo (\citeyear{deOliveira2014}), primeiramente recebe as variáveis $k$ e $r$ definindo assim a família das regras que serão geradas. Em seguida, cria todas as vizinhanças do espaço com exceção das vizinhanças que geram tautologias. E após esses passos, aplica as condições de Boccara e Fukś (\citeyear{boccara2002}). Para se excluir as vizinhanças que geram tautologias, basta excluir as vizinhanças que começam com 0 mas não sejam compostas apenas por 0 \cite{Schranko2010}.
 
-Para exemplificar o funcionamento do algoritmo, considere um espaço com $k=2$ e $r=1$. Primeiramente o algoritmo obterá o conjunto das vizinhanças que não geram regras tautológicas, portanto será obtido o conjunto $\{(1,1,1),(1,1,0),(1,0,1),(1,0,0),(0,0,0)\}$. Então é criado o sistema de equações \ref{eq:conservativeLinearSystem3}, baseado nas condições de Boccara e Fukś (\citeyear{boccara2002}).
+Para exemplificar o funcionamento do algoritmo, considere um espaço com $k=2$ e $r=1$. Primeiramente o algoritmo obterá o conjunto das vizinhanças que não geram regras tautológicas, portanto será obtido o conjunto $\{(1,1,1),(1,1,0),(1,0,1),(1,0,0),(0,0,0)\}$. Então é criado o sistema de equações \eqref{eq:conservativeLinearSystem3}, baseado nas condições de Boccara e Fukś (\citeyear{boccara2002}).
 
 \begin{equation}
 \left\{\begin{matrix}
@@ -87,14 +87,14 @@ Para exemplificar o funcionamento do algoritmo, considere um espaço com $k=2$ e
 \label{eq:conservativeLinearSystem3}
 \end{equation}
 
-Por fim o algoritmo utiliza a função Solve do \textit{Wolfram Mathematica} para simplificar o sistema e utiliza o conjunto solução retornado pela função Solve como regras de substituições. Essas regras de substituições são aplicadas no template base, gerando assim o template das regras conservativas. O template gerado pode ser observado na Equação \ref{eq:conservativeTemplate}, e sua expansão gera as cinco regras conservativas do espaço elementar, após eliminadas as regras inválidas.
+Por fim o algoritmo utiliza a função Solve do \textit{Wolfram Mathematica} para simplificar o sistema e utiliza o conjunto solução retornado pela função Solve como regras de substituições. Essas regras de substituições são aplicadas no template base, gerando assim o template das regras conservativas. O template gerado pode ser observado na Eq. \eqref{eq:conservativeTemplate}, e sua expansão gera as cinco regras conservativas do espaço elementar, após eliminadas as regras inválidas.
 
 \begin{equation}
 (1,x_2-x_3+1,1-x_2,-x_1-x_2+1,x_3,x_2,x_1,0)
 \label{eq:conservativeTemplate}
 \end{equation}
 
-O processo de gerar regras conservativas de paridade é bem parecido. Porém as condições estabelecidas por Boccara e Fukś (\citeyear{boccara2002}) são ligeiramente modificadas em relação a Equação \ref{eq:conservativeCA}, de forma que cada uma das funções locais deve respeitar agora as condições da Equação \ref{eq:parityConservativeCA}.
+O processo de gerar regras conservativas de paridade é bem parecido. Porém as condições estabelecidas por Boccara e Fukś (\citeyear{boccara2002}) são ligeiramente modificadas em relação a Eq. \eqref{eq:conservativeCA}, de forma que cada uma das funções locais deve respeitar agora as condições da Eq. \eqref{eq:parityConservativeCA}.
 
 \begin{equation}
 \begin{split}
@@ -112,7 +112,7 @@ A biblioteca \textit{CATemplates} já tem implementado o algoritmo gerador de te
 \subsection{Confinamento}
 Os autômatos celulares confinados, ou \textit{captive} em Inglês, são uma classe de AC que se baseiam em uma caracterização de suas funções locais que não adotem estados definidos em qualquer estrutura externa à vizinhança \cite{theyssier2004captive}. 
 
-\citeonline{theyssier2004captive} formalmente define que dado a função local $f$ de um AC para a vizinhança $(\alpha_0, \dots, \alpha_{2r})$, sendo o $r$ o raio, um AC é considerado confinado se respeitar a condição descrita na Equação \ref{eq:captiveAC}.
+\citeonline{theyssier2004captive} formalmente define que dado a função local $f$ de um AC para a vizinhança $(\alpha_0, \dots, \alpha_{2r})$, sendo o $r$ o raio, um AC é considerado confinado se respeitar a condição descrita na Eq. \eqref{eq:captiveAC}.
 
 \begin{equation}
 f((\alpha_0, \dots, \alpha_{2r})) = \beta, \beta \in \{\alpha_0, \dots, \alpha_{2r}\}
@@ -121,7 +121,7 @@ f((\alpha_0, \dots, \alpha_{2r})) = \beta, \beta \in \{\alpha_0, \dots, \alpha_{
 
 Essa propriedade pode ser facilmente representada através de templates. Para isto, basta restringir as variáveis a um conjunto de valores presentes na vizinhança correspondente. A biblioteca \textit{open source CATemplates} já apresenta um algoritmo que gera as regras confinadas. Esse algoritmo recebe como parâmetro os argumentos $k$ e $r$. Após isso, gera as vizinhanças do espaço e verifica em cada uma das vizinhanças os estados que elas têm. Caso a vizinhança tenha todos os estados do intervalo $[0, k-1]$ essa posição terá uma variável livre no template. Caso a vizinhança tenha apenas um estado a posição correspondente no template assume um valor fixo. Por fim, caso a vizinhança apresente mais de um estado, mas não todos, a posição correspondente do template apresentará uma variável restritas mediante expressões $x_i \in C$.
 
-É trivial perceber que qualquer AC binário que tenha as funções locais $f((0_0, 0_1,\dots, 0_{2r})) = 0$ e $f((1_0, 1_,1\dots, 1_{2r})) = 1$ é caracterizado como um AC confinado. A Equação \ref{eq:captiveTemplateACE} representa o template de todas as regras confinadas do espaço elementar e as equações \ref{eq:captiveTemplateR05} representam a família de $k=2$ e $r=0,5$.
+É trivial perceber que qualquer AC binário que tenha as funções locais $f((0_0, 0_1,\dots, 0_{2r})) = 0$ e $f((1_0, 1_,1\dots, 1_{2r})) = 1$ é caracterizado como um AC confinado. A Eq. \eqref{eq:captiveTemplateACE} representa o template de todas as regras confinadas do espaço elementar e a Eq. \eqref{eq:captiveTemplateR05} representa a família de $k=2$ e $r=0,5$.
 \begin{equation}
 (1,x_6,x_5,x_4,x_3,x_2,x_1,0)
 \label{eq:captiveTemplateACE}
@@ -132,7 +132,7 @@ Essa propriedade pode ser facilmente representada através de templates. Para is
 \label{eq:captiveTemplateR05}
 \end{equation}
 
-Por fim, a Equação \ref{eq:captiveTemplateK3} representa a família dos autômatos celulares confinados de $r=1$ e três estados.
+Por fim, a Eq. \eqref{eq:captiveTemplateK3} representa a família dos autômatos celulares confinados de $r=1$ e três estados.
 
 \begin{equation}
 \begin{split}
@@ -202,7 +202,7 @@ Já há implementado no CATemplates um algoritmo gerador de templates que repres
 
 O algoritmo recebe como parâmetro um raio $r$, definindo assim a família de ACs que será representada, o valor de simetria interna desejado, e uma das transformações de simetria.
 
-Para melhor representar o funcionamento do algoritmo, considere que foi passado como parâmetro um raio $r = 1$, a transformação de reflexão e a simetria interna desejada igual a 8. O primeiro passo do algoritmo será gerar todas as vizinhanças do espaço, que no nosso exemplo pode ser representado pela conjunto descrito pela Equação \ref{eq:neighborSetACE}
+Para melhor representar o funcionamento do algoritmo, considere que foi passado como parâmetro um raio $r = 1$, a transformação de reflexão e a simetria interna desejada igual a 8. O primeiro passo do algoritmo será gerar todas as vizinhanças do espaço, que no nosso exemplo pode ser representado pela conjunto descrito pela Eq. \eqref{eq:neighborSetACE}
 \begin{equation}
 \{(1,1,1),(1,1,0),
 (1,0,1),(1,0,0),
@@ -211,7 +211,7 @@ Para melhor representar o funcionamento do algoritmo, considere que foi passado 
 \label{eq:neighborSetACE}
 \end{equation}
 
-Após isso, a transformação escolhida, no caso reflexão, é aplicada a cada uma das vizinhanças, gerando assim o conjunto representado pela Equação \ref{eq:neighborSetTransformadoACE}.  
+Após isso, a transformação escolhida, no caso reflexão, é aplicada a cada uma das vizinhanças, gerando assim o conjunto representado pela Eq. \eqref{eq:neighborSetTransformadoACE}.  
 \begin{equation}
 \begin{split}
 \{
@@ -227,7 +227,7 @@ Após isso, a transformação escolhida, no caso reflexão, é aplicada a cada u
 \end{split}
 \end{equation}
 
-Então, dos pares de vizinhanças encontrados, salva-se em uma variável o número de vizinhanças invariantes à transformação escolhida e remove-se os pares de vizinhanças idênticos. Após essa operação o conjunto resultante estará de acordo com a Equação \ref{eq:neighborSetTransformadoInACE}.
+Então, dos pares de vizinhanças encontrados, salva-se em uma variável o número de vizinhanças invariantes à transformação escolhida e remove-se os pares de vizinhanças idênticos. Após essa operação o conjunto resultante estará de acordo com a Eq. \eqref{eq:neighborSetTransformadoInACE}.
 \begin{equation}
 \{(((1,1,0),(0,1,1)),
 ((1,0,0),(0,0,1)),
@@ -236,13 +236,13 @@ Então, dos pares de vizinhanças encontrados, salva-se em uma variável o núme
 \label{eq:neighborSetTransformadoInACE}
 \end{equation}
 
-Nesse momento, caso o valor de simetria interna passado como parâmetro seja menor que as vizinhanças invariantes, o algoritmo retorna como resultado um conjunto vazio, tendo em vista que o valor mínimo de simetria interna é igual ao total de vizinhanças invariantes. Caso contrário o algoritmo agora removerá todas as repetições de pares de vizinhanças, considerando que pares de vizinhanças em ordem diferentes repetições. A Equação \ref{eq:internalSimetryP4} representa como ficara o conjunto após as remoções.
+Nesse momento, caso o valor de simetria interna passado como parâmetro seja menor que as vizinhanças invariantes, o algoritmo retorna como resultado um conjunto vazio, tendo em vista que o valor mínimo de simetria interna é igual ao total de vizinhanças invariantes. Caso contrário o algoritmo agora removerá todas as repetições de pares de vizinhanças, considerando que pares de vizinhanças em ordem diferentes repetições. A Eq. \eqref{eq:internalSimetryP4} representa como ficara o conjunto após as remoções.
 \begin{equation}
 \{(((1,1,0),(0,1,1)), ((1,0,0),(0,0,1))\}
 \label{eq:internalSimetryP4}
 \end{equation}
 
-Cada vizinhança é então substituída pela variável de template correspondente a sua posição, gerando assim um conjunto que representa as equivalências entre variáveis de um template. Esse conjunto de equivalências podem ser melhor visualizados pela Equação \ref{eq:internalSimetryP5} e pelo sistema de equação equivalente representado pela Equação \ref{eq:internalSimetryP6}.
+Cada vizinhança é então substituída pela variável de template correspondente a sua posição, gerando assim um conjunto que representa as equivalências entre variáveis de um template. Esse conjunto de equivalências podem ser melhor visualizados pela Eq. \eqref{eq:internalSimetryP5} e pelo sistema de equação equivalente representado pela Eq. \eqref{eq:internalSimetryP6}.
 \begin{equation}
 \{(x_6,x_3), (x_4,x_1)\}
 \label{eq:internalSimetryP5}
@@ -256,7 +256,7 @@ x_6 & = & x_3
 \label{eq:internalSimetryP6}
 \end{equation}
 
-Entretanto, apesar de igualar todas o sistema de equações ser útil para encontrar a máxima simetria interna de uma determinada transformação, para outros valores de simetria entre o mínimo e o máximo, é necessário que o sistema de equações apresentem algumas inequações, como pode ser visualizado nas Equações \ref{eq:internalSimetryP7} e \ref{eq:internalSimetryP8}.
+Entretanto, apesar de igualar todas o sistema de equações ser útil para encontrar a máxima simetria interna de uma determinada transformação, para outros valores de simetria entre o mínimo e o máximo, é necessário que o sistema de equações apresentem algumas inequações, como pode ser visualizado na Eq. \eqref{eq:internalSimetryP7} e na Eq. \eqref{eq:internalSimetryP8}.
 \begin{equation}
 \left\{\begin{matrix}
 x_4 & \neq & x_1\\ 
@@ -273,7 +273,7 @@ x_6 & \neq & x_3
 \label{eq:internalSimetryP8}
 \end{equation}
 
-A relação de desigualdade é representada nos templates por meio de uma função que sempre dê um resultado diferente. No caso binário essa função é $1 - x_i$. Logo os sistemas representados pelas Equações \ref{eq:internalSimetryP7} e \ref{eq:internalSimetryP8} são respectivamente equivalentes as Equações \ref{eq:internalSimetryP9} e \ref{eq:internalSimetryP10}
+A relação de desigualdade é representada nos templates por meio de uma função que sempre dê um resultado diferente. No caso binário essa função é $1 - x_i$. Logo os sistemas representados pela Eq. \eqref{eq:internalSimetryP7} e pela Eq. \eqref{eq:internalSimetryP8} são respectivamente equivalentes a Eq. \eqref{eq:internalSimetryP9} e a Eq. \eqref{eq:internalSimetryP10}
 \begin{equation}
 \left\{\begin{matrix}
 x_4 & = & 1 - x_1\\ 
@@ -290,13 +290,13 @@ x_6 & = 1 - & x_3
 \label{eq:internalSimetryP10}
 \end{equation}
 
-Para montar essas equivalências, o algoritmo particiona o conjunto de equivalência em $(s-v)/2$ partes, sendo que $s$ é o número de simetria interna passado como argumento e $v$ é o número de vizinhanças invariantes à transformação determinada. Após o particionamento, o algoritmo une as partições com os complementos do conjunto, adicionando assim as desigualdades nos pares do complemento. Para os exemplos dados, o conjunto resultante é representado pela Equação \ref{eq:internalSimetryP11}.
+Para montar essas equivalências, o algoritmo particiona o conjunto de equivalência em $(s-v)/2$ partes, sendo que $s$ é o número de simetria interna passado como argumento e $v$ é o número de vizinhanças invariantes à transformação determinada. Após o particionamento, o algoritmo une as partições com os complementos do conjunto, adicionando assim as desigualdades nos pares do complemento. Para os exemplos dados, o conjunto resultante é representado pela Eq. \eqref{eq:internalSimetryP11}.
 \begin{equation}
 C_{reflex6}=\{((x_4,x_1),(x_6,1-x_3)),((x_4,1-x_1),(x_6,x_3))\}
 \label{eq:internalSimetryP11}
 \end{equation}
 
-O conjunto $C_{reflex6}$ representa as equivalências entre variáveis, que quando aplicadas ao template base, originam os templates que representam as regras com simetria interna 6. Ao realizar essas substituições obtemos o conjunto de templates representado pela Equação \ref{eq:internalSimetryP12}.
+O conjunto $C_{reflex6}$ representa as equivalências entre variáveis, que quando aplicadas ao template base, originam os templates que representam as regras com simetria interna 6. Ao realizar essas substituições obtemos o conjunto de templates representado pela Eq. \eqref{eq:internalSimetryP12}.
 
 \begin{equation}
 \{(x_7,1-x_3,x_5,x_1,x_3,x_2,x_1,x_0),(x_7,x_3,x_5,1-x_1,x_3,x_2,x_1,x_0)\}
@@ -331,7 +331,7 @@ O algoritmo que gera regras totalísticas recebe como argumento os valores de $r
 
 Para determinar qual será a variável associada, dada uma vizinhança qualquer, o algoritmo verifica se a vizinhança foi a única até então que obteve um determinado valor de soma. Em caso positivo o algoritmo criará e associará uma variável $x_i$ para esta transição, sendo $i$ o valor decimal da vizinhança. Caso contrário, a transição será associada uma variável $x_i$ em que $i$ é o valor decimal da primeira e menor vizinhança encontrada com o mesmo valor de soma das vizinhanças.
 
-A Equação \ref{eq:templateTotalisticECA} representa o template para o espaço elementar gerado pelo processo descrito acima. Esse template, quando expandido, gera $k^m = 2^4 = 16$ regras.
+A Eq. \eqref{eq:templateTotalisticECA} representa o template para o espaço elementar gerado pelo processo descrito acima. Esse template, quando expandido, gera $k^m = 2^4 = 16$ regras.
 \begin{equation}
 \begin{split}
 (x_7,x_3,x_3,x_1,x_3,x_1,x_1,x_0)
@@ -339,7 +339,7 @@ A Equação \ref{eq:templateTotalisticECA} representa o template para o espaço 
 \end{split}
 \end{equation}
 
-Já para a família de ACs de $k=3$ e $r=1$, o algoritmo gera o template demonstrado pela Equação \ref{eq:templateTotalistic31}, sendo que esse template representa as $k^m = 3^7 = 2.187$ regras totalísticas do espaço.
+Já para a família de ACs de $k=3$ e $r=1$, o algoritmo gera o template demonstrado pela Eq. \eqref{eq:templateTotalistic31}, sendo que esse template representa as $k^m = 3^7 = 2.187$ regras totalísticas do espaço.
 \begin{equation}
 \begin{split}
 (x_{26},x_{17},x_8,x_{17},x_8,x_5,x_8,x_5,x_2,x_{17},x_8,x_5,x_8,\\
@@ -350,7 +350,7 @@ x_5,x_2,x_5,x_2,x_1,x_8,x_5,x_2,x_5,x_2,x_1,x_2,x_1,x_0)
 
 Para as regras semi-totalísticas, o algoritmo segue o mesmo processo básico, porém com uma pequena modificação: as vizinhanças são somadas, mas a célula central é desconsiderada na soma e posteriormente concatenada ao final do resultado. Neste processo as vizinhanças que contenham o mesmo estado na célula central e a mesma soma de valores dos estados das células externas, como por exemplo $(2,1,0)$ e $(1,1,1)$, geram a mesma cadeias de caracteres ao final. A partir desse ponto o algoritmo segue a mesmo processo aplicado as regras totalísticas: para determinar qual será a variável associada a uma vizinhança o algoritmo verifica se a vizinhança foi a única até então que obteve um determinado valor. Em caso positivo o algoritmo criará e associará uma variável $x_i$ para esta transição, sendo $i$ o valor decimal da vizinhança. Caso contrário, a transição será associada uma variável $x_i$ em que $i$ é o valor decimal da primeira e menor vizinhança encontrada com o mesmo valor de soma das vizinhanças.
 
-Aplicando esse algoritmo gerador de templates de regras semi-totalísticas como os argumentos $k=2$ e $r=1$ é obtido o template representado pela Equação \ref{eq:templateSemiTotalisticECA}.
+Aplicando esse algoritmo gerador de templates de regras semi-totalísticas como os argumentos $k=2$ e $r=1$ é obtido o template representado pela Eq. \eqref{eq:templateSemiTotalisticECA}.
 \begin{equation}
 \begin{split}
 (x_7,x_3,x_5,x_1,x_3,x_2,x_1,x_0)
@@ -358,9 +358,9 @@ Aplicando esse algoritmo gerador de templates de regras semi-totalísticas como 
 \end{split}
 \end{equation}
 
-O template representado pela Equação \ref{eq:templateSemiTotalisticECA} quando expandido gera as $k^m = 2^6 = 64$ regras semi-totalísticas do espaço elementar.
+O template representado pela Eq. \eqref{eq:templateSemiTotalisticECA} quando expandido gera as $k^m = 2^6 = 64$ regras semi-totalísticas do espaço elementar.
 
-Para a família de ACs com $k=3$ e $r=1$, o algoritmo gera o template representado pela Equação \ref{eq:templateSemiTotalistic31}, que quando expandida gera as $k^m = 3^{15} = 14.348.907$ regras semi-totalísticas do espaço.
+Para a família de ACs com $k=3$ e $r=1$, o algoritmo gera o template representado pela Eq. \eqref{eq:templateSemiTotalistic31}, que quando expandida gera as $k^m = 3^{15} = 14.348.907$ regras semi-totalísticas do espaço.
 \begin{equation}
 \begin{split}
 (x_{26},x_{17},x_8,x_{23},x_{14},x_5,x_{20},x_{11},x_2,x_{17},x_8,x_7,x_{14},\\
