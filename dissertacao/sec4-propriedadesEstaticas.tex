@@ -7,7 +7,7 @@ Em ACs, propriedades estáticas são propriedades computadas com base nas tabela
 Esta seção descreverá algumas propriedades estáticas e os algoritmos geradores de templates que as representam. Todos algoritmos explicados estão implementados na biblioteca \textit{CATemplates} \cite{CATemplates}.
 
 \subsection{Conservabilidade de Estados e Conservabilidade de Paridade}
-Conservabilidade de estados é uma propriedade estática que determina que a soma dos estados de um determinado autômato celular não deve se alterar durante a evolução espaço-temporal, independente da configuração inicial passada.
+Conservabilidade de estados é uma propriedade estática que determina que a soma dos estados de um determinado autômato celular não deve se alterar durante a evolução espaço-temporal, independente da configuração inicial.
 
 De acordo com Boccara e Fukś (\citeyear{boccara2002}), um AC é conservativo quando cada uma de suas regras locais $f$ de vizinhança $(\alpha_0,\alpha_1, \dots, \alpha_{n-1})$ respeita as condições descritas na Eq. \eqref{eq:conservativeCA}.
 
@@ -27,7 +27,7 @@ Para exemplificar, considere a regra 204 do espaço elementar. Por meio da condi
 \end{split}
 \end{equation}
 
-Como demonstra \citeonline{Verardo2014}, a aplicação das condições da Eq. \eqref{eq:conservativeCA} nas tabelas de transições de ACs do espaço elementar, sempre resultará no sistema descrito pela Eq. \eqref{eq:conservativeLinearSystem}.
+Como demonstra \citeonline{Verardo2014}, a aplicação das condições da Eq. \eqref{eq:conservativeCA} nas tabelas de transições de ACs do espaço elementar, resulta no sistema descrito pela Eq. \eqref{eq:conservativeLinearSystem}.
 
 \begin{equation}
 \left\{\begin{matrix}
@@ -98,7 +98,7 @@ O processo de gerar regras conservativas de paridade é bem parecido. Porém as 
 
 \begin{equation}
 \begin{split}
-f(\alpha_0,\alpha_1, \dots,\alpha_{n-1}) \equiv \alpha_0 + (\sum_{i=0}^{n-2}f(0_0,0_1, \dots,0_i,\alpha_1,\alpha_2, \dots,\alpha_{n-1}) \\- f(0_0,0_1, \dots,0_i,\alpha_0,\alpha_1, \dots,\alpha_{n-i-1})) \; (mod 2)  
+f(\alpha_0,\alpha_1, \dots,\alpha_{n-1}) \equiv \alpha_0 + (\sum_{i=0}^{n-2}f(0_0,0_1, \dots,0_i,\alpha_1,\alpha_2, \dots,\alpha_{n-1}) \\- f(0_0,0_1, \dots,0_i,\alpha_0,\alpha_1, \dots,\alpha_{n-i-1})) \; \mod 2
 \label{eq:parityConservativeCA}
 \end{split}
 \end{equation}
@@ -110,7 +110,7 @@ A biblioteca \textit{CATemplates} já tem implementado o algoritmo gerador de te
 
 
 \subsection{Confinamento}
-Os autômatos celulares confinados, ou \textit{captive} em Inglês, são uma classe de AC que se baseiam em uma caracterização de suas funções locais que não adotem estados definidos em qualquer estrutura externa à vizinhança \cite{theyssier2004captive}. 
+Os autômatos celulares confinados, ou \textit{captive} em inglês, são uma classe de AC que se baseiam em uma caracterização de suas funções locais que não adotem estados definidos em qualquer estrutura externa à vizinhança \cite{theyssier2004captive}. 
 
 \citeonline{theyssier2004captive} formalmente define que dado a função local $f$ de um AC para a vizinhança $(\alpha_0, \dots, \alpha_{2r})$, sendo o $r$ o raio, um AC é considerado confinado se respeitar a condição descrita na Eq. \eqref{eq:captiveAC}.
 

@@ -2,19 +2,19 @@
 \section{RESULTADOS PARCIAIS}
 \label{sec:resultadosParciais}
 
-O presente projeto de pesquisa já apresenta resultados como resultado o desenvolvimento da operação de complemento para templates com $k=2$, bem como a demonstração de uma série de passos que, utilizando a operação de complemento, conseguem restringir o espaço busca de ACs de raio 3 que tem a possibilidade de solucionar o problema de paridade.
+O presente projeto de pesquisa já apresenta como resultado o desenvolvimento da operação de complemento para templates com $k=2$, bem como a demonstração de uma série de passos que, utilizando a operação de complemento, conseguem restringir o espaço busca de ACs de raio 3 que tem a possibilidade de solucionar o problema de paridade.
 
 A operação de complemento é responsável por obter um conjunto de templates que represente todas as regras não representadas por um template passado como argumento. Está operação pode ser melhor visualizada abaixo:
 \begin{equation}
-C(T_1)=\bar{T_1}
+C(T_1)=\overline{T}_1
 \end{equation}
 
-A Figura \ref{fig:complement} ilustra essa operação que consiste em passar um templates $T_1$ para a função, e receber um conjunto de templates complementares a $T_1$, aqui representados como $\bar{T_1}$.
+A Figura \ref{fig:complement} ilustra essa operação que consiste em passar um template $T_1$ para a função, e receber um conjunto de templates complementares a $T_1$, aqui representados como $\overline{T}_1$.
 \begin{figure}[h!]
   \centering
   \def\svgscale{0.5}
   \import{../img/}{fig_complement.pdf_tex}
-  \caption{Em branco, $T_1$ representa uma família de ACs. Em cinza, $\bar{T_1}$ representa o complemento dessa família.}
+  \caption{Em branco, $T_1$ representa uma família de ACs. Em cinza, $\overline{T}_1$ representa o complemento dessa família.}
   \label{fig:complement}
 \end{figure}
 
@@ -82,13 +82,13 @@ A operação de complemento então adiciona na lista de templates complementares
 
 O desenvolvimento da operação de complemento de template permite diversas possibilidades de aplicação. 
 Uma possibilidade interessante é no problema de paridade. 
-Ainda não se sabe se existem regras de raio 3 que solucionem o problema de paridade. 
+Ainda não se sabe se existem regras de raio 3 que solucionem o problema de paridade \cite{Betel2013}. 
 Mas os templates podem ser uma forma interessante de restringir o conjunto de regras na busca dessa solução.
 
 As regras dos ACs que solucionam o problema de paridade têm algumas propriedades estáticas que podem ser trivialmente percebidas. 
 Um AC que resolva o problema de paridade sempre será contido, tendo em vista no problema de paridade as vizinhanças homogêneas não devem levar a transições de estado ativas, e está é a única restrição de variável dos templates contidos para AC binários. 
 Vale frisar que o espaço das regras contidas de raio 3 ainda é um espaço muito grande, entretanto essa não é a única propriedade estática que um AC que resolva o problema de paridade contém. 
-Para que um AC resolva problema de paridade também é necessário que ele não seja conservativo, visto que se a soma dos estados do AC não mudar, ele nunca convergirá como propõem o problema. 
+Para que um AC resolva problema de paridade também é necessário que ele não seja conservativo, visto que se a soma dos estados do AC não mudar, ele nunca convergirá como propõe o problema. 
 Por fim, espera-se que um AC que resolva o problema de paridade seja conservativo de paridade.
 
 Dado a possibilidade de se obter os templates para todas essas propriedades, é também possível utilizar as operações de complemento e intersecção para restringir o espaço de busca para a solução desse problema.
@@ -96,8 +96,8 @@ Para efetuar esta restrição, basta efetuar a intersecção do templates de con
 Posteriormente, deve-se efetuar a operação de complemento do template das regras conservativas de estado, visto que essas regras não podem resolver o problema de paridade. 
 E por fim, efetuar intersecção do template obtido pela primeira intersecção com cada um dos templates obtidos pela operação de complemento.
 
-Formalmente essas operações de conjuntos entre os templates pode ser representado através da Eq. \eqref{eq:operationsTemplateParidade}, sendo que $T_{confinado}$ representa o templates das regras confinadas, $T_{conservaparidade}$ representa o templates das regras que conservam a paridade e $\bar{T}_{conservaestados}$ representa o conjunto de templates complementares ao templates das regras conservativas. O resultado dessa operação é $T_{paridade}$, esse resultado representa um conjunto de templates que restringem um pouco mais as regras com possibilidades de solucionar o problema de paridade.
+Formalmente essas operações de conjuntos entre os templates pode ser representado através da Eq. \eqref{eq:operationsTemplateParidade}, sendo que $T_{confinado}$ representa o templates das regras confinadas, $T_{conservaparidade}$ representa o templates das regras que conservam a paridade e $\overline{T}_{conservaestados}$ representa o conjunto de templates complementares ao templates das regras conservativas. O resultado dessa operação é $T_{paridade}$, esse resultado representa um conjunto de templates que restringem um pouco mais as regras com possibilidades de solucionar o problema de paridade.
 \begin{equation}
-T_{paridade} = (T_{conservaparidade} \cap T_{confinado}) \cap \bar{T}_{conservaestados}
+T_{paridade} = (T_{conservaparidade} \cap T_{confinado}) \cap \overline{T}_{conservaestados}
 \label{eq:operationsTemplateParidade}
 \end{equation}
