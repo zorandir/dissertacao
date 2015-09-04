@@ -26,26 +26,28 @@ Já a $8$-uplas, apresentada na Eq. \eqref{eq:templateBase}, representa um templ
 
 A representação de famílias de autômatos celulares através de templates, possibilita a utilização de templates para problemas já bem conhecidos da área de ACs. Um exemplo de problema que pode se beneficiar dos templates é o problema da paridade.
 
-A Figura \ref{fig:parity-rule} ilustra o desenvolvimento espaço-temporal da regra BFO \cite{Betel2013} %TODO Ref confirmar
-que resolve o problema de paridade para o raio 4. Nessa imagem o desenvolvimento temporal à esquerda contém, em sua configuração inicial, um número par de estados igual a 1, já na evolução temporal ilustrada à direita há um número ímpar de estados igual a 1.
+A Figura \ref{fig:parity-rule} ilustra o desenvolvimento espaço-temporal da regra BFO \cite{Betel2013} que resolve o problema de paridade para o raio 4. Nessa imagem o desenvolvimento temporal à esquerda contém, em sua configuração inicial, um número par de estados igual a 1, já na evolução temporal ilustrada à direita há um número ímpar de estados igual a 1.
 
 \begin{figure}[h!]
 \center
 \subfigure[CI com número ímpar de 1s]{\includegraphics[width=4.8cm]{regra-1-par.pdf}}
 \qquad
 \subfigure[CI com número par de 1s]{\includegraphics[width=4.8cm]{regra-1-impar.pdf}}
-\caption{Desenvolvimento espaço-temporal da regra BFO resolve o problema de paridade para raio 4.}
+\caption{Desenvolvimento espaço-temporal da regra BFO, que resolve o problema de paridade para raio 4. \cite{Betel2013}}
 \label{fig:parity-rule}
 \end{figure}
 
-O estudo do problema de paridade é interessante pois ajuda a compreender um problema ainda sem solução em ACs, que é, que a despeito da habilidade de realizar computações, pouco se sabe sobre %TODO Nizam = Qual é esse problema>>>>>>>>>>>>>>>>>
-como se deve projetar transições de estado locais que levem a um comportamento global pré-determinado. %TODO Nizam = Qual é esse problema<<<<<<<<<<<<<<<<< %TODO Redundante com o paragráfo acima.>>>>>>>>>>>>>>>>>>
-Entretanto, entender o impacto das interações locais nas soluções globais influi em diversos sistemas de computação emergente. Entender a influência que o tamanho da vizinhança dos autômatos celulares apresenta na computabilidade pode apresentar consequências úteis para o projeto de ACs e para a compreensão de sistemas emergentes complexos em geral.%TODO Redundante com o paragráfo acima.<<<<<<<<<<<<<<<<<<
+O estudo do problema da paridade é interessante pois ajuda a compreender o impacto das interações locais nas soluções globais. Especificamente, entender a influência que o tamanho da vizinhança em autômatos celulares apresenta na computabilidade pode apresentar consequências úteis tanto para ACs como para a compreensão de sistemas emergentes complexos em geral.
 
 Estudos feitos sobre o problema de paridade já levaram ao conhecimento de que o problema não tem solução perfeita para ACs elementares e de raio 2, todavia já foi descoberta uma regra perfeita que soluciona o problema de paridade para raio 4. Em relação aos ACs de raio 3, ainda não foi encontrada solução perfeita e há evidências empíricas desfavoráveis a uma solução para esse raio \cite{Betel2013}.
 
-Betel, De Oliveira e Flocchini (\citeyear{Betel2013}), buscando verificar se o problema de paridade em ACs de raio 2 apresentam alguma regra que solucione o problema para qualquer configuração inicial, encontraram de forma analítica como as transações de estado de supostas regras que resolvessem o problema de paridade deveriam ser. Com isso, utilizando grafos de \textit{De Bruijn} %TODO explicar gafos de De Bruijn 
-foram definidas quais variáveis deveriam ser estáticas, quais deveriam ser livres e quais deveriam apresentar interdependência. Com essas definições foram definidas duas famílias de ACs. Os grafos ilustrados na Figura \ref{fig:grafosDeBruijn} e na Figura \ref{fig:grafosDeBruijn2} são os grafos desenvolvidos por Betel, De Oliveira e Flocchini (\citeyear{Betel2013}).
+Betel, De Oliveira e Flocchini (\citeyear{Betel2013}), buscando verificar se o problema da paridade em ACs de raio 2 apresentam alguma regra que solucione o problema para qualquer configuração inicial, encontraram de forma analítica como as transações de estado de supostas regras que resolvessem o problema de paridade deveriam ser. 
+
+Para representar como as transações de estado deveriam ser, foi utilizado grafos de \textit{De Bruijn}. Grafos de \textit{De Bruijn} são grafos cujos nós são sequências de símbolos de algum alfabeto e cujas arestas indicam as sequências em que se cruzarão \cite{weisstein2015deBruijn}. Em AC, esse tipo de grafo direcionado apresenta em suas arestas o resultado de uma transição de estado, e a vizinhança é representada no grafo pela sobreposição dos dois nós ligados pela aresta de resultado. 
+
+%MEUTODO Talvez colocar um imagem ilustrando os grafos de \textit{De Bruijn} aqui.
+
+Com isso, utilizando grafos de \textit{De Bruijn} foram definidas quais variáveis deveriam ser estáticas, quais deveriam ser livres e quais deveriam apresentar interdependência. Com essas definições foram definidas duas famílias de ACs. Os grafos ilustrados na Figura \ref{fig:grafosDeBruijn} e na Figura \ref{fig:grafosDeBruijn2} são os grafos desenvolvidos por Betel, De Oliveira e Flocchini (\citeyear{Betel2013}).
 
 \begin{figure}[h!]
 \centering
@@ -54,7 +56,7 @@ foram definidas quais variáveis deveriam ser estáticas, quais deveriam ser liv
 \label{fig:grafosDeBruijn}
 \end{figure}
 
-Ambos os grafos apresentam as variáveis livres $a, b, c, d \text{ e } x$ e uma interdependência, em que uma transição de estado deve ter o valor oposto à variável $x$. A única diferença entre os dois grafos está nas variáveis estáticas.
+Ambos os grafos apresentam arestas contendo as variáveis livres $a, b, c, d \text{ e } x$ e uma interdependência, em que uma transição de estado deve ter o valor oposto à variável $x$. A única diferença entre os dois grafos está nas arestas contendo variáveis estáticas.
 
 \begin{figure}[h!]
 \centering
