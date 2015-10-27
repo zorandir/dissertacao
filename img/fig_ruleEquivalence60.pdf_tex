@@ -54,6 +54,6 @@
     \put(0.75564072,0.54895921){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{Regra refletida: 102}}}%
     \put(0.2903337,0.57558978){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{ }}}%
     \put(0,0.0268919){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.48569116\unitlength}\centering Regra conjugada: 195\\ \end{minipage}}}%
-    \put(0.51357843,0.0268919){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.48569116\unitlength}\centering Regra composta por reflexão e conjugação: 153\\ \end{minipage}}}%
+    \put(0.51357843,0.0268919){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.48569116\unitlength}\centering Regra composta: 153\\ \end{minipage}}}%
   \end{picture}%
 \endgroup%

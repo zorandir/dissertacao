@@ -30,9 +30,9 @@ A Figura \ref{fig:parity-rule} ilustra o desenvolvimento espaço-temporal da reg
 
 \begin{figure}[h!]
 \center
-\subfigure[CI com número ímpar de 1s]{\includegraphics[width=4.8cm]{regra-1-par.pdf}}
+\subfigure[CI com número ímpar de 1s]{\includegraphics[width=4.5cm]{regra-1-par.pdf}}
 \qquad
-\subfigure[CI com número par de 1s]{\includegraphics[width=4.8cm]{regra-1-impar.pdf}}
+\subfigure[CI com número par de 1s]{\includegraphics[width=4.5cm]{regra-1-impar.pdf}}
 \caption{Desenvolvimento espaço-temporal da regra BFO, que resolve o problema de paridade para raio 4. \cite{Betel2013}}
 \label{fig:parity-rule}
 \end{figure}
@@ -43,27 +43,32 @@ Estudos feitos sobre o problema de paridade já levaram ao conhecimento de que o
 
 Betel, De Oliveira e Flocchini (\citeyear{Betel2013}), buscando verificar se o problema da paridade em ACs de raio 2 apresentam alguma regra que solucione o problema para qualquer configuração inicial, encontraram de forma analítica como as transações de estado de supostas regras que resolvessem o problema de paridade deveriam ser. 
 
-Para representar como as transações de estado deveriam ser, foi utilizado grafos de \textit{De Bruijn}. Grafos de \textit{De Bruijn} são grafos cujos nós são sequências de símbolos de algum alfabeto e cujas arestas indicam as sequências em que se cruzarão \cite{weisstein2015deBruijn}. Em AC, esse tipo de grafo direcionado apresenta em suas arestas o resultado de uma transição de estado, e a vizinhança é representada no grafo pela sobreposição dos dois nós ligados pela aresta de resultado. 
+Para representar como as transações de estado deveriam ser, foi utilizado grafos de \textit{De Bruijn}. Grafos de De Bruijn são grafos, descobertos de forma independentes por De Bruijn (\citeyear{Bruijn946combinatorial}) e \citeonline{Good1946normal}, cujos nós são sequências de símbolos de algum alfabeto e cujas arestas indicam as sequências em que se cruzarão \cite{weisstein2015deBruijn}. Em AC, esse tipo de grafo direcionado representa em cada uma de suas arestas uma vizinhança possível, o valor associado às arestas será o resultado da transição dado a vizinhança representada pela aresta. A Figura \ref{fig:grafosDeBruijnSample} ilustra dois grafos de De Bruijn, sendo que o primeiro pode ser utilizado para ilustrar todas as vizinhanças possíveis dos automatos celulares elementares.
 
-%MEUTODO Talvez colocar um imagem ilustrando os grafos de \textit{De Bruijn} aqui.
+\begin{figure}[h!]
+\centering
+\includegraphics[width=.35\textwidth]{fig_graphDeBruijn.pdf}
+\caption{Exemplo de grafo de De Bruijn \cite{Good1946normal}}
+\label{fig:grafosDeBruijnSample}
+\end{figure}
 
 Com isso, utilizando grafos de \textit{De Bruijn} foram definidas quais variáveis deveriam ser estáticas, quais deveriam ser livres e quais deveriam apresentar interdependência. Com essas definições foram definidas duas famílias de ACs. Os grafos ilustrados na Figura \ref{fig:grafosDeBruijn} e na Figura \ref{fig:grafosDeBruijn2} são os grafos desenvolvidos por Betel, De Oliveira e Flocchini (\citeyear{Betel2013}).
 
 \begin{figure}[h!]
 \centering
-\includegraphics[width=.8\textwidth]{grafo1.pdf}
+\includegraphics[width=0.8\textwidth]{grafo1.pdf}
 \caption{Grafo de De Bruijn representando regras que possivelmente solucionem o problema de paridade. \cite{Betel2013}}
 \label{fig:grafosDeBruijn}
 \end{figure}
 
-Ambos os grafos apresentam arestas contendo as variáveis livres $a, b, c, d \text{ e } x$ e uma interdependência, em que uma transição de estado deve ter o valor oposto à variável $x$. A única diferença entre os dois grafos está nas arestas contendo variáveis estáticas.
-
 \begin{figure}[h!]
 \centering
-\includegraphics[width=1\textwidth]{grafo2.pdf}
+\includegraphics[width=0.8\textwidth]{grafo2.pdf}
 \caption{Outro grafo de De Bruijn representando regras que possivelmente solucionem o problema de paridade.\cite{Betel2013}}
 \label{fig:grafosDeBruijn2}
 \end{figure}
+
+Ambos os grafos apresentam arestas contendo as variáveis livres $a, b, c, d \text{ e } x$ e uma interdependência, em que uma transição de estado deve ter o valor oposto à variável $x$. A única diferença entre os dois grafos está nas arestas contendo variáveis estáticas.
 
 Ao utilizar os grafos de \textit{De Bruijn} fixando algumas transições de estado a família de ACs em que se procurava as regras que solucionavam o problema de paridade foi restringida para apenas 64 regras. Ao se restringir o espaço de busca, antes composto por $2^{32}$ regras, as regras puderam ser estudadas em mais detalhes até que falhassem. Entretanto, conforme mostrado em \cite{Verardo2014}, a representação desse espaço de 64 regras pode ser equivalentemente representado por meio de \textit{templates}. O template da Eq. \eqref{eq:templateParidade1} representa o mesmo espaço que a Figura \ref{fig:grafosDeBruijn}, já o template da Eq. \eqref{eq:templateParidade2} é equivalente a Figura \ref{fig:grafosDeBruijn2}. Ambos templates apresentam raio $r=2$ e apenas dois estados.
 \begin{equation}
