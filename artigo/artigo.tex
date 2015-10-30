@@ -47,21 +47,26 @@
  Este artigo apresenta a operação de diferença entre templates e sua aplicabilidade. Para isto introduz o que são templates e como o uso de templates pode ajudar na representação de famílias de autômatos celulares. Apresenta também algumas operações aplicáveis aos templates, assim como introduz a operação que gera templates de exceção.
 
 \begin{flushleft}
-{\bf Palavras-chave:} {\it Autômatos celulares, templates, conservabilidade, problema de paridade.}
+{\bf Palavras-chave:} {\it Autômatos celulares, templates, diferença de templates, templates de exceção.}
 \end{flushleft}
 \end{abstract}
 % resumo em português
 
 \section{INTRODUÇÃO}
 \label{sec:introducao}
-Autômatos celulares (ACs) são sistemas dinâmicos tipicamente discretos em tempo, espaço e estados \cite{wolfram2002}. Os ACs têm a capacidade de por meio de regras de comportamentos locais simples gerar comportamentos globais complexos. O estudo de problemas clássicos de autômatos celulares, como o problema da paridade \cite{Betel2013} e o problema da densidade\cite{pp2013}, podem ajudar a compreender como esse comportamento complexo surge.
+Autômatos celulares (ACs) são sistemas dinâmicos tipicamente discretos em tempo, espaço e estados \cite{wolfram2002}. Os ACs têm a capacidade de por meio de regras de comportamentos locais simples gerar comportamentos globais complexos. O estudo de problemas clássicos de autômatos celulares, como o problema da paridade \cite{Betel2013} e o problema da densidade\cite{Land1995}, podem ajudar a compreender como esse comportamento complexo surge.
 
-O problema de paridade consiste em encontra uma regra que determine se há um número par ou ímpar de células com o estado 1 na configuração inicial. Já o problema de densidade consiste em buscar uma regra que determine qual o estado mais frequente na configuração inicial. Há algumas maneiras de se buscar a solução para esses problemas, sendo a mais básica simplesmente testar todas as regras de uma determinada família de ACs afim de verificar se alguma dessas regras resolve o problema buscado. Essa abordagem faz sentido quando se busca por regras no espaço elementar, já que o mesmo contém apenas 256 regras. Entretanto para famílias de ACs maiores, essa abordagem se mostra bastante ineficiente.
+%O problema de paridade consiste em encontra uma regra que determine se há um número par ou ímpar de células com o estado 1 na configuração inicial. Já o problema de densidade consiste em buscar uma regra que determine qual o estado mais frequente na configuração inicial. 
+Há algumas maneiras de se buscar a solução para esses problemas clássicos, sendo a mais básica simplesmente testar todas as regras de uma determinada família de ACs afim de verificar se alguma dessas regras resolve o problema buscado. 
+%Essa abordagem faz sentido quando se busca por regras no espaço elementar, já que o mesmo contém apenas 256 regras. 
+Entretanto para famílias de ACs grandes, essa abordagem se mostra bastante ineficiente.
 
 Como estratégia de pesquisa em famílias maiores pode ser utilizado algoritmos genéticos. Algoritmos genéticos, e outras técnicas evolucionarias, são muito utilizadas na investigação do problema de classificação de densidade \cite{wolz2008very}.
 
 
-Outra estratégia na busca de regras que resolvam determinado problema, é a restrição do espaço de busca por regras que apresentem determinada propriedade. Para conseguir representar um subespaço com determinada propriedade sem a necessidade de se enumerar todas as regras desse espaço, pode-se utilizar \textit{templates}. Um template é uma estrutura de dados associada as tabelas de transições de uma família de ACs utilizando variáveis \cite{deOliveira2014}. A utilização de variáveis torna possível que um template represente um conjunto de regras que podem representar alguma propriedade de autômatos celulares.
+Outra estratégia na busca de regras que resolvam determinado problema, é a restrição do espaço de busca por regras que apresentem determinada propriedade. Para conseguir representar um subespaço com determinada propriedade sem a necessidade de se enumerar todas as regras desse espaço, pode-se utilizar \textit{templates} \cite{deOliveira2014}.
+%Um template é uma estrutura de dados associada as tabelas de transições de uma família de ACs utilizando variáveis \cite{deOliveira2014}. %TODO <- Excluir?
+%A utilização de variáveis torna possível que um template represente um conjunto de regras que podem representar alguma propriedade de autômatos celulares.
 
 Há uma série de operações que podem ser aplicadas aos templates, como expansão e intersecção. No presente artigo é introduzida a operação de diferença entre templates e a operação geradora de templates de exceção. Além disso são mostrados alguns exemplos de aplicação dessas operações.
 
@@ -75,13 +80,7 @@ As células de um autômato celular podem apresentar $k$ estados. Esses estados 
 
 Uma família, ou espaço, de autômatos celulares é definida pelo raio $r$ e pelo número de estados $k$. Autômatos celulares unidimensionais de raio $r=1$ e $k=2$ são conhecidos como a família dos autômatos celulares elementares.
 
-O número de regras de um espaço é dado pela Eq. \eqref{eq:tamFamilia}:%TODO explicar melhor
-	\begin{equation}
-	k^{k^{2r+1}}
-	\label{eq:tamFamilia}
-	\end{equation}
-
-É fácil perceber que qualquer modificação nas variáveis $k$ e $r$ geram famílias com um total de regras muito grande. Uma boa estratégia para lidar com esse problema é a utilização de propriedades estáticas, que são propriedades obtidas através de restrições aplicadas à tabela de transições. Ao utilizar propriedades estáticas, pode-se restringir bastante o espaço de busca original. E com templates é possível representar um conjunto de regras com determinada propriedade estática.
+O número de regras de um espaço é dado pela equação $k^{k^{2r+1}}$, tornando fácil perceber que qualquer modificação nas variáveis $k$ e $r$ geram famílias com um total de regras muito grande. Uma boa estratégia para lidar com esse problema é a utilização de propriedades estáticas, que são propriedades obtidas através de restrições aplicadas à tabela de transições. Ao utilizar propriedades estáticas, pode-se restringir bastante o espaço de busca original. E com templates é possível representar um conjunto de regras com determinada propriedade estática.
 
 Entretanto, para poder explicar o funcionamento dos templates e suas operações é interessante compreender os detalhes das propriedades de conservabilidade de estados, simetria interna e das regras invariantes a troca de cor, pois essas propriedades serão usadas como exemplo posteriormente.
 
@@ -89,7 +88,6 @@ Entretanto, para poder explicar o funcionamento dos templates e suas operações
 Conservabilidade de estados é uma propriedade estática que determina que a soma dos estados de um determinado autômato celular não deve se alterar durante a evolução espaço-temporal, independente da configuração inicial.
 
 De acordo com Boccara e Fukś (\citeyear{boccara2002}), um AC é conservativo quando cada uma de suas regras locais $f$ de vizinhança $(\alpha_0,\alpha_1, \dots, \alpha_{n-1})$ respeita as condições descritas na Eq. \eqref{eq:conservativeCA}.
-
 \begin{equation}
 \begin{split}
 f(\alpha_0,\alpha_1, \dots,\alpha_{n-1}) = \alpha_0 + (\sum_{i=0}^{n-2}f(0_0,0_1, \dots,0_i,\alpha_1,\alpha_2, \dots,\alpha_{n-1}) \\- f(0_0,0_1, \dots,0_i,\alpha_0,\alpha_1, \dots,\alpha_{n-i-1}))
@@ -108,14 +106,14 @@ Para exemplificar essas transformações e as equivalências dinâmicas consider
 
 	\begin{figure}[h!]
 	  \centering
-	  \includegraphics[width=.7\textwidth]{fig_ruleIcon60.png}
+	  \includegraphics[width=.5\textwidth]{fig_ruleIcon60.png}
 	  \caption{Tabela de transições da regra 60 do espaço elementar.}
 	  \label{fig:table60}
 	\end{figure}
 
 	\begin{figure}[h!]
 	  \centering
-	  \includegraphics[width=.7\textwidth]{fig_ruleIcon102.png}
+	  \includegraphics[width=.5\textwidth]{fig_ruleIcon102.png}
 	  \caption{Tabela de transições da regra 102 do espaço elementar, obtida através da transformação de reflexão aplicada na tabela de transições da regra 60.}
 	  \label{fig:table102}
 	\end{figure}
@@ -139,7 +137,9 @@ A propriedade de invariância a troca de cores está diretamente ligada a transf
 
 \section{Templates}
 \label{sec:templates}
-Template é uma generalização de tabelas de transições de ACs por meio de variáveis. Um único template pode representar um conjunto de regras que podem apresentar determinada propriedade. Os templates foram criados por De Oliveira e Verardo (\citeyear{deOliveira2014}) e implementada como um algoritmo na linguagem do software \textit{Wolfram Mathematica} \cite{woframMathematica10}, atualmente disponíveis na biblioteca \textit{open source CATemplates} \cite{CATemplates} no GitHub.
+Template é uma generalização de tabelas de transições de ACs por meio de variáveis. Um único template pode representar um conjunto de regras que podem apresentar determinada propriedade. Os templates foram criados por De Oliveira e Verardo (\citeyear{deOliveira2014}) e implementada como um algoritmo 
+%na linguagem do software \textit{Wolfram Mathematica} \cite{woframMathematica10}, 
+atualmente disponíveis na biblioteca \textit{open source CATemplates} \cite{CATemplates} no GitHub.
 
 Formalmente, um \textit{template} é uma $n$-upla formada por $k^{2r+1}$ itens, e cada item $i$ representa uma função $g_i(x_0,x_1,\dots,x_{k^{2r+1}-1})$. As variáveis $x_i$ podem assumir qualquer estado entre 0 e $k-1$, logo no caso binário $x_i$ pode assumir os valores 0 e 1. É possível limitar os valores possíveis de $x_i$ através da notação $x_i \in C$, onde $C$ é um conjunto representando os possíveis valores de $x_i$.
 
@@ -147,11 +147,11 @@ Exemplificando, o template do espaço elementar $T_1 = (1,1,1,1,1-x_1,x_2,x_1,0)
 
 Já há implementado na biblioteca \textit{open source CATemplates} \cite{CATemplates} diversas algoritmos geradores de templates que representem regras com determinada propriedade. O template $T_{comp} = (1 - x_0, 1 - x_4, 1 - x_2, x_4, 1 - x_1, x_2, x_1, x_0)$ dos ACs elementares, por exemplo, quando expandido gera apenas regras que apresentam máxima simetria interna por composição. Já o template $T_{inv} = (1 - x_0, 1 - x_1, 1 - x_2, 1 - x_3, x_3, x_2, x_1, x_0)$ dos AC elementares quando expandido gera apenas regras com a propriedade de invariância a troca de cor.
 
-Além da possibilidade de expansão de templates, já foi desenvolvido por De Oliveira e Verardo (\citeyear{deOliveira2014b}) um algoritmo que permite gerar templates que representem a intersecção entre dois sub-espaços de regras representadas por templates. Para exemplificar, considere que se esteja a busca de um conjunto de regras que sejam ao mesmo tempo invariantes a troca de cor e apresentem máxima simetria interna por composição. Para encontrar esse conjunto de regras basta-se realizar dois passos.
+Além da possibilidade de expansão de templates, já foi desenvolvido por De Oliveira e Verardo (\citeyear{deOliveira2014b}) um algoritmo que permite gerar templates que representem a intersecção entre dois sub-espaços de regras representadas por templates. Para exemplificar, considere que se esteja em busca de um conjunto de regras que sejam ao mesmo tempo invariantes a troca de cor e apresentem máxima simetria interna por composição. Para encontrar esse conjunto de regras basta realizar dois passos.
 
 O primeiro passo é igualar os dois templates que representam as propriedades desejadas, gerando assim um sistema de equações. Ao solucionar esse sistema de equações serão gerados os relacionamentos entre as variáveis, que quando aplicados aos templates recebidos como entrada, resultará no template que representa a intersecção.
 
-Como exemplo, considere o template $T_{comp}$, que representa as regras com máxima simetria por composição, e o template $T_{inv}$, que representa as regras invariantes a troca de cor, ambos com $k=2$ e $r=1$. Para encontrar a intersecção entre esses dois template o primeiro passo consiste em igualar os templates gerando o sistema de equações representado por Eq. \ref{eq:interseccaoP1}:
+Como exemplo, considere o template $T_{comp}$, que representa as regras com máxima simetria por composição, e o template $T_{inv}$, que representa as regras invariantes a troca de cor, ambos com $k=2$ e $r=1$. O primeiro passo para encontrar a intersecção entre esses dois template consiste em igualá-los gerando o sistema de equações representado pela Eq. \ref{eq:interseccaoP1}:
 \begin{equation}
 \left\{\begin{matrix}
 1 - x_0	& = & 1 - x_0	\\
@@ -226,12 +226,12 @@ Em diversos casos apenas as etapas descritas até aqui são suficientes para enc
 
 Para contornar esse problema, é necessário que após os primeiros passos da operação de diferença entre templates, também se verifique se há templates de exceção na intersecção entre o $T_{minuendo}$ e o $T_{subtraendo}$, sendo que templates de exceção são os templates que apresentam um conjunto de substituições que levam um template passado como parâmetro a apresentar substituições fora do intervalo $[0,k-1]$.
 
-Para exemplificar, vamos continuar a intersecção entre $T_{inv}$ e $T_{con}$. Para isso considere o template $T_{int} = (1, 1 - x_1, 1 - x_2, 1 - x_1 - x_2, x_1 + x_2, x_2, x_1, 0)$, que é a intersecção entre o esses dois templates para $k=2$.
+Para exemplificar, vamos continuar a operação de diferença entre $T_{inv}$ e $T_{con}$. Para isso considere o template $T_{int} = (1, 1 - x_1, 1 - x_2, 1 - x_1 - x_2, x_1 + x_2, x_2, x_1, 0)$, que é a intersecção entre esses dois templates para $k=2$.
 A primeira etapa da operação de diferença entre os templates $T_{inv}$ e o $T_{con}$ ocorre normalmente e encontra os templates complementares $\{(x_7, x_6, x_5, x_4, x_3, x_2, x_1, 1),(x_7, x_6, x_5, x_1 + x_2, x_3, x_2, x_1, x_0)\}$.
 Todavia é trivial perceber que qualquer expansão do template $T_{int}$ que tenha o conjunto de substituições $\{x_1 = 1, x_2 = 1\}$ fará com que a posição $3$ e $4$ do template apresentem valores que não pertencem ao intervalo $[0,k-1]$.
 Logo, todos os templates que apresente $\{x_1 = 1, x_2 = 1\}$ são complementares ao template $T_{int}$. Assim gera-se o template $(x_7, x_6, x_5, x_4, x_3, 1, 1, x_0)$, que é o template de exceção de $T_{int}$.
 
-Deste modo, toda regra representada pelo template $T_{minuendo}$, que é $T_{inv}$ no exemplo dado, e que também seja representada pelos templates de exceção da intersecção do $T_{minuendo}$ com o $T_{subtraendo}$, o $T_{int}$ no exemplo dado, deve ser representada em algum dos templates do conjunto de templates de diferença. Para que isto o algoritmo que encontra a diferença entre templates pega todos os templates de exceção encontrados, os interseccioná com o $T_{minuendo}$ e os adicioná ao conjunto de templates obtidos pelos primeiros passos da operação de diferença entre os templates. Com isso, no exemplo utilizado até agora, conjunto de templates de diferença resultante está representado pela Eq. \ref{eq:differenceR}:
+Deste modo, toda regra representada pelo template $T_{minuendo}$, que é $T_{inv}$ no exemplo dado, e que também seja representada pelos templates de exceção da intersecção do $T_{minuendo}$ com o $T_{subtraendo}$, o $T_{int}$ no exemplo dado, deve ser representada em algum dos templates resultantes da operação de diferença. Para que isto o algoritmo que encontra a diferença entre templates pega todos os templates de exceção encontrados, os interseccioná com o $T_{minuendo}$ e os adicioná ao conjunto de templates obtidos pelos primeiros passos da operação de diferença entre os templates. Com isso, no exemplo utilizado até agora, conjunto de templates de diferença resultante está representado pela Eq. \ref{eq:differenceR}:
 \begin{equation}
 \begin{split}
 \{(0, 1 - x_1, 1 - x_2, 1 - x_3, x_3, x_2, x_1, 1), \\
@@ -243,7 +243,12 @@ Deste modo, toda regra representada pelo template $T_{minuendo}$, que é $T_{inv
 
 O interessante da operação de diferença entre templates é que com ela é possível descobrir respostas para diversas perguntas não triviais, tais como: quais são as regras que apresentam conservabilidade de estados, mas não são apresentam ao mesmo tempo máxima simetria por composição e invariância a troca de cor? Para responder essa pergunta basta gerar o template de regras conservativas, e então subtrair dele a intersecção entre o template de regras com máxima simetria por composição e o template de invariância a troca de cor.
 
-O resultado dessa operação retorna um conjunto de templates que representa todas as regras conservativas, excetuando a regra identidade. 
+O resultado dessa operação retorna um conjunto de templates que representa todas as regras conservativas, excetuando a regra identidade.
+
+Vale frisar que o conjunto de templates retornados não apresenta um espaço de busca menor do que template $T_{minuendo}$, entretanto essa operação é capaz de representar a diferença entre dois templates sem a necessidade de se efetuar a expansão. Posteriormente os templates resultantes podem ser utilizados por outras operações, e essa é a principal vantagem dessa operação. 
+
+
+
 
 
 
@@ -256,7 +261,9 @@ No presente artigo são descritos os templates de autômatos celulares e apresen
 
 Também é demonstrado como é possível obter resposta para perguntas não triviais sobre buscas por regras com determinadas propriedades estáticas, por meio de templates, sem depender da utilização de algoritmos genéticos, evitando também buscas e testes extensivos por regras em toda uma família de ACs.
 
-Entretanto a operação de diferença entre templates ainda funciona apenas para famílias com $k=2$, o que é uma limitação que merece destaque por ser um possível trabalho futuro, já que a generalização dessa operação traria um grande avanço à biblioteca de templates.
+Entretanto a operação de diferença entre templates ainda funciona apenas para famílias com $k=2$, o que é uma limitação que merece destaque por ser um possível trabalho futuro, já que a generalização dessa operação traria um grande avanço à biblioteca de templates. 
+
+Ademais, a operação de diferença gera um número grande de templates, não diminuindo hoje o espaço de busca. Um estudo sobre a possibilidade da diminuição do número de templates gerados por essa operação ainda se faz necessário.
 
 \section*{Agradecimentos}
 \label{sec:agrdecimentos}
