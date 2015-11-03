@@ -171,14 +171,15 @@ Após isso, esse sistema é resolvido obtendo o conjunto solução $S = \{x_3 = 
 Caso pelo menos um dos templates apresente restrições de variáveis, uma segunda etapa do algoritmo deve ser feita. Nessa segunda etapa as expressões que restringem as variáveis são extraídas, gerando um conjunto que é então traduzido para um sistema de equações. Esse sistema de equações é resolvido, e seu conjunto solução é aplicado como um conjunto de substituições nos templates passados como parâmetro.
 
 Inspirada na operação de intersecção, é introduzido neste artigo a operação de diferença entre templates.
+
 \section{Diferença entre templates e Templates de Exceção}
 \label{sec:diferenca_entre_templates_e_templates_de_excecao}
 
 A operação de diferença recebe dois templates como parâmetro, que chamaremos de $T_{minuendo}$ e $T_{subtraendo}$. Essa operação tem como resultado um conjunto de templates que representa todas as regras representadas pelo template $T_{minuendo}$ que não são representadas também pelo $T_{subtraendo}$.
 
-A operação de diferença apresenta um processo com diversas etapas. A primeira etapa consiste em fazer a intersecção entre os dois templates passados como parâmetro, resultando num template $T_i$. Caso não haja intersecção entre os dois templates, o resultado da operação de diferença é o próprio $T_{minuendo}$. Caso haja intersecção, o template de intersecção $T_i$ é igualado ao template $T_{minuendo}$, gerando assim combinações lógicas de equações. Então o algoritmo remove as equações tautológicas e aplica uma operação de negação nas equação, que no caso binário consiste em apenas efetuar as permutações $\rho = (0 \to 1, 1 \to 0)$ ao resultado final das equações. Neste momento o algoritmo troca o operador lógico $\wedge$ por $\vee$ e o sistema gerado por esse processo é solucionado gerando assim um conjunto de conjuntos de substituição que devem ser aplicados ao template $T_{minuendo}$. Caso não haja conjuntos de substituições, ou os conjuntos sejam inválido, todas as regras que pertencem a $T_{minuendo}$ também pertencem ao $T_{subtraendo}$ e, por consequência, o algoritmo retorna um conjunto vazio.
+A operação de diferença é um processo com diversas etapas. A primeira delas consiste em fazer a intersecção entre os dois templates passados como parâmetro, resultando num template $T_i$. Caso não haja intersecção entre os dois templates originais, o resultado da diferença é o próprio $T_{minuendo}$. Caso haja intersecção, o template de intersecção $T_i$ é igualado ao template $T_{minuendo}$, gerando assim combinações lógicas de equações. Então o algoritmo remove as equações tautológicas e aplica uma operação de negação nas equação, que no caso binário consiste em apenas efetuar as permutações $\rho = (0 \to 1, 1 \to 0)$ ao resultado final das equações. Neste momento, deve-se trocar o operador lógico $\wedge$ por $\vee$ e o sistema gerado por esse processo é solucionado, gerando assim um conjunto de conjuntos de substituição que devem ser aplicados ao template $T_{minuendo}$. Caso o conjunto de substituições seja vazio ou inválido (i.e., que referenciam regras não existentes no espaço em questão, como exemplificado à frente), todas as regras que pertencem a $T_{minuendo}$ também pertencem ao $T_{subtraendo}$ e, por consequência, o algoritmo retorna um conjunto vazio.
 
-Para compreender esse processo, considere o template que representa as regras invariantes a troca de cor $T_{inv} = (1 - x_0, 1 - x_1, 1 - x_2, 1 - x_3, x_3, x_2, x_1, x_0)$ e o template de conservabilidade de estados $T_{con} = (1, 1 + x_2 - x_3, 1 - x_2, 1 - x_1 - x_2, x_3, x_2, x_1, 0)$. O primeiro passo para encontrar a diferença de $T_{inv}$ para $T_{con}$ é fazer a intersecção entre os dois templates, que no caso é $T_{int} = (1, 1 - x_1, 1 - x_2, 1 - x_1 - x_2, x_1 + x_2, x_2, x_1, 0)$. Como há intersecção, o próximo passo é igualar $T_{inv}$ com o $T_{int}$ gerando o sistema de equações representado pela Eq. \ref{eq:differenceP1}: \begin{equation} \left\{\begin{matrix} 1 - x_0	& = &	1				\\ 1 - x_1	& = &	1 - x_1			\\ 1 - x_2	& = &	1 - x_2			\\ 1 - x_3	& = &	1 - x_1 - x_2	\\
+Para melhor compreender o processo, considerem-se o template que representa as regras invariantes a troca de cor $T_{inv} = (1 - x_0, 1 - x_1, 1 - x_2, 1 - x_3, x_3, x_2, x_1, x_0)$ e o template de conservabilidade de estados $T_{con} = (1, 1 + x_2 - x_3, 1 - x_2, 1 - x_1 - x_2, x_3, x_2, x_1, 0)$, novamente ambos do espaço elementar. O primeiro passo para encontrar a diferença de $T_{inv}$ para $T_{con}$ é fazer a intersecção entre ambos, que resulta em $T_{int} = (1, 1 - x_1, 1 - x_2, 1 - x_1 - x_2, x_1 + x_2, x_2, x_1, 0)$. Como a intersecção é não nula, o próximo passo é igualar $T_{inv}$ com $T_{int}$, o que gera o sistema de equações representado pela Eq. \ref{eq:differenceP1}: \begin{equation} \left\{\begin{matrix} 1 - x_0	& = &	1				\\ 1 - x_1	& = &	1 - x_1			\\ 1 - x_2	& = &	1 - x_2			\\ 1 - x_3	& = &	1 - x_1 - x_2	\\
 x_3		& = &	x_1 + x_2		\\
 x_2		& = &	x_2				\\
 x_1		& = &	x_1				\\
@@ -202,7 +203,7 @@ x_0		= 0
 \end{split}
 \end{equation}
 
-O algoritmo elimina então todas as equações tautológicas e troca todo operadores lógico $\wedge$ por $\vee$ resultando o sistema representado pela Eq. \ref{eq:differenceP3}:
+Eliminam-se então todas as equações tautológicas e trocam-se os operadores lógicos $\wedge$ por $\vee$, resultando no sistema representado pela Eq. \ref{eq:differenceP3}:
 \begin{equation}
 1 - x_0	= 1				\vee 
 1 - x_3	= 1 - x_1 - x_2	\vee
@@ -211,7 +212,7 @@ x_0		= 0
 \label{eq:differenceP3}
 \end{equation}
 
-Por fim, é aplicado a operação de negação nas equações. No caso binário basta efetuar a permutação $\rho $, que também pode ser feita por meio da função $f(x) = 1 - (x)$. A Eq. \eqref{eq:differenceP4} representa a combinação lógica de equações resultante dessas operações.
+Por fim, aplica-se a operação de negação nas equações que, no caso binário, corresponde à permutação $\rho $ ou,  de forma equivalente, à aplicação da função $f(x) = 1 - (x)$. A Eq. \eqref{eq:differenceP4} representa a combinação lógica de equações resultante dessas operações.
 \begin{equation}
 1 - x_0	= 1 - 1					\vee 
 1 - x_3	= 1 - (1 - x_1 - x_2)	\vee
@@ -220,19 +221,18 @@ x_0		= 1 - 0
 \label{eq:differenceP4}
 \end{equation}
 
-Após esses passos a combinação lógica de equações resultante é resolvida gerando o conjunto solução $S = \{\{x_0\to 1\},\{x_3\to -x_1-x_2+1\}\}$. Como $S$ apresenta mais de um conjunto de substituições, ambos os conjuntos devem ser utilizados para realizar as substituições no template $T_{inv} = (1 - x_0, 1 - x_1, 1 - x_2, 1 - x_3, x_3, x_2, x_1, x_0)$. Com isso é obtido o conjunto de templates $\{(0, 1 - x_1, 1 - x_2, 1 - x_3, x_3, x_2, x_1, 1),(1 - x_0, 1 - x_1, 1 - x_2, x_1 + x_2, 1 - x_1 - x_2, x_2, x_1, x_0)\}$
+Resolve-se então a combinação lógica de equações, gerando o conjunto solução $S = \{\{x_0\to 1\},\{x_3\to -x_1-x_2+1\}\}$. Como $S$ apresenta mais de um conjunto de substituições, ambos os conjuntos devem ser utilizados para realizar as substituições no template $T_{inv} = (1 - x_0, 1 - x_1, 1 - x_2, 1 - x_3, x_3, x_2, x_1, x_0)$, obtendo-se finalmente o conjunto de templates $\{(0, 1 - x_1, 1 - x_2, 1 - x_3, x_3, x_2, x_1, 1),(1 - x_0, 1 - x_1, 1 - x_2, x_1 + x_2, 1 - x_1 - x_2, x_2, x_1, x_0)\}$
 
-Em diversos casos apenas as etapas descritas até aqui são suficientes para encontrar a diferença entre os dois templates. Mas há casos em que o template $T_{subtraendo}$, que é o $T_{con}$ no exemplo dado, apresenta substituições nas variáveis que levam a regras inválidas. Para melhor compreender esse problema, basta verificar a regra gerada quando se expande o template $(1, 1 - x_1, 1 - x_2, 1 - x_1 - x_2, x_1 + x_2, x_2, x_1, 0)$ atribuindo o valor $1$ às variáveis $x_1$ e $x_2$. Aos se fazer isto será obtida na posição $3$ (da direita para esquerda) o valor $2$, que está fora do intervalo inteiro $[0,k-1]$.
+Em diversos casos apenas as etapas descritas até aqui são suficientes para se realizar a diferença entre os dois templates. Mas há casos em que o template $T_{subtraendo}$, correspondente a $T_{con}$ no exemplo dado, apresenta substituições nas variáveis que levam a regras inválidas. Tal situação ocorre, por exemplo, quando se expande o template $(1, 1 - x_1, 1 - x_2, 1 - x_1 - x_2, x_1 + x_2, x_2, x_1, 0)$ atribuindo-se o valor $1$ às variáveis $x_1$ e $x_2$. Aos se fazer isto será obtida na posição $3$ (da direita para esquerda) o valor $2$, que está fora do intervalo inteiro $[0,k-1]$, correspondendo, portanto, a uma regra que não faz parte do espaço tratado.
 
-Para contornar esse problema, é necessário que após os primeiros passos da operação de diferença entre templates, também se verifique se há templates de exceção na intersecção entre o $T_{minuendo}$ e o $T_{subtraendo}$, sendo que templates de exceção são os templates que apresentam um conjunto de substituições que levam um template passado como parâmetro a apresentar substituições fora do intervalo $[0,k-1]$.
+Para contornar esse problema, é necessário que, após os primeiros passos da operação de diferença, também se verifique se há templates de exceção na intersecção entre o $T_{minuendo}$ e o $T_{subtraendo}$, ou seja, templates que apresentam um conjunto de substituições que levam um template passado como parâmetro a apresentar substituições fora do intervalo $[0,k-1]$. %TODO melhorar esse texto
 
-Para exemplificar, vamos continuar a operação de diferença entre $T_{inv}$ e $T_{con}$. Para isso considere o template $T_{int} = (1, 1 - x_1, 1 - x_2, 1 - x_1 - x_2, x_1 + x_2, x_2, x_1, 0)$, que é a intersecção entre esses dois templates para $k=2$.
-A primeira etapa da operação de diferença entre os templates $T_{inv}$ e o $T_{con}$ ocorre normalmente e encontra os templates complementares $\{(x_7, x_6, x_5, x_4, x_3, x_2, x_1, 1),(x_7, x_6, x_5, x_1 + x_2, x_3, x_2, x_1, x_0)\}$.
-Todavia é trivial perceber que qualquer expansão do template $T_{int}$ que tenha o conjunto de substituições $\{x_1 = 1, x_2 = 1\}$ fará com que a posição $3$ e $4$ do template apresentem valores que não pertencem ao intervalo $[0,k-1]$.
-Logo, todos os templates que apresente $\{x_1 = 1, x_2 = 1\}$ são complementares ao template $T_{int}$. Assim gera-se o template $(x_7, x_6, x_5, x_4, x_3, 1, 1, x_0)$, que é o template de exceção de $T_{int}$.
+Exemplificando, vamos continuar a operação de diferença entre $T_{inv}$ e $T_{con}$; para tanto, seja o template $T_{int} = (1, 1 - x_1, 1 - x_2, 1 - x_1 - x_2, x_1 + x_2, x_2, x_1, 0)$ a intersecção entre eles, para $k=2$.
+A primeira etapa da operação de diferença ocorre normalmente e gera os templates $\{(x_7, x_6, x_5, x_4, x_3, x_2, x_1, 1),(x_7, x_6, x_5, x_1 + x_2, x_3, x_2, x_1, x_0)\}$.
+Mas é trivial perceber que qualquer expansão de $T_{int}$ que tenha o conjunto de substituições $\{x_1 = 1, x_2 = 1\}$ fará com que a posição $3$ e $4$ do template apresentem valores que não pertencem ao intervalo $[0,k-1]$.
+Logo, todos os templates que apresentem $\{x_1 = 1, x_2 = 1\}$ são complementares ao template $T_{int}$. Assim gera-se o template $(x_7, x_6, x_5, x_4, x_3, 1, 1, x_0)$, que é o template de exceção de $T_{int}$.
 
-Deste modo, toda regra representada pelo template $T_{minuendo}$, que é $T_{inv}$ no exemplo dado, e que também seja representada pelos templates de exceção da intersecção do $T_{minuendo}$ com o $T_{subtraendo}$, o $T_{int}$ no exemplo dado, deve ser representada em algum dos templates resultantes da operação de diferença. Para que isto o algoritmo que encontra a diferença entre templates pega todos os templates de exceção encontrados, os interseccioná com o $T_{minuendo}$ e os adicioná ao conjunto de templates obtidos pelos primeiros passos da operação de diferença entre os templates. Com isso, no exemplo utilizado até agora, conjunto de templates de diferença resultante está representado pela Eq. \ref{eq:differenceR}:
-\begin{equation}
+Deste modo, toda regra representada pelo template $T_{minuendo}$ -- $T_{inv}$ no exemplo dado -- e que também seja representada pelos templates de exceção da intersecção do $T_{minuendo}$ com o $T_{subtraendo}$ -- $T_{int}$ no exemplo dado -- deve ser representada em algum dos templates resultantes da operação de diferença. Para tanto, o algoritmo que encontra a diferença entre templates considera todos os templates de exceção encontrados, intersecciona-os com o $T_{minuendo}$ e adiciona-os ao conjunto de templates obtidos pelos primeiros passos da operação de diferença. Com isso, no exemplo utilizado até agora, o conjunto de templates de diferença resultante está representado pela Eq. \ref{eq:differenceR}:\begin{equation}
 \begin{split}
 \{(0, 1 - x_1, 1 - x_2, 1 - x_3, x_3, x_2, x_1, 1), \\
 (1 - x_0, 1 - x_1, 1 - x_2, x_1 + x_2, 1 - x_1 - x_2, x_2, x_1, x_0), \\
@@ -241,11 +241,9 @@ Deste modo, toda regra representada pelo template $T_{minuendo}$, que é $T_{inv
 \end{split}
 \end{equation}
 
-O interessante da operação de diferença entre templates é que com ela é possível descobrir respostas para diversas perguntas não triviais, tais como: quais são as regras que apresentam conservabilidade de estados, mas não são apresentam ao mesmo tempo máxima simetria por composição e invariância a troca de cor? Para responder essa pergunta basta gerar o template de regras conservativas, e então subtrair dele a intersecção entre o template de regras com máxima simetria por composição e o template de invariância a troca de cor.
+O interessante da operação de diferença entre templates é que com ela é possível descobrir respostas para diversas perguntas não triviais, como por exemplo, determinar quais são as regras que apresentam conservabilidade de estados, mas não apresentam ao mesmo tempo máxima simetria por composição nem invariância a troca de cor. Para responder a questão basta gerar o template de regras conservativas, e então subtrair dele a intersecção entre o template de regras com máxima simetria por composição e o template de invariância a troca de cor. Neste caso específico, o resultado é um conjunto de templates que representa todas as regras conservativas, excetuando a regra identidade.
 
-O resultado dessa operação retorna um conjunto de templates que representa todas as regras conservativas, excetuando a regra identidade.
-
-Vale frisar que o conjunto de templates retornados não apresenta um espaço de busca menor do que template $T_{minuendo}$, entretanto essa operação é capaz de representar a diferença entre dois templates sem a necessidade de se efetuar a expansão. Posteriormente os templates resultantes podem ser utilizados por outras operações, e essa é a principal vantagem dessa operação. 
+Vale frisar que o conjunto de templates retornados não apresenta um espaço de busca menor do que template o $T_{minuendo}$; entretanto, a operação é capaz de representar a diferença entre dois templates sem a necessidade de se efetuar a expansão. Posteriormente os templates resultantes podem ser utilizados por outras operações, e essa é a principal vantagem da operação. 
 
 
 
