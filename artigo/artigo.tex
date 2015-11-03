@@ -55,16 +55,11 @@
 \label{sec:introducao}
 Autômatos celulares (ACs) são sistemas dinâmicos tipicamente discretos em tempo, espaço e estados \cite{wolfram2002}. Por meio de regras de ações locais simples os ACs têm a capacidade de gerar comportamentos globais complexos. O estudo de problemas clássicos de autômatos celulares, como o problema da paridade \cite{Betel2013} e o problema da densidade \cite{deOliveira2014density}, podem ajudar a compreender como esse comportamento complexo surge.
 
-%O problema de paridade consiste em encontra uma regra que determine se há um número par ou ímpar de células com o estado 1 na configuração inicial. Já o problema de densidade consiste em buscar uma regra que determine qual o estado mais frequente na configuração inicial. 
-Há algumas maneiras de se buscar a solução para esses problemas clássicos, sendo a mais básica simplesmente testar todas as regras de uma determinada família de ACs afim de verificar se alguma dessas regras resolve o problema buscado. 
-%Essa abordagem faz sentido quando se busca por regras no espaço elementar, já que o mesmo contém apenas 256 regras. 
-Entretanto, para grandes famílias de ACs, que é a situação mais usual, essa abordagem se mostra ineficiente, senão impraticável.
+Há algumas maneiras de se buscar a solução para esses problemas clássicos, sendo a mais básica simplesmente testar todas as regras de uma determinada família de ACs afim de verificar se alguma dessas regras resolve o problema buscado. Entretanto, para grandes famílias de ACs, que é a situação mais usual, essa abordagem se mostra ineficiente, senão impraticável.
 
 Como estratégia de pesquisa nessas famílias maiores, algoritmos de busca têm sido utilizados, em particular os de computação evolutiva, os quais já se mostraram muito eficazes no problema de classificação de densidade \cite{wolz2008very}.
 
 Outra estratégia na busca de regras é a restrição do espaço de busca por regras que apresentem determinada propriedade. Para conseguir representar um subespaço com determinada propriedade sem a necessidade de se enumerar todas as regras nele contidas, pode-se utilizar a ideia de \textit{templates}, conforme proposta em \cite{deOliveira2014,deOliveira2014b}.
-%Um template é uma estrutura de dados associada as tabelas de transições de uma família de ACs utilizando variáveis \cite{deOliveira2014}. %TODO <- Excluir?
-%A utilização de variáveis torna possível que um template represente um conjunto de regras que podem representar alguma propriedade de autômatos celulares.
 
 Há uma série de operações que podem ser aplicadas aos templates, como expansão e intersecção. No presente artigo é introduzida a operação de \textit{diferença entre templates} e a operação geradora de \textit{templates de exceção}. Além disso são mostrados alguns exemplos de aplicação dessas operações.
 
@@ -94,8 +89,6 @@ f(\alpha_0,\alpha_1, \dots,\alpha_{n-1}) = \alpha_0 + (\sum_{i=0}^{n-2}f(0_0,0_1
 \label{eq:conservativeCA}
 \end{split}
 \end{equation}
-
-% A biblioteca \textit{CATemplates} já tem implementado o algoritmo gerador de templates que representam todas as regras conservativas de um espaço.
 
 \subsection{Simetria Interna}
 Para compreender a propriedade de simetria interna, é necessário primeiro introduzir a noção de equivalência dinâmica entre regras. As explicações a seguir são válidas para regras binárias, apesar de ser possível sua generalização para $k$ estados.
@@ -137,21 +130,19 @@ A propriedade de invariância a troca de cores está diretamente ligada à trans
 
 \section{Templates}
 \label{sec:templates}
-Template é uma generalização de tabelas de transições de ACs por meio de variáveis. Um único template pode representar um conjunto de regras que podem apresentar determinada propriedade. Os templates foram criados por De Oliveira e Verardo (\citeyear{deOliveira2014}) e implementada como um algoritmo 
-%na linguagem do software \textit{Wolfram Mathematica} \cite{woframMathematica10}, 
-atualmente disponíveis na biblioteca \textit{open source CATemplates} \cite{CATemplates} no GitHub.
+Template é uma generalização das tabelas de transições de estado de ACs por meio de variáveis. Um único template pode representar um conjunto de regras que podem apresentar determinada propriedade. Os templates foram criados e implementados por De Oliveira e Verardo (\citeyear{deOliveira2014}) e são atualmente disponíveis na biblioteca \textit{open source CATemplates} \cite{CATemplates} no GitHub.
 
-Formalmente, um \textit{template} é uma $n$-upla formada por $k^{2r+1}$ itens, e cada item $i$ representa uma função $g_i(x_0,x_1,\dots,x_{k^{2r+1}-1})$. As variáveis $x_i$ podem assumir qualquer estado entre 0 e $k-1$, logo no caso binário $x_i$ pode assumir os valores 0 e 1. É possível limitar os valores possíveis de $x_i$ através da notação $x_i \in C$, onde $C$ é um conjunto representando os possíveis valores de $x_i$.
+Formalmente, um \textit{template} é uma $n$-upla formada por $k^{2r+1}$ itens, em que cada item $i$ representa uma função $g_i(x_0,x_1,\dots,x_{k^{2r+1}-1})$. As variáveis $x_i$ podem assumir qualquer estado entre 0 e $k-1$. É possível limitar os valores possíveis de $x_i$ através da notação $x_i \in C$, onde $C$ é um conjunto representando os possíveis valores de $x_i$. %TODO verificar essa função $g_i$
 
-Exemplificando, o template do espaço elementar $T_1 = (1,1,1,1,1-x_1,x_2,x_1,0)$ representará todas as regras que tenham na posição 0 (sempre da direita pra esquerda) o estado 0, nas posições 4, 5, 6 e 7 o estado 1, nas posições 1 e 2 qualquer estado no intervalo $[0,k-1]$ e na posição 3 o estado complementar ao valor da posição 1. Deste modo o template $T_1$ representa o conjunto de autômatos celulares elementares $\{(1,1,1,1,1,0,0,0),(1,1,1,1,0,0,1,0),(1,1,1,1,1,1,0,0),(1,1,1,1,0,1,1,0)\}$, ou em sua forma decimal $\{248,242,252,246\}$. O processo de encontrar todas as regras representadas por um template se chama \textit{expansão}.
+Exemplificando, o template do espaço elementar $T_1 = (1,1,1,1,1-x_1,x_2,x_1,0)$ representa todas as regras que tenham na posição 0 (sempre da direita pra esquerda) o estado 0, nas posições 4, 5, 6 e 7 o estado 1, nas posições 1 e 2 qualquer estado no intervalo $[0,k-1]$ e na posição 3 o estado complementar ao valor da posição 1. Deste modo o template $T_1$ representa o conjunto de autômatos celulares elementares $\{(1,1,1,1,1,0,0,0),(1,1,1,1,0,0,1,0),(1,1,1,1,1,1,0,0),(1,1,1,1,0,1,1,0)\}$, ou em sua forma decimal $\{248,242,252,246\}$. O processo de encontrar todas as regras representadas por um template se chama \textit{expansão}.
 
-Já há implementado na biblioteca \textit{open source CATemplates} \cite{CATemplates} diversas algoritmos geradores de templates que representem regras com determinada propriedade. O template $T_{comp} = (1 - x_0, 1 - x_4, 1 - x_2, x_4, 1 - x_1, x_2, x_1, x_0)$ dos ACs elementares, por exemplo, quando expandido gera apenas regras que apresentam máxima simetria interna por composição. Já o template $T_{inv} = (1 - x_0, 1 - x_1, 1 - x_2, 1 - x_3, x_3, x_2, x_1, x_0)$ dos AC elementares quando expandido gera apenas regras com a propriedade de invariância a troca de cor.
+Já há implementado na biblioteca \textit{CATemplates} \cite{CATemplates} diversos algoritmos geradores de templates que representem regras com determinada propriedade. O template $T_{comp} = (1 - x_0, 1 - x_4, 1 - x_2, x_4, 1 - x_1, x_2, x_1, x_0)$ dos ACs elementares, por exemplo, quando expandido gera apenas regras que apresentam máxima simetria interna por composição. Já o template $T_{inv} = (1 - x_0, 1 - x_1, 1 - x_2, 1 - x_3, x_3, x_2, x_1, x_0)$ dos AC elementares se expande apenas nas regras com propriedade de invariância a troca de cor.
 
-Além da possibilidade de expansão de templates, já foi desenvolvido por De Oliveira e Verardo (\citeyear{deOliveira2014b}) um algoritmo que permite gerar templates que representem a intersecção entre dois sub-espaços de regras representadas por templates. Para exemplificar, considere que se esteja em busca de um conjunto de regras que sejam ao mesmo tempo invariantes a troca de cor e apresentem máxima simetria interna por composição. Para encontrar esse conjunto de regras basta realizar dois passos.
+Além da possibilidade de expansão de templates, já foi desenvolvido por De Oliveira e Verardo (\citeyear{deOliveira2014b}) um algoritmo que permite gerar templates que representem a intersecção entre dois sub-espaços de regras representadas por templates. Para exemplificar, considere-se a busca por um conjunto de regras que sejam ao mesmo tempo invariantes a troca de cor e apresentem máxima simetria interna por composição. Para encontrar esse conjunto de regras basta realizar dois passos.
 
 O primeiro passo é igualar os dois templates que representam as propriedades desejadas, gerando assim um sistema de equações. Ao solucionar esse sistema de equações serão gerados os relacionamentos entre as variáveis, que quando aplicados aos templates recebidos como entrada, resultará no template que representa a intersecção.
 
-Como exemplo, considere o template $T_{comp}$, que representa as regras com máxima simetria por composição, e o template $T_{inv}$, que representa as regras invariantes a troca de cor, ambos com $k=2$ e $r=1$. O primeiro passo para encontrar a intersecção entre esses dois template consiste em igualá-los gerando o sistema de equações representado pela Eq. \ref{eq:interseccaoP1}:
+Como exemplo, seja o template $T_{comp}$, que representa as regras com máxima simetria por composição, e o template $T_{inv}$, que representa as regras invariantes a troca de cor, ambos com $k=2$ e $r=1$. O primeiro passo para encontrar a intersecção entre esses dois template consiste em igualá-los gerando o sistema de equações representado pela Eq. \ref{eq:interseccaoP1}:
 \begin{equation}
 \left\{\begin{matrix}
 1 - x_0	& = & 1 - x_0	\\
@@ -166,11 +157,11 @@ x_0		& = & x_0		\\
 \label{eq:interseccaoP1}
 \end{equation}
 
-Após isso, esse sistema é resolvido obtendo o conjunto solução $S = \{x_3 = 1-x1, x_4 = x_1\}$. Esse conjunto solução é então aplicado como um conjunto se substituições aos templates recebidos como parâmetro. Caso os templates recebidos como parâmetro não apresentem restrições de variáveis, o resultado de ambas as substituições podem ser escolhidos, finalizando o processo e resultando no template $(1 - x_0, 1 - x_1, 1 - x_2, x_1, 1 - x_1, x_2, x_1, x_0)$ que representa a intersecção dos templates $T_{comp}$ e $T_{inv}$, e por consequência representa todos as regras do espaço elementar que são ao mesmo tempo invariantes a troca de cor e tenham máxima simetria por composição.
+Em seguida o sistema é resolvido, obtendo-se o conjunto solução $S = \{x_3 = 1-x1, x_4 = x_1\}$. Esse conjunto solução é então aplicado como um conjunto se substituições aos templates recebidos como parâmetro. Caso os templates recebidos como parâmetro não apresentem restrições de variáveis, o resultado de ambas as substituições podem ser escolhidos, finalizando o processo e resultando no template $(1 - x_0, 1 - x_1, 1 - x_2, x_1, 1 - x_1, x_2, x_1, x_0)$, o qual representa a intersecção dos templates $T_{comp}$ e $T_{inv}$ e, por consequência, todos as regras do espaço elementar que, ao mesmo tempo, são invariantes a troca de cor e têm máxima simetria por composição.
 
-Caso pelo menos um dos templates apresente restrições de variáveis, uma segunda etapa do algoritmo deve ser feita. Nessa segunda etapa as expressões que restringem as variáveis são extraídas, gerando um conjunto que é então traduzido para um sistema de equações. Esse sistema de equações é resolvido, e seu conjunto solução é aplicado como um conjunto de substituições nos templates passados como parâmetro.
+Caso pelo menos um dos templates apresente restrições de variáveis, uma segunda etapa deve ser realizada. Para tanto, as expressões que restringem as variáveis são extraídas, gerando um conjunto que é então traduzido para um novo sistema de equações a ser resolvido, cujo conjunto solução é então aplicado como um conjunto de substituições nos templates passados como parâmetro.
 
-Inspirada na operação de intersecção, é introduzido neste artigo a operação de diferença entre templates.
+Inspirada na operação de intersecção, introduzimos neste artigo a operação de diferença entre templates.
 
 \section{Diferença entre templates e Templates de Exceção}
 \label{sec:diferenca_entre_templates_e_templates_de_excecao}
