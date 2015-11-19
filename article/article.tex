@@ -69,7 +69,7 @@ However, in order to explain the functioning of templates and its operations it 
 \subsection{Number Conservation}
 Number conservation is a static property that determines that the sum from the states of a particular cellular automata should not change during the evolution of space-time, regardless of the initial configuration.
 
-According to Boccara and Fukś (\cite{boccara2002}), a CA is conservative when each of its local function $f$, applied in every neighborhood $(\alpha_0,\alpha_1, \dots, \alpha_{n-1})$ satisfy the conditions described in Eq. \ref{eq:conservativeCA}.
+According to Boccara and Fukś \cite{boccara2002}, a CA is conservative when each of its local function $f$, applied in every neighborhood $(\alpha_0,\alpha_1, \dots, \alpha_{n-1})$ satisfy the conditions described in Eq. \ref{eq:conservativeCA}.
 \begin{equation}
 \begin{split}
 f(\alpha_0,\alpha_1, \dots,\alpha_{n-1}) = \alpha_0 + (\sum_{i=0}^{n-2}f(0_0,0_1, \dots,0_i,\alpha_1,\alpha_2, \dots,\alpha_{n-1}) \\- f(0_0,0_1, \dots,0_i,\alpha_0,\alpha_1, \dots,\alpha_{n-i-1}))
@@ -82,31 +82,20 @@ To grasp the internal symmetry property, the comprehension of the concept of dyn
 
 Given a transitions table of an CA, there are three changes that can be applied and results in a dynamically equivalent behavior to CAs: \textit{reflection}, \textit{combination} and \textit{composition}. Reflection is the transformation obtained reflecting the bits of the neighborhoods transitions table. The conjugation is obtained by reversing all the states of the cells of the transitions table. Finally, the composition is obtained making reflection and conjugation, regardless of the order.
 
-To illustrate these dynamic equivalence as well the transformations, consider the transition table of Rule 60 of the elementary space, as shown in Figure \ref{fig:table60}. When applying the transformation by reflection in rule 60 we obtain the Rule 102 of the elementary space, illustrated in Figure \ref{fig:table102}.
-
-  \begin{figure}[h!]
+  \begin{figure}[!ht]
     \centering
-    \includegraphics[width=.5\textwidth]{fig_ruleIcon60.png}
+    \includegraphics[width=0.7\textwidth]{fig_ruleIcon60.png}
     \caption{Transitions table of the rule 60 of the elementary space.}
     \label{fig:table60}
   \end{figure}
-
-  \begin{figure}[h!]
+  \begin{figure}[!ht]
     \centering
-    \includegraphics[width=.5\textwidth]{fig_ruleIcon102.png}
+    \includegraphics[width=0.7\textwidth]{fig_ruleIcon102.png}
     \caption{Transitions table of the rule 102 from the elementary space, obtained through transformation by reflection applied to the transitions table of rule 60.}
     \label{fig:table102}
   \end{figure}
 
-% Tanto a regra 60, como as regras 102, 153 e 195 pertencem a mesma classe de equivalência dinâmica. Uma forma interessante de entender o porquê é analisando a evolução espaço-temporal dessas regras, ilustrada pela Figura \ref{fig:dynamicEquivalecy}.
-
-%   \begin{figure}[h!]
-%     \centering
-%     \def\svgscale{0.45}
-%     \import{../img/}{fig_ruleEquivalence60.pdf_tex}
-%     \caption{Evolução espaço-temporal das regras pertencente à mesma classe dinâmica da regra 60.}
-%     \label{fig:dynamicEquivalecy}
-%   \end{figure}
+To illustrate these dynamic equivalence as well the transformations, consider the transition table of Rule 60 of the elementary space, as shown in Figure \ref{fig:table60}. When applying the transformation by reflection in rule 60 we obtain the Rule 102 of the elementary space, illustrated in Figure \ref{fig:table102}.
 
 The internal symmetry is defined by the number of state transitions which remain identical after applied a specific transformation. For example, the rule 60 from the elementary CAs has a value of internal symmetry by reflection equal to 4, because it shares the state transitions $((1,1,1),0)$, $((1,0,1),1)$, $((0,1,0),1)$ e $ ((0,0,0),0)$ with the resulting rule of its transformation by reflection, the rule 102.
 
@@ -117,15 +106,19 @@ The property color blind is directly related to transformation by conjugation, a
 
 \section{Templates}
 \label{sec:templates}
-Template is a generalization of the state transition tables of CAs through variables. A template can represents a rule set, which in turn can presents particular property. The templates were created and implemented by De Oliveira and Verardo (2014) and are currently available at the library \textit{open source CATemplates} \cite{CATemplates} on GitHub.
+Template is a generalization of the state transition tables of CAs through variables. A template can represents a rule set, which in turn can presents particular property. The templates were created and implemented by De Oliveira and Verardo \cite{deOliveira2014} and are currently available at the library \textit{open source CATemplates} \cite{CATemplates} on GitHub.
 
 Formally, a \textit{template} is an $n$-tuple formed by $k^{2r+1}$ items, wherein each item $i$ represents a function $g_i(x_{k^{2r+1}-1},x_{k^{2r+1}-2},\dots,x_1,x_0)$. The variables $x_i$ can assume any state between 0 and $k-1$. Can be limited the possible values of $x_i$ by the notation $x_i \in C$, in which $C$ is a set representing the possible values of $x_i$. %TODO verificar essa função $g_i$
 
-As an example, the template of the elementary space $T_1 = (1,1,1,1,1-x_1,x_2,x_1,0)$ represents all the rules which have at position 0 (always from right to left) state 0, at positions 4, 5, 6 and 7 the state 1, at positions 1 and 2 any state in the interval $ [0, k-1] $ and in position 3 the complementary state to the value of position 1. Therefore the template $T_1$ represents the set of elementary cellular automata $\{(1,1,1,1,1,0,0,0),(1,1,1,1,0,0,1,0),(1,1,1,1,1,1,0,0),(1,1,1,1,0,1,1,0)\}$, or in its decimal form $\{248,242,252,246\}$. The process of finding all the rules represented by a template is called \textit{expansion}.
+As an example, the template of the elementary space $T_1 = (1,1,1,1,1-x_1,x_2,x_1,0)$ represents all the rules which have at position 0 (always from right to left) state 0, at positions 4, 5, 6 and 7 the state 1, at positions 1 and 2 any state in the interval $ [0, k-1] $ and in position 3 the complementary state to the value of position 1. Therefore the template $T_1$ represents the set of elementary cellular automata in its decimal form $\{248,242,252,246\}$ or in binary form as presented below:
+\begin{displaymath}
+\{(1,1,1,1,1,0,0,0),(1,1,1,1,0,0,1,0),(1,1,1,1,1,1,0,0),(1,1,1,1,0,1,1,0)\}
+\end{displaymath}
 
-There implemented in the library \textit{CATemplates} \cite{CATemplates} several generators algorithms of templates representing rules with certain property. The template $T_{comp} = (1 - x_0, 1 - x_4, 1 - x_2, x_4, 1 - x_1, x_2, x_1, x_0)$ of the elementary CAs, for example, when expanded generates only rules that have a maximum internal symmetry by composition. But the template $T_{inv} = (1 - x_0, 1 - x_1, 1 - x_2, 1 - x_3, x_3, x_2, x_1, x_0)$ of the elementary CAs expands only the rules with color blind property.
+The process of finding all the rules represented by a template is called \textit{expansion}. There are implemented in the library \textit{CATemplates} \cite{CATemplates} several generators algorithms of templates representing rules with certain property. %TODO Inverter frase
+ The template $T_{comp} = (1 - x_0, 1 - x_4, 1 - x_2, x_4, 1 - x_1, x_2, x_1, x_0)$ of the elementary CAs, for example, when expanded generates only rules that have a maximum internal symmetry by composition. But the template $T_{inv} = (1 - x_0, 1 - x_1, 1 - x_2, 1 - x_3, x_3, x_2, x_1, x_0)$ of the elementary CAs expands only the rules with color blind property.
 
-Besides the possibility of expansion of templates, it has been developed by De Oliveira e Verardo (2014) an algorithm to generate templates that represent the intersection between two sub-spaces of rules represented by templates. To illustrate, consider the search for a rule set that are both color blind and have maximum internal symmetry by composition. To find this rule set is necessary to perform two steps: first one must match the two templates that represent the desired properties, thus forming an equation system; then to solve the equations, relationships are generated between the variables that, when applied to templates received as input will result in the template representing the intersection.
+Besides the possibility of expansion of templates, it has been developed by De Oliveira e Verardo \cite{deOliveira2014b} an algorithm to generate templates that represent the intersection between two sub-spaces of rules represented by templates. To illustrate, consider the search for a rule set that are both color blind and have maximum internal symmetry by composition. To find this rule set is necessary to perform two steps: first one must match the two templates that represent the desired properties, thus forming an equation system; then to solve the equations, relationships are generated between the variables that, when applied to templates received as input will result in the template representing the intersection.
 
 As an example, consider the template $T_{comp}$ representing rules with a maximum symmetry by composition and the template $T_{inv}$representing color blind rules, both with $k=2$ and $r=1$. The first step to finding the intersection between these two template is equate them generating the equation system represented by Eq. \ref{eq:interseccaoP1}:
 \begin{equation}
@@ -204,18 +197,21 @@ In many cases, only the steps described so far are sufficient to make the differ
 To work around this problem, it is necessary that after the first steps of difference operation, also check for exception templates at the intersection of the $T_{minuend}$ and $T_{subtrahend}$, ie, templates which represent a set of substitutions that take the template passed as parameter to display  substitutions outside the range $[0,k-1]$. %TODO melhorar esse texto
 
 For example, we will continue the difference operation between $T_{inv}$ and $T_{con}$; to this end, consider the template $T_i = (1, 1 - x_1, 1 - x_2, 1 - x_1 - x_2, x_1 + x_2, x_2, x_1, 0)$ the intersection between them, for $k=2$.
-The first step of the difference operation occurs normally and generate the templates $\{(x_7, x_6, x_5, x_4, x_3, x_2, x_1, 1),(x_7, x_6, x_5, x_1 + x_2, x_3, x_2, x_1, x_0)\}$.
-But it is trivial to realize that any expansion of $T_i$ having the set of substitutions $\{x_1 = 1, x_2 = 1\}$ will cause the position $3$ and $4$ of the template display values that do not belong to the interval $[0,k-1]$.
+The first step of the difference operation occurs normally and generates the templates: 
+\begin{displaymath}
+\{(x_7, x_6, x_5, x_4, x_3, x_2, x_1, 1),(x_7, x_6, x_5, x_1 + x_2, x_3, x_2, x_1, x_0)\}
+\end{displaymath}
+It is trivial to realize that any expansion of $T_i$ having the set of substitutions $\{x_1 = 1, x_2 = 1\}$ will cause the position $3$ and $4$ of the template display values that do not belong to the interval $[0,k-1]$.
 Hence all templates that have $\{x_1 = 1, x_2 = 1\}$ are complementary to the template $T_i$. So it will generate the template $(x_7, x_6, x_5, x_4, x_3, 1, 1, x_0)$, which is the exception template of $T_i$.
 
-Therefore every rule represented  by the template $T_{minuend}$ -- $T_{inv}$ in the given example -- and which is also represented by the exception template from the the intersection of $T_{minuend}$ with $T_{subtrahend}$ -- $T_i$ in this example - - should be represented by at least one of the templates resulting from the difference operation. For this, the algorithm that finds the difference between templates considers all exception templates found, intersects them with the $T_{minuend}$ and adds them to the set of templates obtained by the first steps of the difference operation. Thus, for the example presented above, the set of difference templates resultant is represented by Eq. \ref{eq:differenceR}:\begin{equation}
+Therefore every rule represented  by the template $T_{minuend}$ -- $T_{inv}$ in the given example -- and which is also represented by the exception template from the the intersection of $T_{minuend}$ with $T_{subtrahend}$ -- $T_i$ in this example - - should be represented by at least one of the templates resulting from the difference operation. For this, the algorithm that finds the difference between templates considers all exception templates found, intersects them with the $T_{minuend}$ and adds them to the set of templates obtained by the first steps of the difference operation. Thus, for the example presented above, the set of difference templates resultant is represented below:\begin{displaymath}
 \begin{split}
 \{(0, 1 - x_1, 1 - x_2, 1 - x_3, x_3, x_2, x_1, 1), \\
 (1 - x_0, 1 - x_1, 1 - x_2, x_1 + x_2, 1 - x_1 - x_2, x_2, x_1, x_0), \\
 (1 - x_0, 0, 0, 1 - x_3, x_3, 1, 1, x_0)\}
 \label{eq:differenceR}
 \end{split}
-\end{equation}
+\end{displaymath}
 
 One advantage of the difference operation between templates is with which it is possible to find answers to various non-trivial question, for example, determine which rules have the numerical conservability property, but do not present at the same time maximum symmetry by composition and color blind property. To answer the question simply pick the template of conservatives rules, and then subtract from it the intersection between the rules template with maximum symmetry by composition and the color blind template. In this particular case, the result is a set of templates representing all the conservative rules except the identity rule.
 
@@ -242,75 +238,10 @@ For now the difference operation between templates has been implemented just to 
 
 \section*{Acknowledgements}
 \label{sec:agrdecimentos}
-The authors thank Mackenzie Research Fund (MACKPESQUISA), the FAPESP, and federal agencies CAPES and CNPq for different forms of support received during the development of this work.
+The authors thank Mackpesquisa, the Fapesp, and federal agencies CAPES and CNPq for different forms of support received during the development of this work.
 
-
-%
 % ---- Bibliography ----
-%
-\begin{thebibliography}{}
-\providecommand{\abntrefinfo}[3]{}
-\providecommand{\abntbstabout}[1]{}
-\abntbstabout{1.52 }
+\bibliography{bibliografia}
+\bibliographystyle{splncs}
 
-\bibitem[Betel, {DE OLIVEIRA} e Flocchini 2013]{Betel2013}
-\abntrefinfo{Betel, {DE OLIVEIRA} e Flocchini}{BETEL; {DE OLIVEIRA};
-  FLOCCHINI}{2013}
-{BETEL, H.; {DE OLIVEIRA}, P. P.~B.; FLOCCHINI, P. Solving the parity problem
-  in one-dimensional cellular automata.
-\emph{Natural Computing}, v.~12, n.~3, p. 323--337, 2013.}
-
-\bibitem[Boccara e {FUK\'{S}} 2002]{boccara2002}
-\abntrefinfo{Boccara e {FUK\'{S}}}{BOCCARA; {FUK\'{S}}}{2002}
-{BOCCARA, N.; {FUK\'{S}}, H. Number-conserving cellular automaton rules.
-\emph{Fundamenta Informaticae}, IOS Press, v.~52, n.~1-3, p. 1--13, 2002.}
-
-\bibitem[{DE OLIVEIRA} 2014]{deOliveira2014density}
-\abntrefinfo{{DE OLIVEIRA}}{{DE OLIVEIRA}}{2014}
-{{DE OLIVEIRA}, P. P.~B. On density determination with cellular automata:
-  Results, constructions and directions.
-\emph{Journal of Cellular Automata}, v.~9, n.~5-6, p. 357--385, 2014.}
-
-\bibitem[{DE OLIVEIRA} e Verardo 2014]{deOliveira2014}
-\abntrefinfo{{DE OLIVEIRA} e Verardo}{{DE OLIVEIRA}; VERARDO}{2014a}
-{{DE OLIVEIRA}, P. P.~B.; VERARDO, M. Representing families of cellular
-  automata rules.
-\emph{The Mathematica Journal}, v.~16, n.~8, 2014.
-Dispon{\'\i}vel em: $<$dx\-.doi\-.org\-/doi:10\-.3888\-/tmj\-.16-8$>$.}
-
-\bibitem[{DE OLIVEIRA} e Verardo 2014]{deOliveira2014b}
-\abntrefinfo{{DE OLIVEIRA} e Verardo}{{DE OLIVEIRA}; VERARDO}{2014b}
-{{DE OLIVEIRA}, P. P.~B.; VERARDO, M. Template based representation of cellular
-  automata rules. In:  ISOKAWA, T.; IMAI, K.; MATSIU, N.; PEPER, F.; UMEO, H.
-  (Ed.). \emph{20th International Workshop on Cellular Automata and Discrete
-  Complex Systems}. Himeji, Japão, Julho 7-9: [s.n.], 2014. p. 199--204.}
-
-\bibitem[Salo e T{\"o}rm{\"a} 2013]{salo2013color}
-\abntrefinfo{Salo e T{\"o}rm{\"a}}{SALO; T{\"O}RM{\"A}}{2013}
-{SALO, V.; T{\"O}RM{\"A}, I. Color blind cellular automata. In:  \emph{Cellular
-  Automata and Discrete Complex Systems}. [S.l.]: Springer, 2013. p. 139--154.}
-
-\bibitem[Verardo e {DE OLIVEIRA} 2015]{CATemplates}
-\abntrefinfo{Verardo e {DE OLIVEIRA}}{VERARDO; {DE OLIVEIRA}}{2015}
-{VERARDO, M.; {DE OLIVEIRA}, P. P.~B. \emph{CATemplates}.
-[S.l.], 2015. Dispon{\'\i}vel em:
-  $<$https:\-/\-/github\-.com\-/mverardo\-/CATemplates$>$.}
-
-\bibitem[Wolfram 1994]{wolfram1994cellular}
-\abntrefinfo{Wolfram}{WOLFRAM}{1994}
-{WOLFRAM, S. \emph{Cellular automata and complexity: collected papers}. [S.l.]:
-  Addison-Wesley Reading, 1994.}
-
-\bibitem[Wolfram 2002]{wolfram2002}
-WOLFRAM 2002
-{WOLFRAM, S. \emph{A new kind of science}. [S.l.]: Wolfram media Champaign,
-  2002.}
-
-\bibitem[Wolz e {DE OLIVEIRA} 2008]{wolz2008very}
-\abntrefinfo{Wolz e {DE OLIVEIRA}}{WOLZ; {DE OLIVEIRA}}{2008}
-{WOLZ, D.; {DE OLIVEIRA}, P. P.~B. Very effective evolutionary techniques for
-  searching cellular automata rule spaces.
-\emph{J. Cellular Automata}, v.~3, n.~4, p. 289--312, 2008.}
-
-\end{thebibliography}
 \end{document}
