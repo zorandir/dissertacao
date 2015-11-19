@@ -42,29 +42,34 @@ A cellular automata template consist in a notation that has recently been introd
 Cellular automata (CAs) are dynamical systems typically discrete in time, space and states.
 CAs can produce behavior of great complexity based on simple rules of local action \cite{wolfram2002}. The study of classical problems of cellular automata, like the parity problem \cite{Betel2013} and the density classification problem \cite{deOliveira2014density} can help to understand how this complex behavior emerges.
 
-The most basic approach to find a suitable solution to classic problems consists in testing each of the rules of a particular family of CAs in order to see if any of these rules are able to solve the problem. However, this approach shows to be inefficient or impractical for larger families of CAs, which is the most usual panorama in literature.
+The most basic approach to find a suitable solution to classic problems consists in testing each of the rules of a particular family of CAs in order to see if any of these rules are able to solve the problem. However, this approach shows to be inefficient or impractical for a large number of families in CAs, which is the most usual panorama in literature.
+% Não entendi muito bem o que você quis dizer com "However, this approach shows to be inefficient or impractical for a large number of families in CAs, which is the most usual panorama in literature." 
+%Alias, será que você não quis dizer "for larger families of CAs" ao invés de "for a large number of families in CAs"?
 
 Evolutionary computing is constantly used to deal with larger families. This type of algorithm has proven very effective to find solutions for the density classification problem \cite{wolz2008very}.
 
-Another strategy to find suitable rules is restricting the search space by rules that have a given property. To represent a subspace with a particular property without the need of enumerate all of the space rules, one can use \textit{templates}, as proposed in \cite{deOliveira2014,deOliveira2014b}.
+Another strategy to find suitable rules is restricting the search space by rules that have a given property. To represent a subspace with a particular property without the need of enumerate all of the space rules, one can use \textit{templates}, as proposed by De Oliveira and Verardo  \cite{deOliveira2014,deOliveira2014b}.
 
 There are two operations that can be applied to templates: \textit{expansion} and \textit{intersection} \cite{deOliveira2014,deOliveira2014b}. In this paper we introduce a new operation, named \textit{difference between templates} and the operation that generates the \textit{exception templates}. Moreover, application of these operations are presented in this paper with practical examples.
-% Atualmente, não temos "a lot of operations", só temos a expansão e a interseção. Pode dizer isso e citar os artigos onde elas estão explicadas. Tente sempre evitar termos meio vagos como "a lot of" e etc.
 % Po, "difference between templates" é um nome meio grande...hahaha será que não tem outro melhor?
 
 This paper is organized in sections. The next section, \ref{sec:automatos_celulares}, presents some basic concepts about cellular automata. Following, Section \ref{sec:templates} presents more details about templates and its major operations. The Section \ref{sec:diferenca_entre_templates_e_templates_de_excecao} introduces the operation of difference between templates and the operation that generates what we call the \textit{exception templates}, as well as their applications. Finally, the Section \ref{sec:consideracoes_finais} makes closing remarks about the news algorithm.
 
 \section{Cellular Automata}
 \label{sec:automatos_celulares}
-Cellular Automata are simple mathematical idealizations of natural systems \cite{wolfram1994cellular}. They consist of a lattice of discrete cells, each of which can be on one of a finite set of states in a given time step. The values (or states) of the cells evolve in discrete time steps usually according to deterministic rules that specify the state of each cell according to the states of their neighboring cells \cite{wolfram1994cellular}.% "Cellular Automata are simple mathematical idealizations of natural systems" está identico ao autor. "which can be on one of a"?
+Cellular Automata are simple mathematical idealizations of natural systems \cite{wolfram1994cellular}. They consist of a lattice of discrete cells, each of which can be a state of a finite set of states in a given time step. The values (or states) of the cells evolve in discrete time steps usually according to deterministic rules that specify the state of each cell according to the states of their neighboring cells \cite{wolfram1994cellular}.% "Cellular Automata are simple mathematical idealizations of natural systems" está identico ao autor.
 
 Conventionally, it is assumed that a cellular automaton cells have $k$ states which are represented by integer values in the range of $[0, k-1]$ The state of a cell is changed by the local function of the automaton (a rule), formed by the state transitions set of a cell, based on its current state and in the states of adjacent cells. To update the values of a cell by local functions, usually a radius $r$ is defined as the number of adjacent cells to be analyzed in each direction by local functions.
 
 A family (space) of cellular automata, is defined by the radius $r$ and the number of states $k$. One-dimensional cellular automata with $r=1$ e $k=2$ are called the family of elementary cellular automata.
+% O PP não costuma curtir muito o termo "família". Normalmente usamos "espaço" mesmo. Ele provavelmente vai pedir pra vc mudar isso no artigo inteiro. hahahah
 
-To refer to the rules of a space, it is common to use the number obtained by the outputs decimal representation of the state transitions, sorting the lexicographically neighborhoods from largest to smallest state; for instance, in the elementary space, the number of the rules corresponds to the decimal sequence formed by the 8-bit output, arranged from the neighborhood 111 to 000.
+To refer to the rules of a space, it is common to use the number obtained by the outputs decimal representation  of the state transitions, sorting the lexicographically neighborhoods from largest to smallest state; for instance, in the elementary space, the number of the rules corresponds to the decimal sequence formed by the 8-bit output, arranged from the neighborhood 111 to 000.
+%Esse paragrafo tá meio confuso... eu entendi pq já conheço a idéia, mas uma pessoa que nunca viu isso provavelmente vai boiar.
+% Aqui também parece um bom lugar pra introduzir o termo "rule table" e usar ele mais a frente
 
 The number of rules in a space is provided by $k^{k^{2r+1}}$, making it easy to realize that any increase in the values of $k$ and $r$ generates families with a large amount of rules. An approach to handle this problem is to use static properties as a hint on how the CA will behave during its evolution. A static property is obtained directly from the CA's rule table. The use of static properties can highly restrict the initial search space. With templates can be represented a set of rules with certain static property.
+% Na verdade não é a propriedade que restringe o espaço. Você pode usar um template associado a uma propriedade pra restringir o espaço. As duas últimas frases tão meio confusas.
 
 In order to explain how templates work, it is important to understand the properties of number conservation, internal symmetry and color blindness, that will be used in later examples.
 
