@@ -76,7 +76,7 @@ In order to explain how templates work, it is important to understand the proper
 \subsection{Number Conservation}
 Number conservation is a static property that determines that the sum of the states of a particular cellular automata should not change during the CA's evolution, regardless of the initial configuration.
 
-According to Boccara and Fukś \cite{boccara2002}, a CA is conservative when each of its local function $f$, applied in every neighborhood $(\alpha_0,\alpha_1, \dots, \alpha_{n-1})$ satisfies the conditions described in Eq. \ref{eq:conservativeCA}.
+According to Boccara and Fukś \cite{boccara2002}, a CA is conservative when its local function $f$, applied to every neighborhood $(\alpha_0,\alpha_1, \dots, \alpha_{n-1})$ satisfies the conditions described in Eq. \ref{eq:conservativeCA}.
 \begin{equation}
 \begin{split}
 f(\alpha_0,\alpha_1, \dots,\alpha_{n-1}) = \alpha_0 + (\sum_{i=0}^{n-2}f(0_0,0_1, \dots,0_i,\alpha_1,\alpha_2, \dots,\alpha_{n-1}) \\- f(0_0,0_1, \dots,0_i,\alpha_0,\alpha_1, \dots,\alpha_{n-i-1}))
@@ -87,7 +87,7 @@ f(\alpha_0,\alpha_1, \dots,\alpha_{n-1}) = \alpha_0 + (\sum_{i=0}^{n-2}f(0_0,0_1
 \subsection{Internal symmetry}
 To grasp the internal symmetry property, the comprehension of the concept of dynamic equivalence of rules is needed. The following explanations are valid for binary rules, although it is possible to generalize to $k$ states.
 
-Given a transitions table of an CA, there are three changes that can be applied and results in a dynamically equivalent behavior to CAs: \textit{reflection}, \textit{combination} and \textit{composition}. Reflection is the transformation obtained reflecting the bits of the neighborhoods transitions table. The conjugation is obtained by reversing all the states of the cells of the transitions table. Finally, the composition is obtained making reflection and conjugation, regardless of the order.
+Given the rule table of a CA, there are three transformations that can be applied to it, such that the resulting rule table is  dynamically equivalent to the original CA: \textit{reflection}, \textit{conjugation} and \textit{composition}. Reflection is the transformation obtained by mirroring the bits of the neighborhoods in the rule table. The conjugation is obtained by reversing all the states of the cells of the rule table. The last one is obtaines by composing both conjugation and reflection, regardless of the order.
 
   \begin{figure}[!ht]
     \centering
@@ -104,8 +104,9 @@ Given a transitions table of an CA, there are three changes that can be applied 
 
 To illustrate these dynamic equivalence as well the transformations, consider the transition table of Rule 60 of the elementary space, as shown in Figure \ref{fig:table60}. When applying the transformation by reflection in rule 60 we obtain the Rule 102 of the elementary space, illustrated in Figure \ref{fig:table102}.
 
-The internal symmetry is defined by the number of state transitions which remain identical after applied a specific transformation. For example, the rule 60 from the elementary CAs has a value of internal symmetry by reflection equal to 4, because it shares the state transitions $((1,1,1),0)$, $((1,0,1),1)$, $((0,1,0),1)$ e $ ((0,0,0),0)$ with the resulting rule of its transformation by reflection, the rule 102.
+The internal symmetry is defined by the number of state transitions which remain identical after a specific transformation is applied. For example, the elementary CA 60 has a value of internal symmetry by reflection equal to 4, because it shares the state transitions $((1,1,1),0)$, $((1,0,1),1)$, $((0,1,0),1)$ e $ ((0,0,0),0)$ with the resulting rule of its transformation by reflection, the rule 102.
 
+%Trocar "e" por and acima
 \subsection{Color blind cellular automata}
 A CA is considered color blind when it is invariant to the application of permutations in the states of transition table \cite{salo2013color}. Naturally, there is generally $k!$ permutations, but only one in the binary case, which can be described as $\{0 \to 1 ,\, 1 \to 0\}$. 
 
@@ -142,7 +143,8 @@ x_0   & = & x_0   \\
 \label{eq:interseccaoP1}
 \end{equation}
 
-Then, the system is solved yielding the solution set $S = \{x_3 = 1-x1, x_4 = x_1\}$. This solution set is then applied as a set of replacements to the templates received as parameter. If the templates received as parameter does not show variables constraints, the result of both replacements can be chosen, ending the process and resulting in the template $(1 - x_0, 1 - x_1, 1 - x_2, x_1, 1 - x_1, x_2, x_1, x_0)$, which is the intersection of templates $T_{comp}$ and $T_{inv}$and, therefore, all the rules of the elementary space which at the same time is color blind and present maximum symmetry by composition.
+Then, the system is solved yielding the solution set $S = \{x_3 = 1-x1, x_4 = x_1\}$. This solution set is then applied as a set of replacements to the templates received as parameter. If the templates received as parameter does not show variables constraints, the result of both replacements can be chosen, ending the process and resulting in the template $(1 - x_0, 1 - x_1, 1 - x_2, x_1, 1 - x_1, x_2, x_1, x_0)$, which is the intersection of templates $T_{comp}$ and $T_{inv}$ and, therefore, represents all the rules of the elementary space which are color blind and present maximum symmetry by composition.
+% Você fala várias vezes sobre parametros, mas acho que não tá muito obvio que você tá explicando um algoritmo. 
 
 If at least one of the templates presents variables with restriction, a second step should be carried out. Therefore, the expressions that restrict the variables are extracted, generating a set which is then translated into a new equation system to be solved, whose solution set is then applied as a set of replacements in the templates passed as parameter.
 
@@ -153,7 +155,7 @@ Inspired by the intersection operation, we introduce in this article the operati
 
 The difference operation has two templates as an input parameter, which we will call $T_{minuend}$ and $T_{subtrahend}$. This operation output will result in a set of templates that represents all the rules represented by the template $T_{minuend}$ and are not represented by the $T_{subtrahend}$.
 
-The difference operation is a process with several steps. The first consists in a process of intersection between the two selected templates set as parameters, resulting in a template $T_i$. If there is no intersection between the two original template, the result of the difference is the actual $T_{minuend}$. If there intersection, the intersection of template $T_i$ is matched to the template $T_{minuend}$, thereby generating logical combinations of equations. Then the algorithm removes the tautological equations and applies a negation operation in the equation, which in the binary case is to just make the permutations $\rho = (0 \to 1, 1 \to 0)$ to the result of the equations. Then, the logical operator is exchanged from $\wedge$ to $\vee$ and the system generated by this process is solved, thereby generating a set of replacement sets that should be applied to the template $T_{minuend}$. If the replacement set is empty or invalid (ie, reference non existing rules in the space, as exemplified below), all the rules pertaining to $T_{minuend}$ also belong to the $T_{subtrahend}$ and, therefore, the algorithm returns an empty set.
+The difference operation is a process with several steps. The first consists in a process of intersection between the two selected templates set as parameters, resulting in a template $T_i$. If there is no intersection between the two original template, the result of the difference is the actual $T_{minuend}$. If there is an intersection, it is matched to the template $T_{minuend}$, thereby generating logical combinations of equations. Then the algorithm removes the tautological equations and applies a negation operation in the equation, which in the binary case is to just make the permutations $\rho = (0 \to 1, 1 \to 0)$ to the result of the equations. Then, the logical operator is exchanged from $\wedge$ to $\vee$ and the system generated by this process is solved, thereby generating a set of replacement sets that should be applied to the template $T_{minuend}$. If the replacement set is empty or invalid (ie, reference non existing rules in the space, as exemplified below), all the rules pertaining to $T_{minuend}$ also belong to the $T_{subtrahend}$ and, therefore, the algorithm returns an empty set.
 
 To better understand the process, consider the template that represents the color blind rules $T_{inv} = (1 - x_0, 1 - x_1, 1 - x_2, 1 - x_3, x_3, x_2, x_1, x_0)$ and number conserving templates $T_{con} = (1, 1 + x_2 - x_3, 1 - x_2, 1 - x_1 - x_2, x_3, x_2, x_1, 0)$, both of the elementary space. The first step to find the difference from $T_{inv}$ to $T_{con}$ is to make the intersection between them, which results in $T_i = (1, 1 - x_1, 1 - x_2, 1 - x_1 - x_2, x_1 + x_2, x_2, x_1, 0)$. As the intersection is not null, the next step is to equate $T_{inv}$ with $T_i$, which generates the equations system represented by Eq. \ref{eq:differenceP1}: \begin{equation} \left\{\begin{matrix} 1 - x_0 & = & 1       \\ 1 - x_1  & = & 1 - x_1     \\ 1 - x_2  & = & 1 - x_2     \\ 1 - x_3  & = & 1 - x_1 - x_2 \\
 x_3   & = & x_1 + x_2   \\
@@ -164,7 +166,7 @@ x_0   & = & 0       \\
 \label{eq:differenceP1}
 \end{equation}
 
-However, this system must be represented by logical combinations of equation, as shown in Eq. \ref{eq:differenceP2}:
+However, this system must be represented by logical combinations of the equations, as shown in Eq. \ref{eq:differenceP2}:
 \begin{equation}
 \begin{split}
 1 - x_0 = 1       \wedge
@@ -179,7 +181,7 @@ x_0   = 0
 \end{split}
 \end{equation}
 
-Are eliminated then all tautological equations and is exchanged logical operators $\wedge$ to $\vee$, resulting in the system represented by Eq. \ref{eq:differenceP3}:
+All tautological equations are then eliminated, and the $\wedge$ are switched to $\vee$, resulting in the system represented by Eq. \ref{eq:differenceP3}:
 \begin{equation}
 1 - x_0 = 1       \vee 
 1 - x_3 = 1 - x_1 - x_2 \vee
@@ -188,7 +190,7 @@ x_0   = 0
 \label{eq:differenceP3}
 \end{equation}
 
-The last step, apply a negation operation on the equations that, in the binary case, corresponding to the permutation $\rho $ or, equivalently, the implementation of the function $f(x) = 1 - (x)$. Eq. \ref{eq:differenceP4} represents the logical combination of equations resulting from these operations.
+The last step is to apply a negation operation on the equations that, in the binary case, corresponding to the permutation $\rho $ or, equivalently, the implementation of the function $f(x) = 1 - (x)$. Eq. \ref{eq:differenceP4} represents the logical combination of equations resulting from these operations.
 \begin{equation}
 1 - x_0 = 1 - 1         \vee 
 1 - x_3 = 1 - (1 - x_1 - x_2) \vee
@@ -197,7 +199,8 @@ x_0   = 1 - 0
 \label{eq:differenceP4}
 \end{equation}
 
-Is solved then the logical combination from equations, generating the solution set $S = \{\{x_0\to 1\},\{x_3\to -x_1-x_2+1\}\}$. As $S$ has more of a substitution set, both sets must be used to make substitutions in the template $T_{inv} = (1 - x_0, 1 - x_1, 1 - x_2, 1 - x_3, x_3, x_2, x_1, x_0)$, finally yielding the set of templates $\{(0, 1 - x_1, 1 - x_2, 1 - x_3, x_3, x_2, x_1, 1),(1 - x_0, 1 - x_1, 1 - x_2, x_1 + x_2, 1 - x_1 - x_2, x_2, x_1, x_0)\}$
+The equations are solved, generating the solution set $S = \{\{x_0\to 1\},\{x_3\to -x_1-x_2+1\}\}$. As $S$ has more than one item, both solutions must be used to make substitutions in the template $T_{inv} = (1 - x_0, 1 - x_1, 1 - x_2, 1 - x_3, x_3, x_2, x_1, x_0)$, finally yielding the set of templates $\{(0, 1 - x_1, 1 - x_2, 1 - x_3, x_3, x_2, x_1, 1),(1 - x_0, 1 - x_1, 1 - x_2, x_1 + x_2, 1 - x_1 - x_2, x_2, x_1, x_0)\}$
+
 
 In many cases, only the steps described so far are sufficient to make the difference between both templates. But there are cases in which the template $T_{subtrahend}$, corresponding to $T_{con}$ in the given example, the variables has substitutions that lead to invalid rules. This situation occurs, for example, when expanding the template $(1, 1 - x_1, 1 - x_2, 1 - x_1 - x_2, x_1 + x_2, x_2, x_1, 0)$ by assigning the value $1$ to the variables $x_1$ and $x_2$. By doing this is obtained in position $3$ (from right to left) the value of $2$, which is outside the entire range $[0, k-1]$, corresponding therefore to a rule that is not part of the treated space.
 
@@ -211,7 +214,7 @@ The first step of the difference operation occurs normally and generates the tem
 It is trivial to realize that any expansion of $T_i$ having the set of substitutions $\{x_1 = 1, x_2 = 1\}$ will cause the position $3$ and $4$ of the template display values that do not belong to the interval $[0,k-1]$.
 Hence all templates that have $\{x_1 = 1, x_2 = 1\}$ are complementary to the template $T_i$. So it will generate the template $(x_7, x_6, x_5, x_4, x_3, 1, 1, x_0)$, which is the exception template of $T_i$.
 
-Therefore every rule represented  by the template $T_{minuend}$ -- $T_{inv}$ in the given example -- and which is also represented by the exception template from the the intersection of $T_{minuend}$ with $T_{subtrahend}$ -- $T_i$ in this example - - should be represented by at least one of the templates resulting from the difference operation. For this, the algorithm that finds the difference between templates considers all exception templates found, intersects them with the $T_{minuend}$ and adds them to the set of templates obtained by the first steps of the difference operation. Thus, for the example presented above, the set of difference templates resultant is represented below:\begin{displaymath}
+Therefore every rule represented  by the template $T_{minuend}$ -- $T_{inv}$ in the given example -- and which is also represented by the exception template from the the intersection of $T_{minuend}$ with $T_{subtrahend}$ -- $T_i$ in this example -- should be represented by at least one of the templates resulting from the difference operation. For this, the algorithm that finds the difference between templates considers all exception templates found, intersects them with the $T_{minuend}$ and adds them to the set of templates obtained by the first steps of the difference operation. Thus, for the example presented above, the set of difference templates resultant is represented below:\begin{displaymath}
 \begin{split}
 \{(0, 1 - x_1, 1 - x_2, 1 - x_3, x_3, x_2, x_1, 1), \\
 (1 - x_0, 1 - x_1, 1 - x_2, x_1 + x_2, 1 - x_1 - x_2, x_2, x_1, x_0), \\
