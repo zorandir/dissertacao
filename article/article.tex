@@ -13,96 +13,71 @@
 
 \titlerunning{Difference operation between templates}
 
-\author{Zorandir Soares\inst{2} \and Maurício Verardo\inst{2} \and
-Pedro Paulo Balbi de Oliveira\inst{1}\inst{2}}
+% \author{Zorandir Soares\inst{2} \and Maurício Verardo\inst{2} \and
+% Pedro P. B. de Oliveira\inst{1}\inst{2}}
 
-\authorrunning{Zorandir Soares, Maurício Verardo, and Pedro de Oliveira} 
+% \authorrunning{Zorandir Soares, Maurício Verardo, and Pedro de Oliveira} 
 
-\tocauthor{Zorandir Soares, Maurício Verardo, and Pedro de Oliveira}
+% \tocauthor{Zorandir Soares, Maurício Verardo, and Pedro de Oliveira}
 
-\institute{Universidade Presbiteriana Mackenzie\\
-Faculdade de Computação e Informática
-\and
-Pós-Graduação em Engenharia Elétrica e Computação\\
-Rua da Consolação 896, Consolação\\
-01302-907 São Paulo, SP - Brazil\\
-\email{zorandir@gmail.com}\\
-\email{mauricio.verardo@gmail.com}\\
-\email{pedrob@mackenzie.br}}
+% \institute{Universidade Presbiteriana Mackenzie\\
+% Faculdade de Computação e Informática
+% \and
+% Pós-Graduação em Engenharia Elétrica e Computação\\
+% Rua da Consolação 896, Consolação\\
+% 01302-907 São Paulo, SP - Brazil\\
+% \email{zorandir@gmail.com}\\
+% \email{mauricio.verardo@gmail.com}\\
+% \email{pedrob@mackenzie.br}}
 
-\maketitle              % typeset the title of the contribution
+\maketitle
 
 \begin{abstract}
-A cellular automata template is a generalization of the state transition tables of cellular automata. Templates has recently been introduced to represent families of cellular automata that share a given property. This paper introduces the operation of difference between templates, used to find cellular automata that have a given property but lack another one. This paper also introduce a process called \textit{exception templates} that is required to this operation. Experimental results of both techniques are illustrated with examples in the space of elementary cellular automata.
-\keywords{cellular automata, rule space, templates, difference between templates, exception templates.}
+A cellular automata template is a generalisation of the state transition tables of cellular automata. Templates have recently been introduced to represent families of cellular automata that share a given property. This paper introduces the operation of difference between templates, used to find cellular automata that have a given property but lack another. We also introduce a process called \textit{exception templates} that is required to this operation. Experimental results of both techniques are illustrated with examples in the space of elementary cellular automata.
+\keywords{Cellular automata, rule space, templates, difference between templates, exception templates.}
 \end{abstract}
 %
 \section{Introduction}
 \label{sec:introducao}
-Cellular automata (CAs) are dynamical systems typically discrete in time, space and states.
-CAs can produce behavior of great complexity based on simple rules of local action \cite{wolfram2002}. The study of classical problems of cellular automata, like the parity problem \cite{Betel2013} and the density classification problem \cite{deOliveira2014density} can help to understand how this complex behavior emerges.
+Cellular automata (CAs) are dynamical systems typically discrete in time, space and state variables.
+CAs can produce behavior of great complexity even based on simple rules of local action \cite{wolfram2002}. The study of classical problems of cellular automata, like the parity problem \cite{Betel2013} and the density classification problem \cite{deOliveira2014density} can help understand how this complex behavior emerges.
 
-The most basic approach to find a suitable solution to classic problems consists in testing each of the rules of a particular family of CAs in order to see if any of these rules are able to solve the problem. However, this approach shows to be inefficient or impractical for larger families of CAs, which is the most usual panorama in literature.
-% Não entendi muito bem o que você quis dizer com "However, this approach shows to be inefficient or impractical for a large number of families in CAs, which is the most usual panorama in literature." 
-%FEITO --> Alias, será que você não quis dizer "for larger families of CAs" ao invés de "for a large number of families in CAs"?
+The most basic approach to find a suitable solution to classic problems consists in testing each of the rules of a particular family of CAs in order to check whether some rule is able to solve the problem. However, this approach shows to be inefficient or impractical for larger families of CAs, which is the most usual panorama in literature.
 
-Evolutionary computing is constantly used to deal with larger families. This type of algorithm has proven very effective to find solutions for the density classification problem \cite{wolz2008very}.
+Evolutionary computing has been consistently used to deal with larger families. This type of algorithm has proven very effective to find solutions for density and parity classification \cite{wolz2008very}.
 
-Another strategy to find suitable rules is restricting the search space by rules that have a given property. To represent a subspace with a particular property without the need of enumerate all of the space rules, one can use \textit{templates}, as proposed by De Oliveira and Verardo  \cite{deOliveira2014,deOliveira2014b}.
+Another strategy to find suitable rules is restricting the search space by rules that have a given property. In order to represent a subspace with a particular property without the need of enumerate all of the rules in the space, one can use \textit{templates}, as proposed by De Oliveira and Verardo  \cite{deOliveira2014,deOliveira2014b}.
 
-There are two operations that can be applied to templates: \textit{expansion} and \textit{intersection} \cite{deOliveira2014,deOliveira2014b}. In this paper we introduce a new operation, named \textit{difference between templates} and the operation that generates the \textit{exception templates}. Moreover, application of these operations are presented in this paper with practical examples.
-% Po, "difference between templates" é um nome meio grande...hahaha será que não tem outro melhor?
+Up to the moment, two key operations have been defined to be applied to templates: \textit{expansion} and \textit{intersection} \cite{deOliveira2014,deOliveira2014b}. Here we introduce two new operations, namely, the \textit{difference between templates} and another that generates the \textit{exception templates}. Moreover, application of these operations are presented with simple examples.
 
-This paper is organized in sections. The next section, \ref{sec:automatos_celulares}, presents some basic concepts about cellular automata. Following, Section \ref{sec:templates} presents more details about templates and its major operations. The Section \ref{sec:diferenca_entre_templates_e_templates_de_excecao} introduces the operation of difference between templates and the operation that generates what we call the \textit{exception templates}, as well as their applications. Finally, the Section \ref{sec:consideracoes_finais} makes closing remarks about the news algorithm.
+This paper is organised as follows. Next, Section \ref{sec:automatos_celulares} gives some basic concepts about cellular automata. Following, Section \ref{sec:templates} presents more details about templates and its major operations. Section \ref{sec:diferenca_entre_templates_e_templates_de_excecao} introduces the operation of difference between templates and the one that generates the \textit{exception templates}, as well as their applications. The paper concludes with Section \ref{sec:consideracoes_finais} with closing remarks.
 
 \section{Cellular Automata}
 \label{sec:automatos_celulares}
-Cellular Automata are simple mathematical idealizations of natural systems \cite{wolfram1994cellular}. They consist of a lattice of discrete cells, each of which can be a state of a finite set of states in a given time step. The values (or states) of the cells evolve in discrete time steps usually according to deterministic rules that specify the state of each cell according to the states of their neighboring cells \cite{wolfram1994cellular}.
+Cellular Automata are simple mathematical idealisations of natural systems \cite{wolfram1994cellular}. They consist of a lattice of discrete cells, each of which can take on one of a finite set of discrete states in a given time step. The states of the cells evolve in discrete time steps usually according to deterministic rules that specify the state of each cell according to those of their neighbouring cells \cite{wolfram1994cellular}.
 
-Conventionally, it is assumed that a cellular automaton cells have $k$ states which are represented by integer values in the range of $[0, k-1]$ The state of a cell is changed by the local function of the automaton (a rule), formed by the state transitions set of a cell, based on its current state and in the states of adjacent cells. To update the values of a cell by local functions, usually a radius $r$ is defined as the number of adjacent cells to be analyzed in each direction by local functions.
+We assume that the cells have $k$ possible states which are represented by integer values in the range of $[0, k-1]$. The state of a cell is changed by the local function of the automaton (its rule), formed by a state transition set, that applies to its current state and those of adjacent cells. In order to define the size of the neighbourhood of the cells, usually a radius $r$ is defined encompassing the extent by which the neighbouring cells will be accounted for.
 
-A family (space) of cellular automata, is defined by the radius $r$ and the number of states $k$. One-dimensional cellular automata with $r=1$ e $k=2$ are called the space of elementary cellular automata.
-% FEITO ->> O PP não costuma curtir muito o termo "família". Normalmente usamos "espaço" mesmo. Ele provavelmente vai pedir pra vc mudar isso no artigo inteiro. hahahah
+A family (or space) of cellular automata, is defined by the radius $r$ and the number of states $k$. One-dimensional cellular automata with $r=1$ e $k=2$ constitute the so-called elementary cellular automata. In order to refer to the rules of a space, it is common to use the number obtained by the decimal representation of the outputs of the state transitions, sorting the neighbourhoods lexicographically from the largest to smallest state; for instance, in the elementary space, the number of the rules corresponds to the decimal sequence formed by the 8-bit output, arranged from neighbourhood 111 down to 000. 
 
-To refer to the rules of a space, it is common to use the number obtained by the outputs decimal representation  of the state transitions, sorting the lexicographically neighborhoods from largest to smallest state; for instance, in the elementary space, the number of the rules corresponds to the decimal sequence formed by the 8-bit output, arranged from the neighborhood 111 to 000. 
-
-In other words, as neighbourhood are sets of adjacent cells that influence in the state of the current cell in the next time step, all CA has a rule that relates each possible neighborhood with its state after a time step. This rule can be represented by rule tables. Rule tables are n-tuples, where $ n = 2r + 1$  in one-dimensional case, where the elements of that tuple are all possible neighborhoods and their respective state transitions. 
-
-For example, consider the rule table of the elementary CA 60, as shown below:
-\begin{displaymath}
-\begin{split}
-(
-(1,1,1),0),(1,1,0),0),(1,0,1),1),(1,0,0),1),\\
-(0,1,1),1),(0,1,0),1),(0,0,1),0),(0,0,0),0)
-)
-\end{split}
-\end{displaymath}
-
-\begin{figure}[!t]
+\begin{figure}
   \centering
   \includegraphics[width=0.7\textwidth]{fig_ruleIcon60.png}
   \caption{Rule table of the elementary CA 60.}
   \label{fig:table60}
 \end{figure}
-This rule table can also be illustrated as in Figure \ref{fig:table60}, that is the iconic representation of rule table of the elementary CA 60.
 
-%Esse paragrafo tá meio confuso... eu entendi pq já conheço a idéia, mas uma pessoa que nunca viu isso provavelmente vai boiar.
-% Aqui também parece um bom lugar pra introduzir o termo "rule table" e usar ele mais a frente
-% E você começou a usar o termo neighborhood sem explicar o que é o neighborhood.
+In other words, as neighbourhood are sets of adjacent cells that determine the state of the current cell in the next time step, all CA has a rule that relates each possible neighbourhood with the state of the central cell in the next time step. This rule can then be represented by rule tables with $n$-tuples, $n = 2r + 1$  in the one-dimensional case. For example, the rule table of the elementary CA 60 is given by 
+((1,1,1),0), (1,1,0),0), (1,0,1),1), (1,0,0),1), (0,1,1),1), (0,1,0),1), (0,0,1),0), (0,0,0),0)), and illustrated in Figure \ref{fig:table60} by its iconic representation table of the elementary CA 60.
 
+Since the number of rules in a space is given by $k^{k^{2r+1}}$, any increase in the values of $k$ and $r$ generates families with an exponentially increase in the number of rules. An approach to handle this problem is to use static properties as a hint on how the CA will behave during its evolution. A static property is obtained directly from the CA's rule table. The use of static properties can highly restrict the initial search space. With templates we can represent a set of rules with a certain static property. For the sake of simplicity, whenever we refer to a CA template from now on, we mean one-dimensional and binary CA template.
 
+In order to explain how templates work, it is important to understand the properties of number conservation, internal symmetry and colour blindness, that will be used in later examples.
 
-The number of rules in a space is provided by $k^{k^{2r+1}}$, making it easy to realize that any increase in the values of $k$ and $r$ generates families with a large amount of rules. An approach to handle this problem is to use static properties as a hint on how the CA will behave during its evolution. A static property is obtained directly from the CA's rule table. The use of static properties can highly restrict the initial search space. With templates can be represented a set of rules with certain static property.
-% Na verdade não é a propriedade que restringe o espaço. Você pode usar um template associado a uma propriedade pra restringir o espaço. As duas últimas frases tão meio confusas.
-
-For present purposes, whenever we refer to a CA template in this paper, we mean one-dimensional and binary CA template.
-
-In order to explain how templates work, it is important to understand the properties of number conservation, internal symmetry and color blindness, that will be used in later examples.
-
-\subsection{Number Conservation, Internal Symmetry and Color Blind Cellular Automata}
+\subsection{Number Conservation, Internal Symmetry and Colour Blind Cellular Automata}
 Number conservation is a static property that determines that the sum of the states of a particular cellular automata should not change during the CA's evolution, regardless of the initial configuration.
 
-According to Boccara and Fukś \cite{boccara2002}, a CA is conservative when its local function $f$, applied to every neighborhood $(\alpha_0,\alpha_1, \dots, \alpha_{n-1})$, considering $n=2r+1$, satisfies the conditions described in Eq. \ref{eq:conservativeCA}.
+According to Boccara and Fukś \cite{boccara2002}, a CA is conservative when its local function $f$, applied to every neighbourhood $(\alpha_0,\alpha_1, \dots, \alpha_{n-1})$, considering $n=2r+1$, satisfies the conditions described in Eq. \ref{eq:conservativeCA}.
 \begin{equation}
 \begin{split}
 f(\alpha_0,\alpha_1, \dots,\alpha_{n-1}) = \alpha_0 + (\sum_{i=0}^{n-2}f(0_0,0_1, \dots,0_i,\alpha_1,\alpha_2, \dots,\alpha_{n-1}) \\- f(0_0,0_1, \dots,0_i,\alpha_0,\alpha_1, \dots,\alpha_{n-i-1}))
@@ -111,52 +86,36 @@ f(\alpha_0,\alpha_1, \dots,\alpha_{n-1}) = \alpha_0 + (\sum_{i=0}^{n-2}f(0_0,0_1
 \end{equation}
 
 %\subsection{Internal symmetry}
-Another interesting property is the internal symmetry. But to grasp the internal symmetry property, the comprehension of the concept of rule equivalence is needed. The following explanations are valid for binary rules, although it is possible to generalize to $k$ states.
-
-Given the rule table of a CA, there are three transformations that can be applied to it, such that the resulting rule table is  represents an equivalent rule to the original CA: \textit{reflection}, \textit{conjugation} and \textit{composition}. Reflection is the transformation obtained by mirroring the bits of the neighborhoods in the rule table. The conjugation is obtained by reversing all the states of the cells of the rule table. The last one is obtaines by composing both conjugation and reflection, regardless of the order.
-
-  \begin{figure}[!ht]
+Another interesting property is internal symmetry. But in order to grasp its meaning, first we need the concept of rule equivalence. The following explanations are valid for binary rules, although it is possible to generalise the notion to arbitrary $k$ states.
+  \begin{figure}
     \centering
     \includegraphics[width=0.7\textwidth]{fig_ruleIcon102.png}
-    \caption{Rule table of elementary CA 102 obtained through transformation by reflection applied to the rule table of elementary CA 60.}
+    \caption{Elementary CA 102, equivalent by reflection to elementary CA 60.}
     \label{fig:table102}
   \end{figure}
+  
+Given the rule table of a CA, there are three transformations that can be applied to it, such that the resulting rule table represents an equivalent rule to the original CA: \textit{reflection}, \textit{conjugation} and \textit{composition}. Reflection is the transformation obtained by mirroring the bits of the neighbourhoods in all neighbourhoods of the rule table, while preserving the same output. Conjugation is obtained by flipping all states of the cells of the rule table. Finally, by composition we mean the mathematical notion of composing conjugation and reflection, regardless of the order. Figure \ref{fig:table102} illustrates the process; after applying the reflection transformation in elementary rule 60 we obtain the elementary CA 102.
 
-To illustrate these dynamic equivalences as well as the transformations, consider the rule table of the elementary CA 60, as shown in Figure \ref{fig:table60}. When applying the transformation by reflection in CA 60 we obtain the elementary CA 102, illustrated in Figure \ref{fig:table102}.
+The internal symmetry is defined by the number of state transitions that remains the same after a specific transformation has been applied. For example, the internal symmetry value by reflection of the elementary CA 60 is 4 because it shares the state transitions $((1,1,1),0)$, $((1,0,1),1)$, $((0,1,0),1)$ and $ ((0,0,0),0)$ with rule 102, its equivalent rule by reflection.
 
-The internal symmetry is defined by the number of state transitions which remain identical after a specific transformation is applied. For example, the elementary CA 60 has a value of internal symmetry by reflection equal to 4, because it shares the state transitions $((1,1,1),0)$, $((1,0,1),1)$, $((0,1,0),1)$ and $ ((0,0,0),0)$ with the resulting rule of its transformation by reflection, the rule 102.
-
-% USO POUCO, deixei quieto --->>> Você pode explicar no capítulo sobre CAs o que é o espaço elementar, e introduzir a abreviação ECA (Elementary CA), pra não ter que ficar repetindo "of the elementary space".
-
-%\subsection{Color blind cellular automata}
-Finnaly, the color blind property is directly related to transformation by conjugation, and the color blind rules have maximum internal symmetry by conjugation.
-
-Then, a CA is considered color blind when it is invariant to the application of permutations in the states of transition table \cite{salo2013color}. Naturally, there is generally $k!$ permutations, but only one in the binary case, which can be described as $\{0 \to 1 ,\, 1 \to 0\}$.
+%\subsection{Colour blind cellular automata}
+Finnaly, the colour blind property is directly related to transformation by conjugation, so that the colour blind rules are those with maximum internal symmetry by conjugation. Then, a CA is considered colour blind when it is invariant to the application of all state permutations in the states of transition table \cite{salo2013color}. Naturally, there is generally $k!$ permutations, but only one in the binary case, which can be described as $\{0 \to 1 ,\, 1 \to 0\}$.
 
 \section{Templates}
 \label{sec:templates}
-A template is a generalization of the state transition tables of CAs through variables or functions. A template represents a set of CAs which might share of a given static property. Templates were created and implemented by De Oliveira and Verardo \cite{deOliveira2014} and are currently available in the open source library \textit{CATemplates} \cite{CATemplates} on GitHub.
-%FEITO->>> Lá no abstract, você disse que templates são uma "notação criada recentemente" aqui você diz que eles são uma "generalização da tabela de transições". A definição certa é a generalização da tabela de transições. Arruma no abstract!
-%FEITO->>> Outra coisa: não são só variáveis que podem entrar no template...logo aqui em baixo você diz que cada item é uma função!
+A template is a generalisation of the state transition tables of CAs by means of variables or functions. A template represents a set of CAs which share a given static property. Templates were created and implemented by De Oliveira and Verardo \cite{deOliveira2014,deOliveira2014b} and are currently available in the open source library \textit{CATemplates} \cite{CATemplates} on GitHub.
 
-Formally, a \textit{template} is an $n$-tuple formed by $k^{2r+1}$ items, wherein each item $i$ represents a function $g_i(x_{k^{2r+1}-1},x_{k^{2r+1}-2},\dots,x_1,x_0)$. By default, a template variable $x_i$ can assume any state between 0 and $k-1$, but their values can be limited by the notation $x_i \in C$, in which $C$ is a set representing the possible values of $x_i$. %TODO verificar essa função $g_i$
+Formally, a \textit{template} is an $n$-tuple formed by $k^{2r+1}$ items, wherein each item $i$ represents a function $g_i(x_{k^{2r+1}-1},x_{k^{2r+1}-2},\dots,x_1,x_0)$. By default, a template variable $x_i$ can take on any state between 0 and $k-1$, but their values can be limited by the notation $x_i \in C$, in which $C$ is a set representing the possible values of $x_i$. %TODO verificar essa função $g_i$
 
-As an example, the template of the elementary space $T_1 = (1,1,1,1,1-x_1,x_2,x_1,0)$ represents all the rules which have at position 0 (always from right to left) state 0, at positions 4, 5, 6 and 7 the state 1, at positions 1 and 2 any state in the interval $ [0, k-1] $ and in position 3 the complementary state to the value of position 1. Therefore the template $T_1$ represents the set of elementary cellular automata in its decimal form $\{248,242,252,246\}$ or in binary form as presented below:
-\begin{displaymath}
-\{(1,1,1,1,1,0,0,0),(1,1,1,1,0,0,1,0),(1,1,1,1,1,1,0,0),(1,1,1,1,0,1,1,0)\}
-\end{displaymath}
+As an example, the template of the elementary space $T_1 = (1,1,1,1,1-x_1,x_2,x_1,0)$ represents all rules that have state 0 at position 0 (always from right to left), state 1 at positions 4, 5, 6 and 7, any state in the interval $[0, k-1]$ at positions 1 and 2, and in position 3 the complementary state to the value of position 1. Therefore the template $T_1$ represents the set of elementary rules $\{248,242,252,246\}$, that correspond in binary form, respectively to $\{(1,1,1,1,1,0,0,0), (1,1,1,1,0,0,1,0), (1,1,1,1,1,1,0,0), (1,1,1,1,0,1,1,0)\}$.
 
 The process of finding all the rules represented by a template is called \textit{expansion}. There are several generator algorithms of templates representing rules with certain property implemented in the library \textit{CATemplates} \cite{CATemplates}.
 
-The template $T_{comp} = (1 - x_0, 1 - x_4, 1 - x_2, x_4, 1 - x_1, x_2, x_1, x_0)$ of the elementary CAs, for example, when expanded generates only rules that have a maximum internal symmetry by reflection and by conjugation. %FEITO ----->>> de novo, composition não é o nome da transformação. Ela é só a composição da conjugação com a reflexão.
- But the template $T_{cb} = (1 - x_0, 1 - x_1, 1 - x_2, 1 - x_3, x_3, x_2, x_1, x_0)$ of the elementary CAs expands only the rules with color blind property.
+The template $T_{comp} = (1 - x_0, 1 - x_4, 1 - x_2, x_4, 1 - x_1, x_2, x_1, x_0)$ of the elementary CAs, for example, when expanded generates only rules that have maximum internal symmetry by reflection and by conjugation. But the template $T_{cb} = (1 - x_0, 1 - x_1, 1 - x_2, 1 - x_3, x_3, x_2, x_1, x_0)$ of the elementary CAs expands only to colour blind rules.
 
-Besides the possibility of expansion of templates, it has been developed by De Oliveira e Verardo \cite{deOliveira2014b} an algorithm to generates templates that represent the intersection between two sub-spaces of rules represented by distinct templates. To illustrate, consider the search for a rule set composed by CAs that are both color blind and have maximum internal symmetry by composition of reflection and conjugation. %FEITO ---->>>> COMPOSITIOOOOOOON hahaha
- To find this rule set, it is necessary to perform two steps: first one must match the two templates that represent the desired properties, thus forming an equation system. When the equation system is solved, relationships are generated between the variables that when applied to templates received as input will result in the template representing the intersection.
- % esse último parágrafo tá meio confuso...
+Besides the possibility of template expansion, De Oliveira and Verardo \cite{deOliveira2014,deOliveira2014b} also developed an algorithm to generate templates that represent the intersection between two sub-spaces of rules represented by distinct templates. To illustrate, consider the search for a rule set composed by CAs that are both colour blind and have maximum internal symmetry by composition of reflection and conjugation. In order to find this rule set, two steps need to be performed: first one must match the two templates that represent the desired properties, thus forming an equation system defined by the template components. Them by solving the equation system, relationships are generated between the variables that, when applied to templates received as input, will result in the template representing the intersection.
 
-As an example, consider the template $T_{comp}$ representing rules with a maximum symmetry by composition and the template $T_{cb}$ representing color blind rules. The first step to find the intersection between these two template is equate them generating the equation system represented by Eq. \ref{eq:interseccaoP1}:
-% O título do artigo já diz que você tá trabalhando com CAs binários. Acho que você pode considerar falar no começo que o seu artigo só usa $k=2$ pra não precisar ficar falando sempre.
+For instance, consider the template $T_{comp}$ representing rules with maximum symmetry by composition and the template $T_{cb}$ representing colour blind rules. The first step towards the intersection between the two template is to equate them, which leads to the equation system represented by Eq. \ref{eq:interseccaoP1}:
 \begin{equation}
 \left\{\begin{matrix}
 1 - x_0 & = & 1 - x_0 \\
@@ -171,21 +130,20 @@ x_0   & = & x_0   \\
 \label{eq:interseccaoP1}
 \end{equation}
 
-Then, the system is solved yielding the solution set $S = \{x_3 = 1-x1, x_4 = x_1\}$. This solution set is then applied as a set of replacements to the templates received as parameter. If the templates received as parameter does not show variables constraints, the result of both replacements can be chosen, ending the process and resulting in the template $(1 - x_0, 1 - x_1, 1 - x_2, x_1, 1 - x_1, x_2, x_1, x_0)$, which is the intersection of templates $T_{comp}$ and $T_{cb}$ and, therefore, represents all the rules of the elementary space which are color blind and present maximum symmetry by composition.
-% Você fala várias vezes sobre parametros, mas acho que não tá muito obvio que você tá explicando um algoritmo. 
+Then, the system is solved yielding the solution set $S = \{x_3 = 1-x1, x_4 = x_1\}$. This solution set is then applied as a set of replacements to the templates received as parameter. If the latter do not show variable constraints, the result of either replacements can be chosen, thus ending the process and resulting in the template $(1 - x_0, 1 - x_1, 1 - x_2, x_1, 1 - x_1, x_2, x_1, x_0)$; this template is the intersection of $T_{comp}$ and $T_{cb}$ and, therefore, represents all elementary rules that are colour blind and possess maximum symmetry by composition.
 
-If at least one of the templates presents variables with restriction, a second step should be carried out. Therefore, the expressions that restrict the variables are extracted, generating a set which is then translated into a new equation system to be solved, whose solution set is then applied as a set of replacements in the templates passed as parameter.
+If at least one of the templates presents variables with restriction, a second step should be carried out. Therefore, the expressions that restrict the variables are extracted, generating a set that is then translated into a new equation system to be solved; the new solution set is then applied as a set of replacements in the templates passed as parameter.
 
-Inspired by the intersection operation, we introduce in this article the operation of difference between templates.
+Inspired by the intersection operation, here we introduce the operation of difference between templates.
 
 \section{Difference Between Templates and Exception Templates}
 \label{sec:diferenca_entre_templates_e_templates_de_excecao}
 
-The difference operation has two templates as an input parameter, which we will call $T_{minuend}$ and $T_{subtrahend}$. This operation output will result in a set of templates that represents all the rules represented by the template $T_{minuend}$ and are not represented by the $T_{subtrahend}$.
+The difference operation has two templates as input parameters, which we call $T_{minuend}$ and $T_{subtrahend}$. The operation’s output results in a set of templates that represents all rules accounted for template $T_{minuend}$ but not by $T_{subtrahend}$.
 
-The difference operation is a process with several steps. The first consists in a process of intersection between the two selected templates set as parameters, resulting in a template $T_{int}$. If there is no intersection between the two original template, the result of the difference is the actual $T_{minuend}$. If there is an intersection, it is matched to the template $T_{minuend}$, thereby generating logical combinations of equations. Then the algorithm removes the tautological equations and applies a negation operation in the equation, which in the binary case is to just make the permutations $\rho = (0 \to 1, 1 \to 0)$ to the result of the equations. Then, the logical operator is exchanged from $\wedge$ to $\vee$ and the system generated by this process is solved, thereby generating a set of replacement sets that should be applied to the template $T_{minuend}$. If the replacement set is empty or invalid (ie, reference non existing rules in the space, as exemplified below), all the rules pertaining to $T_{minuend}$ also belong to the $T_{subtrahend}$ and, therefore, the algorithm returns an empty set.
+The difference operation is a process with several steps. The first consists in the process of intersecting the two parameter templates, resulting in template $T_{int}$. If the intersection is null, the outcome of the difference is $T_{minuend}$ itself. Otherwise, it is matched to template $T_{minuend}$, thus generating logical combinations of equations. Then, the tautological equations, if any, are removed, and the remaining equations subjected to a negation operation, which in the binary case means the permutations $\rho = (0 \to 1, 1 \to 0)$. The existing occurrences of the logical operator $\wedge$ is then replaced by $\vee$ and the resulting system of equations solved, which results in a set of replacements in the variables of $T_{minuend}$. If the replacement set is empty or invalid (due to references to non existing rules in the space, as exemplified below), all rules pertaining to $T_{minuend}$ also belong to $T_{subtrahend}$ and, therefore, the process ends up with an empty set.
 
-To better understand the process, consider the template that represents the color blind rules $T_{cb} = (1 - x_0, 1 - x_1, 1 - x_2, 1 - x_3, x_3, x_2, x_1, x_0)$ and number conserving templates $T_{con} = (1, 1 + x_2 - x_3, 1 - x_2, 1 - x_1 - x_2, x_3, x_2, x_1, 0)$, both generated using the library \textit{CATemplates}. The first step to find the difference from $T_{cb}$ to $T_{con}$ is to make the intersection between them, which results in $T_{int} = (1, 1 - x_1, 1 - x_2, 1 - x_1 - x_2, x_1 + x_2, x_2, x_1, 0)$. As the intersection is not null, the next step is to equate $T_{cb}$ with $T_{int}$, which generates the equations system represented by Eq. \ref{eq:differenceP1}: \begin{equation} \left\{\begin{matrix} 1 - x_0 & = & 1       \\ 1 - x_1  & = & 1 - x_1     \\ 1 - x_2  & = & 1 - x_2     \\ 1 - x_3  & = & 1 - x_1 - x_2 \\
+For a better apprecisation of the process, consider the template that represents the colour blind rules $T_{cb} = (1 - x_0, 1 - x_1, 1 - x_2, 1 - x_3, x_3, x_2, x_1, x_0)$ and number conserving templates $T_{con} = (1, 1 + x_2 - x_3, 1 - x_2, 1 - x_1 - x_2, x_3, x_2, x_1, 0)$, both generated using the library \textit{CATemplates}. The first step to find the difference from $T_{cb}$ to $T_{con}$ is to make the intersection between them, which results in $T_{int} = (1, 1 - x_1, 1 - x_2, 1 - x_1 - x_2, x_1 + x_2, x_2, x_1, 0)$. Since the intersection is not null, the next step is to equate $T_{cb}$ with $T_{int}$, which generates the equation system represented by Eq. \ref{eq:differenceP1}: \begin{equation} \left\{\begin{matrix} 1 - x_0 & = & 1       \\ 1 - x_1  & = & 1 - x_1     \\ 1 - x_2  & = & 1 - x_2     \\ 1 - x_3  & = & 1 - x_1 - x_2 \\
 x_3   & = & x_1 + x_2   \\
 x_2   & = & x_2       \\
 x_1   & = & x_1       \\
@@ -209,7 +167,7 @@ x_0   = 0
 \end{split}
 \end{equation}
 
-All tautological equations are then eliminated, and the $\wedge$ are switched to $\vee$, resulting in the system represented by Eq. \ref{eq:differenceP3}:
+All tautological equations are then eliminated, and the $\wedge$ symbol is replaced by $\vee$, resulting in the system shown in Eq. \ref{eq:differenceP3}:
 \begin{equation}
 1 - x_0 = 1       \vee 
 1 - x_3 = 1 - x_1 - x_2 \vee
@@ -218,7 +176,7 @@ x_0   = 0
 \label{eq:differenceP3}
 \end{equation}
 
-The last step is to apply a negation operation on the equations that, in the binary case, corresponding to the permutation $\rho $ or, equivalently, the implementation of the function $f(x) = 1 - (x)$. Eq. \ref{eq:differenceP4} represents the logical combination of equations resulting from these operations.
+The last step is to apply the negation operation to the equations; in the binary case, this means the swaps $0 \to 1$ and $1 \to 0$ or, equivalently, the application of function $f(x) = 1 - (x)$. Eq. \ref{eq:differenceP4} represents the logical combination of equations resulting from these operations.
 \begin{equation}
 1 - x_0 = 1 - 1         \vee 
 1 - x_3 = 1 - (1 - x_1 - x_2) \vee
@@ -227,26 +185,20 @@ x_0   = 1 - 0
 \label{eq:differenceP4}
 \end{equation}
 
-The equations are solved, generating the solution set $S = \{\{x_0\to 1\},\{x_3\to -x_1-x_2+1\}\}$. As $S$ has more than one item, both solutions must be used to make substitutions in the template $T_{cb} = (1 - x_0, 1 - x_1, 1 - x_2, 1 - x_3, x_3, x_2, x_1, x_0)$, finally yielding the set of templates $\{(0, 1 - x_1, 1 - x_2, 1 - x_3, x_3, x_2, x_1, 1),(1 - x_0, 1 - x_1, 1 - x_2, x_1 + x_2, 1 - x_1 - x_2, x_2, x_1, x_0)\}$
+The equations are solved, generating the solution set $S = \{\{x_0\to 1\},\{x_3\to -x_1-x_2+1\}\}$. As $S$ has more than one item, both solutions must be used to make substitutions to the template $T_{cb} = (1 - x_0, 1 - x_1, 1 - x_2, 1 - x_3, x_3, x_2, x_1, x_0)$, finally yielding the set of templates $\{(0, 1 - x_1, 1 - x_2, 1 - x_3, x_3, x_2, x_1, 1),(1 - x_0, 1 - x_1, 1 - x_2, x_1 + x_2, 1 - x_1 - x_2, x_2, x_1, x_0)\}$
 
+In many cases, only the steps described so far are sufficient to make the difference between both templates. But there are cases in which the template $T_{subtrahend}$, corresponding to $T_{con}$ in the given example, has substitutions that lead to invalid rules. This situation occurs, for example, when expanding the template $(1, 1 - x_1, 1 - x_2, 1 - x_1 - x_2, x_1 + x_2, x_2, x_1, 0)$ by assigning the value $1$ to the variables $x_1$ and $x_2$. This expansions yields $2$ at position $3$ (from right to left) of the template, which is outside of the range $[0, k-1]$, corresponding therefore to a rule that is not part of the space at issue.
 
-In many cases, only the steps described so far are sufficient to make the difference between both templates. But there are cases in which the template $T_{subtrahend}$, corresponding to $T_{con}$ in the given example, has substitutions that lead to invalid rules. This situation occurs, for example, when expanding the template $(1, 1 - x_1, 1 - x_2, 1 - x_1 - x_2, x_1 + x_2, x_2, x_1, 0)$ by assigning the value $1$ to the variables $x_1$ and $x_2$. This expansions yields a $2$ at position $3$ (from right to left) of the template, which is outside of the range $[0, k-1]$, corresponding therefore to a rule that is not part of the treated space.
-
-To work around this problem, it is necessary that after the first steps of the difference operation, we also check for exception templates at the intersection of the $T_{minuend}$ and $T_{subtrahend}$, ie, templates which represent a set of substitutions that take the template passed as parameter to display  substitutions outside the range $[0,k-1]$. %TODO melhorar esse texto
-% Não entendi absolutamente nada desse paragrafo. hahahaha
-% Explica primeiro o que é um exception template, depois pra que ele serve. Se não fica difícil entender.
-
-For example, we will continue the difference operation between $T_{cb}$ and $T_{con}$. To this end, consider the template $T_{int} = (1, 1 - x_1, 1 - x_2, 1 - x_1 - x_2, x_1 + x_2, x_2, x_1, 0)$ the intersection between them, for $k=2$.
-% Tá confuso...T_{int} é a interseção entre eles? normalmente _i é usado pra indicar índice, acho que não é um bom nome pra um template se você quiser dizer que é um template de interseção.
+In order to circumvent this problem, it is necessary that, after the first steps of the difference operation, we also check for exception templates at the intersection of $T_{minuend}$ and $T_{subtrahend}$, that is, templates that represent substitutions that outside the range $[0,k-1]$. For example, let us carry on with the difference operation between $T_{cb}$ and $T_{con}$, and consider the template $T_{int} = (1, 1 - x_1, 1 - x_2, 1 - x_1 - x_2, x_1 + x_2, x_2, x_1, 0)$ the intersection between them, for $k=2$.
 
 The first step of the difference operation occurs normally and generates the templates: 
 \begin{displaymath}
 \{(x_7, x_6, x_5, x_4, x_3, x_2, x_1, 1),(x_7, x_6, x_5, x_1 + x_2, x_3, x_2, x_1, x_0)\}
 \end{displaymath}
-In this case, any expansion of $T_{int}$ having the set of substitutions $\{x_1 = 1, x_2 = 1\}$ will cause the position $3$ and $4$ of the template display values that do not belong to the interval $[0,k-1]$.
-Hence all templates that have $\{x_1 = 1, x_2 = 1\}$ are complementary to the template $T_{int}$. So it will generate the template $(x_7, x_6, x_5, x_4, x_3, 1, 1, x_0)$, which is the exception template of $T_{int}$.
+In this case, any expansion of $T_{int}$ including the set of substitutions $\{x_1 = 1, x_2 = 1\}$ will cause the positions $3$ and $4$ of the template to display values that do not belong to the interval $[0,k-1]$.
+Hence, all templates that have $\{x_1 = 1, x_2 = 1\}$ generate only rules not represented by the template $T_{int}$. So the difference operation will also generate the template $(x_7, x_6, x_5, x_4, x_3, 1, 1, x_0)$, which is the exception template of $T_{int}$.
 
-Therefore every rule represented  by the template $T_{minuend}$ -- $T_{cb}$ in the given example -- and which is also represented by the exception template from the the intersection of $T_{minuend}$ with $T_{subtrahend}$ -- $T_{int}$ in this example -- should be represented by at least one of the templates resulting from the difference operation. For this, the algorithm that finds the difference between templates considers all exception templates found, intersects them with the $T_{minuend}$ and adds them to the set of templates obtained by the first steps of the difference operation. Thus, for the example presented above, the set of difference templates resultant is represented below:\begin{displaymath}
+Therefore every rule represented  by the template $T_{minuend}$ -- $T_{cb}$ in the given example -- and which is also represented by the exception template from the the intersection of $T_{minuend}$ and $T_{subtrahend}$ -- $T_{int}$ in this example -- should be represented by at least one of the templates resulting from the difference operation. For this, the algorithm that finds the difference between templates considers all exception templates found, intersects them with $T_{minuend}$ and adds them to the set of templates obtained from the first steps of the difference operation. Thus, for the example discussed above, the resulting set of difference templates is represented as:\begin{displaymath}
 \begin{split}
 \{(0, 1 - x_1, 1 - x_2, 1 - x_3, x_3, x_2, x_1, 1), \\
 (1 - x_0, 1 - x_1, 1 - x_2, x_1 + x_2, 1 - x_1 - x_2, x_2, x_1, x_0), \\
@@ -255,38 +207,23 @@ Therefore every rule represented  by the template $T_{minuend}$ -- $T_{cb}$ in t
 \end{split}
 \end{displaymath}
 
-One advantage of the difference operation between templates is that it is possible to find answers to various non-trivial questions, for example, determine which rules have the numerical conservability property, but do not present at the same time maximum symmetry by composition and color blind property. % Esse paragrafo tá meio vago
- To answer the question simply pick the template of conservatives rules, and then subtract from it the intersection between the rules template with maximum symmetry by composition and the color blind template. In this particular case, the result is a set of templates representing all the conservative rules except the identity rule. % Isso parece mais o resultado de um experimento do que uma explicação de como usar a parada.
+One advantage of the difference operation between templates is that it allows for finding answers to various non-trivial questions, such as to determine which rules are number conserving but not colour blind, and at the same time, do not do not have maximum symmetry by composition. To answer the question it would suffice to take the template of conservative rules, and then subtract from it the intersection between the template of rules with maximum symmetry by composition and that of rules with colour blindness. In this particular case, the result is a set of templates that represent all the conservative rules except the identity rule.
 
-It is worth noting that the set of templates returned does not present a smaller search space than the the template $T_{minuend}$; however, the operation is able to represent the difference between two templates without the need to perform the expansion. Subsequently the resulting templates can be used by other operations, and this is the main advantage of the operation.
-
-
-
-
-
-
-
-
+It is worth noting that the set of templates returned may lead to a smaller search space than that embedded in template $T_{minuend}$, and that the operation is able to represent the difference between two templates without the need to perform the expansion. Subsequently the resulting templates can be used by other operations, and this is the main advantage of the operation. But all in all, it is also interesting to note that the whole process works as an automatic theorem proving capability concerning rule properties in a given CA space.
 
 \section{Final Remarks}
 \label{sec:consideracoes_finais}
-This paper describes the templates of cellular automata -- introduced by De Oliveira e Verardo \cite{deOliveira2014,deOliveira2014b} --, introduces the difference operation and shows an approach to find exception templates. % Faltou citar de onde os templates saíram
- Both operations could prove valuable in many situations involving efforts to find rules in a large space, particularly in the classic problems of parity and density classification.
- % Os exception templates são uma operação?? Cara, não consegui entender o que eles são. hahahah
- % Acho que também faltou explicar melhor os problemas da paridade e classificação de densidade...quando chega aqui, o leitor sabe exatamente o que eles são? Ele tem alguma noção mínima de pq esses problemas são importantes?
+By relying on the notion of templates of cellular automata as introduced by De Oliveira and Verardo \cite{deOliveira2014,deOliveira2014b}, here it was introduced the difference operation between templates as well as  showed an approach to finding exception templates that provide a constraint on template expansion. Both operations are general enough to prove their value in many efforts towards finding CA rules in a large space, particularly in the classic problems of parity and density classification.
 
-Also, we show the possibility to obtain non-trivial answers to questions about searches for rules with certain static properties by means of templates, without relying on the use of search algorithms or enumerative reviews in a whole family of CAs.
-% Onde está isso?
+Also, we showed the possibility to obtain non-trivial answers to questions about searches for rules with certain static properties by means of templates, that prevents from relying on the use of search algorithms or enumerative methods.
 
-It is noteworthy that the difference operation can generate a large number of templates, which can, in specific cases, not effectively reduce the search space. But the approach is relevant in general terms, and so more effective the greater the complexity of the attributes specified in the rules, ie, the greater the amount of property that the rules space in question should either not present. 
-%Não entendi
-Though the work done in \cite{deOliveira2014,deOliveira2014b} made possible to specify templates of desired properties, the present work makes possible to find templates that exclude unwanted properties.
+It is noteworthy that the difference operation can generate a large number of templates, which may, in specific cases, not effectively reduce the search space. But the approach is relevant in general terms, and so more effective the greater the complexity of the attributes specified in the rules, i.e., the greater the number of properties that the rule space in question should either present or not. Although the work in \cite{deOliveira2014,deOliveira2014b} made it possible to specify templates of desired properties, the present work makes it possible to find templates that exclude unwanted properties.
 
-Currently, the difference operation works with binary CAs, but its generalization to higher values of $k$ is underway.
+Currently, the difference operation works with binary CAs, but its generalisation to higher values of $k$ is underway.
 
 \section*{Acknowledgements}
 \label{sec:agrdecimentos}
-The authors thank Mackpesquisa, the Fapesp, and federal agencies CAPES and CNPq for different forms of support received during the development of this work.
+The authors thank MackPesquisa, FAPESP and the federal agencies CAPES and CNPq, for different forms of support during the development of this work.
 
 % ---- Bibliography ----
 \bibliography{bibliografia}
