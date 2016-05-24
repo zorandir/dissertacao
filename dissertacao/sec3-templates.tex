@@ -1,4 +1,4 @@
-%!TEX root = qualificacao.tex
+%!TEX root = dissertacao.tex
 \section{TEMPLATES}
 \label{sec:templates}
 
@@ -43,11 +43,11 @@ Estudos feitos sobre o problema de paridade já levaram ao conhecimento de que o
 
 Betel, De Oliveira e Flocchini (\citeyear{Betel2013}), buscando verificar se o problema da paridade em ACs de raio 2 apresentam alguma regra que solucione o problema para qualquer configuração inicial, encontraram de forma analítica como as transações de estado de supostas regras que resolvessem o problema de paridade deveriam ser. 
 
-Para representar como as transações de estado deveriam ser, foi utilizado grafos de \textit{De Bruijn}. Grafos de De Bruijn são grafos, descobertos de forma independentes por De Bruijn (\citeyear{Bruijn946combinatorial}) e \citeonline{Good1946normal}, cujos nós são sequências de símbolos de algum alfabeto e cujas arestas indicam as sequências em que se cruzarão \cite{weisstein2015deBruijn}. Em AC, esse tipo de grafo direcionado representa em cada uma de suas arestas uma vizinhança possível, o valor associado às arestas será o resultado da transição dado a vizinhança representada pela aresta. A Figura \ref{fig:grafosDeBruijnSample} ilustra dois grafos de De Bruijn, sendo que o primeiro pode ser utilizado para ilustrar todas as vizinhanças possíveis dos automatos celulares elementares.
+Para representar como as transações de estado deveriam ser, foi utilizado grafos de \textit{De Bruijn}. Grafos de De Bruijn são grafos, descobertos de forma independentes por De Bruijn (\citeyear{Bruijn946combinatorial}) e \citeonline{Good1946normal}, cujos nós são sequências de símbolos de algum alfabeto e cujas arestas indicam as sequências em que se cruzarão \cite{weisstein2015deBruijn}. Em AC, esse tipo de grafo direcionado representa em cada uma de suas arestas uma vizinhança possível, o valor associado às arestas será o resultado da transição dado a vizinhança representada pela aresta. A Figura \ref{fig:grafosDeBruijnSample} ilustra dois grafos de De Bruijn, sendo que o primeiro pode ser utilizado para ilustrar todas as vizinhanças possíveis dos autômatos celulares elementares.
 
 \begin{figure}[h!]
 \centering
-\includegraphics[width=.35\textwidth]{fig_graphDeBruijn.pdf}
+\includegraphics[width=0.36\textwidth]{fig_graphDeBruijn.pdf}
 \caption{Exemplo de grafo de De Bruijn \cite{Good1946normal}}
 \label{fig:grafosDeBruijnSample}
 \end{figure}
@@ -91,71 +91,62 @@ E(T)=R_k
 \end{equation}
 
 A operação de expansão pode ser dividida em dois passos, em que o primeiro consiste em efetuar todas as $i$ substituições de variáveis, sendo que $i$ pertence ao intervalo discreto $[0,k^m-1]$. Considere como exemplo o template $T_1 = (1,1,1,1,1-x_1,x_2,x_1,0)$, o primeiro passo do processo de expansão consiste em encontrar as tabelas $k$-árias resultantes das combinações possíveis das substituições de $x_1$ e $x_2$, conforme pode ser melhor visualizado na Tabela \ref{tab:expansionProcess}.
-
 \begin{table}[h!]
 \centering
 \caption{Processo de expansão}
-{
-	\vspace{0.3cm}
 	\begin{tabular}{cccc}
-	\hline
+    \toprule
 	$i$ & $x_2$ & $x_1$ & tabela $k$-ária resultante \\
-	\hline
+    \midrule
 	0	&	0	&	0	&	(1,1,1,1,1,0,0,0)	\\
 	1	&	0	&	1	&	(1,1,1,1,1,1,0,0)	\\
 	2	&	1	&	0	&	(1,1,1,1,0,0,1,0)	\\
 	3	&	1	&	1	&	(1,1,1,1,0,1,1,0)	\\
-	\hline
+    \bottomrule
 	\end{tabular}
-}
+\caption*{Fonte: Elaboração Própria.}
 \label{tab:expansionProcess}
 \end{table}
 
-O segundo passo da operação de expansão é eliminar as tabelas $k$-ária inválidas. No caso do template $T_1$ todas as tabelas resultantes eram válidas, mas nem sempre isso ocorre. No template $T_2 = (1,1,1,1,1,x_0+x_1,x_1,x_0)$, por exemplo, a substituição $x_0 = 1$ e $x_1 = 1$ resulta numa tabela $k$-ária inválida pois a terceira posição apresenta um estado com um valor fora do interval $[0,k-1]$, para $k=2$. A Tabela \ref{tab:invalideExpansion} evidência melhor essa substituição inválida.
-
+O segundo passo da operação de expansão é eliminar as tabelas $k$-ária inválidas. No caso do template $T_1$ todas as tabelas resultantes eram válidas, mas nem sempre isso ocorre. No template $T_2 = (1,1,1,1,1,x_0+x_1,x_1,x_0)$, por exemplo, a substituição $x_0 = 1$ e $x_1 = 1$ resulta numa tabela $k$-ária inválida pois posição $2$ apresenta um estado com um valor fora do interval $[0,k-1]$, para $k=2$. A Tabela \ref{tab:invalideExpansion} evidência melhor essa substituição inválida.
 \begin{table}[h!]
 \centering
 \caption{Processo de expansão}
-{
-	\vspace{0.3cm}
 	\begin{tabular}{cccc}
-	\hline
+    \toprule
 	$i$ & $x_1$ & $x_0$ & tabela $k$-ária resultante \\
-	\hline
+    \midrule
 	0	&	0	&	0	&	(1,1,1,1,1,0,0,0)	\\
 	1	&	0	&	1	&	(1,1,1,1,1,1,0,1)	\\
 	2	&	1	&	0	&	(1,1,1,1,1,1,1,0)	\\
 	3	&	1	&	1	&	(1,1,1,1,1,2,1,1)	\\
-	\hline
-	\end{tabular}
-}
+    \bottomrule
+   	\end{tabular}
+\caption*{Fonte: Elaboração Própria.}
 \label{tab:invalideExpansion}
 \end{table}
 
 Ainda há outra maneira em que templates resultam em substituições inválidas, sendo uma delas através da utilização da notação restrição por conjuntos. Considere o templates $T_3 = (2,2,2,2,2,2,2,2,x_0\in \{0,1\})$ da família de $k=3$ e $r=0{,}5$. %TODO Explicar raio 0,5
 A substituição obtida para $i = 2$ seria inválida pois nesse caso $x_0 = 2$ e $2 \notin \{0,1\}$. A Tabela \ref{tab:invalideExpansion2} evidencia melhor esse processo.
-
 \begin{table}[h!]
 \centering
 \caption{Processo de expansão}
-{
-	\vspace{0.3cm}
 	\begin{tabular}{cccc}
-	\hline
+    \toprule
 	$i$ & $x_0$ & tabela $k$-ária resultante \\
-	\hline
+    \midrule
 	0	&	0	&	(2,2,2,2,2,2,2,2,0)	\\
 	1	&	1	&	(2,2,2,2,2,2,2,2,1)	\\
 	2	&	2	&	(2,2,2,2,2,2,2,2,2)	\\
-	\hline
+    \bottomrule
 	\end{tabular}
-}
+\caption*{Fonte: Elaboração Própria.}
 \label{tab:invalideExpansion2}
 \end{table}
 
 A existência de regras inválidas são os responsáveis por templates que representem um conjunto de regras menores que $k^m$. Essa possibilidade é bastante útil para os templates de regras conservativas e regras confinadas.
 
-O valor de $i$ sempre representa apenas uma substituição possível para as variáveis livres de um templates. Isso ocorre pois $i$ é a representação decimal da conversão $k$-ária das concatenações dos valores das variáveis livres em ordem decrescente. Exemplificando, considere o templates $T_3 = (2,2,2,2,2,2,2,x_1,x_0\in \{0,1\})$ para $k=3$. O valor de $i=5$ será convertido pelo processo de expansão obtendo-se assim o seu equivalente na base ternária $(1,2)$ e então cada um dos dígitos é atribuído a uma variável, resultando assim no conjunto de substituições ${x_0=2,x_1=1}$.
+O valor de $i$ sempre representa apenas uma substituição possível para as variáveis livres de um templates. Isso ocorre pois $i$ é a representação decimal da conversão $k$-ária das concatenações dos valores das variáveis livres em ordem decrescente. Exemplificando, considere o templates $T_4 = (2,2,2,2,2,2,2,x_1\in \{0,1\},x_0)$ para $k=3$. O valor de $i=5$ será convertido pelo processo de expansão obtendo-se assim o seu equivalente na base ternária $(1,2)$ e então cada um dos dígitos é atribuído a uma variável, resultando assim no conjunto de substituições ${x_0=2,x_1=1}$.
 
 A forma com que o valor de $i$ representa apenas uma expansão permite possibilidade de se obter a $i$-ésima expansão de um template. Essa propriedade é relevante devido ao fato da expansão ser uma operação potencialmente custosa, e a possibilidade de ser realizar a $i$-ésima expansão de um template facilita e permite o paralelismo.
 
