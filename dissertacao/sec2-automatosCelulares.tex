@@ -5,7 +5,7 @@ Autômatos celulares são idealizações matemáticas simples dos sistemas natur
 
 %TODO Citar ACs probabilisticos
 
-Autômatos celulares podem operar com reticulados em qualquer número de dimensões. Os primeiros ACs eram bidimensionais e foram criados por \citeonline{neumann1966theory} para serem usados como um modelo formal de auto reprodução de sistemas biológicos. Outro conhecido AC bidimensional é o ``Jogo da Vida'' (ou ``Game of Life''), criado por John Conway, que fez sua primeira aparição em uma coluna de jogos matemáticos \cite{GardnerM1970}. Entre os AC unidimensionais, os mais conhecidos são os do espaço elementar, que foram sistematicamente estudados por \citeonline{wolfram1983statistical}.
+Autômatos celulares podem operar com reticulados em qualquer número de dimensões. Os primeiros ACs eram bidimensionais e foram criados por \citeonline{neumann1966theory} para serem usados como um modelo formal de auto reprodução de sistemas biológicos. Outro conhecido AC bidimensional é o ``Jogo da Vida'' (ou ``Game of Life''), criado por John Conway, que fez sua primeira aparição em uma coluna de jogos matemáticos \cite{GardnerM1970}. Entre os ACs unidimensionais os mais conhecidos são os do espaço elementar, que foram sistematicamente estudados por \citeonline{wolfram1983statistical}.
 
 Independente da dimensionalidade do reticulado, é necessário definir como o AC se comportará nas bordas. Um tratamento típico é a aplicação da condição de contorno periódica nas extremidades. Esse tratamento considera reticulados unidimensionais como um anel, como pode ser visualizado na Figura \ref{fig:anel}, e considera reticulados bidimensionais como um toro (ou toroide), que pode ser visualizado na Figura \ref{fig:toro}.  
 	\begin{figure}[h!]
@@ -26,7 +26,7 @@ Independente da dimensionalidade do reticulado, é necessário definir como o AC
 %Estados; regras locais; e raio
 As células de um autômato celular podem apresentar $k$ estados. O valor desses estados é representado ou por cores ou por valores inteiros no intervalo $[0, k-1]$. O estado de uma célula pode ser modificado pelas funções locais, que são o conjunto de regras que determinam o novo valor de uma célula baseado em seu estado atual e nos estados das células adjacentes. Para que as funções locais atualizem os valores de uma célula, é necessário que um raio $r$ seja definido. Esse raio $r$ representa o número de células adjacentes que serão analisadas em cada direção pelas funções locais.
 
-%vizinhanças
+%vizinhanças %Vai citar o weisstein mesmo?
 Além do raio, é preciso determinar o formato de vizinhança que será utilizada nos parâmetros da função local. Duas vizinhanças bem comuns em ACs bidimensionais são as vizinhanças de von Neumann \cite{weisstein2015b} e Moore \cite{weisstein2015c}. Na Figura \ref{fig:vVonNeumann} e na Figura \ref{fig:vMoore} são apresentadas, para raios de 0 a 3, as vizinhanças de von Neumann e Moore, respectivamente. No caso dos ACs unidimensionais, as vizinhanças são definidas apenas pelo raio $r$ e ele descreve quantas células a esquerda e direita da célula atual serão consideras pela função local.
 %TODO <<<<<<<<<<<<<<<<< Introduzir notação matemática aqui
 
@@ -44,8 +44,8 @@ Além do raio, é preciso determinar o formato de vizinhança que será utilizad
 	  \label{fig:vMoore}
 	\end{figure}
 
-%Famílias de autômatos Celulares; e Autômatos Celulares Elementares.
-Uma família de autômatos celulares é definida pelo raio, número de estados, tipo de vizinhança e a dimensionalidade das configurações. Autômatos celulares unidimensionais de raio $r=1$ e $k=2$ são conhecidos como a família dos autômatos celulares elementares.
+%Famílias de autômatos Celulares; e Autômatos Celulares Elementares. %TODO: Um familia é definida apenas pelo raio e pelo número de estados!
+Uma família de autômatos celulares é definida pelo raio, número de estados, tipo de vizinhança e a dimensionalidade das configurações. Autômatos celulares unidimensionais de $r=1$ e $k=2$ são conhecidos como a família dos autômatos celulares elementares.
 
 Todo AC é regido por um conjunto de regras locais que determinam como ficarão as configurações no próximo passo de tempo de acordo com as configurações de vizinhança recebidas. Existem diversas maneiras de representar essas regras locais, a mais comum são as tabelas de transições. A tabela de transições é uma $n-$upla em que os elementos são todos os possíveis estados de vizinhanças de uma célula acrescentados de um estado que representa a transição que ocorrerá. A Eq. \eqref{eq:nupla} representa a $n$-upla da regra 30.
 	\begin{equation}
@@ -56,11 +56,10 @@ Todo AC é regido por um conjunto de regras locais que determinam como ficarão 
 	\end{split}
 	\end{equation}
 
-Uma outra forma de representar uma tabela de transições é a forma icônica. Na forma icônica o bit $1$ é representado por um ícone na cor preta, e o bit $0$ por um ícone na cor branca. Cada uma das transições de estados é representada por um conjunto de ícones que representa a vizinhança na parte superior, e um ícone para representar o estado resultante após a transição na parte inferior. A Figura \ref{fig:repIconicaR30} mostra a representação icônica da regra 30.
-
+Uma outra forma de representar uma tabela de transições é a forma icônica. Na forma icônica o bit $1$ é representado por um ícone na cor preta, e o bit $0$ por um ícone na cor branca. Cada uma das transições de estados é representada por um conjunto de ícones que simboliza a vizinhança na parte superior, e um ícone para simbolizar o estado resultante após a transição na parte inferior. A Figura \ref{fig:repIconicaR30} ilustra a representação icônica da regra 30.
 	\begin{figure}[h!]
 	  \centering
-	  \includegraphics[width=0.6\textwidth]{fig_repIconicaR30.pdf}
+	  \includegraphics[width=0.45\textwidth]{fig_repIconicaR30.pdf}
 	  \caption{Representação icônica da regra 30.}
 	  \label{fig:repIconicaR30}
 	\end{figure}
