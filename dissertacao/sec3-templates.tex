@@ -4,19 +4,19 @@
 
 \textit{Templates} de autômatos celulares são uma generalização de suas tabelas de transição de estado, capazes de representar famílias de regras. Os templates foram criados por de Oliveira e Verardo (\citeyear{deOliveira2014}) e implementados como um algoritmo na linguagem do software \textit{Wolfram Mathematica} \cite{woframMathematica10}, atualmente disponíveis na biblioteca \textit{open source CATemplates} \cite{CATemplates} no GitHub.
 
-Formalmente, um \textit{template} é uma $n$-upla formada por $k^{2r+1}$ itens, e cada item $i$ representa uma função $g_i(x_0,x_1,\dots,x_{k^{2r+1}-1})$. As variáveis $x_i$ podem assumir qualquer estado entre 0 e $k-1$, o que implica que, no caso binário, $x_i$ pode assumir os valores 0 e 1. Pode-se limitar os valores possíveis de $x_i$ através da notação $x_i \in C$, onde $C$ é um conjunto representando os possíveis valores de $x_i$; note-se, entretanto, que essa notação só tem sentido prático para ACs com quantidade de estados $k>2$.
+Formalmente, um \textit{template} é uma $n$-tupla formada por $k^{2r+1}$ itens, e cada item $i$ representa uma função $g_i(x_0,x_1,\dots,x_{k^{2r+1}-1})$. As variáveis $x_i$ podem assumir qualquer estado entre 0 e $k-1$, o que implica que, no caso binário, $x_i$ pode assumir os valores 0 e 1. Pode-se limitar os valores possíveis de $x_i$ através da notação $x_i \in C$, onde $C$ é um conjunto representando os possíveis valores de $x_i$; note-se, entretanto, que essa notação só tem sentido prático para ACs com quantidade de estados $k>2$.
 
 Exemplificando, dado um template $T_1 = (1,1,1,1,1-x_1,x_2,x_1,0)$, ele representará todas as regras que tenham na posição 0 (sempre da direita para a esquerda) o estado 0, nas posições 4, 5, 6 e 7 o estado 1, nas posições 1 e 2 qualquer estado no intervalo $[0,k-1]$, e na posição 3 o estado complementar ao valor da posição 1. Perceba-se que o tamanho da $n$-tupla é $k^{2r+1}$, acarretando que no template $T_1$ os únicos valores inteiros possíveis para $k$ e $r$ são 2 e 1 respectivamente. Portanto $T_1$ representará um subespaço dos ACs elementares.
 
 Deste modo o template $T_1$ representa o conjunto de autômatos celulares elementares $\{(1,1,1,1,1,0,0,0),(1,1,1,1,0,0,1,0),(1,1,1,1,1,1,0,0),(1,1,1,1,0,1,1,0)\}$, ou em suas formas decimais, o conjunto de regras $\{248,242,252,246\}$.
 
-Cada template tem um número de substituições máximo igual a $k^m$, sendo $m$ o número de variáveis livres. O maior template possível de uma família de ACs é o \textit{template base}, em que todas as variáveis são livres, e que representa todas as regras do espaço em questão. O menor é o \textit{template constante}, em que não há variáveis livres, e representa, portanto, apenas uma regra. A $8$-upla mostrada na Eq. \eqref{eq:templateConstante} representa um template constante que corresponde à regra elementar 30.  
+Cada template tem um número de substituições máximo igual a $k^m$, sendo $m$ o número de variáveis livres. O maior template possível de uma família de ACs é o \textit{template base}, em que todas as variáveis são livres, e que representa todas as regras do espaço em questão. O menor é o \textit{template constante}, em que não há variáveis livres, e representa, portanto, apenas uma regra. A $8$-tupla mostrada na Eq. \eqref{eq:templateConstante} representa um template constante que corresponde à regra elementar 30.  
 \begin{equation}
 (0,0,0,1,1,1,1,0)
 \label{eq:templateConstante}
 \end{equation}
 
-Já a $8$-upla, apresentada na Eq. \eqref{eq:templateBase}, representa um template base que está associado a todas as 256 regras do espaço elementar já que, para $m = 8$, temos $2^m = 256 $.
+Já a $8$-tupla, apresentada na Eq. \eqref{eq:templateBase}, representa um template base que está associado a todas as 256 regras do espaço elementar já que, para $m = 8$, temos $2^m = 256 $.
 \begin{equation}
 (x_7,x_6,x_5,x_4,x_3,x_2,x_1,x_0)
 \label{eq:templateBase}
@@ -52,7 +52,7 @@ Para representar como as transições de estado deveriam ser, foram utilizados g
 \label{fig:grafosDeBruijnSample}
 \end{figure}
 
-Com isso, utilizando grafos de De Bruijn, foram definidas quais variáveis deveriam ser estáticas, quais deveriam ser livres, e quais deveriam apresentar interdependência. Com essas definições foram encontrados dois conjuntos de ACs. Os grafos ilustrados na Figura \ref{fig:grafosDeBruijn} e na Figura \ref{fig:grafosDeBruijn2} são os grafos desenvolvidos por Betel, de Oliveira e Flocchini (\citeyear{Betel2013}).
+Com isso, utilizando grafos de De Bruijn, foram definidas quais variáveis deveriam ser valores constantes, quais deveriam ser livres, e quais deveriam apresentar interdependência. Com essas definições foram encontrados dois conjuntos de ACs. Os grafos ilustrados na Figura \ref{fig:grafosDeBruijn} e na Figura \ref{fig:grafosDeBruijn2} são os grafos desenvolvidos por Betel, de Oliveira e Flocchini (\citeyear{Betel2013}).
 
 \begin{figure}[h!]
 \centering
@@ -143,7 +143,7 @@ A substituição obtida para $i = 2$ (conforme a Tabela \ref{tab:invalideExpansi
 \label{tab:invalideExpansion2}
 \end{table}
 
-A existência de regras inválidas possibilita templates que representem um conjunto de regras diferentes de $k^m$. Essa possibilidade é bastante útil para os templates de regras conservativas, regras conservativas de paridade e regras confinadas. Deste modo, toda vez que se gera um template, também é necessário informar que tipo de pós-processamento será necessário utilizar na hora da expansão. A Tabela \ref{tab:posProcessamento} mostra os pós-processamentos necessários para as principais funções geradoras de templates do CATemplates:
+A existência de regras inválidas possibilita templates que representem um conjunto de regras diferentes de $k^m$. Essa possibilidade é bastante útil para os templates de regras conservativas, regras conservativas de paridade e regras confinadas. Deste modo, toda vez que se gera um template, também é necessário informar que tipo de pós-processamento será necessário utilizar na hora da expansão. A Tabela \ref{tab:posProcessamento} mostra os pós-processamentos necessários para as principais funções geradoras de templates do \textit{CATemplates}:
 \begin{table}[h!]
 \centering
 \caption{Pós-processamento necessário por templates}
@@ -158,7 +158,6 @@ A existência de regras inválidas possibilita templates que representem um conj
 	Templates de simetria		 				& Nenhum pós-processamento necessário 				\\
     \bottomrule
 	\end{tabular}
-\caption*{Fonte: Elaboração Própria.}
 \label{tab:posProcessamento}
 \end{table}
 

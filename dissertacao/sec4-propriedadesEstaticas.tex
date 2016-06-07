@@ -142,7 +142,7 @@ x_8 \in \{0,2\}, x_7, x_6 \in \{0,2\}, x_5, x_4 \in \{0,1\}, x_3 \in \{0,1\}, x_
 \end{equation}
 
 \subsection{Simetria Interna}
-Para entender a propriedade de simetria interna faz-se necessário compreender o funcionamento das transformações de regras e classes de equivalência dinâmica. As explicações a seguir são válidas para regras binárias pois o algoritmo hoje implementado no CATemplates é para regras binárias, apesar de ser possível sua generalização para $k$ estados.
+Para entender a propriedade de simetria interna faz-se necessário compreender o funcionamento das transformações de regras e classes de equivalência dinâmica. As explicações a seguir são válidas para regras binárias pois o algoritmo hoje implementado no \textit{CATemplates} é para regras binárias, apesar de ser possível sua generalização para $k$ estados.
 
 Dada uma tabela de transições de um AC, existem três transformações que podem ser empregadas e que resultam em ACs com comportamentos dinâmicos equivalentes: \textit{reflexão}, \textit{conjugação} e \textit{composição reflexão-conjugação}. A reflexão é a transformação obtida ao refletir os bits das vizinhanças da tabela. A conjugação é obtida ao inverter todos os estados das células da tabela de transições. Já a composição é a transformação obtida ao se efetuar a reflexão e a conjugação, independente da ordem.
 
@@ -196,7 +196,7 @@ Um resultado bem diferente pode ser visto ao se repetir esse mesmo processo para
 
 Vale frisar que apenas transformações por reflexão apresentam vizinhanças invariantes. No caso das reflexões por conjugação e por composição isso não ocorre.
 
-Já há implementado no CATemplates um algoritmo gerador de templates que representam regras do espaço binário com um determinado valor de simetria para uma transformação.
+Já há implementado no \textit{CATemplates} um algoritmo gerador de templates que representam regras do espaço binário com um determinado valor de simetria para uma transformação.
 
 O algoritmo recebe como parâmetro um raio $r$, para definir a família de ACs que será representada, o valor de simetria interna desejado, e uma das transformações de simetria.
 
