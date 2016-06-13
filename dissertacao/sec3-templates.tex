@@ -43,7 +43,7 @@ Estudos feitos sobre o problema de paridade já levaram ao conhecimento de que o
 
 Betel, de Oliveira e Flocchini (\citeyear{Betel2013}), buscando verificar se o problema da paridade em ACs de raio 2 apresentam alguma regra que solucione o problema para qualquer configuração inicial, encontraram de forma analítica como as transições de estado de supostas regras que resolvessem o problema de paridade deveriam ser. 
 
-Para representar como as transições de estado deveriam ser, foram utilizados grafos de \textit{De Bruijn}. Grafos de De Bruijn são grafos, propostos de forma independentes por De Bruijn (\citeyear{Bruijn946combinatorial}) e \citeonline{Good1946normal}, cujos nós são sequências de símbolos de algum alfabeto e cujas arestas indicam as sequências em que se cruzarão \cite{weisstein2015deBruijn}. Em AC, esse tipo de grafo direcionado representa em cada uma de suas arestas uma vizinhança possível, e o valor associado às arestas será o resultado da transição, dada à vizinhança representada pela aresta. A Figura \ref{fig:grafosDeBruijnSample} ilustra dois grafos de De Bruijn, sendo que o primeiro pode ser utilizado para ilustrar todas as vizinhanças possíveis dos autômatos celulares elementares.
+Para representar como as transições de estado deveriam ser, foram utilizados grafos de De Bruijn. Grafos de De Bruijn são grafos, propostos de forma independentes por De Bruijn (\citeyear{Bruijn946combinatorial}) e \citeonline{Good1946normal}, cujos nós são sequências de símbolos de algum alfabeto e cujas arestas indicam as sequências em que se cruzarão \cite{weisstein2015deBruijn}. Em AC, esse tipo de grafo direcionado representa em cada uma de suas arestas uma vizinhança possível, e o valor associado às arestas será o resultado da transição, dada à vizinhança representada pela aresta. A Figura \ref{fig:grafosDeBruijnSample} ilustra dois grafos de De Bruijn, sendo que o primeiro pode ser utilizado para ilustrar todas as vizinhanças possíveis dos autômatos celulares elementares.
 
 \begin{figure}[h!]
 \centering
@@ -126,8 +126,7 @@ O pós-processamento da operação de expansão pode variar de acordo com o temp
 
 Conforme mostrado na Tabela \ref{tab:invalideExpansion}, para o template $T_2$ listar apenas regras válidas é necessário aplicar um pós-processamento que filtre as tabelas $k$-árias inválidas, no caso, a gerada pela expansão de $i = 3$. 
 
-Um outro exemplo de template que resulta em substituições inválidas são os templates que utilizam a notação de restrição por conjuntos. Considere o template $T_3 = (2,2,2,2,2,2,2,2,x_0\in \{0,1\})$ da família de $k=3$ e $r=0{,}5$. %TODO Explicar raio 0,5
-A substituição obtida para $i = 2$ (conforme a Tabela \ref{tab:invalideExpansion2}) seria inválida pois nesse caso $x_0 = 2 \notin \{0,1\}$, sendo assim necessário que o pós-processamento desconsidere essa expansão gerada.
+Um outro exemplo de template que resulta em substituições inválidas são os templates que utilizam a notação de restrição por conjuntos. Considere o template $T_3 = (2,2,2,2,2,2,2,2,x_0\in \{0,1\})$ da família de $k=3$ e $r=0{,}5$, sendo que raio $0{,}5$ define uma vizinhança com apenas dois campos. A substituição obtida para $i = 2$ (conforme a Tabela \ref{tab:invalideExpansion2}) seria inválida pois nesse caso $x_0 = 2 \notin \{0,1\}$, sendo assim necessário que o pós-processamento desconsidere essa expansão gerada.
 \begin{table}[h!]
 \centering
 \caption{Processo de expansão}
@@ -143,7 +142,7 @@ A substituição obtida para $i = 2$ (conforme a Tabela \ref{tab:invalideExpansi
 \label{tab:invalideExpansion2}
 \end{table}
 
-A existência de regras inválidas possibilita templates que representem um conjunto de regras diferentes de $k^m$. Essa possibilidade é bastante útil para os templates de regras conservativas, regras conservativas de paridade e regras confinadas. Deste modo, toda vez que se gera um template, também é necessário informar que tipo de pós-processamento será necessário utilizar na hora da expansão. A Tabela \ref{tab:posProcessamento} mostra os pós-processamentos necessários para as principais funções geradoras de templates do \textit{CATemplates}:
+A existência de regras inválidas possibilita templates que representem um conjunto de regras diferentes de $k^m$. Essa possibilidade é bastante útil para os templates de regras conservativas, regras conservativas de paridade e regras confinadas, que representam um número de regras diferente de $k^m$. Deste modo, toda vez que se gera um template, também é necessário informar que tipo de pós-processamento será necessário utilizar na hora da expansão. A Tabela \ref{tab:posProcessamento} mostra os pós-processamentos necessários para as principais funções geradoras de templates do \textit{CATemplates}:
 \begin{table}[h!]
 \centering
 \caption{Pós-processamento necessário por templates}

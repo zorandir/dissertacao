@@ -105,7 +105,7 @@ f(\alpha_0,\alpha_1, \dots,\alpha_{n-1}) \equiv \alpha_0 + (\sum_{i=0}^{n-2}f(0_
 
 Respeitando-se as condições da Eq. \eqref{eq:parityConservativeCA} chega-se no mesmo template que representa as regras conservativas, representado pela Eq. \eqref{eq:conservativeTemplate}. Todavia, antes de filtrar as regras inválidas no pós-processamento da expansão desse template, é aplicado $mod$ $2$ a todas as tabelas $k$-árias encontradas. 
 
-A biblioteca \textit{CATemplates} já tem implementado o algoritmo gerador de templates de regras conservativas de paridade e, conforme será mostrado posteriormente, esse algoritmo pode ser importante na busca de uma solução para o problema de paridade.
+A biblioteca \textit{CATemplates} já tem implementado o algoritmo gerador de templates de regras conservativas de paridade e, conforme será mostrado posteriormente, esse algoritmo pode apresentar utilidade na busca de uma solução para o problema de paridade.
 
 \subsection{Confinamento}
 Os autômatos celulares confinados (do inglês, \textit{captive}), são uma classe de ACs que se baseiam em uma caracterização de suas funções locais que não adotem estados definidos em qualquer estrutura externa à vizinhança \cite{theyssier2004captive}. 
@@ -200,7 +200,7 @@ Já há implementado no \textit{CATemplates} um algoritmo gerador de templates q
 
 O algoritmo recebe como parâmetro um raio $r$, para definir a família de ACs que será representada, o valor de simetria interna desejado, e uma das transformações de simetria.
 
-Para melhor representar o funcionamento do algoritmo, assuma-se que foi passado como parâmetro o raio $r = 1$, a transformação de reflexão e a simetria interna desejada igual a 8. O primeiro passo do algoritmo será gerar todas as vizinhanças do espaço, que no nosso exemplo representa o conjunto mostrado na Eq. \eqref{eq:neighborSetACE}
+Para melhor representar o funcionamento do algoritmo, assuma-se que foi passado como parâmetro o raio $r = 1$, a transformação de reflexão e a simetria interna desejada igual a 6. O primeiro passo do algoritmo será gerar todas as vizinhanças do espaço, que no nosso exemplo representa o conjunto mostrado na Eq. \eqref{eq:neighborSetACE}
 \begin{equation}
 \{(1,1,1),(1,1,0),
 (1,0,1),(1,0,0),
@@ -225,7 +225,7 @@ Em seguida, a transformação escolhida (no caso reflexão) é aplicada a cada u
 \end{split}
 \end{equation}
 
-Dos pares de vizinhanças encontrados, guarda-se então o número de vizinhanças invariantes à transformação escolhida e removem-se os pares de vizinhança idênticos. Com isso, o conjunto resultante estará de acordo com a Eq. \eqref{eq:neighborSetTransformadoInACE}.
+Dos pares de vizinhanças encontrados, guarda-se então na variável $v$ o número de vizinhanças invariantes à transformação escolhida e removem-se os pares de vizinhança idênticos. Com isso, o conjunto resultante estará de acordo com a Eq. \eqref{eq:neighborSetTransformadoInACE} e $v$ será igual a 4, para a trasformação por reflexão no raio 1.
 \begin{equation}
 \{((1,1,0),(0,1,1)),
 ((1,0,0),(0,0,1)),
@@ -254,7 +254,7 @@ x_6 & = & x_3
 \label{eq:internalSimetryP6}
 \end{equation}
 
-Entretanto, apesar de igualar todas o sistema de equações ser útil para encontrar a máxima simetria interna de uma determinada transformação, para outros valores de simetria entre o mínimo e o máximo é necessário que o sistema de equações apresente algumas inequações, como mostrado nas Eq. \eqref{eq:internalSimetryP7} e Eq. \eqref{eq:internalSimetryP8}.
+Igualar todas as variáveis correspondente à vizinhança gerando o sistema de equações é útil para encontrar a máxima simetria interna de uma determinada transformação. Mas para encontrar valores de simetria arbitrários em uma família de ACs é necessário que o sistema de equações apresente algumas inequações, como mostrado nas Eq. \eqref{eq:internalSimetryP7} e Eq. \eqref{eq:internalSimetryP8}.
 \begin{equation}
 \left\{\begin{matrix}
 x_4 & \neq & x_1\\ 
@@ -288,7 +288,7 @@ x_6 & = 1 - & x_3
 \label{eq:internalSimetryP10}
 \end{equation}
 
-Para montar essas equivalências, o algoritmo particiona o conjunto de equivalência em $(s-v)/2$ partes, sendo que $s$ é o valor de simetria interna passado como argumento e $v$ é o número de vizinhanças invariantes à transformação determinada. Após o particionamento, o algoritmo une as partições com os complementos do conjunto, adicionando assim as desigualdades nos pares do complemento. Para os exemplos dados, $s=8$ e $v=?$, o que resulta no conjunto representado pela Eq. \eqref{eq:internalSimetryP11}.
+Para montar essas equivalências, o algoritmo particiona o conjunto de equivalência em $(s-v)/2$ partes, sendo que $s$ é o valor de simetria interna passado como argumento e $v$ é o número de vizinhanças invariantes à transformação determinada. Após o particionamento, o algoritmo une as partições com os complementos do conjunto, adicionando assim as desigualdades nos pares do complemento. Para os exemplos dados, $s=6$ e $v=4$, o que resulta no conjunto representado pela Eq. \eqref{eq:internalSimetryP11}.
 \begin{equation}
 C_{reflex6}=\{((x_4,x_1),(x_6,1-x_3)),((x_4,1-x_1),(x_6,x_3))\}
 \label{eq:internalSimetryP11}
@@ -307,7 +307,7 @@ Esse algoritmo teve sua primeira implementação apresentada por de Oliveira e V
 \subsection{Totalidade e Semi-totalidade}
 Os ACs totalísticos são autômatos celulares cujo valor de uma célula depende apenas da soma dos valores dos seus vizinhos no passo de tempo anterior \cite{wolfram1983statistical}.
 
-De forma análoga, pode-se considerar que as transições dependem da média dos valores das células que compõem  a vizinhança. A Figura \ref{fig:totalistcRule} ilustra a tabela de transição de um AC totalístico com $k = 3$ e $r = 1$ (especificamente, o de número 777, entre os totalísticos do espaço em questão).
+De forma análoga, pode-se considerar que as transições dependem da média dos valores das células que compõem  a vizinhança. A Figura \ref{fig:totalistcRule} ilustra a tabela de transição de um AC totalístico com $k = 3$ e $r = 1$ (especificamente, o de número 777, entre os totalísticos do espaço em questão) \cite{wolfram2002new}.
 
 	\begin{figure}[h!]
 	  \centering
@@ -346,7 +346,7 @@ x_5,x_2,x_5,x_2,x_1,x_8,x_5,x_2,x_5,x_2,x_1,x_2,x_1,x_0)
 \end{split}
 \end{equation}
 
-Para as regras semi-totalísticas, o algoritmo segue o mesmo processo básico, porém com uma pequena modificação: as vizinhanças são somadas, mas a célula central é desconsiderada na soma e posteriormente concatenada ao final do resultado. Neste processo as vizinhanças que contenham o mesmo estado na célula central e a mesma soma de valores dos estados das células externas -- como por exemplo $(2,1,0)$ e $(1,1,1)$ -- geram a mesma cadeis de caracteres ao final. A partir desse ponto o algoritmo segue a mesmo processo aplicado às regras totalísticas: para determinar qual será a variável associada a uma vizinhança o algoritmo verifica se a vizinhança foi a única até então que obteve um determinado valor. Em caso positivo o algoritmo criará e associará uma variável $x_i$ para esta transição, sendo $i$ o valor decimal da vizinhança. Caso contrário, a transição será associada uma variável $x_i$ em que $i$ é o valor decimal da primeira (e de menor valor) vizinhança encontrada com o mesmo valor de soma das vizinhanças.
+Para as regras semi-totalísticas, o algoritmo segue o mesmo processo básico, porém com uma pequena modificação: as vizinhanças são somadas, mas a célula central é desconsiderada na soma e posteriormente concatenada ao final do resultado. Neste processo as vizinhanças que contenham o mesmo estado na célula central e a mesma soma de valores dos estados das células externas -- como por exemplo $(2,1,0)$ e $(1,1,1)$ -- geram o mesmo valor após a transição de estado. A partir desse ponto o algoritmo segue a mesmo processo aplicado às regras totalísticas: para determinar qual será a variável associada a uma vizinhança o algoritmo verifica se a vizinhança foi a única até então que obteve um determinado valor. Em caso positivo o algoritmo criará e associará uma variável $x_i$ para esta transição, sendo $i$ o valor decimal da vizinhança. Caso contrário, a transição será associada uma variável $x_i$ em que $i$ é o valor decimal da primeira (e de menor valor) vizinhança encontrada com o mesmo valor de soma das vizinhanças.
 
 Aplicando esse algoritmo gerador de templates de regras semi-totalísticas com os argumentos $k=2$ e $r=1$ é obtido o template mostrado na Eq. \eqref{eq:templateSemiTotalisticECA}.
 \begin{equation}
