@@ -26,13 +26,15 @@ Já a $8$-tupla, apresentada na Eq. \eqref{eq:templateBase}, representa um templ
 
 A representação de famílias de autômatos celulares através de templates possibilita a utilização de templates para problemas já bem conhecidos da área de ACs. Um exemplo de problema que pode se beneficiar dos templates é o problema da paridade.
 
+Para o problema de paridade, nesse projeto, considera-se um AC binário, unidimensional e com condição de contorno periódica. Se uma configuração inicial contiver um número ímpar de estados com valor 1, o AC deve convergir para uma configuração global onde toda as células estejam preenchidas com 1, caso contrário, ele deve convergir para todos os estados com o valor 0. Há um problema nessa definição para  reticulado de tamanho par, pois uma configuração inicial com todas as células apresentando o estado $1$ teriam que convergir para uma configuração com todos os estados apresentando o valor $0$. Entretanto, o problema define que uma configuração preenchida apenas por $1$s assim deve permanecer. Devido a isso, pode-se dizer que as regras que solucionam o problema de paridade em ACs são \textit{perfeitas} se eles resolverem o problema de paridade em qualquer configuração inicial arbitrária para ACs de tamanho ímpar \cite{Betel2013}. Conforme Betel, de Oliveira e Flocchini (\citeyear{Betel2013}) nos lembram, duas condições devem ser satisfeitas em relação ao problema de paridade. A primeira é que, se $f$ é a regra local que resolve o problema de paridade, então $f(0, \dots, 0) = 0$ e $f(1, \dots, 1) = 1$. A segunda é que, para uma regra preservar a configuração de paridade, ela deve apresentar número par de transições ativas (quais, sejam, as que imponham uma troca do bit de saída); em outras palavras, toda aplicação da regra deve levar a uma nova configuração com a mesma paridade.
+
 A Figura \ref{fig:parity-rule} ilustra o desenvolvimento espaço-temporal da regra BFO \cite{Betel2013} que resolve o problema de paridade para o raio 4. Nessa imagem o desenvolvimento temporal à esquerda contém, em sua configuração inicial, um número par de estados igual a 1 e, na evolução temporal ilustrada à direita, um número ímpar de estados igual a 1.
 
 \begin{figure}[h!]
 \center
-\subfigure[Configuração inicial com número ímpar de 1s]{\includegraphics[width=4.2cm]{regra-1-par.pdf}}
+\subfigure[Configuração inicial com número ímpar de 1s]{\includegraphics[width=3.7cm]{regra-1-par.pdf}}
 \qquad
-\subfigure[Configuração inicial com número par de 1s]{\includegraphics[width=4.2cm]{regra-1-impar.pdf}}
+\subfigure[Configuração inicial com número par de 1s]{\includegraphics[width=3.7cm]{regra-1-impar.pdf}}
 \caption{Evolução espaço-temporal da regra BFO, que resolve o problema de paridade para raio 4 \cite{Betel2013}.}
 \label{fig:parity-rule}
 \end{figure}
@@ -44,26 +46,24 @@ Estudos feitos sobre o problema de paridade já levaram ao conhecimento de que o
 Betel, de Oliveira e Flocchini (\citeyear{Betel2013}), buscando verificar se o problema da paridade em ACs de raio 2 apresentam alguma regra que solucione o problema para qualquer configuração inicial, encontraram de forma analítica como as transições de estado de supostas regras que resolvessem o problema de paridade deveriam ser. 
 
 Para representar como as transições de estado deveriam ser, foram utilizados grafos de De Bruijn. Grafos de De Bruijn são grafos, propostos de forma independentes por De Bruijn (\citeyear{Bruijn946combinatorial}) e \citeonline{Good1946normal}, cujos nós são sequências de símbolos de algum alfabeto e cujas arestas indicam as sequências em que se cruzarão \cite{weisstein2015deBruijn}. Em AC, esse tipo de grafo direcionado representa em cada uma de suas arestas uma vizinhança possível, e o valor associado às arestas será o resultado da transição, dada à vizinhança representada pela aresta. A Figura \ref{fig:grafosDeBruijnSample} ilustra dois grafos de De Bruijn, sendo que o primeiro pode ser utilizado para ilustrar todas as vizinhanças possíveis dos autômatos celulares elementares.
-
 \begin{figure}[h!]
 \centering
-\includegraphics[width=0.36\textwidth]{fig_graphDeBruijn.pdf}
+\includegraphics[width=0.3\textwidth]{fig_graphDeBruijn.pdf}
 \caption{Exemplo de grafo de De Bruijn \cite{Good1946normal}}
 \label{fig:grafosDeBruijnSample}
 \end{figure}
 
 Com isso, utilizando grafos de De Bruijn, foram definidas quais variáveis deveriam ser valores constantes, quais deveriam ser livres, e quais deveriam apresentar interdependência. Com essas definições foram encontrados dois conjuntos de ACs. Os grafos ilustrados na Figura \ref{fig:grafosDeBruijn} e na Figura \ref{fig:grafosDeBruijn2} são os grafos desenvolvidos por Betel, de Oliveira e Flocchini (\citeyear{Betel2013}).
-
 \begin{figure}[h!]
 \centering
-\includegraphics[width=0.8\textwidth]{grafo1.pdf}
+\includegraphics[width=0.7\textwidth]{grafo1.pdf}
 \caption{Grafo de De Bruijn representando regras que possivelmente solucionassem o problema de paridade \cite{Betel2013}.}
 \label{fig:grafosDeBruijn}
 \end{figure}
 
 \begin{figure}[h!]
 \centering
-\includegraphics[width=0.8\textwidth]{grafo2.pdf}
+\includegraphics[width=0.7\textwidth]{grafo2.pdf}
 \caption{Outro grafo de De Bruijn representando regras adicionais que possivelmente solucionassem o problema de paridade \cite{Betel2013}.}
 \label{fig:grafosDeBruijn2}
 \end{figure}
