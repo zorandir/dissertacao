@@ -6,6 +6,7 @@ Em ACs, propriedades estáticas são propriedades computadas com base nas tabela
 Esta seção descreve algumas propriedades estáticas que já tem seus algoritmos geradores de templates implementados na biblioteca \textit{CATemplates} \cite{CATemplates}.
 
 \subsection{Conservabilidade de Estados e Conservabilidade de Paridade}
+\label{sec:propriedadeEstaticasDefCon}
 Conservabilidade de estados é uma propriedade estática que determina que a soma dos estados de um determinado autômato celular não deve se alterar durante a evolução espaço-temporal, independente da configuração inicial.
 
 De acordo com Boccara e Fukś (\citeyear{boccara2002}), um AC é conservativo quando cada uma de suas regras locais $f$ de vizinhança $(\alpha_0,\alpha_1, \dots, \alpha_{n-1})$ respeita as condições descritas na Eq. \eqref{eq:conservativeCA}.
@@ -137,6 +138,7 @@ Vale frisar que apenas transformações por reflexão apresentam vizinhanças in
 
 
 \subsection{Totalidade e Semi-totalidade}
+\label{sec:propriedadeEstaticasDefTot}
 Os ACs totalísticos são autômatos celulares cujo valor de uma célula depende apenas da soma dos valores dos seus vizinhos no passo de tempo anterior \cite{wolfram1983statistical}.
 
 De forma análoga, pode-se considerar que as transições dependem da média dos valores das células que compõem  a vizinhança. A Figura \ref{fig:totalistcRule} ilustra a tabela de transição de um AC totalístico com $k = 3$ e $r = 1$ (especificamente, o de número 777, entre os totalísticos do espaço em questão) \cite{wolfram2002new}.

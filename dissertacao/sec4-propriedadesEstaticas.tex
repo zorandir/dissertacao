@@ -1,16 +1,16 @@
 %!TEX root = dissertacao.tex
 \section[REPRESENTAÇÃO DE PROPRIEDADES ESTÁTICAS POR MEIO DE TEMPLATES]{REPRESENTAÇÃO DE PROPRIEDADES \\ ESTÁTICAS POR MEIO DE TEMPLATES}
 \label{sec:propriedadesEstaticas}
-Uma propriedade obtida por meio de restrições aplicadas à tabela de transições de um AC é denominada como uma propriedades estáticas. Propriedades estáticas pode ser usadas para restringir as regras do espaço no qual serão feitas as buscas para solucionar determinado problema de ACs pois com propriedades estáticas se pode prever a evolução de um AC. 
+Uma propriedade obtida por meio de restrições aplicadas à tabela de transições de um AC é denominada como uma propriedade estática. Com propriedades estáticas se pode prever a evolução de um AC e, por isso, elas podem ser usadas para restringir as regras do espaço no qual serão feitas as buscas para solucionar determinado problema de ACs.
 
-Nessa seção são mostrados templates capazes de representar propriedade estáticas e seus algoritmos geradores.
+Nessa Seção são mostrados templates capazes de representar propriedades estáticas e seus algoritmos geradores.
 
 \subsection{Templates Para Regras Com Conservabilidade de Estados e Com Conservabilidade de Paridade}
 Conservabilidade de estados é uma propriedade estática que determina que a soma dos estados de um determinado autômato celular não deve se alterar durante a evolução espaço-temporal, independente da configuração inicial.
 
 O algoritmo que gera templates que representam regras conservativas, criado por de Oliveira e Verardo (\citeyear{deOliveira2014}), primeiramente recebe as variáveis $k$ e $r$ definindo assim a família das regras que serão geradas. Em seguida, cria todas as vizinhanças do espaço, com exceção das vizinhanças que geram tautologias. E após esses passos, aplica as condições de Boccara e Fukś (\citeyear{boccara2002}). Para se excluir as vizinhanças que geram tautologias, basta excluir as vizinhanças que começam com 0 mas não sejam compostas apenas por 0 \cite{Schranko2010}.
 
-Para exemplificar o funcionamento do algoritmo, seja o espaço com $k=2$ e $r=1$. Primeiramente, o algoritmo obterá o conjunto das vizinhanças que não geram regras tautológicas, qual seja o conjunto $\{(1,1,1),(1,1,0),(1,0,1),(1,0,0),(0,0,0)\}$. Então é criado o sistema de equações \eqref{eq:conservativeLinearSystem3}, baseado nas condições de Boccara e Fukś (\citeyear{boccara2002}).
+Para exemplificar o funcionamento do algoritmo, considere o espaço com $k=2$ e $r=1$. Primeiramente, o algoritmo obterá o conjunto das vizinhanças que não geram regras tautológicas, qual seja o conjunto $\{(1,1,1),(1,1,0),(1,0,1),(1,0,0),(0,0,0)\}$. Então é criado o sistema de equações \eqref{eq:conservativeLinearSystem3}, baseado nas condições de Boccara e Fukś (\citeyear{boccara2002}).
 
 \begin{equation}
 \left\{\begin{matrix}
@@ -30,7 +30,7 @@ Por fim, o algoritmo utiliza a função $Solve$ do \textit{Wolfram Mathematica} 
 \label{eq:conservativeTemplate}
 \end{equation}
 
-O processo de gerar regras conservativas de paridade é bem parecido. Respeitando-se as condições da Eq. \eqref{eq:parityConservativeCA} chega-se no mesmo template que representa as regras conservativas, representado pela Eq. \eqref{eq:conservativeTemplate}. Todavia, antes de filtrar as regras inválidas no pós-processamento da expansão desse template, é aplicado $mod$ $2$ a todas as tabelas $k$-árias encontradas.
+O processo de gerar regras conservativas de paridade é bem parecido. Respeitando-se as condições da Eq. \eqref{eq:parityConservativeCA}, mostrada na Subseção \ref{sec:propriedadeEstaticasDefCon}, chega-se no mesmo template que representa as regras conservativas, representado pela Eq. \eqref{eq:conservativeTemplate}. Todavia, antes de filtrar as regras inválidas no pós-processamento da expansão desse template, é aplicado $mod$ $2$ a todas as tabelas $k$-árias encontradas.
 
 A biblioteca \textit{CATemplates} já tem implementado o algoritmo gerador de templates de regras conservativas de paridade e, conforme será mostrado posteriormente, esse algoritmo pode apresentar utilidade na busca de uma solução para o problema de paridade.
 
@@ -64,7 +64,7 @@ Em seguida, a transformação escolhida (no caso reflexão) é aplicada a cada u
 \end{split}
 \end{equation}
 
-Dos pares de vizinhanças encontrados, guarda-se então na variável $v$ o número de vizinhanças invariantes à transformação escolhida e removem-se os pares de vizinhança idênticos. Com isso, o conjunto resultante estará de acordo com a Eq. \eqref{eq:neighborSetTransformadoInACE} e $v$ será igual a 4, para a trasformação por reflexão no raio 1.
+Dos pares de vizinhanças encontrados, guarda-se então na variável $v$ o número de vizinhanças invariantes à transformação escolhida e removem-se os pares de vizinhança idênticos. Com isso, o conjunto resultante estará de acordo com a Eq. \eqref{eq:neighborSetTransformadoInACE} e $v$ será igual a 4, para a transformação por reflexão no raio 1.
 \begin{equation}
 \{((1,1,0),(0,1,1)),
 ((1,0,0),(0,0,1)),
@@ -73,7 +73,7 @@ Dos pares de vizinhanças encontrados, guarda-se então na variável $v$ o núme
 \label{eq:neighborSetTransformadoInACE}
 \end{equation}
 
-Nesse momento, caso o valor de simetria interna passado como parâmetro seja menor que as vizinhanças invariantes, o algoritmo retorna como resultado um conjunto vazio, tendo em vista que o valor mínimo de simetria interna é igual ao total de vizinhanças invariantes. Caso contrário o algoritmo agora removerá todas as repetições de pares de vizinhanças, considerando que pares de vizinhanças em ordem diferentes repetições. A Eq. \eqref{eq:internalSimetryP4} representa como ficará o conjunto após as remoções.
+Nesse momento, caso o valor de simetria interna passado como parâmetro seja menor que as vizinhanças invariantes, o algoritmo retorna como resultado um conjunto vazio, tendo em vista que o valor mínimo de simetria interna é igual ao total de vizinhanças invariantes. Caso contrário o algoritmo agora removerá todas as repetições de pares de vizinhanças, considerando que pares de vizinhanças em ordem diferentes são repetições. A Eq. \eqref{eq:internalSimetryP4} representa como ficará o conjunto após as remoções.
 \begin{equation}
 \{(((1,1,0),(0,1,1)), ((1,0,0),(0,0,1))\}
 \label{eq:internalSimetryP4}
@@ -144,7 +144,7 @@ Esse conjunto de templates representam todas as regras com valor de simetria por
 Esse algoritmo teve sua primeira implementação apresentada por de Oliveira e Verardo (\citeyear{deOliveira2014}; \citeyear{deOliveira2014b}). Posteriormente uma nova versão foi apresentada em \cite{Verardo2014}.
 
 \subsection{Templates para Regras Totalísticas e Semi-Totalísticas}
-A partir das definições de como devem ser as transições de estados dos ACs totalísticos e dos ACs semi-totalísticos é possível representá-los por meio de templates. A biblioteca \textit{CATemplates} já apresenta os algoritmos que geram essas propriedades e seu funcionamento é bem simples. 
+A partir das definições de como devem ser as transições de estados dos ACs totalísticos e dos ACs semi-totalísticos, demonstradas na Subseção \ref{sec:propriedadeEstaticasDefTot}, é possível representá-los por meio de templates. A biblioteca \textit{CATemplates} já apresenta os algoritmos que geram essas propriedades e seu funcionamento é bem simples. 
 
 O algoritmo que gera regras totalísticas recebe como argumento os valores de $r$ e $k$, definindo assim uma família de ACs. Em seguida enumera as vizinhanças do espaço e calcula a soma dos estados de cada uma delas. O resultado da soma é o que define quais transições devem ser iguais para que o template represente apenas regras totalísticas.
 
@@ -189,7 +189,7 @@ x_5,x_4,x_{11},x_2,x_1,x_8,x_7,x_6,x_5,x_4,x_3,x_2,x_1,x_0)
 \end{equation}
 
 \subsection{Templates Para Regras Confinadas}
-A propriedade estática de confinamento pode ser facilmente representada através de templates. Para isto, basta restringir as variáveis a um conjunto de valores presentes na vizinhança correspondente. A biblioteca aberta \textit{CATemplates} também já apresenta um algoritmo que gera as regras confinadas. Esse algoritmo recebe como parâmetro os argumentos $k$ e $r$, gera as vizinhanças do espaço, e verifica em cada uma das vizinhanças os estados que elas têm. Caso a vizinhança tenha todos os estados do intervalo $[0, k-1]$ essa posição terá uma variável livre no template. Caso a vizinhança tenha apenas um estado, a posição correspondente no template assume um valor fixo. Por fim, caso a vizinhança apresente mais de um estado, mas não todos, a posição correspondente do template apresentará uma variável restrita pela expressões $x_i \in C$.
+A propriedade estática de confinamento pode ser facilmente representada através de templates. Para isto, basta restringir as variáveis a um conjunto de valores presentes na vizinhança correspondente. A biblioteca aberta \textit{CATemplates} também já apresenta um algoritmo que gera as regras confinadas. Esse algoritmo recebe como parâmetro os argumentos $k$ e $r$, gera as vizinhanças do espaço, e verifica em cada uma das vizinhanças os estados que elas têm. Caso a vizinhança tenha todos os estados do intervalo $[0, k-1]$ essa posição terá uma variável livre no template. Caso a vizinhança tenha apenas um estado, a posição correspondente no template recebe uma constante. Por fim, caso a vizinhança apresente mais de um estado, mas não todos, a posição correspondente do template apresentará uma variável restrita pela expressões $x_i \in C$.
 
 A Eq. \eqref{eq:captiveTemplateACE} representa o template de todas as regras confinadas do espaço elementar e a Eq. \eqref{eq:captiveTemplateR05} representa a família de $k=2$ e $r=0,5$.
 \begin{equation}
