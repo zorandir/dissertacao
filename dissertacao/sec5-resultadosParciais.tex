@@ -4,7 +4,7 @@
 Neste capítulo apresenta-se o desenvolvimento da operação de diferença entre templates com $k=2$, introduz-se a operação de geração de templates de exceção, e demonstra-se uma série de passos que, utilizando templates, pode auxiliar na busca de ACs de raio 3 que tem a possibilidade de solucionar o problema de paridade.
 
 \subsection{Templates de Exceção}
-Alguns templates apresentam em seus campos valores que, quando expandidos, gerarão substituições inválidas e, por consequência, regras inválidas. O template $T_o = (x_7, x_6, x_5, 1 - x_1 - x_5, 2 - x_1 - x_2, x_2, x_1, 0)$ com $k=2$ é um exemplo disso. É trivial perceber que qualquer expansão do template $T_o$ que tenha o conjunto de substituições $\{x_1 = 1, x_5 = 1\}$ fará com que a posição 4 do template apresente o valor $2$, que não pertence ao intervalo $[0,k-1]$; da mesma maneira, qualquer expansão do template $T_o$ que tenha o conjunto de substituições $\{x_1 = 0, x_2 = 0\}$ fará com que a posição 3 do template também apresente um valor que não pertence ao intervalo $[0,k-1]$. Um \textit{template de exceção} é um template que apresenta esses conjuntos substituições que levam um template passado com parâmetro a apresentar substituições fora do intervalo inteiro $[0, k-1]$. Já o conjunto de \textit{template de exceção} de um template representa todas os templates de exceção encontrados apartir do template passado como parâmetro. O conjunto de templates de exceção do template $T_o$, utilizado como exemplo, pode ser representado pela Eq. \ref{eq:exceptionsTemplates}.
+Alguns templates apresentam em seus campos valores que, quando expandidos, gerarão substituições inválidas e, por consequência, regras inválidas. O template $T_o = (x_7, x_6, x_5, 1 - x_1 - x_5, 2 - x_1 - x_2, x_2, x_1, 0)$ com $k=2$ é um exemplo disso. É trivial perceber que qualquer expansão do template $T_o$ que tenha o conjunto de substituições $\{x_1 = 1, x_5 = 1\}$ fará com que a posição 4 do template apresente o valor $2$, que não pertence ao intervalo $[0,k-1]$; da mesma maneira, qualquer expansão do template $T_o$ que tenha o conjunto de substituições $\{x_1 = 0, x_2 = 0\}$ fará com que a posição 3 do template também apresente um valor que não pertence ao intervalo $[0,k-1]$. Um \textit{template de exceção} é um template que apresenta esses conjuntos substituições que levam um template passado com parâmetro a apresentar substituições fora do intervalo inteiro $[0, k-1]$. Já o conjunto de \textit{template de exceção} de um template representa todos os templates de exceção encontrados apartir do template passado como parâmetro. O conjunto de templates de exceção do template $T_o$, utilizado como exemplo, pode ser representado pela Eq. \ref{eq:exceptionsTemplates}.
 
 \begin{equation}
 C_e = \{(x_7, x_6, 1, x_4, x_3, 1, x_2, x_0),(x_7, x_6, x_5, x_4, x_3, 0, 0, x_0)\}
@@ -64,7 +64,7 @@ C_e = \{(x_7, x_6, x_5, x_4, x_3, 1, 1, x_0),(x_7, x_6, x_5, x_4, x_3, 0, 0, x_0
 A operação que gera os templates de exceção foi apresentada por Soares, Verardo e
 de Oliveira (\citeyear{soares2016difference}) e é importante por ser essencial para a operação de diferença entre templates. 
 
-É importante frisar que essa é uma operação com complexidade $O(c^n)$, onde $n$ é o número de variáveis nas posições que não apresentem apenas variáveis livres ou constantes. Por conta disso, a operação de diferença pode se mostrar demasiadamente custosa quando aplicadas a templates com muita dependências entre variáveis, tais como os templates de conservabilidade e conservabilidade de paridade.
+É importante frisar que essa é uma operação com complexidade $O(c^n)$, onde $n$ é o número de variáveis nas posições que não apresentem apenas variáveis livres ou constantes. Por conta disso, a operação de diferença pode se mostrar demasiadamente custosa quando aplicadas a templates com muitas dependências entre variáveis, tais como os templates de conservabilidade e conservabilidade de paridade.
 
 \subsection{Diferença entre Templates binários}
 A operação de diferença entre templates binários $D_i$ é responsável por obter um conjunto $C_{di}$ com $n$ templates, os quais, quando expandidos (via a operação de expansão $E$), apresentam apenas as regras geradas pela expansão do template $T_m$ que não estejam também presentes na expansão do template de intersecção entre $T_s$ e $T_m$, chamado aqui de $T_i$. A operação de diferença pode ser descrita em mais detalhes da seguinte maneira:
@@ -128,7 +128,7 @@ x_5 = 1 - (x_3 + x_1) \vee x_4 = 1 - (1 - x_1) \vee x_0 = 1 - 0
 \label{eq:logicalComplement2}
 \end{equation}
 
-A etapa de troca do operador lógico e de permutação $\rho$ são a base desta operação, pois essas etapas determina que se qualquer campo de um template resultar numa regra com um valor diferente do esperado no template original, esse campo deve ser considerado para a criação dos templates de diferença.
+A etapa de troca do operador lógico e de permutação $\rho$ são a base desta operação, pois essas etapas determinam que se qualquer campo de um template resultar numa regra com um valor diferente do esperado no template original, esse campo deve ser considerado para a criação dos templates de diferença.
 
 Continuando, a combinação lógica de equações da Eq. \eqref{eq:logicalComplement2} é então solucionada, resultando no conjunto solução $S = \{\{x_0 \to 1\}, \{x_4 \to x_1\}, \{x_5 \to 1 - x_1 - x_3\}\}$. Perceba-se que $S$ apresenta mais de um conjunto de substituições e, portanto, cada um deles deve ser utilizado para realizar as substituições no template $T_m$. Essas substituições fazem com que se obtenha o conjunto de templates $C_{d1}$, representados pela Eq. \eqref{eq:logicalComplement3}. 
 \begin{equation}
@@ -146,7 +146,7 @@ C_{d1} = \{\\(x_7, x_6, x_5, x_4, x_3, x_1, x_1, 1), \\(x_7, x_6, x_5, x_1, x_3,
 \end{split}
 \end{equation}
 
-A operação de diferença $D_i$ também pode ser realizada sem se efetuar a intersecção. Nesse caso, a operação sem intersecção, chamada aqui apenas apenas por $D$, encontrará um conjunto de templates $C_d$. A expansão dos templates de $C_{d}$ apresentará apenas as regras geradas pela expansão do template $T_m$ que não estejam também presentes na expansão do template $T_s$. Essa operação pode ser descrita em mais detalhes da seguinte maneira:
+A operação de diferença $D_i$ também pode ser realizada sem se efetuar a intersecção. Nesse caso, a operação sem intersecção, chamada aqui apenas por $D$, encontrará um conjunto de templates $C_d$. A expansão dos templates de $C_{d}$ apresentará apenas as regras geradas pela expansão do template $T_m$ que não estejam também presentes na expansão do template $T_s$. Essa operação pode ser descrita em mais detalhes da seguinte maneira:
 \begin{equation}
 \begin{split}
 D(T_m,T_s)= C_d \Leftrightarrow E(C_d) = E(T_m) \setminus E(T_s) \\
@@ -156,12 +156,11 @@ C_d = \{T_1,T_2,\dots, T_n\}\\
 
 O processo que o algoritmo da operação $D$ usa para encontrar a diferença entre dois templates é bem parecido com o do algoritmo da operação $D_{i}$. Primeiramente, igualam-se os templates $T_m$ e $T_s$, obtendo-se assim combinações lógicas de equações. Após remover eventuais equações tautológicas, o algoritmo aplica a operação de negação nas equações e troca o operador lógico $\wedge$ por $\vee$. Esse sistema é então solucionado, resultando num conjunto com diversos conjuntos de regras de substituições. E após eliminar desse conjunto eventuais substituições envolvendo variáveis que não pertençam ao $T_m$, esses conjuntos de regras de substituição são aplicados ao template $T_m$, gerando o conjunto de templates que é parte do resultado dessa operação. Um segundo conjunto de templates, composto pela intersecção de cada um dos templates de exceção do template $T_s$ com o template $T_m$, será a outra parte do resultado.
 
-Os algortimos $D$ e $D_i$ apresentam como resultado os conjunto de templates $C_d$ e $C_{di}$, respectivamente. $C_d$ e $C_{di}$ podem ser diferentes mesmo quando $D$ e $D_i$ recebem os mesmos templates como entrada. Mas ambos contém exatamente as mesmas regras quando se expande os templates dos conjuntos.
+Os algoritmos $D$ e $D_i$ apresentam como resultado os conjunto de templates $C_d$ e $C_{di}$, respectivamente. $C_d$ e $C_{di}$ podem ser diferentes mesmo quando $D$ e $D_i$ recebem os mesmos templates como entrada. Mas ambos contêm exatamente as mesmas regras quando se expande os templates dos conjuntos.
 
 \section{DISCUSSÃO E TESTES}
 \label{sec:discussoesETestes}
 A implementação das operações de diferença foi desenvolvida na linguagem do software \textit{Wolfram Mathematica} \cite{woframMathematica10} e na mesma linguagem foram criados os testes unitários que verificam se o \textit{output} da operação está correto de acordo com os possíveis \textit{input} dados a ela. Todos os testes receberam dois templates, $T_m$ e $T_s$, expandiram esses dois templates individualmente, e depois subtraíram das regras encontradas na expansão de $T_m$ todas as regras representadas por $T_s$. O resultado da diferença entre $T_m$ e $T_s$ é o conjunto de regras $C_{exp}$. Esse conjunto de regras $C_{exp}$ deve ser idêntico às regras geradas pela expansão dos templates resultantes da operação de diferença entre os templates $T_m$ e $T_s$. Por conta desta custosa forma de teste, os testes dessa operação se concentraram nos raios 1, 2 e 3.
-
 
 Uma importante questão sobre a expansão do conjunto de regras $C_{exp}$, encontrado pela operação de diferença, é definir qual será o pós-processamento da operação de expansão que deve ser usado com esses templates. A operação de pós-processamento a ser utilizada na operação de diferença sempre será a mesma utilizada no template $T_m$ passado como parâmetro, acrescida da operação de filtro das regras inválidas caso essa operação já não tenha sido feita. Isto porque a operação de diferença deve representar todas as regras válidas da expansão de $T_m$ que não sejam representadas por $T_s$. Assim, caso $T_m$ e $T_s$ não tenham intersecção, o resultado deve ser apenas o template $T_m$ com o mesmo pós-processamento.
 
@@ -197,13 +196,13 @@ Para os testes com $r = 2$, os templates usados representavam as seguintes propr
 \label{tab:differenceTests}
 \end{table}
 
-Ademais, esses testes mostraram que a operação de diferença está funcionando para diversos templates, sem a necessidade de operações específicas para cadas um dos templates.
+Ademais, esses testes mostraram que a operação de diferença está funcionando para diversos templates, sem a necessidade de operações específicas para cada um dos templates.
 
 É importante explicitar que a implementação do algoritmo que executa a operação de diferença entre templates ainda não permite trabalhar com $k\neq 2$, pois a negação das equações são feitas por meio da função $f(x) = 1 - x$.
 
 \subsection{Templates aplicados no problema de paridade}
 O desenvolvimento da operação de diferença entre template permite diversas possibilidades de aplicação.
-Uma das possibilidade é no problema de paridade. 
+Uma das possibilidades é no problema de paridade. 
 Ainda não se sabe se existem regras de raio 3 que solucionem o problema de paridade \cite{Betel2013}. 
 Mas o uso de templates e suas operações podem ser uma forma interessante de restringir o conjunto de regras na busca dessa solução.
 
@@ -214,7 +213,7 @@ Por fim, espera-se que um AC que resolva o problema de paridade seja conservativ
 
 Dada a possibilidade de se obter os templates para todas essas propriedades, é também possível utilizar esses templates e as operações de diferença e intersecção para expressar esse espaço de busca para a solução do problema de paridade.
 Para expressar esse espaço, basta efetuar a intersecção dos templates de confinamento com o template de conservabilidade de paridade, visto que ambas as propriedades são necessárias. Entretanto, vale frisar que essa intersecção gera o próprio template de paridade, não fazendo diferença para o resultado final.
-Posteriormente, deve-se efetuar a operação de diferença com o template obtido pela primeira intersecção com o template das regras conservativas de estado, já que as conservabilidade de estado impede a resolução do problema de paridade.
+Posteriormente, deve-se efetuar a operação de diferença com o template obtido pela primeira intersecção com o template das regras conservativas de estado, já que a conservabilidade de estado impede a resolução do problema de paridade.
 
 Formalmente, essas operações de conjuntos entre os templates podem ser representadas através da Eq. \eqref{eq:operationsTemplateParidade}, sendo que $T_{confinado}$ representa o template das regras confinadas, $T_{conservaparidade}$ representa o templates das regras que conservam a paridade, e ${T}_{conservaestados}$ indica o template de regras conservativas. O resultado dessa operação é $T_{paridade}$, o qual representa um conjunto de templates que restringem um pouco mais as regras com possibilidades de solucionar o problema de paridade.
 \begin{equation}
@@ -222,6 +221,6 @@ T_{paridade} = (T_{conservaparidade} \cap T_{confinado}) - {T}_{conservaestados}
 \label{eq:operationsTemplateParidade}
 \end{equation}
 
-Entretanto, apesar de formalmente possível, a realização dessas operações não se mostraram produtivas. Isto ocorre pois  a operação de exceção, utilizada pela operação de diferença, tem complexidade $O(c^n)$, onde $n$ é o número de variáveis nas posições que não apresentem apenas variáveis livres ou constantes nos templates. Deste modo, gerar os templates de exceção do template $T_{conservaestados}$ é tão custoso quanto expandir todas as regras desse template.
+Entretanto, apesar de formalmente possível, a realização dessas operações não se mostrou produtiva. Isto ocorre pois a operação de exceção, utilizada pela operação de diferença, tem complexidade $O(c^n)$, onde $n$ é o número de variáveis nas posições que não apresentem apenas variáveis livres ou constantes nos templates. Deste modo, gerar os templates de exceção do template $T_{conservaestados}$ é tão custoso quanto expandir todas as regras desse template.
 
 Dito isto, é mais simples utilizar o template $T_{conservaestados}$ com uma função de pós-processamento alternativa que elimine todas as tabelas $k$-árias que não apresentem campos inválidos, e aplique $mod$ $2$ nas restantes. Assim  esse mesmo template vai representar apenas as regras que mantenham a paridade mas não apresentem a propriedade de conservabilidade de estados. Também poderá ser aplicado nesse template operações de intersecção ou diferença com outros templates de modo a se restringir ainda mais o espaço de busca.
