@@ -10,6 +10,8 @@
 \usepackage{subfigure}
 \usepackage{amsmath}
 \usepackage{import}
+\usepackage[font=small]{caption}
+\usepackage{booktabs}
 
 % Criar nova pagina a cada nova section
 \let\stdsection\section
@@ -21,9 +23,11 @@
 \citeoption{abnt-etal-list=5}
 \citeoption{abnt-etal-text=3}
 
-\include{capa}
+\input{capa}
 
-\include{abstractEResumo}
+\input{agradecimentos}
+
+\input{abstractEResumo}
 
 % SUMÁRIO
 \newpage
@@ -37,19 +41,21 @@
 \renewcommand{\baselinestretch}{1.4} 
 \normalsize
 
-\include{sec1-introducao}
+\input{sec1-introducao}
 
-\include{sec2-automatosCelulares}
+\input{sec2-automatosCelulares}
 
-\include{sec3-templates}
+\input{sec3-propriedadesEstaticas.tex}
 
-\include{sec4-propriedadesEstaticas}
+\input{sec3-templates}
 
-\include{sec5-resultadosParciais}
+\input{sec4-propriedadesEstaticas}
 
-\include{sec6-consideracoesFinais}
+\input{sec5-resultadosParciais}
 
-\include{sec7-planoDeTrabalho}
+\input{sec6-consideracoesFinais}
+
+% \input{sec7-planoDeTrabalho}
 
 \def\refname{REFERÊNCIAS BIBLIOGRÁFICAS}
 \bibliography{bibliografia}

@@ -1,3 +1,4 @@
+%!TEX root = dissertacao.tex
 % RESUMO
 \newpage
 \thispagestyle{plain}
@@ -7,12 +8,13 @@
 \textbf{RESUMO}
 \end{center}
 %\renewcommand{\baselinestretch}{0.6666666}
-Templates são representações formais para conjuntos de autômatos celulares (ACs) feitas por meio da generalização das tabelas de transição clássicas. Já existem algoritmos que geram templates para propriedades estáticas %TODO: definir propriedades estáticas de maneira simples
-e algoritmos que realizam operações como intersecção entre templates e expansão de template. Este projeto de pesquisa introduz a operação de complemento de templates e o funcionamento do algoritmo dessa operação implementada na biblioteca \textit{CATemplates}. Também são apresentados exemplos das possibilidades de uso do templates no problema de paridade, com o apoio das operações de complemento e das operações geradoras de templates de ACs conservativos de paridade e ACs conservativos de estado.
-\\[0.5cm]
+\textit{Templates} são representações formais para conjuntos de autômatos celulares unidimensionais feitas por meio da generalização das tabelas de transição clássicas. Já existem algoritmos na literatura que geram templates para propriedades estáticas de autômatos celulares, assim como há algoritmos que realizam operações como intersecção entre templates e expansão de template. Aqui, é introduzida a operação de templates de exceção, a operação de diferença entre templates, e explica-se o funcionamento do algoritmo dessas operações, que foram implementadas na biblioteca \textit{CATemplates} do software Mathematica. Também são apresentados exemplos da possibilidade de uso de templates no problema de paridade (a saber, a determinação da paridade de 1s em uma configuração binária cíclica de tamanho ímpar), com o apoio da operação de diferença entre templates, e das operações geradoras de templates de autômatos celulares conservativos de paridade e conservativos de estado.
+\\[0.5cm]																																																																																																																																																																																																																																																			
 \begin{flushleft}
-{\bf Palavras-chave:} {\it Autômatos celulares, templates, conservabilidade, problema de paridade.}
+{\bf Palavras-chave:} {\it Autômatos celulares, templates, diferença entre templates, templates de exceção, propriedades estáticas.}
 \end{flushleft}
+\pagenumbering{roman}
+
 
 % ABSTRACT
 \newpage
@@ -23,8 +25,8 @@ e algoritmos que realizam operações como intersecção entre templates e expan
 \textbf{ABSTRACT}
 \end{center}
 %\renewcommand{\baselinestretch}{0.6666666}
-Templates are formal representation for cellular automata sets (CAs) made through the generalization of the classical transitions table. There are algorithms that generate templates for static properties and algorithms that perform operations such as intersection between templates and template expansion. In this research project it is introduced the templates complement operating and explained the functioning of the algorithm of this operation implemented in the \textit{CATemplates} package. Also show examples of possibilities of using templates in the parity problem, with the support of complement operations and generating operations of CAs conservative parity and ACs state conservative.
+Templates are formal representation for sets of one-dimensional cellular automata created by means of a generalisation of the classical state transition tables. Algorithms already do exist in the literature that generate templates for static properties of cellular automata rule, as well as others that perform operations such as intersection between templates and template expansion. Here, we introduce the exception template operation, the operation of difference between templates, and explain the functioning of the algorithm of those operations, which have been implemented in the CATemplates package of the Mathematica software. We also show examples of the possibility of using templates in the parity problem (namely, the determination of the parity of 1s in a cyclic binary configuration of odd length), with the support of the operation of difference between templates, and of the template generation of parity conserving and state conserving cellular automata.
 \\[0.5cm]
 \begin{flushleft}
-{\bf Keywords:} {\it Cellular automata, templates, conservation, parity problem.}
+{\bf Keywords:} {\it Cellular automata, templates, difference between templates, exception template, static properties.}
 \end{flushleft}
