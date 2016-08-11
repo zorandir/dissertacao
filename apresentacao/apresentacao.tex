@@ -2,10 +2,11 @@
 \usepackage{lmodern}
 \usepackage{abnt-alf}
 \usepackage[brazil]{babel}
-\usepackage{graphicx} \graphicspath{ {../img/} } % Inclusão de gráficos
+\usepackage{graphicx} \graphicspath{ {img/} } % Inclusão de gráficos
 \usepackage[utf8]{inputenc}		% Codificacao do documento (conversão automática dos acentos)
 \usepackage{multicol}
 \usepackage{subfigure}
+\usepackage{booktabs}
 
 \usetheme{Berlin}
 \usecolortheme{beaver}
@@ -17,7 +18,7 @@
   \oldmacro\hfill%
   \insertframenumber\,/\,\inserttotalframenumber}
 
-\title[zorandir@gmail.com]{Aperfeiçoando a Representação de Autômatos Celulares Através de \textit{Templates}}  
+\title[zorandir@gmail.com]{Diferença entre Templates de Autômatos Celulares Unidimensionais Binários}  
 \author[ ]{Zorandir Soares Jr. \\zorandir@gmail.com} 
 \institute[ ]{Universidade Presbiteriana Mackenzie\\
 Programa de Pós-Graduação em Engenharia Elétrica e Computação \vskip 0.5cm
@@ -42,15 +43,14 @@ Orientador: Prof. Dr. Pedro Paulo Balbi de Oliveira
 
 
  
- \section[Objetivos]{Objetivos e Motivação}
- \subsection*{Objetivos e Motivação}
+ \section[Objetivos]{Objetivos}
+ \subsection*{Objetivos}
  \begin{frame}
-     \frametitle{Objetivos e Motivação}
+     \frametitle{Objetivos}
      \begin{itemize}
-           \item Aperfeiçoar a representação de autômatos celulares através de \textit{templates}
-           \item Desenvolver e melhorar algoritmos geradores de templates
-           \item Apresentar exemplos da utilização dos templates em problemas típicos dos ACs
-           \item Pesquisar e implementar soluções para os principais problemas em aberto
+           \item Apresentar a operação de diferença entre templates
+           \item Apresentar a operação geradora de templates de exceção
+           \item Apresentar exemplos da utilização dos templates no problema de paridade
      \end{itemize}
  \end{frame}
  
@@ -73,7 +73,7 @@ Orientador: Prof. Dr. Pedro Paulo Balbi de Oliveira
      % Autômatos Celulares (ACs) são idealizações matemáticas simples dos sistemas naturais. Eles consistem em um reticulado de campos discretos idênticos, onde cada campo pode assumir um conjunto finitos de, geralmente, valores inteiros. Os valores dos campos evoluem em tempo discreto de acordo com regras determinísticas que especificam o valor de cada campo de acordo com os campos das vizinhanças \cite{wolfram1994cellular}.
  \end{frame}
 
-
+  
 
 
 
@@ -100,41 +100,6 @@ k^{k^{2r+1}}
      \end{itemize}
  \end{frame}
 
-% \begin{frame}
-% \frametitle{Tamanho das famílias dos autômatos celulares}
-% \framesubtitle{Autômatos celulares binários}
-% \begin{figure}[h!]
-% \centering
-% \includegraphics[width=.5\textwidth]{fig_graphicRxr.pdf}
-% \caption{Gráfico mostrando a variação do tamanho dos espaços de acordo com o tamanho do raio $r$}
-% \end{figure}
-% \end{frame}
-
-% \begin{frame} %Substitiur por um BOM gráfico
-% \frametitle{Tamanho das famílias dos autômatos celulares}
-% \framesubtitle{Autômatos celulares não binários}
-% \begin{figure}[h!]
-% \centering
-% \includegraphics[width=.5\textwidth]{fig_graphicRxk.pdf}
-% \caption{Gráfico mostrando a variação do tamanho dos espaços de acordo com o número de estados $k$}
-% \end{figure}
-% \end{frame}
-
-%  \begin{frame}
-%      \frametitle{Representação de famílias}
-%      \framesubtitle{Grafos de Gruijin}
-%  \end{frame}
-
-% \begin{frame}
-% 	\frametitle{Representação de famílias}
-% 	\framesubtitle{Templates}
-% \end{frame}
-
-
-
-
-
-
 \section{Templates}
 \subsection*{Templates}
 \begin{frame}
@@ -148,45 +113,43 @@ k^{k^{2r+1}}
     \end{figure}
 \end{frame}
 
-\begin{frame}
-    \frametitle{Exemplo -  Template Base}
+% \begin{frame}
+%     \frametitle{Exemplo -  Template Base}
     
-    \begin{equation}
-    \begin{split}
-    (k:2, r:1, \\rawList:(x_7,x_6,x_5,x_4,x_3,x_2,x_1,x_0),  \\expansionFunction:RawExpansion)
-    \end{split}
-    \end{equation}
-\end{frame}
-
-\begin{frame}
-    \frametitle{Exemplo -  Template Modular}
-  
-    \begin{equation}
-    \begin{split}
-    (k:2, r:1, N:2, \\rawList:(x_7,x_6,x_5,x_4,x_3,x_2,x_1,x_0),  \\imprisonmentExpressions:(x_0 \in \{0,1\}), \\expansionFunction:ModNExpansion)
-    \end{split}
-    \end{equation}
-\end{frame}
+%     \begin{equation}
+%     \begin{split}
+%     (x_7,x_6,x_5,x_4,x_3,x_2,x_1,x_0)
+%     \end{split}
+%     \end{equation}
+% \end{frame}
 
 \begin{frame}
 	\frametitle{Expansão}
 	Expansão é o processo no qual se obtêm todas as tabelas de transição $R_k$ associadas a um template $T$.
-    \begin{columns}
-    \begin{column}{5cm}
-        \begin{equation}
-        E(T)=R_k
-        \end{equation}
-    \end{column}
-    \pause
-    \begin{column}{5cm}
-     \begin{itemize}
-           \item RawExpansion
-           \item FilteredExpansion
-           \item ModNExpansion
-     \end{itemize}
-    \end{column}
-    \end{columns}
+  \begin{equation}
+  E(T)=R_k
+  \end{equation}
  \end{frame}
+
+\begin{frame}
+    \frametitle{Exemplo -  Expansão}
+    
+  \begin{table}[h!]
+  \centering
+  \caption{Processo de expansão do template $(1,1,1,1,1,x_0+x_1,x_1,x_0)$}
+    \begin{tabular}{cccc}
+      \toprule
+    $i$ & $x_1$ & $x_0$ & tabela $k$-ária resultante \\
+      \midrule
+    0 & 0 & 0 & (1,1,1,1,1,0,0,0) \\
+    1 & 0 & 1 & (1,1,1,1,1,1,0,1) \\
+    2 & 1 & 0 & (1,1,1,1,1,1,1,0) \\
+    3 & 1 & 1 & (1,1,1,1,1,2,1,1) \\
+      \bottomrule
+      \end{tabular}
+  \label{tab:invalideExpansion}
+  \end{table}
+\end{frame}
 
 \begin{frame}
 	\frametitle{Intersecção}
@@ -205,155 +168,6 @@ k^{k^{2r+1}}
  \end{frame}
 
  \begin{frame}
-    \frametitle{Intersecção}
-
-    \textbf{Intersecções resolvidas}
-    \begin{itemize}
-      \item Intersecção de templates não modulares
-      \item Intersecção de templates modulares com mesmo valor de $N$
-    \end{itemize}
- \end{frame}
-
-\begin{frame}
-    \frametitle{Complemento}
-    \begin{equation}
-    C(T_1)=\bar{T}_1 \Leftrightarrow E(\bar{T}_1) = U \setminus E(T_1)
-    \end{equation}
-
-    \begin{figure}[h!]
-      \centering
-      \includegraphics[width=.4\textwidth]{fig_complement3.pdf}
-      \caption{Em branco, $T_1$ é um template que representa um conjunto de regras. Em cinza, $\bar{T_1}$ é um conjunto de template que representa o complemento de $T_1$.}
-      \label{fig:complement}
-    \end{figure}    
- \end{frame}
-
-% \begin{frame}
-%     \frametitle{Confinamento}
-%     \framesubtitle{Operação Geradora de Templates}
-%           \vspace{-0.8cm}
-%     \begin{itemize}
-%            \item Implementado na CATemplates
-%            \item Funciona com qualquer número de estados
-%      \end{itemize}     
-%         \begin{equation}
-%         \begin{split}
-%         (k:2, r:1, \\rawList:(1, x_6, x_5, x_4, x_3, x_2, x_1, 0),  \\expansionFunction:RawExpansion)
-%         \end{split}
-%         \end{equation}        
-% \end{frame}
-
-% \begin{frame}
-%     \frametitle{Totalidade e Semi-Totalidade}
-%     \framesubtitle{Operação Geradora de Templates}
-%           \vspace{-0.8cm}
-%     \begin{itemize}
-%            \item Implementado na CATemplates
-%            \item Funciona com qualquer número de estados
-%      \end{itemize}     
-%     \begin{equation}
-%     \begin{split}
-%     (k:2, r:1, rawList:(x_7, x_3, x_3, x_1, x_3, x_1, x_1, 0),  \\expansionFunction:RawExpansion)
-%     \end{split}
-%     \end{equation}        
-%     \begin{equation}
-%     \begin{split}
-%     (k:2, r:1, rawList:(x_7, x_3, x_5, x_1, x_3, x_2, x_1, 0),  \\expansionFunction:RawExpansion)
-%     \end{split}
-%     \end{equation}    
-% \end{frame}
-
-% \begin{frame}
-%     \frametitle{Color Blind}
-%     \framesubtitle{Operação Geradora de Templates}
-%      \vspace{-0.8cm}
-%      \begin{itemize}
-%            \item Implementado na CATemplates
-%            \item Funciona com qualquer número de estados
-%            \item Template Modular para $k>2$
-%      \end{itemize}     
-%         \begin{equation}
-%         \begin{split}
-%         (k:3, r:1, rawList:(2, 2 - x_1, 2 - 2 x_1, 2 - x_3, 2 - x_4, 2 - x_5, 2 - 2 x_3,\\
-%          2 - 2 x_5, 2 - 2 x_4, 1 - 2 x_4, 1 - 2 x_3, 1 - 2 x_5, 1 - 2 x_1, 1, 1 + 2 x_1, 1 + 2 x_5,\\
-%                       1 + 2 x_3, 1 + 2 x_4, 2 x_4, 2 x_5, 2 x_3,x_5, x_4, x_3, 2 x_1, x_1, 0), \\expansionFunction:ModKExpansion)
-%         \end{split}
-%         \end{equation}    
-% \end{frame}
-
-% \begin{frame}
-%     \frametitle{Simetria Interna Máxima}
-%     \framesubtitle{Operação Geradora de Templates}
-%      \vspace{-0.8cm}
-%      \begin{itemize}
-%            \item Implementado no CATemplates
-%            \item Funciona com qualquer número de estados
-%      \end{itemize}     
-%         \begin{equation}
-%         \begin{split}
-%         rawList:(x_7, x_3, x_5, x_1, x_3, x_2, x_1, x_0)
-%         \end{split}
-%         \end{equation}        
-%         \begin{equation}
-%         \begin{split}
-%         rawList:(1 - x_0, 1 - x_1, 1 - x_2, 1 - x_3, x_3, x_2, x_1, x_0)
-%         \end{split}
-%         \end{equation}
-%         \begin{equation}
-%         \begin{split}
-%         rawList:(1 - x_0, 1 - x_4, 1 - x_2, 1 - x_4, x_3, x_2, x_1, x_0)
-%         \end{split}
-%         \end{equation}   
-% \end{frame} 
-
-% \begin{frame}
-%     \frametitle{Simetria Interna Arbitrária}
-%     \framesubtitle{Operação Geradora de Templates}
-%      \vspace{-0.8cm}
-%      \begin{itemize}
-%            \item Implementado na CATemplates
-%            \item Funciona apenas no espaço binário
-%      \end{itemize}     
-%         \begin{equation}
-%         \begin{split}
-%         (k:2, r:1, \\rawList:(x_7, x_3, x_3, x_1, x_3, x_1, x_1, 0),  \\expansionFunction:RawExpansion)
-%         \end{split}
-%         \end{equation}        
-
-% \end{frame} 
-
-% \begin{frame}
-%     \frametitle{Conservabilidade de Estados}
-%     \framesubtitle{Operação Geradora de Templates}
-%      \vspace{-0.8cm}
-%      \begin{itemize}
-%            \item Implementado na CATemplates
-%            \item Funciona com qualquer número de estados
-%      \end{itemize}     
-%         \begin{equation}
-%         \begin{split}
-%         (k:2, r:1, \\rawList:(1, 1 + x_2 - x_3, 1 - x_2, 1 - x_1 - x_2, x_3, x_2, x_1, 0),  \\expansionFunction:RawExpansion)
-%         \end{split}
-%         \end{equation}        
-% \end{frame} 
-
-% \begin{frame}
-%     \frametitle{Conservabilidade Modular}
-%     \framesubtitle{Operação Geradora de Templates}
-%      \vspace{-0.8cm}
-%      \begin{itemize}
-%            \item Implementado na CATemplates
-%            \item Funciona com qualquer número de estados
-%            \item Template Modular
-%      \end{itemize}     
-%         \begin{equation}
-%         \begin{split}
-%         (k:2, r:1, n:2, \\rawList:(1, 1 + x_2 + x_3, 1 + x_2, 1 + x_1 + x_2, x_3, x_2, x_1, 0),  \\expansionFunction:ModNExpansion)
-%         \end{split}
-%         \end{equation}        
-% \end{frame} 
-
-\begin{frame}
     \frametitle{Geradoras de Templates e Número de Estados}
     \vspace{-0.8cm}
     \begin{table}[]
@@ -381,14 +195,220 @@ k^{k^{2r+1}}
 \end{frame} 
 
 
-
- \section{Resultados Parciais}
- \subsection*{Resultados Parciais}
  \begin{frame}
-     \frametitle{Resultados Parciais}
+    \frametitle{Geradoras de Templates e Pós-processamentoj}
+    \vspace{-0.8cm}
+\begin{table}[h!]
+\centering
+\caption{Pós-processamento necessário por templates}
+    \vspace{-0.8cm}
+    \resizebox{\textwidth}{!}{%
+  \begin{tabular}{ll}
+    \toprule
+  Template & Pós-processamento \\
+    \midrule
+  Template de regras confinadas         & Filtrar regras com restrições inválidas \\
+  Template de conservabilidade de estados   & Filtrar regras inválidas            \\
+  Template de conservabilidade de paridade  & Aplicar $mod$ $2$ e filtrar regras inválidas  \\
+  Template de totalidade e semi-totalidade  & Nenhum pós-processamento necessário         \\
+  Templates de simetria           & Nenhum pós-processamento necessário         \\
+    \bottomrule
+  \end{tabular}
+  }
+\label{tab:posProcessamento}
+\end{table}
+\end{frame} 
+
+
+ \section{Diferença entre Templates}
+ \subsection*{Diferença entre Templates}
+ \begin{frame}
+     \frametitle{Diferença entre Templates}
+     \begin{itemize}
+           \item Templates de exceção
+           \item Diferença entre Templates
+     \end{itemize}
+ \end{frame}
+
+ \begin{frame}
+     \frametitle{Templates de exceção}
+
+      A operação geradora de templates de exceção $X$ gera um conjunto $C_e$ com todos os templates de exceção do template $T_o$ passado como parâmetro. A operação que gera o conjunto templates de exceção de um template pode ser descrita em mais detalhes da seguinte maneira:
+      \begin{equation}
+      \begin{split}
+      X(T_o)= C_e \\
+      C_e = \{T_1,T_2,\dots, T_n\}\\
+      \end{split}
+      \end{equation}     
+ \end{frame}
+
+ \begin{frame}
+    \frametitle{Exemplo - Templates de exceção}
+    
+    \\Considere o template:
+    $T_{o} = (1, x_6, x_5, 1 - x_1 - x_2, 2 - x_1 - x_2, x_2, x_1, 0)$. 
+
+    O primeiro passo do algoritmo é encontrar um conjunto com as posições que não apresentem apenas constantes ou variáveis livres, obtendo-se assim $\{\{1 - x_1 - x_2\}, \{2 - x_1 - x_2\}\}$.
+ \end{frame}
+ \begin{frame}
+     \frametitle{Templates de exceção}
+    \begin{columns}
+        \begin{column}{5cm}
+          \begin{table}[h!]
+          \centering
+          \caption{Expansão do campo 1 - x_1 - x_2.}
+            \begin{tabular}{ccc}
+              \toprule
+            $x_2$ & $x_1$ & Expansão do campo \\
+              \midrule
+            0 & 0 & 1 - x_1 - x_2 = 1 \\
+            0 & 1 & 1 - x_1 - x_2 = 0 \\
+            1 & 0 & 1 - x_1 - x_2 = 0 \\
+            1 & 1 & 1 - x_1 - x_2 = -1  \\
+              \bottomrule
+            \end{tabular}
+          \label{tab:exceptionProcessA}
+          \end{table} 
+        
+        \end{column}
+        \begin{column}{5cm}
+
+          \begin{table}[h!]
+          \centering
+          \caption{Expansão do campo 2 - x_1 - x_2.}
+            \begin{tabular}{ccc}
+              \toprule
+            $x_2$ & $x_1$ & Expansão do campo \\
+              \midrule
+            0 & 0 & 2 - x_1 - x_2 = 2 \\
+            0 & 1 & 2 - x_1 - x_2 = 1 \\
+            1 & 0 & 2 - x_1 - x_2 = 1 \\
+            1 & 1 & 2 - x_1 - x_2 = 0 \\
+              \bottomrule
+            \end{tabular}
+          \label{tab:exceptionProcessB}
+          \end{table}
+
+        \end{column}
+\end{columns}
+ \end{frame}
+ \begin{frame}
+     \frametitle{Templates de exceção}
+Para finalizar a operação, o algoritmo seleciona as substituições que geram valores inválidos, e aplicam ela ao template base, gerando assim o conjunto de templates $C_e$, mostrado na  Eq. \ref{eq:exceptionsTemplates2}.
+
+\begin{equation}
+C_e = \{(x_7, x_6, x_5, x_4, x_3, 1, 1, x_0),(x_7, x_6, x_5, x_4, x_3, 0, 0, x_0)\}
+\label{eq:exceptionsTemplates2}
+\end{equation}
+ \end{frame}
+
+  \begin{frame}
+    \frametitle{Operação de Diferença entre Templates Binários}
+
+    A operação de diferença entre templates binários $D_i$ é responsável por obter um conjunto $C_{di}$ com $n$ templates, os quais, quando expandidos (via a operação de expansão $E$), apresentam apenas as regras geradas pela expansão do template $T_m$ que não estejam também presentes na expansão do template de intersecção entre $T_s$ e $T_m$, chamado aqui de $T_i$.
+    \begin{equation}
+    \begin{split}
+    D_i(T_m,T_s)= C_{di} \Leftrightarrow E(C_{di}) = E(T_m) \setminus E(T_i) \\
+    T_i = I(T_m,T_s)\\
+    C_{di} = \{T_1,T_2,\dots, T_n\}\\
+    \end{split}
+    \end{equation}
+ \end{frame}
+
+
+  \begin{frame}
+    \frametitle{Operação de Diferença entre Templates Binários}
+    A Figura \ref{fig:complement} ilustra essa operação, onde os templates $T_m$ e $T_s$ passados como parâmetro para a operação de diferença estão representado pelos dois círculos, e o conjunto $C_{di}$ retornado pela função está representado pela área em cinza na imagem.
+    \begin{figure}[h!]
+      \centering
+      \includegraphics[width=.4\textwidth]{fig_complement2.pdf}
+      \caption{Os círculos $T_m$ e $T_s$ são os templates que representam dois conjuntos de regras. Em cinza, $C_{di}$ é o conjunto de templates que representam o conjunto de regras retornado pela operação de diferença.}
+      \label{fig:complement}
+    \end{figure}
+ \end{frame}
+
+ \begin{frame}
+    \frametitle{Exemplo - Operação de Diferença entre Templates}
+    Considere
+    \begin{equation}
+    \begin{split}
+    T_m = (x_7, x_6, x_5, x_4, x_3, x_1, x_1, x_0) \\
+    T_s = (x_7, x_6, x_3 + x_1, 1 - x_1, x_3, x_1, x_1, 0)\\
+    T_i = I(T_m,T_s) = (x_7, x_6, x_3 + x_1, 1 - x_1, x_3, x_1, x_1, 0)\\
+    \end{split}
+    \end{equation}
+ \end{frame}
+
+ \begin{frame}
+    \frametitle{Exemplo - Operação de Diferença entre Templates}
+    \begin{columns}
+        \begin{column}{5cm}
+    \begin{equation}
+    \left\{\begin{matrix}
+    x_7 & = & x_7 \\ 
+    x_6 & = & x_6 \\ 
+    x_5 & = & x_3 + x_1 \\ 
+    x_4 & = & 1 - x_1 \\ 
+    x_3 & = & x_3 \\ 
+    x_1 & = & x_1 \\ 
+    x_1 & = & x_1 \\ 
+    x_0 & = & 0
+    \end{matrix}\right.
+    \end{equation}
+
+    \end{column}
+
+    \begin{column}{5cm}
+    \begin{equation}\\
+    x_7 = x_7 \wedge  
+    x_6 = x_6 \wedge  \\
+    x_5 = x_3 + x_1 \wedge  
+    x_4 =   1 - x_1 \wedge  \\
+    x_3 = x_3 \wedge  
+    x_1 = x_1 \wedge  \\
+    x_1 = x_1 \wedge  
+    x_0 = 0
+    \end{equation}
+
+    \begin{equation}\\
+    x_5 = x_3 + x_1 \\
+    \vee x_4 = 1 - x_1 \\
+    \vee x_0 = 0
+    \label{eq:logicalComplement1}
+    \end{equation}
+    \end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Exemplo - Operação de Diferença entre Templates}
+
+    \begin{equation}
+    x_5 = 1 - (x_3 + x_1) \vee x_4 = 1 - (1 - x_1) \vee x_0 = 1 - 0
+    \label{eq:logicalComplement2}
+    \end{equation}
+
+    \begin{equation}
+    S = \{\{x_0 \to 1\}, \{x_4 \to x_1\}, \{x_5 \to 1 - x_1 - x_3\}\}
+    \label{eq:logicalComplement3}
+    \end{equation}
+
+    \begin{equation}
+    \begin{split}
+    C_{di} = \{\\(x_7, x_6, x_5, x_4, x_3, x_1, x_1, 1), \\(x_7, x_6, x_5, x_1, x_3, x_1, x_1, x_0), \\(x_7, x_6, 1 - x_1 - x_3, x_4, x_3, x_1, x_1, x_0)\}
+    \end{split}
+    \label{eq:logicalComplement3}
+    \end{equation}
+
+\end{frame}
+
+ \section{Discussões e Testes}
+ \subsection*{Discussões e Testes}
+ \begin{frame}
+     \frametitle{Discussões e Testes}
      \begin{itemize}
            \item Aplicação no Problema de Paridade
-           \item Operação de Complemento
+           \item Metodologia de testes
      \end{itemize}
  \end{frame}
 
@@ -431,210 +451,38 @@ k^{k^{2r+1}}
     \begin{equation}
     2^{63} \approx  9.2\times 10^{18}
     \end{equation}
-
-    
-
-
 \end{frame}
 
 \begin{frame}
-    \frametitle{Complemento}
-    \begin{columns}
-        \begin{column}{5cm}
-    \begin{equation}
-    rawList:(x_7, x_6, x_5, 1 - x_1, x_3, x_2, x_1, 0)
-    \end{equation}
-    \begin{equation}
-    \left\{\begin{matrix}
-    x_7 & = & x_7   \\ 
-    x_6 & = & x_6   \\ 
-    x_5 & = & x_5   \\ 
-    x_4 & = & 1 - x_1 \\ 
-    x_3 & = & x_3   \\ 
-    x_2 & = & x_2   \\ 
-    x_1 & = & x_1   \\ 
-    x_0 & = & 0
-    \end{matrix}\right.
-    \end{equation}
-    \begin{equation}
-    x_4 = 1 - x_1 \wedge x_0 = 0
-    \end{equation}
-    \end{column}
+    \frametitle{Testes}
+    \vspace{-0.8cm}
+    \begin{table}[h!]
+    \centering
+    \caption{Propriedades estáticas utilizadas para o teste da operação de diferença em cada raio}
+    \vspace{-0.8cm}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{l|lllll|}
+    \cline{2-6}
+    & \multicolumn{5}{c|}{Template minuendo ($T_m$)} \\ \cline{1-1}
+    \multicolumn{1}{|l|}{Template subtraendo ($T_s$)}                  
+    & totalidade
+    & semi-totalidade
+    & \begin{tabular}[c]{@{}l@{}}conservabilidade\\ de estados\end{tabular} 
+    & \begin{tabular}[c]{@{}l@{}}invariância à\\ troca de cor\end{tabular}  
+    & confinamento 
+    \\ \cline{2-6} 
 
-    \begin{column}{5cm}
-        \begin{figure}[h!]
-          \centering
-          \includegraphics[width=.8\textwidth]{fig_complement3.pdf}
-        \end{figure}
-    \end{column}
-\end{columns}
+    \multicolumn{1}{|l|}{totalidade}                  & Raio 1, 2 e 3& Raio 1, 2 e 3  & Raio 1 e 2& Raio 1 e 2& Raio 1  \\
+    \multicolumn{1}{|l|}{semi-totalidade}             & Raio 1, 2 e 3& Raio 1, 2 e 3  & Raio 1 e 2& Raio 1 e 2& Raio 1  \\
+    \multicolumn{1}{|l|}{conservabilidade de estados} & Raio 1 e 2   & Raio 1 e 2   & Raio 1 e 2& Raio 1 e 2& Raio 1  \\
+    \multicolumn{1}{|l|}{invariância  à troca de cor} & Raio 1 e 2   & Raio 1 e 2   & Raio 1 e 2& Raio 1 e 2& Raio 1  \\
+    \multicolumn{1}{|l|}{confinamento}                & Raio 1     & Raio 1     & Raio 1  & Raio 1  & Raio 1  \\ \hline
+    \bottomrule
+    \end{tabular}%
+    }
+    \label{tab:differenceTests}
+    \end{table}
 \end{frame}
-
-\begin{frame}
-    \frametitle{Complemento}
-    \begin{columns}
-        \begin{column}{5cm}
-        \begin{equation}
-        x_4 = 1 - x_1 \vee x_0 = 0
-        \end{equation}
-        \begin{equation}
-        x_4 = 1 - (1 - x_1) \vee 
-        x_0 = 1 - 0
-        \end{equation}
-        \begin{equation}
-        S = \{\{x_4 \to x_1\},\{x_0\to 1\}\}
-        \end{equation}
-    \end{column}
-
-    \begin{column}{5cm}
-        \begin{figure}[h!]
-          \centering
-          \includegraphics[width=.7\textwidth]{fig_complement3.pdf}
-        \end{figure}
-    \end{column}
-\end{columns}
-\begin{equation}
-\{(x_7, x_6, x_5, x_4, x_3, x_2, x_1, 1),(x_7, x_6, x_5, x_1, x_3, x_2, x_1, x_0)\}
-\end{equation}
-\end{frame}
-
-% \begin{frame}
-%     \frametitle{Problema de Paridade}
-%     \framesubtitle{Aplicação}
-   
-%     O \textit{Problema de Paridade}. Neste problema a configuração inicial (entrada) deve ser classificada em uma entre duas classe, de acordo com a quantidade par de 1s ou não (a saída é, portanto, a paridade da entrada - par ou ímpar) \cite{Sipper1998}.
-% \end{frame}
-
-
-
-
-
-
- \section{Problemas e Trabalhos Futuros}
- \subsection*{Problemas em Aberto}
- \begin{frame}
-    \frametitle{Intersecção de Templates Modulares}
-
-    \textbf{Intersecções não resolvidas}
-    \begin{itemize}
-      \item Intersecção de templates com Mods diferentes
-      \item Intersecção de um template modular com um template não modular
-    \end{itemize}
-
-    \begin{alertblock}{Solução do problema permite:}
-        \vspace{-0.4cm}
-        \begin{itemize}
-          \item Realizar o complemento de Templates Modulares 
-          \item Criar a operação de diferença entre Templates
-        \end{itemize}
-    \end{alertblock}
- \end{frame}
-
-
-\begin{frame}
-    \frametitle{Intersecção de Templates Modulares primos entre si}
-    \begin{alertblock}{Teorema Chinês dos restos}
-    \vspace{-0.4cm}    
-    \label{chinese}
-    Sejam $m_1,m_2,\dots,m_r$, $r$ inteiros positivos que são primos entre si, dois a dois, e sejam $a_1,a_2,\dots,a_r$, $r$ inteiros quaisquer. Então, o sistema de congruências:
-    
-    $
-        \left\{\begin{matrix}
-        x \equiv a_1 & (\textup{mod }m_1) \\ 
-        x \equiv a_2 & (\textup{mod }m_2) \\
-        \vdots \\
-        x \equiv a_r & (\textup{mod }m_r) \\
-        \end{matrix}\right.    
-    $
-
-    admite um solução $x$ única módulo $m = m_1 m_2 \dots m_r$
-    \end{alertblock}
-\end{frame} 
-
- \begin{frame}
-     \frametitle{Negação de variável}
-     No caso binário, uma variável pode ser negada por meio da função $f(x)=1-x$. No template abaixo a terceira posição ilustra a variável $x_1$ negada. 
-    \begin{equation}
-    \begin{split}
-    (k=2, r=0.5, \\
-    rawList= (1,1-x_1,x_1,0), \\
-    expansionFunction=RawExpansion)
-    \end{split}
-    \end{equation}
- \end{frame}
-
- \begin{frame}
-     \frametitle{Negação de variável}
-     A questão: como negar variáveis em templates não binários?
-
-    \begin{alertblock}{Solução do problema permite:}
-        \vspace{-0.4cm}
-        \begin{itemize}
-          \item Abstração do algoritmo gerador de templates de simetria interna.
-          \item Abstração da operação de complemento.
-        \end{itemize}
-    \end{alertblock}
- \end{frame}
-
-  \begin{frame}
-    \frametitle{Operação de Diferença entre Conjuntos}
-    \begin{equation}
-    C(T_1,T_2)=T_3 \Leftrightarrow E(T_3) = E(T_2) \setminus E(T_1)
-    \end{equation}
-
-    \begin{figure}[h!]
-      \centering
-      \includegraphics[width=.4\textwidth]{fig_complement2.pdf}
-      \caption{Os círculos $T_1$ e $T_2$ são os templates que representam dois conjuntos de regras. Em cinza, $T_3$ é um conjunto de template que representa o conjunto de regras de $T_2 - T_1$.}
-      \label{fig:complement2}
-    \end{figure}    
- \end{frame}
-
- \section{Cronograma}
- \subsection*{Cronograma}
-
- \begin{frame}
-     \frametitle{Cronograma}
-      \begin{itemize}
-          \item Fase 0: participação nas disciplinas necessárias ao cumprimento dos créditos para a obtenção do título de mestre;
-          \item Fase 1: pesquisa bibliográfica de autômatos celulares e de templates;
-          \item Fase 2: programação e testes da operação de complemento de templates;
-          \item Fase 3: proposição de propriedades estáticas para se gerar templates;
-          \item Fase 4: pesquisa e implementação dos problemas em abertos e de novas operações de geração de templates;
-          \item Fase 5: submissão de artigo;
-          \item Fase 6: escrita da dissertação.
-      \end{itemize}
- \end{frame}
-
- \begin{frame}
-     \frametitle{Cronograma}
-\begin{table}[h!]
-\centering
-\caption{Cronograma de desenvolvimento do projeto}
-\vspace{-0.8cm}
-\label{cronograma}
-\resizebox{\textwidth}{!}{
-    \vspace{0cm}
-    \begin{tabular}{|l|c|c|c|c|c|c|c|c|}
-    \hline  
-    \multicolumn{1}{|c|}{}  & \multicolumn{4}{c|}{2014}                     & \multicolumn{4}{c|}{2015}                     \\ \hline
-    \textbf{Atividades}     & Jan-Mar   & Abr-Jun   & Jul-Set   & Out-Dez   & Jan-Mar   & Abr-Jun   & Jul-Set   & Out-Dez   \\ \hline
-    Fase 0                  &  •        & •         & •         & •         &           & •         &           &           \\ \hline
-    Fase 1                  &           &           &           & •         &  •        &           &           &           \\ \hline
-    Fase 2                  &           &           &           &           &  •        & •         &           &           \\ \hline
-    Fase 3                  &           &           &           &           &           &           & •         &           \\ \hline
-    Fase 4                  &           &           &           &           &           &           & •         & •         \\ \hline
-    Fase 5                  &           &           &           &           &           &           & •         &           \\ \hline
-    Fase 6                  &           &           &           &           &           & •         & •         & •         \\ \hline
-    \hline
-    \end{tabular}
-}
-\end{table}
- \end{frame}
-
-
-
-
 
 % \section{Referências}
 %  \begin{frame}%[allowframebreaks]
@@ -642,27 +490,11 @@ k^{k^{2r+1}}
 %      \bibliography{bibliografia}
 %  \end{frame}
 
-
-
-
-
- % \section{}
- % \begin{frame}[t]\frametitle{Dúvidas}
- %     \center
- %     {\fontsize{250}{300}\selectfont {?}}
- % \end{frame}
-
-
-
-
 \section*{}
 \begin{frame}[t]
      \frametitle{Agradecimentos}
 \vspace{1cm}
 \center
      À Capes, CNPq, MackPesquisa e ao Laboratório de Computação Natural (LCoN).
-
-    % \center
-    % {\fontsize{50}{300}\selectfont {Obrigado}}
 \end{frame}
 \end{document}
