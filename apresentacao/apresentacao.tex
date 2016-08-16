@@ -5,8 +5,10 @@
 \usepackage{graphicx} \graphicspath{ {img/} } % Inclusão de gráficos
 \usepackage[utf8]{inputenc}		% Codificacao do documento (conversão automática dos acentos)
 \usepackage{multicol}
+\usepackage{xmpmulti}
 \usepackage{subfigure}
 \usepackage{booktabs}
+\setbeamertemplate{caption}[numbered]
 
 \usetheme{Berlin}
 \usecolortheme{beaver}
@@ -47,18 +49,15 @@ Orientador: Prof. Dr. Pedro Paulo Balbi de Oliveira
  \subsection*{Objetivos}
  \begin{frame}
      \frametitle{Objetivos}
-     \begin{itemize}
+        % \transduration<0-1>{0.1}
+        % \multiinclude[<+->][format=png, graphics={width=\textwidth}]{fig_test}
+    \begin{itemize}
            \item Apresentar a operação de diferença entre templates
            \item Apresentar a operação geradora de templates de exceção
            \item Apresentar exemplos da utilização dos templates no problema de paridade
      \end{itemize}
  \end{frame}
  
- 
-
-
-
-
  \section{Autômatos Celulares}
  \subsection*{Autômatos Celulares}
  \begin{frame}
@@ -196,7 +195,7 @@ k^{k^{2r+1}}
 
 
  \begin{frame}
-    \frametitle{Geradoras de Templates e Pós-processamentoj}
+    \frametitle{Geradoras de Templates e Pós-processamento}
     \vspace{-0.8cm}
 \begin{table}[h!]
 \centering
@@ -225,15 +224,176 @@ k^{k^{2r+1}}
  \begin{frame}
      \frametitle{Diferença entre Templates}
      \begin{itemize}
-           \item Templates de exceção
            \item Diferença entre Templates
+           \item Templates de exceção
      \end{itemize}
  \end{frame}
+
+  \begin{frame}
+    \frametitle{Operação de Diferença entre Templates Binários}
+
+    % A operação de diferença entre templates binários $D_i$ é responsável por obter um conjunto $C_{di}$ com $n$ templates, os quais, quando expandidos (via a operação de expansão $E$), apresentam apenas as regras geradas pela expansão do template $T_m$ que não estejam também presentes na expansão do template de intersecção entre $T_s$ e $T_m$, chamado aqui de $T_i$.
+
+    \begin{figure}[h!]
+      \centering
+      \includegraphics[width=.4\textwidth]{fig_complement2.pdf}
+      \label{fig:complement}
+    \end{figure}\begin{equation}
+    \begin{split}
+    D_i(T_m,T_s)= C_{di} \Leftrightarrow E(C_{di}) = E(T_m) \setminus E(T_i) \\
+    T_i = I(T_m,T_s)\\
+    C_{di} = \{T_1,T_2,\dots, T_n\}\\
+    \end{split}
+    \end{equation}
+ \end{frame}
+
+
+  \begin{frame}
+    \frametitle{Operação de Diferença entre Templates Binários}
+    \begin{figure}[h!]
+      \centering
+      \includegraphics[width=.6\textwidth]{grafico1.pdf}
+    \end{figure}
+ \end{frame}
+
+  \begin{frame}
+    \frametitle{Operação de Diferença entre Templates Binários}
+    \begin{figure}[h!]
+      \centering
+      \includegraphics[width=.4\textwidth]{grafico2.pdf}
+    \end{figure}
+ \end{frame}
+
+ \begin{frame}
+    \frametitle{Exemplo - Operação de Diferença entre Templates}
+    Considere:
+    \begin{equation*}
+    \begin{split}
+    T_m = (x_7, x_6, x_5, x_4, x_3, x_1, x_1, x_0) \\
+    T_s = (x_7, x_6, x_3 + x_1, 1 - x_1, x_3, x_1, x_1, 0)\\
+    \end{split}
+    \end{equation*}
+
+    \begin{equation}
+    \left\{\begin{matrix}
+    x_7 & = & x_7 \\ 
+    x_6 & = & 0 \\ 
+    x_5 & = & x_3 + x_1 \\ 
+    x_4 & = & 1 - x_1 \\ 
+    x_3 & = & x_3 \\ 
+    x_1 & = & x_1 \\ 
+    x_1 & = & x_1 \\ 
+    x_0 & = & x_0\\
+    \end{matrix}\right.
+    \end{equation}
+\end{frame}
+
+ \begin{frame}
+    \frametitle{Exemplo - Operação de Diferença entre Templates}
+    Considere:
+    \begin{equation*}
+    \begin{split}
+    T_m = (x_7, x_6, x_5, x_4, x_3, x_1, x_1, x_0) \\
+    T_s = (x_7, x_6, x_3 + x_1, 1 - x_1, x_3, x_1, x_1, 0)\\
+    \end{split}
+    \end{equation*}
+
+    \begin{equation}
+      \begin{matrix}
+       x_7 & = & x_7       & \wedge  \\
+       x_6 & = & 0         & \wedge  \\
+       x_5 & = & x_3 + x_1 & \wedge  \\
+       x_4 & = &   1 - x_1 & \wedge  \\
+       x_3 & = & x_3       & \wedge  \\
+       x_1 & = & x_1       & \wedge  \\
+       x_1 & = & x_1       & \wedge  \\
+       x_0 & = & x_0       &         \\
+      \end{matrix}
+    \end{equation}
+
+\end{frame}
+
+ \begin{frame}
+    \frametitle{Exemplo - Operação de Diferença entre Templates}
+    Considere:
+    \begin{equation*}
+    \begin{split}
+    T_m = (x_7, x_6, x_5, x_4, x_3, x_1, x_1, x_0) \\
+    T_s = (x_7, x_6, x_3 + x_1, 1 - x_1, x_3, x_1, x_1, 0)\\
+    \end{split}
+    \end{equation*}
+
+
+    \begin{equation}
+      \begin{matrix}
+        &  &               &  \\
+       x_6 & = & 0         & \wedge \\
+       x_5 & = & x_3 + x_1 & \wedge  \\
+       x_4 & = &   1 - x_1 &  \\
+        &  &               &  \\
+        &  &               &  \\
+        &  &               &  \\
+        &  &               &  \\
+      \end{matrix}
+    \end{equation}
+
+\end{frame}
+
+ \begin{frame}
+    \frametitle{Exemplo - Operação de Diferença entre Templates}
+    Considere:
+    \begin{equation*}
+    \begin{split}
+    T_m = (x_7, x_6, x_5, x_4, x_3, x_1, x_1, x_0) \\
+    T_s = (x_7, x_6, x_3 + x_1, 1 - x_1, x_3, x_1, x_1, 0)\\
+    \end{split}
+    \end{equation*}
+
+    \begin{equation}
+      \begin{matrix}
+        &  &                     &   \\
+       x_6 & = & 1 - 0           & \vee  \\
+       x_5 & = & 1 - (x_3 + x_1) & \vee  \\
+       x_4 & = & 1 - (1 - x_1)   &   \\
+        &  &                     &   \\
+        &  &                     &   \\
+        &  &                     &   \\
+        &  &                     &   \\
+      \end{matrix}
+    \end{equation}
+
+\end{frame}
+
+
+\begin{frame}
+    \frametitle{Exemplo - Operação de Diferença entre Templates}
+    Considere:
+    \begin{equation*}
+    \begin{split}
+    T_m = (x_7, x_6, x_5, x_4, x_3, x_1, x_1, x_0) \\
+    T_s = (x_7, 0, x_3 + x_1, 1 - x_1, x_3, x_1, x_1, x_0)\\
+    \end{split}
+    \end{equation*}
+
+    \begin{equation}
+    S = \{\{x_6 \to 1\}, \{x_4 \to x_1\}, \{x_5 \to 1 - x_1 - x_3\}\}
+    \label{eq:logicalComplement3}
+    \end{equation}
+
+    \begin{equation}
+    \begin{split}
+    C_{d1} = \{\\(x_7, 1, x_5, x_4, x_3, x_1, x_1, x_0), \\(x_7, x_6, x_5, x_1, x_3, x_1, x_1, x_0), \\(x_7, x_6, 1 - x_1 - x_3, x_4, x_3, x_1, x_1, x_0)\}
+    \end{split}
+    \label{eq:logicalComplement3}
+    \end{equation}
+
+\end{frame}
+
 
  \begin{frame}
      \frametitle{Templates de exceção}
 
-      A operação geradora de templates de exceção $X$ gera um conjunto $C_e$ com todos os templates de exceção do template $T_o$ passado como parâmetro. A operação que gera o conjunto templates de exceção de um template pode ser descrita em mais detalhes da seguinte maneira:
+      % A operação geradora de templates de exceção $X$ gera um conjunto $C_e$ com todos os templates de exceção do template $T_o$ passado como parâmetro. A operação que gera o conjunto templates de exceção de um template pode ser descrita em mais detalhes da seguinte maneira:
       \begin{equation}
       \begin{split}
       X(T_o)= C_e \\
@@ -244,27 +404,36 @@ k^{k^{2r+1}}
 
  \begin{frame}
     \frametitle{Exemplo - Templates de exceção}
-    
-    \\Considere o template:
-    $T_{o} = (1, x_6, x_5, 1 - x_1 - x_2, 2 - x_1 - x_2, x_2, x_1, 0)$. 
+    Considere:
+    \begin{equation*}
+    \begin{split}
+    T_s = (x_7, 0, x_3 + x_1, 1 - x_1, x_3, x_1, x_1, x_0)\\
+    \end{split}
+    \end{equation*}
 
-    O primeiro passo do algoritmo é encontrar um conjunto com as posições que não apresentem apenas constantes ou variáveis livres, obtendo-se assim $\{\{1 - x_1 - x_2\}, \{2 - x_1 - x_2\}\}$.
+    O primeiro passo do algoritmo é encontrar um conjunto com as posições que não apresentem apenas constantes ou variáveis livres, obtendo-se assim $\{\{x_3 + x_1\}, \{1 - x_1\}\}$.
  \end{frame}
  \begin{frame}
      \frametitle{Templates de exceção}
+    Considere:
+    \begin{equation*}
+    \begin{split}
+    T_s = (x_7, 0, x_3 + x_1, 1 - x_1, x_3, x_1, x_1, x_0)\\
+    \end{split}
+    \end{equation*}
     \begin{columns}
         \begin{column}{5cm}
           \begin{table}[h!]
           \centering
-          \caption{Expansão do campo 1 - x_1 - x_2.}
+          \caption{Expansão do campo x_3 + x_1.}
             \begin{tabular}{ccc}
               \toprule
-            $x_2$ & $x_1$ & Expansão do campo \\
+            $x_3$ & $x_1$ & Expansão do campo \\
               \midrule
-            0 & 0 & 1 - x_1 - x_2 = 1 \\
-            0 & 1 & 1 - x_1 - x_2 = 0 \\
-            1 & 0 & 1 - x_1 - x_2 = 0 \\
-            1 & 1 & 1 - x_1 - x_2 = -1  \\
+            0 & 0 & x_3 + x_1 = 0 \\
+            0 & 1 & x_3 + x_1 = 1 \\
+            1 & 0 & x_3 + x_1 = 1 \\
+            1 & 1 & x_3 + x_1 = 2  \\
               \bottomrule
             \end{tabular}
           \label{tab:exceptionProcessA}
@@ -275,15 +444,13 @@ k^{k^{2r+1}}
 
           \begin{table}[h!]
           \centering
-          \caption{Expansão do campo 2 - x_1 - x_2.}
+          \caption{Expansão do campo 1 - x_1.}
             \begin{tabular}{ccc}
               \toprule
-            $x_2$ & $x_1$ & Expansão do campo \\
+            $x_1$ & Expansão do campo \\
               \midrule
-            0 & 0 & 2 - x_1 - x_2 = 2 \\
-            0 & 1 & 2 - x_1 - x_2 = 1 \\
-            1 & 0 & 2 - x_1 - x_2 = 1 \\
-            1 & 1 & 2 - x_1 - x_2 = 0 \\
+            0 & 1 - x_1 = 1 \\
+            1 & 1 - x_1 = 0 \\
               \bottomrule
             \end{tabular}
           \label{tab:exceptionProcessB}
@@ -297,160 +464,56 @@ k^{k^{2r+1}}
 Para finalizar a operação, o algoritmo seleciona as substituições que geram valores inválidos, e aplicam ela ao template base, gerando assim o conjunto de templates $C_e$, mostrado na  Eq. \ref{eq:exceptionsTemplates2}.
 
 \begin{equation}
-C_e = \{(x_7, x_6, x_5, x_4, x_3, 1, 1, x_0),(x_7, x_6, x_5, x_4, x_3, 0, 0, x_0)\}
+C_e = \{(x_7, x_6, x_5, x_4, 1, x_2, 1, x_0)\}
 \label{eq:exceptionsTemplates2}
 \end{equation}
  \end{frame}
 
-  \begin{frame}
-    \frametitle{Operação de Diferença entre Templates Binários}
-
-    A operação de diferença entre templates binários $D_i$ é responsável por obter um conjunto $C_{di}$ com $n$ templates, os quais, quando expandidos (via a operação de expansão $E$), apresentam apenas as regras geradas pela expansão do template $T_m$ que não estejam também presentes na expansão do template de intersecção entre $T_s$ e $T_m$, chamado aqui de $T_i$.
-    \begin{equation}
-    \begin{split}
-    D_i(T_m,T_s)= C_{di} \Leftrightarrow E(C_{di}) = E(T_m) \setminus E(T_i) \\
-    T_i = I(T_m,T_s)\\
-    C_{di} = \{T_1,T_2,\dots, T_n\}\\
-    \end{split}
-    \end{equation}
- \end{frame}
-
-
-  \begin{frame}
-    \frametitle{Operação de Diferença entre Templates Binários}
-    A Figura \ref{fig:complement} ilustra essa operação, onde os templates $T_m$ e $T_s$ passados como parâmetro para a operação de diferença estão representado pelos dois círculos, e o conjunto $C_{di}$ retornado pela função está representado pela área em cinza na imagem.
-    \begin{figure}[h!]
-      \centering
-      \includegraphics[width=.4\textwidth]{fig_complement2.pdf}
-      \caption{Os círculos $T_m$ e $T_s$ são os templates que representam dois conjuntos de regras. Em cinza, $C_{di}$ é o conjunto de templates que representam o conjunto de regras retornado pela operação de diferença.}
-      \label{fig:complement}
-    \end{figure}
- \end{frame}
-
  \begin{frame}
-    \frametitle{Exemplo - Operação de Diferença entre Templates}
-    Considere
+     \frametitle{Finalizando a Operação de diferença}
+\begin{equation*}
+C_e = \{(x_7, x_6, x_5, x_4, 1, x_2, 1, x_0)\}\\
+C_{d2} = C_e \bigcap  T_m\\
+C_{di} = C_{d1} \bigcup  C_{d2}
+
+\label{eq:exceptionsTemplates2}
+\end{equation*}
+
+    \vspace{-0.8cm}
     \begin{equation}
     \begin{split}
-    T_m = (x_7, x_6, x_5, x_4, x_3, x_1, x_1, x_0) \\
-    T_s = (x_7, x_6, x_3 + x_1, 1 - x_1, x_3, x_1, x_1, 0)\\
-    T_i = I(T_m,T_s) = (x_7, x_6, x_3 + x_1, 1 - x_1, x_3, x_1, x_1, 0)\\
-    \end{split}
-    \end{equation}
- \end{frame}
-
- \begin{frame}
-    \frametitle{Exemplo - Operação de Diferença entre Templates}
-    \begin{columns}
-        \begin{column}{5cm}
-    \begin{equation}
-    \left\{\begin{matrix}
-    x_7 & = & x_7 \\ 
-    x_6 & = & x_6 \\ 
-    x_5 & = & x_3 + x_1 \\ 
-    x_4 & = & 1 - x_1 \\ 
-    x_3 & = & x_3 \\ 
-    x_1 & = & x_1 \\ 
-    x_1 & = & x_1 \\ 
-    x_0 & = & 0
-    \end{matrix}\right.
-    \end{equation}
-
-    \end{column}
-
-    \begin{column}{5cm}
-    \begin{equation}\\
-    x_7 = x_7 \wedge  
-    x_6 = x_6 \wedge  \\
-    x_5 = x_3 + x_1 \wedge  
-    x_4 =   1 - x_1 \wedge  \\
-    x_3 = x_3 \wedge  
-    x_1 = x_1 \wedge  \\
-    x_1 = x_1 \wedge  
-    x_0 = 0
-    \end{equation}
-
-    \begin{equation}\\
-    x_5 = x_3 + x_1 \\
-    \vee x_4 = 1 - x_1 \\
-    \vee x_0 = 0
-    \label{eq:logicalComplement1}
-    \end{equation}
-    \end{column}
-\end{columns}
-\end{frame}
-
-\begin{frame}
-    \frametitle{Exemplo - Operação de Diferença entre Templates}
-
-    \begin{equation}
-    x_5 = 1 - (x_3 + x_1) \vee x_4 = 1 - (1 - x_1) \vee x_0 = 1 - 0
-    \label{eq:logicalComplement2}
-    \end{equation}
-
-    \begin{equation}
-    S = \{\{x_0 \to 1\}, \{x_4 \to x_1\}, \{x_5 \to 1 - x_1 - x_3\}\}
-    \label{eq:logicalComplement3}
-    \end{equation}
-
-    \begin{equation}
-    \begin{split}
-    C_{di} = \{\\(x_7, x_6, x_5, x_4, x_3, x_1, x_1, 1), \\(x_7, x_6, x_5, x_1, x_3, x_1, x_1, x_0), \\(x_7, x_6, 1 - x_1 - x_3, x_4, x_3, x_1, x_1, x_0)\}
+    C_{d1} = \{\\(x_7, 1, x_5, x_4, x_3, x_1, x_1, x_0), \\(x_7, x_6, x_5, x_1, x_3, x_1, x_1, x_0), \\(x_7, x_6, 1 - x_1 - x_3, x_4, x_3, x_1, x_1, x_0), \\(x_7, x_6, x_5, x_4, 1, 1, 1, x_0) \}
     \end{split}
     \label{eq:logicalComplement3}
     \end{equation}
 
-\end{frame}
+
+ \end{frame}
+
+
+
+
 
  \section{Discussões e Testes}
  \subsection*{Discussões e Testes}
  \begin{frame}
      \frametitle{Discussões e Testes}
      \begin{itemize}
-           \item Aplicação no Problema de Paridade
-           \item Metodologia de testes
+      \item Número de templates gerados
+      \item Aplicação no Problema de Paridade
+      \item Metodologia de testes
      \end{itemize}
  \end{frame}
 
 \begin{frame}
-    \frametitle{Problema de Paridade}
-    \begin{figure}[h!]
-        \centering
-        \includegraphics[width=0.5\textwidth]{fig_parityRule.pdf}
-        \caption{Exemplo de regra de paridade. A imagem a esquerda contém em sua entrada um número par de 1s. A da direita contém um número ímpar.}
-    \end{figure}
-\end{frame}
+    \frametitle{Função de Teste}
 
-\begin{frame}
-    \frametitle{Problema de Paridade}
-    \begin{equation}
-    T_{paridade} = (T_{conservaparidade} \cap T_{confinado}) \cap \bar{T}_{conservaestados}
-    % T_{paridade} = T_{conservaparidade} \cap \bar{T}_{conservaestados}
-    \label{eq:operationsTemplateParidade}
-    \end{equation}
-
-    \begin{alertblock}{A regra que solucione o problema de paridade:}
-        \vspace{-0.4cm}    
-        \begin{itemize}
-          \item deve ser \textbf{confinada}
-          \item deve \textbf{conservar a paridade}
-          \item não deve \textbf{number conserving}
-        \end{itemize}
-    \end{alertblock}
-\end{frame}
-
-\begin{frame}
-    \frametitle{Problema de Paridade}
-
-    Tamanho do espaço:
-    \begin{equation}
-    2^{2^{2\times3+1}}=3,4 \times 10^{38}
-    \end{equation}
-
-    Número máximo de regras conservativas de paridade:
-    \begin{equation}
-    2^{63} \approx  9.2\times 10^{18}
-    \end{equation}
+    \begin{itemize}
+           \item A função recebe dois templates como parâmetro, um template minuendo e um subtraendo
+           \item Expande as dois templates obtendo dois conjuntos de regras
+           \item Realiza a diferença entre os dois conjuntos de regras
+           \item Verifica se as regras obtidas são equivalentes a expansão dos templates obtidos pela operação de diferença
+     \end{itemize}
 \end{frame}
 
 \begin{frame}
@@ -483,6 +546,98 @@ C_e = \{(x_7, x_6, x_5, x_4, x_3, 1, 1, x_0),(x_7, x_6, x_5, x_4, x_3, 0, 0, x_0
     \label{tab:differenceTests}
     \end{table}
 \end{frame}
+
+\begin{frame}
+    \frametitle{Exemplo: template de semi-totalidade - template de totalidade}
+    \begin{equation}
+    \resizebox{\textwidth}{!}{%
+(x_{31}, x_{15}, x_{15}, x_{7}, x_{27}, x_{11}, x_{11}, x_{3}, x_{15}, x_{7}, x_{7}, x_{5}, x_{11}, x_{3}, x_{3}, x_{1}, x_{15}, x_{7}, x_{7}, x_{5}, x_{11}, x_{3}, x_{3}, x_{1}, x_{7}, x_{5}, x_{5}, x_{4}, x_{3}, x_{1}, x_{1}, x_{0}) - } \\
+\resizebox{\textwidth}{!}{%
+(x_{31}, x_{15}, x_{15}, x_{7}, x_{27}, x_{11}, x_{11}, x_{3}, x_{15}, x_{7}, x_{7}, x_{5}, x_{11}, x_{3}, x_{3}, x_{1}, x_{15}, x_{7}, x_{7}, x_{5}, x_{11}, x_{3}, x_{3}, x_{1}, x_{7}, x_{5}, x_{5}, x_{4}, x_{3}, x_{1}, x_{1}, x_{0})
+ = }
+\resizebox{\textwidth}{!}{%
+\{
+(x_{31}, x_{15}, x_{15}, x_7, x_{27}, 1 - x_7, 1 - x_7, x_3, x_{15}, x_7, x_7, x_5, 1 - x_7, x_3, x_3, x_1, x_{15}, x_7, x_7, x_5, 1 - x_7, x_3, x_3, x_1, x_7, x_5, x_5, x_4, x_3, x_1, x_1, x_0),
+}\\
+\resizebox{\textwidth}{!}{%
+(x_{31}, x_{15}, x_{15}, x_7, 1 - x_{15}, x_{11}, x_{11}, x_3, x_{15}, x_7, x_7, x_5, x_{11}, x_3, x_3, x_1, x_{15}, x_7, x_7, x_5, x_{11}, x_3, x_3, x_1, x_7, x_5, x_5, x_4, x_3, x_1, x_1, x_0),
+}\\
+\resizebox{\textwidth}{!}{%
+(x_{31}, x_{15}, x_{15}, x_7, x_{27}, x_{11}, x_{11}, x_3, x_{15}, x_7, x_7, x_5, x_{11}, x_3, x_3, x_1, x_{15}, x_7, x_7, x_5, x_{11}, x_3, x_3, x_1, x_7, x_5, x_5, 1 - x_1, x_3, x_1, x_1, x_0),
+}\\
+\resizebox{\textwidth}{!}{%
+(x_{31}, x_{15}, x_{15}, x_7, x_{27}, x_{11}, x_{11}, x_3, x_{15}, x_7, x_7, 1 - x_3, x_{11}, x_3, x_3, x_1, x_{15}, x_7, x_7, 1 - x_3, x_{11}, x_3, x_3, x_1, x_7, 1 - x_3, 1 - x_3, x_4, x_3, x_1, x_1, x_0)\}
+}
+    \end{equation}    
+
+\end{frame}
+
+
+\begin{frame}
+    \frametitle{Problema de Paridade}
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[width=0.5\textwidth]{fig_parityRule.pdf}
+        \caption{Exemplo de regra de paridade. A imagem a esquerda contém em sua entrada um número par de 1s. A da direita contém um número ímpar.}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Problema de Paridade}
+    \begin{equation}
+    T_{paridade} = (T_{conservaparidade} \cap T_{confinado}) - T_{conservaestados}
+    % T_{paridade} = T_{conservaparidade} \cap \bar{T}_{conservaestados}
+    \label{eq:operationsTemplateParidade}
+    \end{equation}
+
+    \begin{alertblock}{A regra que solucione o problema de paridade:}
+        \vspace{-0.4cm}    
+        \begin{itemize}
+          \item deve ser \textbf{confinada}
+          \item deve \textbf{conservar a paridade}
+          \item não deve \textbf{number conserving}
+        \end{itemize}
+    \end{alertblock}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Problema de Paridade}
+
+    Tamanho do espaço:
+    \begin{equation}
+    2^{2^{2\times3+1}}=3,4 \times 10^{38}
+    \end{equation}
+
+    Número máximo de regras conservativas de paridade:
+    \begin{equation}
+    2^{63} \approx  9.2\times 10^{18}
+    \end{equation}
+\end{frame}
+
+% Gera muitos templates, troca 6 por meia duzia, quantificar, e mostrar possíveis soluções.
+
+\begin{frame}
+    \frametitle{Problema de Paridade - Pós-processamento}
+
+    Template Core:
+    \begin{equation}
+    \{1, 1 + x2 - x3, 1 - x2, 1 - x1 - x2, x3, x2, x1, 0\}
+    \end{equation}
+
+    \begin{columns}
+      \begin{column}{5cm}
+      Regra \emph{number-conservative}
+      FilterOutOfRange
+      \end{column}
+      
+      \begin{column}{5cm}
+      Regra conservativa de paridade
+      TemplateMod 2
+      \end{column}
+    \end{columns}
+\end{frame}
+
+
 
 % \section{Referências}
 %  \begin{frame}%[allowframebreaks]
