@@ -107,20 +107,10 @@ k^{k^{2r+1}}
 	\textit{Template} é uma generalização de tabelas de transições de ACs.
     \begin{figure}[h!]
         \centering
-        \includegraphics[width=0.6\textwidth]{fig_transitionTable.pdf}
+        \includegraphics[width=0.8\textwidth]{fig_transitionTable.pdf}
         \caption{Exemplo de tabelas de transições}
     \end{figure}
 \end{frame}
-
-% \begin{frame}
-%     \frametitle{Exemplo -  Template Base}
-    
-%     \begin{equation}
-%     \begin{split}
-%     (x_7,x_6,x_5,x_4,x_3,x_2,x_1,x_0)
-%     \end{split}
-%     \end{equation}
-% \end{frame}
 
 \begin{frame}
 	\frametitle{Expansão}
@@ -389,6 +379,14 @@ k^{k^{2r+1}}
 
 \end{frame}
 
+  \begin{frame}
+    \frametitle{Operação de Diferença entre Templates Binários}
+    \begin{figure}[h!]
+      \centering
+      \includegraphics[width=.4\textwidth]{grafico2c.pdf}
+    \end{figure}
+ \end{frame}
+
 
  \begin{frame}
      \frametitle{Templates de exceção}
@@ -421,6 +419,7 @@ k^{k^{2r+1}}
     T_s = (x_7, 0, x_3 + x_1, 1 - x_1, x_3, x_1, x_1, x_0)\\
     \end{split}
     \end{equation*}
+    \vspace{-0.8cm}
     \begin{columns}
         \begin{column}{5cm}
           \begin{table}[h!]
@@ -469,20 +468,30 @@ C_e = \{(x_7, x_6, x_5, x_4, 1, x_2, 1, x_0)\}
 \end{equation}
  \end{frame}
 
+  \begin{frame}
+    \frametitle{Operação de Diferença entre Templates Binários}
+    \begin{figure}[h!]
+      \centering
+      \includegraphics[width=.4\textwidth]{grafico2d-e.pdf}
+    \end{figure}
+ \end{frame}
+
+
  \begin{frame}
      \frametitle{Finalizando a Operação de diferença}
-\begin{equation*}
-C_e = \{(x_7, x_6, x_5, x_4, 1, x_2, 1, x_0)\}\\
-C_{d2} = C_e \bigcap  T_m\\
-C_{di} = C_{d1} \bigcup  C_{d2}
+    \begin{equation*}
+    C_e = \{(x_7, x_6, x_5, x_4, 1, x_2, 1, x_0)\}\\
+    C_{d2} = C_e \bigcap  T_m\\
+    C_{di} = C_{d1} \bigcup  C_{d2}
+    \end{equation*}
 
-\label{eq:exceptionsTemplates2}
-\end{equation*}
-
-    \vspace{-0.8cm}
+    \vspace{-1.0cm}
     \begin{equation}
     \begin{split}
-    C_{d1} = \{\\(x_7, 1, x_5, x_4, x_3, x_1, x_1, x_0), \\(x_7, x_6, x_5, x_1, x_3, x_1, x_1, x_0), \\(x_7, x_6, 1 - x_1 - x_3, x_4, x_3, x_1, x_1, x_0), \\(x_7, x_6, x_5, x_4, 1, 1, 1, x_0) \}
+    C_{di} = \{\\(x_7, 1, x_5, x_4, x_3, x_1, x_1, x_0), \\
+    (x_7, x_6, x_5, x_1, x_3, x_1, x_1, x_0), \\
+    (x_7, x_6, 1 - x_1 - x_3, x_4, x_3, x_1, x_1, x_0), \\
+    (x_7, x_6, x_5, x_4, 1, 1, 1, x_0) \}
     \end{split}
     \label{eq:logicalComplement3}
     \end{equation}
@@ -644,6 +653,18 @@ C_{di} = C_{d1} \bigcup  C_{d2}
 %      \frametitle{Referências}
 %      \bibliography{bibliografia}
 %  \end{frame}
+
+ \section[Conclusão]{Conclusão}
+ \subsection*{Conclusão}
+\begin{frame}[t]
+     \frametitle{Conclusão}
+\center
+    \begin{itemize}
+           \item Diferença entre templates
+           \item Templates de exceção
+           \item Aplicação no problema de paridade
+     \end{itemize}
+\end{frame}
 
 \section*{}
 \begin{frame}[t]

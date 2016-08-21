@@ -6,10 +6,9 @@
 \beamer@slide {fig:complement}{14}
 \beamer@slide {eq:logicalComplement3}{21}
 \beamer@slide {eq:logicalComplement3}{21}
-\beamer@slide {tab:exceptionProcessA}{24}
-\beamer@slide {tab:exceptionProcessB}{24}
-\beamer@slide {eq:exceptionsTemplates2}{25}
+\beamer@slide {tab:exceptionProcessA}{25}
+\beamer@slide {tab:exceptionProcessB}{25}
 \beamer@slide {eq:exceptionsTemplates2}{26}
-\beamer@slide {eq:logicalComplement3}{26}
-\beamer@slide {tab:differenceTests}{29}
-\beamer@slide {eq:operationsTemplateParidade}{32}
+\beamer@slide {eq:logicalComplement3}{28}
+\beamer@slide {tab:differenceTests}{31}
+\beamer@slide {eq:operationsTemplateParidade}{34}
