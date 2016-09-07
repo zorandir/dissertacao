@@ -1,16 +1,16 @@
 %!TEX root = dissertacao.tex
 \section[REPRESENTAÇÃO DE PROPRIEDADES ESTÁTICAS POR MEIO DE TEMPLATES]{REPRESENTAÇÃO DE PROPRIEDADES \\ ESTÁTICAS POR MEIO DE TEMPLATES}
 \label{sec:propriedadesEstaticas}
-Uma propriedade obtida por meio de restrições aplicadas à tabela de transições de um AC é denominada como uma propriedade estática. Com propriedades estáticas se pode prever a evolução de um AC e, por isso, elas podem ser usadas para restringir as regras do espaço no qual serão feitas as buscas para solucionar determinado problema de ACs.
+Uma propriedade obtida por meio de restrições aplicadas à tabela de transições de um AC é denominada como uma propriedade estática. Propriedades estáticas ajudam prever a evolução de um AC e, por isso, elas podem ser usadas para restringir as regras do espaço no qual serão feitas as buscas para solucionar determinado problema de ACs.
 
-Nessa Seção são mostrados templates capazes de representar propriedades estáticas e seus algoritmos geradores.
+Nesse Capítulo são mostrados templates capazes de representar propriedades estáticas e seus algoritmos geradores.
 
 \subsection{Templates Para Regras Com Conservabilidade de Estados e Com Conservabilidade de Paridade}
 Conservabilidade de estados é uma propriedade estática que determina que a soma dos estados de um determinado autômato celular não deve se alterar durante a evolução espaço-temporal, independente da configuração inicial.
 
-O algoritmo que gera templates que representam regras conservativas, criado por de Oliveira e Verardo (\citeyear{deOliveira2014}), primeiramente recebe as variáveis $k$ e $r$ definindo assim a família das regras que serão geradas. Em seguida, cria todas as vizinhanças do espaço, com exceção das vizinhanças que geram tautologias. E após esses passos, aplica as condições de Boccara e Fukś (\citeyear{boccara2002}). Para se excluir as vizinhanças que geram tautologias, basta excluir as vizinhanças que começam com 0 mas não sejam compostas apenas por 0 \cite{Schranko2010}.
+O algoritmo que gera templates que representam regras conservativas, criado por de Oliveira e Verardo (\citeyear{deOliveira2014}), primeiramente recebe as variáveis $k$ e $r$ definindo assim a família das regras que serão geradas. Em seguida, cria todas as vizinhanças do espaço, com exceção das vizinhanças que geram tautologias, e após esses passos, aplica as condições de Boccara e Fukś (\citeyear{boccara2002}). Para se excluir as vizinhanças que geram tautologias, basta excluir as vizinhanças que começam com 0 mas não sejam compostas apenas por 0 \cite{Schranko2010}.
 
-Para exemplificar o funcionamento do algoritmo, considere o espaço com $k=2$ e $r=1$. Primeiramente, o algoritmo obterá o conjunto das vizinhanças que não geram regras tautológicas, qual seja o conjunto $\{(1,1,1),(1,1,0),(1,0,1),(1,0,0),(0,0,0)\}$. Então é criado o sistema de equações \eqref{eq:conservativeLinearSystem3}, baseado nas condições de Boccara e Fukś (\citeyear{boccara2002}).
+Para exemplificar o funcionamento do algoritmo, considere-se o espaço com $k=2$ e $r=1$. Primeiramente, o algoritmo obterá o conjunto das vizinhanças que não geram regras tautológicas, qual seja, o conjunto $\{(1,1,1),(1,1,0),(1,0,1),(1,0,0),(0,0,0)\}$. Então é criado o sistema de equações \eqref{eq:conservativeLinearSystem3}, baseado nas condições de Boccara e Fukś (\citeyear{boccara2002}).
 
 \begin{equation}
 \left\{\begin{matrix}
@@ -73,7 +73,7 @@ Dos pares de vizinhanças encontrados, guarda-se então na variável $v$ o núme
 \label{eq:neighborSetTransformadoInACE}
 \end{equation}
 
-Nesse momento, caso o valor de simetria interna passado como parâmetro seja menor que as vizinhanças invariantes, o algoritmo retorna como resultado um conjunto vazio, tendo em vista que o valor mínimo de simetria interna é igual ao total de vizinhanças invariantes. Caso contrário o algoritmo agora removerá todas as repetições de pares de vizinhanças, considerando que pares de vizinhanças em ordem diferentes são repetições. A Eq. \eqref{eq:internalSimetryP4} representa como ficará o conjunto após as remoções.
+Nesse momento, caso o valor de simetria interna passado como parâmetro seja menor que a quantidade de vizinhanças invariantes, o algoritmo retorna como resultado um conjunto vazio, tendo em vista que o valor mínimo de simetria interna é igual ao total de vizinhanças invariantes. Caso contrário o algoritmo agora removerá todas as repetições de pares de vizinhanças, considerando que pares de vizinhanças em ordem diferentes são repetições. A Eq. \eqref{eq:internalSimetryP4} representa como ficará o conjunto após as remoções.
 \begin{equation}
 \{(((1,1,0),(0,1,1)), ((1,0,0),(0,0,1))\}
 \label{eq:internalSimetryP4}
@@ -93,7 +93,7 @@ x_6 & = & x_3
 \label{eq:internalSimetryP6}
 \end{equation}
 
-Igualar todas as variáveis correspondente à vizinhança gerando o sistema de equações é útil para encontrar a máxima simetria interna de uma determinada transformação. Mas para encontrar valores de simetria arbitrários em uma família de ACs é necessário que o sistema de equações apresente algumas inequações, como mostrado nas Eq. \eqref{eq:internalSimetryP7} e Eq. \eqref{eq:internalSimetryP8}.
+Igualar todas as variáveis correspondentes à vizinhança gerando o sistema de equações é útil para encontrar a máxima simetria interna de uma determinada transformação. Mas para encontrar valores de simetria arbitrários em uma família de ACs é necessário que o sistema de equações apresente algumas inequações, como mostrado nas Eq. \eqref{eq:internalSimetryP7} e Eq. \eqref{eq:internalSimetryP8}.
 \begin{equation}
 \left\{\begin{matrix}
 x_4 & \neq & x_1\\ 
@@ -158,7 +158,7 @@ A Eq. \eqref{eq:templateTotalisticECA} representa o template para o espaço elem
 \end{split}
 \end{equation}
 
-Já para a família de ACs de $k=3$ e $r=1$, o algoritmo gera o template demonstrado pela Eq. \eqref{eq:templateTotalistic31}, sendo que esse template representa as $k^m = 3^7 = 2.187$ regras totalísticas do espaço.
+Já para a família de ACs de $k=3$ e $r=1$, o algoritmo gera o template mostrado na Eq. \eqref{eq:templateTotalistic31}, sendo que esse template representa as $k^m = 3^7 = 2.187$ regras totalísticas do espaço.
 \begin{equation}
 \begin{split}
 (x_{26},x_{17},x_8,x_{17},x_8,x_5,x_8,x_5,x_2,x_{17},x_8,x_5,x_8,\\
@@ -167,7 +167,7 @@ x_5,x_2,x_5,x_2,x_1,x_8,x_5,x_2,x_5,x_2,x_1,x_2,x_1,x_0)
 \end{split}
 \end{equation}
 
-Para as regras semi-totalísticas, o algoritmo segue o mesmo processo básico, porém com uma pequena modificação: as vizinhanças são somadas, mas a célula central é desconsiderada na soma e posteriormente concatenada ao final do resultado. Neste processo as vizinhanças que contenham o mesmo estado na célula central e a mesma soma de valores dos estados das células externas -- como por exemplo $(2,1,0)$ e $(1,1,1)$ -- geram o mesmo valor após a transição de estado. A partir desse ponto o algoritmo segue a mesmo processo aplicado às regras totalísticas: para determinar qual será a variável associada a uma vizinhança o algoritmo verifica se a vizinhança foi a única até então que obteve um determinado valor. Em caso positivo o algoritmo criará e associará uma variável $x_i$ para esta transição, sendo $i$ o valor decimal da vizinhança. Caso contrário, a transição será associada uma variável $x_i$ em que $i$ é o valor decimal da primeira (e de menor valor) vizinhança encontrada com o mesmo valor de soma das vizinhanças.
+Para as regras semi-totalísticas, o algoritmo segue o mesmo processo básico, porém com uma pequena modificação: as vizinhanças são somadas, mas a célula central é desconsiderada na soma e posteriormente concatenada ao final do resultado. Neste processo, as vizinhanças que contenham o mesmo estado na célula central e a mesma soma de valores dos estados das células externas (como as vizinhanças $(2,1,0)$ e $(1,1,1)$) geram o mesmo valor após a transição de estado. A partir desse ponto o algoritmo segue o mesmo processo aplicado às regras totalísticas: para determinar qual será a variável associada a uma vizinhança o algoritmo verifica se a vizinhança foi a única até então que obteve um determinado valor. Em caso positivo o algoritmo criará e associará uma variável $x_i$ para esta transição, sendo $i$ o valor decimal da vizinhança. Caso contrário, a transição será associada uma variável $x_i$ em que $i$ é o valor decimal da primeira (e de menor valor) vizinhança encontrada com o mesmo valor de soma das vizinhanças.
 
 Aplicando esse algoritmo gerador de templates de regras semi-totalísticas com os argumentos $k=2$ e $r=1$ é obtido o template mostrado na Eq. \eqref{eq:templateSemiTotalisticECA}.
 \begin{equation}

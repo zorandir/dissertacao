@@ -3,7 +3,7 @@
 \label{sec:propriedadeEstaticasDef}
 Em ACs, propriedades estáticas são propriedades computadas com base nas tabelas de transições. Essas propriedades permitem prever determinados comportamentos de ACs sem consultar sua evolução espaço-temporal. 
 
-Esta seção descreve algumas propriedades estáticas que já tem seus algoritmos geradores de templates implementados na biblioteca \textit{CATemplates} \cite{CATemplates}.
+Esta seção descreve algumas propriedades estáticas que já têm seus algoritmos geradores de templates implementados na biblioteca \textit{CATemplates} \cite{CATemplates}.
 
 \subsection{Conservabilidade de Estados e Conservabilidade de Paridade}
 \label{sec:propriedadeEstaticasDefCon}
@@ -82,7 +82,7 @@ f(\alpha_0,\alpha_1, \dots,\alpha_{n-1}) \equiv \alpha_0 + (\sum_{i=0}^{n-2}f(0_
 
 
 \subsection{Simetria Interna}
-Para entender a propriedade de simetria interna faz-se necessário compreender o funcionamento das transformações de regras e classes de equivalência dinâmica. As explicações a seguir são válidas para regras binárias pois o algoritmo hoje implementado no \textit{CATemplates} é para regras binárias, apesar de ser possível sua generalização para $k$ estados.
+Para entender a propriedade de simetria interna faz-se necessário compreender o funcionamento das transformações de regras e classes de equivalência dinâmica. As explicações a seguir são válidas para regras binárias pois o algoritmo implementado no \textit{CATemplates} é para regras binárias, apesar de ser possível sua generalização para $k$ estados.
 
 Dada uma tabela de transições de um AC, existem três transformações que podem ser empregadas e que resultam em ACs com comportamentos dinâmicos equivalentes: \textit{reflexão}, \textit{conjugação} e \textit{composição reflexão-conjugação}. A reflexão é a transformação obtida ao refletir os bits das vizinhanças da tabela. A conjugação é obtida ao inverter todos os estados das células da tabela de transições. Já a composição é a transformação obtida ao se efetuar a reflexão e a conjugação, independente da ordem.
 
@@ -130,9 +130,9 @@ Tanto a regra 60, como as regras 102, 153 e 195 pertencem à mesma classe de equ
 	  \label{fig:dynamicEquivalecy}
 	\end{figure}
 
-Tendo em vista as tabelas de transições obtidas por meio das transformações, é possível saber quão simétrica é uma regra em relação a uma determinada transformação ou, em outras palavras, qual o grau de simetria interna de uma regra em relação à transformação em questão. A simetria interna pode ser representada pelo número de vizinhanças que permanecem iguais após aplicada uma determinada transformação. Exemplificando, a regra 60 dos ACs elementares tem valor de simetria interna por reflexão igual a 4, pois compartilha as transições de estado $((1,1,1),0)$, $((1,0,1),1)$, $((0,1,0),1)$ e $ ((0,0,0),0)$ com a regra resultante de sua transformação por reflexão, a regra 102. Vale notar que, como as vizinhanças compartilhadas são todas as vizinhanças invariantes do espaço elementar, logo pode-se dizer que a regra 60 tem a menor simetria interna possível para o espaço elementar.
+Tendo em vista as tabelas de transições obtidas por meio das transformações, é possível saber quão simétrica é uma regra em relação a uma determinada transformação ou, em outras palavras, qual o grau de simetria interna de uma regra em relação à transformação em questão. A simetria interna pode ser representada pelo número de vizinhanças que permanecem iguais após aplicada uma determinada transformação. Exemplificando, a regra 60 dos ACs elementares tem valor de simetria interna por reflexão igual a 4, pois compartilha as transições de estado $((1,1,1),0)$, $((1,0,1),1)$, $((0,1,0),1)$ e $ ((0,0,0),0)$ com a regra resultante de sua transformação por reflexão, a regra 102. Vale notar que, como as vizinhanças compartilhadas são todas e apenas as vizinhanças invariantes do espaço elementar, logo pode-se dizer que a regra 60 tem a menor simetria interna possível para o espaço elementar.
 
-Um resultado bem diferente pode ser visto ao se repetir esse mesmo processo para a regra 204, que tem valor 8 de simetria interna para transformação por reflexão. Esse valor é máximo possível para o espaço elementar e evidencia que ao se aplicar a transformação por reflexão na regra 204 será obtida a mesma regra como resultado. Uma regra que possua máxima simetria para uma transformação é uma regra invariante.
+Um resultado bem diferente pode ser visto ao se repetir esse mesmo processo para a regra 204, que tem valor 8 de simetria interna para transformação por reflexão. Esse valor é máximo possível para o espaço elementar e evidencia que, ao se aplicar a transformação por reflexão na regra 204, será obtida a mesma regra como resultado. Uma regra que possua máxima simetria para uma transformação é uma regra invariante.
 
 Vale frisar que apenas transformações por reflexão apresentam vizinhanças invariantes. No caso das reflexões por conjugação e por composição isso não ocorre.
 
@@ -151,11 +151,6 @@ De forma análoga, pode-se considerar que as transições dependem da média dos
 	\end{figure}
 
 Já os ACs semi-totalísticos (\textit{outer-totalistic CA}) são generalizações de ACs totalísticos \cite{weisstein2015outerTotalistic}. Um AC é considerado semi-totalístico caso suas transições sejam definidas pela soma (ou média) das células da vizinhança sem levar em consideração a célula central.
-
-%talvez trocar citação de Gardner.
-O Jogo da Vida \cite{GardnerM1970} é o exemplo mais conhecido de autômatos celulares semi-totalísticos, tendo em vista que as células centrais no Jogo da Vida são definidas em termos de ``viva'' (estado 1) ou ``morta'' (estado 0).
-
-Os ACs semi-totalísticos podem ser interpretados como ACs clássicos que apresentam a propriedade de \textit{semi-totalidade}. A propriedade de semi-totalidade determina que as transições que apresentem a mesma soma dos estados vizinhos externos e que tenham a mesma célula central devem apresentar o mesmo resultado. Da mesma forma os ACs totalísticos também têm sua propriedade correspondente nos ACs clássicos: a \textit{totalidade}. A totalidade determina que todas as transições que apresentem a mesma soma dos estados das vizinhanças devem levar a um mesmo resultado.
 
 \subsection{Confinamento}
 Os autômatos celulares confinados (do inglês, \textit{captive}), são uma classe de ACs que se baseiam em uma caracterização de suas funções locais que não adotem estados definidos em qualquer estrutura externa à vizinhança \cite{theyssier2004captive}. 
