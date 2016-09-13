@@ -13,7 +13,7 @@ De acordo com Boccara e Fukś (\citeyear{boccara2002}), um AC é conservativo qu
 
 \begin{equation}
 \begin{split}
-f(\alpha_0,\alpha_1, \dots,\alpha_{n-1}) = \alpha_0 + (\sum_{i=0}^{n-2}f(0_0,0_1, \dots,0_i,\alpha_1,\alpha_2, \dots,\alpha_{n-1}) \\- f(0_0,0_1, \dots,0_i,\alpha_0,\alpha_1, \dots,\alpha_{n-i-1}))
+f(\alpha_0,\alpha_1, \dots,\alpha_{n-1}) = \alpha_0 + \sum_{i=0}^{n-2}(f(0_0,0_1, \dots,0_i,\alpha_1,\alpha_2, \dots,\alpha_{n-1}) \\- f(0_0,0_1, \dots,0_i,\alpha_0,\alpha_1, \dots,\alpha_{n-i-1}))
 \label{eq:conservativeCA}
 \end{split}
 \end{equation}
@@ -75,7 +75,7 @@ Excluindo-se as condições tautológicas do sistema e atribuindo os valores das
 O processo de gerar regras conservativas de paridade é bem parecido. Porém, as condições estabelecidas por Boccara e Fukś (\citeyear{boccara2002}) são ligeiramente modificadas em relação à Eq. \eqref{eq:conservativeCA}, de forma que cada uma das funções locais deve respeitar agora as condições da Eq. \eqref{eq:parityConservativeCA}.
 \begin{equation}
 \begin{split}
-f(\alpha_0,\alpha_1, \dots,\alpha_{n-1}) \equiv \alpha_0 + (\sum_{i=0}^{n-2}f(0_0,0_1, \dots,0_i,\alpha_1,\alpha_2, \dots,\alpha_{n-1}) \\- f(0_0,0_1, \dots,0_i,\alpha_0,\alpha_1, \dots,\alpha_{n-i-1})) \; \mod 2
+f(\alpha_0,\alpha_1, \dots,\alpha_{n-1}) \equiv \alpha_0 + \sum_{i=0}^{n-2}(f(0_0,0_1, \dots,0_i,\alpha_1,\alpha_2, \dots,\alpha_{n-1}) \\- f(0_0,0_1, \dots,0_i,\alpha_0,\alpha_1, \dots,\alpha_{n-i-1})) \; \mod 2
 \label{eq:parityConservativeCA}
 \end{split}
 \end{equation}

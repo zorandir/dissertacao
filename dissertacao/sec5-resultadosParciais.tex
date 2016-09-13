@@ -67,24 +67,23 @@ de Oliveira (\citeyear{soares2016difference}) e é importante por ser essencial 
 É importante frisar que essa é uma operação com complexidade $O(c^n)$, onde $n$ é o número de variáveis nas posições que não apresentem apenas variáveis livres ou constantes. Por conta disso, a operação de diferença pode se mostrar demasiadamente custosa quando aplicadas a templates com muitas dependências entre variáveis, tais como os templates de conservabilidade e conservabilidade de paridade.
 
 \subsection{Diferença entre Templates binários}
-A operação $D_i$ de diferença entre os templates binários $T_m$ e $T_s$ é responsável por obter um conjunto $C_{di}$ com diversos templates, os quais, quando expandidos (via a operação de expansão $E$), apresentam apenas as regras geradas pela expansão do template $T_m$ que não estejam também presentes na expansão do template de intersecção entre $T_s$ e $T_m$, chamado aqui de $T_i$. Ou seja, a operação de diferença pode ser descrita da seguinte maneira:
+A operação $D$ de diferença entre os templates binários $T_m$ e $T_s$ é responsável por obter um conjunto $C_{d}$ com diversos templates, os quais, quando expandidos (via a operação de expansão $E$), apresentam apenas as regras geradas pela expansão do template $T_m$ que não estejam também presentes na expansão do template de intersecção entre $T_s$ e $T_m$, chamado aqui de $I(T_m, T_s)$. Ou seja, a operação de diferença pode ser descrita da seguinte maneira:
 \begin{equation}
 \begin{split}
-D_i(T_m,T_s)= C_{di} \Leftrightarrow E(C_{di}) = E(T_m) \setminus E(I(T_m, T_s)) = E(T_m) \setminus E(T_i) \\
-T_i = I(T_m,T_s)\\
-C_{di} = \{T_1,T_2,\dots, T_n\}\\
+D(T_m,T_s)= C_{d} \Leftrightarrow E(C_{d}) = E(T_m) \setminus E(I(T_m, T_s)) \\
+C_{d} = \{T_1,T_2,\dots, T_n\}\\
 \end{split}
 \end{equation}
 
-A Figura \ref{fig:complement} ilustra essa operação, onde os templates $T_m$ e $T_s$ passados como parâmetro para a operação de diferença estão representado pelos dois círculos, e o conjunto $C_{di}$ retornado pela função está representado pela área em cinza na imagem.
+A Figura \ref{fig:complement} ilustra essa operação, onde o template minuendo $T_m$ e o template subtraendo $T_s$ passados como parâmetros para a operação de diferença estão representado pelos dois círculos, e o conjunto $C_{d}$ retornado pela função está representado pela área em cinza na imagem.
 \begin{figure}[h!]
   \centering
   \includegraphics[width=.4\textwidth]{fig_complement2.pdf}
-  \caption{Os círculos $T_m$ e $T_s$ são os templates que representam dois conjuntos originais de regras. Em cinza, $C_{di}$ é o conjunto de templates que representam o conjunto de regras retornado pela operação de diferença entre $T_m$ e $T_s$.}
+  \caption{Os círculos $T_m$ e $T_s$ são os templates que representam dois conjuntos originais de regras. Em cinza, $C_{d}$ é o conjunto de templates que representam o conjunto de regras retornado pela operação de diferença entre $T_m$ e $T_s$.}
   \label{fig:complement}
 \end{figure}    
 
-O diagrama \ref{fig:diagramInter} demonstra de maneira mais detalhada cada uma das etapas desse algoritmo.
+O diagrama \ref{fig:diagramInter} mostra de forma mais detalhada cada uma das etapas desse algoritmo.
 \begin{figure}[h!]
   \centering
   \includegraphics[width=.8\textwidth]{diagram-di.pdf}
@@ -92,9 +91,11 @@ O diagrama \ref{fig:diagramInter} demonstra de maneira mais detalhada cada uma d
   \label{fig:diagramInter}
 \end{figure}    
 
-O processo que o algoritmo usa para encontrar a diferença entre dois templates é efetuado através de uma sequência de etapas. A primeira etapa consiste em encontrar o template $T_i = T_m \bigcap T_s$. Em seguida, a operação $P(T_m, T_i)$ é executada. Essa operação consiste em igualar os templates $T_m$ e $T_i$, obtendo-se assim combinações lógicas de equações; remover eventuais equações tautológicas; aplicar a operação de negação nas equações e trocar o operador lógico $\wedge$ por $\vee$, que, no caso binário, consiste apenas em efetuar as permutações $\rho = (0 \rightarrow 1, 1 \rightarrow 0, \wedge \rightarrow \vee)$ ao resultado final das equações; por fim, solucionar a equação, resultando num conjunto com diversos conjuntos de regras de substituições, as quais são aplicadas ao template $T_i$, gerando um conjunto de templates que é parte do resultado dessa operação. Complementar a esta etapa, é necessário encontrar o conjunto dos templates de exceção por meio da operação $X(T_i)$ e efetuar a intersecção de cada um dos templates de exceção do template $T_i$ com o template $T_m$. O resultado de ambas etapas é então unido, gerando o resultado da operação de diferença.
+O processo que o algoritmo usa para encontrar a diferença entre dois templates é efetuado através de uma sequência de etapas. Na primeira etapa a operação $P(T_m, I(T_m, T_s))$ é executada. Essa operação consiste em igualar o template $T_m$ com o template obtido pela intersecção de $T_m$ com $T_s$, obtendo-se assim combinações lógicas de equações; remover eventuais equações tautológicas; aplicar a operação de negação nas equações e trocar o operador lógico $\wedge$ por $\vee$, que, no caso binário, consiste apenas em efetuar as permutações $\rho = (0 \rightarrow 1, 1 \rightarrow 0, \wedge \rightarrow \vee)$ ao resultado final das equações; por fim, solucionar a equação, resultando num conjunto com diversos conjuntos de regras de substituições, as quais são aplicadas ao template $I(T_m, T_s)$, gerando um conjunto de templates que é parte do resultado dessa operação. Complementar a esta etapa, é necessário encontrar o conjunto dos templates de exceção por meio da operação $X(I(T_m, T_s))$ e efetuar a intersecção de cada um dos templates de exceção do template $I(T_m, T_s)$ com o template $T_m$. O resultado de ambas etapas é então unido, gerando o resultado da operação de diferença.
 
-Para melhor compreender a necessidades dessas etapas, considerem-se os templates $T_m = (x_3, x_2, x_1, x_0)$ e $T_s = (x_3, 1, 1 + x_0, x_0)$, ambos com $k=2$ e $r=0,5$. No primeiro passo da operação de diferença, encontra-se o $T_i = T_m \bigcap T_s = (x_3, 1, 1 + x_0, x_0)$. Após isso, executa-se a operação $P(T_m, T_i)$, que, primeiramente, iguala os templates $T_m$ e $T_i$, o que gera o sistema de equações mostrado na Eq. \eqref{eq:complementR05}.
+De forma mais genérica, $I(T_m, X(I(T_m, T_s)))$ é responsável por encontrar os templates com substituições de variáveis que geram regras inválidas para $I(T_m, T_s)$, mas apresentam regras válidas em $T_m$. Já a operação $P$ se responsabiliza por encontrar os templates que representem regras de $T_m$ que não pertençam a $I(T_m, T_s)$, contanto que as substiuições de variáveis gerem regras válidas nos templates $T_m$ e $I(T_m, T_s)$.
+
+Para melhor compreender a necessidades dessas etapas, considerem-se os templates $T_m = (x_3, x_2, x_1, x_0)$ e $T_s = (x_3, 1, 1 + x_0, x_0)$, ambos com $k=2$ e $r=0,5$. No primeiro passo da operação de diferença, executa-se a operação $P(T_m, I(T_m, T_s))$ que iguala os templates $T_m$ com $I(T_m, T_s)$, o que gera o sistema de equações mostrado na Eq. \eqref{eq:complementR05}.
 \begin{equation}
 \left\{\begin{matrix}
 x_3 & = & x_3	\\ 
@@ -130,26 +131,32 @@ x_2 = 1 - 1		\vee	x_1 = 1 - (1 + x_0)
 
 A etapa de troca do operador lógico e de permutação $\rho$ são a base desta operação, pois essas etapas determinam que se qualquer campo de um template resultar numa regra com um valor diferente do esperado no template original, esse campo deve ser considerado para a criação dos templates de diferença.
 
-Por fim, a combinação lógica de equações da Eq. \eqref{eq:logicalComplement052} é solucionada, resultando no conjunto solução $S = \{\{x_1 = -x_0\}, \{x_2 = 0\}\}$. Perceba-se que $S$ apresenta mais de um conjunto de substituições e, portanto, cada um deles deve ser utilizado para realizar as substituições no template $T_m$. Essas substituições fazem com que como resultado da operação $P(T_m, T_i)$ se obtenha o conjunto de templates $C_{d1}$, representados pela Eq. \eqref{eq:logicalComplementR053}.
+Por fim, a combinação lógica de equações da Eq. \eqref{eq:logicalComplement052} é solucionada, resultando no conjunto solução $S = \{\{x_1 = -x_0\}, \{x_2 = 0\}\}$. Perceba-se que $S$ apresenta mais de um conjunto de substituições e, portanto, cada um deles deve ser utilizado para realizar as substituições no template $T_m$. Essas substituições fazem com que como resultado da operação $P(T_m, I(T_m, T_s))$ se obtenha o conjunto de templates representados pela Eq. \eqref{eq:logicalComplementR053}.
 \begin{equation}
 \begin{split}
-C_{d1} = \{(x_3, 0, x_1, x_0), \\(x_3, x_2, -x_0, x_0)\\\}
+\{(x_3, 0, x_1, x_0), \\(x_3, x_2, -x_0, x_0)\}
 \end{split}
 \label{eq:logicalComplementR053}
 \end{equation}
 
-Na maior parte dos templates, apenas etapa já seria suficiente para obter os templates que representam todas as regras que pertençam as $T_m$, mas não pertençam a $T_s$. Esse não é o caso, e é fácil perceber que a regra $(1,1,1,1) \subset E(T_m)$ e $(1,1,1,1) \not\subset E(T_s)$, logo essa é uma regra que deveria aparecer operação que realiza a diferença entre esses dois templates, mas isso não ocorre utilizando apenas a operação $P$. O motivo é que a operação $P$, ao realizar a igualdade entre os templates $T_m$ e $T_s$, pode trazer para os templates resultantes as características do template $T_s$ que geram expansões inválidas.
+Sempre que $I(T_m, T_s)$ não apresentar templates de exceção, apenas etapa $P$ já seria suficiente para obter os templates que representam todas as regras que pertençam a $T_m$, mas não pertençam a $T_s$. Neste exemplo isso não ocorre, e é fácil perceber que a regra $(1,1,1,1) \in E(T_m)$ e $(1,1,1,1) \not\in E(T_s)$; logo, essa é uma regra que deveria aparecer na operação $D$ que realiza a diferença entre esses dois templates, mas isso não ocorreria utilizando apenas a operação $P$. O motivo é que a operação $P$, ao realizar a igualdade entre os templates $T_m$ e $T_s$, pode trazer para os templates resultantes as características do template $T_s$ que geram expansões inválidas. Deste modo, cada template gerado por $P(T_m, I(T_m, T_s))$ representa um template $T_m$ com uma variável em posição correspondente em $I(T_m, T_s)$ negada. E como a negação só pode ser feita em valores binários, essa operação representa todas as regras de $T_m$ com alguma variável binária em posição correspondente $I(T_m, T_s)$ negada. Para as variáveis não binárias, se faz necessário gerar os template de exceção com a operação $X(I(T_m, T_s))$, que resulta no conjunto de templates $\{(x_3, x_2, x_1, 1)\}$ (no caso, só com 1 elemento). Os templates desse conjunto são então interseccionados com o template $T_m$, resultando no conjunto representados pela Eq. \eqref{eq:logicalComplementR0532}.
+\begin{equation}
+\begin{split}
+\{(x_3, x_2, x_1, 1)\}
+\end{split}
+\label{eq:logicalComplementR0532}
+\end{equation}
 
-Por conta disto, se faz necessário gerar os template de exceção com a operação $X(T_i)$, que resulta no conjunto de templates $\{(x_3, x_2, x_1, 1)\}$ (no caso, só com 1 elemento). Os templates desse conjunto são então interseccionados com o template $T_m$, resultando no conjunto $C_e = \{(x_3, x_2, x_1, 1)\}$. Por fim, faz-se a unificação dos conjuntos $C_{d1}$ e $C_e$, obtendo-se o conjunto de templates $C_{di}$, representado pela Eq. \ref{eq:complementionSetR054}.
+Por fim, faz-se a unificação dos conjuntos das equações Eq. \eqref{eq:logicalComplementR053} e Eq. \eqref{eq:logicalComplementR0532}, obtendo-se o conjunto de templates $C_{d}$, representado pela Eq. \ref{eq:complementionSetR054}.
 
 \begin{equation}
 \begin{split}
-C_{di} = \{(x_3, 0, x_1, x_0), \\(x_3, x_2, -x_0, x_0),\\ (x_3, x_2, x_1, 1)\}
+C_{d} = \{(x_3, 0, x_1, x_0), \\(x_3, x_2, -x_0, x_0),\\ (x_3, x_2, x_1, 1)\}
 \end{split}
 \label{eq:complementionSetR054}
 \end{equation}
 
-A operação de diferença $D_i$ também pode ser realizada sem se efetuar a intersecção. Nesse caso, a operação sem intersecção, chamada aqui apenas por $D$, encontrará um conjunto de templates $C_d$. A expansão dos templates de $C_{d}$ apresentará apenas as regras geradas pela expansão do template $T_m$ que não estejam também presentes na expansão do template $T_s$. Essa operação pode ser apresentada da seguinte maneira:
+A operação de diferença $D$ também pode ser realizada sem se efetuar a intersecção. Nesse caso, a operação sem intersecção, chamada aqui apenas por $D$, encontrará um conjunto de templates $C_d$. A expansão dos templates de $C_{d}$ apresentará apenas as regras geradas pela expansão do template $T_m$ que não estejam também presentes na expansão do template $T_s$. Essa operação pode ser apresentada da seguinte maneira:
 \begin{equation}
 \begin{split}
 D(T_m,T_s)= C_d \Leftrightarrow E(C_d) = E(T_m) \setminus E(T_s) \\
@@ -157,9 +164,11 @@ C_d = \{T_1,T_2,\dots, T_n\}\\
 \end{split}
 \end{equation}
 
-O processo que o algoritmo da operação $D$ usa para encontrar a diferença entre dois templates é bem parecido com o do algoritmo da operação $D_{i}$. Primeiramente, igualam-se os templates $T_m$ e $T_s$, obtendo-se assim combinações lógicas de equações. Após remover eventuais equações tautológicas, o algoritmo aplica a operação de negação nas equações e troca o operador lógico $\wedge$ por $\vee$. Esse sistema é então solucionado, resultando num conjunto com diversos conjuntos de regras de substituições. E após eliminar desse conjunto eventuais substituições envolvendo variáveis que não pertençam ao $T_m$, esses conjuntos de regras de substituição são aplicados ao template $T_m$, gerando o conjunto de templates que é parte do resultado dessa operação. Um segundo conjunto de templates, composto pela intersecção de cada um dos templates de exceção do template $T_s$ com o template $T_m$, será a outra parte do resultado.
+O processo que o algoritmo da operação $D$ usa para encontrar a diferença entre dois templates é bem parecido com o do algoritmo da operação $D$. Primeiramente, igualam-se os templates $T_m$ e $T_s$, obtendo-se assim combinações lógicas de equações. Após remover eventuais equações tautológicas, o algoritmo aplica a operação de negação nas equações e troca o operador lógico $\wedge$ por $\vee$. Esse sistema é então solucionado, resultando num conjunto com diversos conjuntos de regras de substituições. E após eliminar desse conjunto eventuais substituições envolvendo variáveis que não pertençam ao $T_m$, esses conjuntos de regras de substituição são aplicados ao template $T_m$, gerando o conjunto de templates que é parte do resultado dessa operação. Um segundo conjunto de templates, composto pela intersecção de cada um dos templates de exceção do template $T_s$ com o template $T_m$, será a outra parte do resultado.
 
-O diagrama \ref{fig:diagramInterDd} demonstra de maneira mais detalhada cada uma das etapas da operação de diferença sem intersecção.
+Similar a operação  de diferença com intersecção, $I(T_m, X(T_s))$ é responsável por encontrar os templates com substituições de variáveis que geram regras inválidas para $T_s$, mas apresentam regras válidas em $T_m$. Já a operação $P$ se responsabiliza por encontrar os templates que representem regras válidas de $T_m$ que não pertençam a $T_s$, contanto que as substiuições de variávei gerem regras válidas também em $T_s$.
+
+O diagrama \ref{fig:diagramInterDd} detalha cada uma das etapas da operação de diferença sem intersecção.
 \begin{figure}[h!]
   \centering
   \includegraphics[width=.5\textwidth]{diagram-dd.pdf}
@@ -167,7 +176,7 @@ O diagrama \ref{fig:diagramInterDd} demonstra de maneira mais detalhada cada uma
   \label{fig:diagramInterDd}
 \end{figure}
 
-Os algoritmos $D$ e $D_i$ apresentam como resultado os conjunto de templates $C_d$ e $C_{di}$, respectivamente. $C_d$ e $C_{di}$ podem ser diferentes mesmo quando $D$ e $D_i$ recebem os mesmos templates como entrada. Mas ambos contêm exatamente as mesmas regras quando se expandem os templates dos conjuntos.
+Os algoritmos $D$, com ou sem intersecção, apresentam como resultado conjuntos que podem ser diferentes mesmo quando ambos recebem os mesmos templates como entrada. Mas ambos contêm exatamente as mesmas regras quando se expandem os templates dos conjuntos.
 
 \section{DISCUSSÃO E TESTES}
 \label{sec:discussoesETestes}
@@ -241,6 +250,6 @@ T_{paridade} = (T_{conservaparidade} \cap T_{confinado}) - {T}_{conservaestados}
 \label{eq:operationsTemplateParidade}
 \end{equation}
 
-Entretanto, apesar de formalmente possível, a realização dessas operações não se mostrou produtiva. Isto ocorre pois a operação de exceção, utilizada pela operação de diferença, tem complexidade $O(c^n)$, onde $n$ é o número de variáveis nas posições que não apresentem apenas variáveis livres ou constantes nos templates. Deste modo, gerar os templates de exceção do template $T_{conservaestados}$ é tão custoso quanto expandir todas as regras desse template.
+Entretanto, apesar de formalmente possível, a realização dessas operações não se mostrou produtiva. Isto ocorre pois a operação de exceção, utilizada pela operação de diferença, tem complexidade $O(c^n)$, onde $n$ é o número das variáveis $c$ com posições que não apresentem apenas variáveis livres ou constantes nos templates. Deste modo, gerar os templates de exceção do template $T_{conservaestados}$ é tão custoso quanto expandir todas as regras desse template.
 
 Dito isto, é mais simples utilizar o template $T_{conservaestados}$ com uma função de pós-processamento alternativa que elimine todas as tabelas $k$-árias que não apresentem campos inválidos, e aplique $mod$ $2$ nas restantes. Assim  esse mesmo template vai representar apenas as regras que mantenham a paridade mas não apresentem a propriedade de conservabilidade de estados. Também poderá ser aplicado nesse template operações de intersecção ou diferença com outros templates de modo a se restringir ainda mais o espaço de busca. Por fim, a busca por melhorias na implementação da operação de diferença de modo que a faça gerar um espaço de busca menor também se mostra necessário.
