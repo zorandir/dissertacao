@@ -50,10 +50,10 @@
   \makeatother%
   \begin{picture}(1,1.06846753)%
     \put(0,0){\includegraphics[width=\unitlength,page=1]{fig_ruleEquivalence60.pdf}}%
-    \put(0.24280091,0.54895921){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{Regra original: 60}}}%
-    \put(0.75564072,0.54895921){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{Regra refletida: 102}}}%
+    \put(0.24280091,0.53){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{Regra original: 60}}}%
+    \put(0.75564072,0.53){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{Regra refletida: 102}}}%
     \put(0.2903337,0.57558978){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{ }}}%
-    \put(0,0.0268919){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.48569116\unitlength}\centering Regra conjugada: 195\\ \end{minipage}}}%
-    \put(0.45357843,0.0268919){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.58569116\unitlength}\centering {Regra composta por reflexão} \vskip -0.75em \centering {e conjugação: 153}\\ \end{minipage}}}%
+    \put(0,0.02){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.48569116\unitlength}\centering Regra conjugada: 195\\ \end{minipage}}}%
+    \put(0.45357843,0.02){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.58569116\unitlength}\centering {Regra composta por reflexão} \vskip -0.75em \centering {e conjugação: 153}\\ \end{minipage}}}%
   \end{picture}%
 \endgroup%
